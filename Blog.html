@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights | ANTHEON Premium Blog</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Blog-specific enhancements that match your home page style */
+        :root {
+            --accent-cyan: #00f2ff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: #050505;
+            overflow-x: hidden;
+        }
+
+        .blog-header {
+            padding: 160px 0 80px;
+            position: relative;
+        }
+
+        /* Modern Bento-style Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            margin-bottom: 100px;
+        }
+
+        .blog-post {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.1);
+        }
+
+        /* Large Featured Post */
+        .post-featured { grid-column: span 8; height: 500px; flex-direction: row; }
+        .post-standard { grid-column: span 4; }
+        .post-wide { grid-column: span 6; }
+
+        .post-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: 0.5s;
+        }
+
+        .post-featured .post-image { width: 50%; height: 100%; }
+
+        .blog-post:hover .post-image { filter: grayscale(0%); scale: 1.05; }
+
+        .post-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .post-category {
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .post-featured .post-title { font-size: 2.2rem; }
+
+        .post-excerpt {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .post-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .read-time {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .post-featured, .post-standard, .post-wide { grid-column: span 12; flex-direction: column; height: auto; }
+            .post-featured .post-image { width: 100%; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="container nav-flex">
+            <a href="index.html" class="brand-logo">ANT<span>HEON</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="expertise.html">Expertise</a></li>
+                <li><a href="blog.html" style="color: var(--accent-cyan);">Insights</a></li>
+                <li><a href="contact.html" class="cta-pill">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="blog-header" data-aos="fade-up">
+            <span class="badge">Knowledge Hub</span>
+            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-top: 15px;">
+                Scaling <span style="color: var(--accent-cyan);">Operations</span> <br>through Insight.
+            </h1>
+            <p style="color: #888; max-width: 600px; margin-top: 20px;">
+                Weekly deep-dives into digital systems, AI automation, and high-level business efficiency.
+            </p>
+        </header>
+
+        <div class="blog-grid">
+            
+            <article class="blog-post post-featured" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000" class="post-image" alt="Tech">
+                <div class="post-content">
+                    <span class="post-category">Strategy</span>
+                    <h2 class="post-title">The Operational Blueprint of 7-Figure Founders</h2>
+                    <p class="post-excerpt">Discover the exact systems used by top-tier CEOs to remove themselves from daily tasks while doubling output.</p>
+                    <div class="post-footer">
+                        <span>March 4, 2026</span>
+                        <span class="read-time">12 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-post post-standard" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600" class="post-image" alt="Social">
+                <div class="post-content">
+                    <span class="post-category">Marketing</span>
+                    <h3 class="post-title">Mastering Meta Ads in the Privacy Era</h3>
+                    <div class="post-footer">
+                        <span>Feb 28, 2026</span>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-post post-wide" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800" class="post-image" alt="SEO">
+                <div class="post-content">
+                    <span class="post-category">SEO</span>
+                    <h3 class="post-title">Shopify SEO: Dominating Search Rankings in 2026</h3>
+                    <p class="post-excerpt">Stop paying for every click. Learn how to build an organic engine that converts.</p>
+                    <div class="post-footer">
+                        <span>Feb 24, 2026</span>
+                        <span class="read-time">9 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-post post-wide" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800" class="post-image" alt="Team">
+                <div class="post-content">
+                    <span class="post-category">Management</span>
+                    <h3 class="post-title">Building a High-Performance Virtual Team</h3>
+                    <p class="post-excerpt">How to vet, onboard, and manage global talent with zero friction.</p>
+                    <div class="post-footer">
+                        <span>Feb 15, 2026</span>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+</body>
+</html>

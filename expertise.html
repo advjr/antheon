@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore my high-impact Virtual Assistant expertise: Web Development, Shopify SEO, Social Media Consulting, Meta Ads, and more.">
+    <meta name="keywords" content="Website Manager, Shopify SEO, Meta Ads Expert, Social Media Consultant, Content Creator, VA Services">
+    <title>Our Expertise | ANTHEON - Scaling Your Digital Presence</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-primary: #7c3aed;
+            --brand-gradient: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+            --bg-dark: #020617;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent-green: #22c55e;
+        }
+
+        /* --- BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION (IMPORTED STYLE) --- */
+        .glass-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 50px;
+            z-index: 2000;
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: white; 
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo span { color: var(--brand-primary); }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover { color: white; }
+
+        .nav-logo-img { height: 40px; width: auto; display: block; object-fit: contain; }
+
+        .logo-separator {
+            display: inline-block;
+            width: 1.5px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 15px;
+            border-radius: 10px;
+        }
+
+        /* Hamburger Styles */
+        .menu-toggle { display: none; cursor: pointer; z-index: 2100; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: white; transition: 0.3s; }
+
+        /* --- CONTENT STYLES --- */
+        .expertise-header {
+            padding: 160px 5% 60px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(124, 58, 237, 0.1), transparent 50%);
+        }
+
+        .expertise-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .expertise-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 5% 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: var(--card-glass);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 24px;
+            transition: 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--brand-gradient);
+            opacity: 0; transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+
+        .skill-card:hover::before { opacity: 1; }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--brand-primary);
+            display: inline-block;
+        }
+
+        .skill-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .skill-card ul { list-style: none; color: var(--text-dim); }
+
+        .skill-card ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .skill-card ul li i { color: var(--accent-green); font-size: 0.8rem; }
+
+        .cta-section {
+            background: var(--card-glass);
+            margin: 0 5% 100px;
+            padding: 80px 40px;
+            border-radius: 40px;
+            text-align: center;
+            border: 1px dashed rgba(124, 58, 237, 0.4);
+            grid-column: 1 / -1;
+        }
+
+        .cta-section h2 { font-size: 2rem; margin-bottom: 20px; }
+
+        .cta-pill {
+        background: var(--brand-primary);
+        padding: 10px 25px !important;
+        border-radius: 50px;
+        color: white !important;
+        }
+
+        .btn-call {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--brand-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-call:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5);
+        }
+
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE RESPONSIVENESS (IMPORTED) --- */
+        @media (max-width: 768px) {
+            .glass-nav { width: 95%; top: 10px; padding: 10px 20px; }
+            .menu-toggle { display: block; }
+            
+            .nav-links {
+                position: fixed;
+                top: -110vh;
+                left: 0;
+                flex-direction: column;
+                background: var(--bg-dark);
+                width: 100%;
+                height: 100vh;
+                justify-content: center;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                gap: 35px;
+            }
+
+            .nav-links.active { top: 0; }
+            .nav-links a { font-size: 1.2rem; }
+
+            /* Hamburger Animation */
+            .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+            .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .grid-container { grid-template-columns: 1fr; }
+            .expertise-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="nav-flex">
+            <a href="index.html" class="brand-logo">
+                <img src="Ann.png" alt="Antheon Logo" class="nav-logo-img">
+                <span class="logo-separator"></span>
+                ANT<span>HEON</span>
+            </a>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Plans</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="cta-pill">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="expertise-header">
+        <div data-aos="fade-up">
+            <span style="color: var(--brand-primary); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">Technical Stack</span>
+            <h1>High-Level Expertise</h1>
+            <p>I don't just "assist." I build, optimize, and scale business infrastructure using modern digital frameworks.</p>
+        </div>
+    </header>
+
+    <main class="grid-container">
+        <section class="skill-card" data-aos="fade-up">
+            <div class="skill-icon"><i class="fas fa-code"></i></div>
+            <h2>Web Development</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> WordPress & Webflow Management</li>
+                <li><i class="fas fa-check"></i> Custom Landing Page Design</li>
+                <li><i class="fas fa-check"></i> Speed & Hosting Optimization</li>
+            </ul>
+        </section>
+
+        <section class="skill-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-icon"><i class="fab fa-shopify"></i></div>
+            <h2>Shopify SEO Expert</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> E-commerce Keyword Strategy</li>
+                <li><i class="fas fa-check"></i> Product Description Copy</li>
+                <li><i class="fas fa-check"></i> Technical SEO Audit</li>
+            </ul>
+        </section>
+
+        <section class="skill-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-icon"><i class="fas fa-bullhorn"></i></div>
+            <h2>Social Consulting</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> Multi-platform Audit</li>
+                <li><i class="fas fa-check"></i> Engagement & Growth Strategy</li>
+                <li><i class="fas fa-check"></i> Brand Voice Development</li>
+            </ul>
+        </section>
+
+        <section class="skill-card" data-aos="fade-up">
+            <div class="skill-icon"><i class="fas fa-photo-video"></i></div>
+            <h2>Creative Studio</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> Professional Video Editing</li>
+                <li><i class="fas fa-check"></i> Custom Graphic Design</li>
+                <li><i class="fas fa-check"></i> Short-form Content (Reels/TikTok)</li>
+            </ul>
+        </section>
+
+        <section class="skill-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-icon"><i class="fab fa-facebook-square"></i></div>
+            <h2>Meta Ads (FB/IG)</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> Targeted Campaign Setup</li>
+                <li><i class="fas fa-check"></i> Pixel & Conversion Tracking</li>
+                <li><i class="fas fa-check"></i> A/B Creative Testing</li>
+            </ul>
+        </section>
+
+        <section class="skill-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-icon"><i class="fas fa-pen-fancy"></i></div>
+            <h2>Copywriting</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> Conversion-led Sales Copy</li>
+                <li><i class="fas fa-check"></i> Email Marketing Funnels</li>
+                <li><i class="fas fa-check"></i> SEO Blog Management</li>
+            </ul>
+        </section>
+
+        <section class="skill-card" data-aos="fade-up">
+            <div class="skill-icon"><i class="fas fa-user-shield"></i></div>
+            <h2>Admin Excellence</h2>
+            <ul>
+                <li><i class="fas fa-check"></i> Executive Calendar Sync</li>
+                <li><i class="fas fa-check"></i> Customer Support Systems</li>
+                <li><i class="fas fa-check"></i> Operational Standard Procedures</li>
+            </ul>
+        </section>
+
+        <div class="cta-section" data-aos="zoom-in">
+            <h2>Need something else?</h2>
+            <p style="margin-bottom: 30px; color: var(--text-dim);">My skill set is adaptive. If your specific need isn't listed above, let's discuss how I can build a custom solution for you.</p>
+            <a href="https://calendly.com/anthonydevera" class="btn-call"><i class="fas fa-phone-alt"></i> Book A Free Discovery Call</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ANTHEON | Designed for Excellence.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Master Hamburger Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
