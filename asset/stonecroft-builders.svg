@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 220" width="1150" height="220">
+  <g transform="translate(15,15)">
+    <rect x="0" y="70" width="34" height="120" fill="#1F2937"/>
+    <rect x="46" y="40" width="34" height="150" fill="#1F2937"/>
+    <rect x="92" y="90" width="34" height="100" fill="#F59E0B"/>
+    <path d="M0 70 L63 20 L126 70 Z" fill="#F59E0B"/>
+  </g>
+  <text x="170" y="128" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="72" letter-spacing="1" fill="#1F2937">STONECROFT</text>
+  <text x="170" y="182" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="34" letter-spacing="4" fill="#F59E0B">BUILDERS &amp; CO.</text>
+</svg>

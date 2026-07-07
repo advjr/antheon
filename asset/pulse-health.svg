@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
+  <g transform="translate(15,15)">
+    <circle cx="95" cy="95" r="90" fill="#2563EB"/>
+    <path d="M35 95 H70 L85 60 L105 130 L120 95 H155" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="235" y="128" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="76" letter-spacing="1" fill="#2563EB">PULSE</text>
+  <text x="235" y="180" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="32" letter-spacing="6" fill="#0D9488">HEALTH PARTNERS</text>
+</svg>
