@@ -546,6 +546,12 @@
     }
     form textarea { resize: vertical; min-height: 130px; }
     form .btn { width: 100%; }
+    .form-sent-notice {
+      border: 1px solid var(--border); background: var(--bg-alt);
+      padding: 32px 28px; border-radius: 10px;
+    }
+    .form-sent-notice strong { display: block; font-size: 19px; margin-bottom: 8px; color: var(--text); }
+    .form-sent-notice span { color: var(--text-muted); font-size: 15px; }
 
     /* --- Footer --- */
     footer { background: var(--brand-ink); color: rgba(255,255,255,0.72); padding: 72px 0 40px; }
@@ -1060,7 +1066,10 @@
           </div>
 
           <div>
-            <form id="contact-form" novalidate>
+            <form id="contact-form" action="https://formspree.io/dev@antheonph.com" method="POST" novalidate>
+              <input type="hidden" name="_subject" value="New Systems Audit inquiry — Antheon website">
+              <input type="hidden" name="_next" value="?sent=true#contact">
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
               <div class="field">
                 <label for="name">Full name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -1413,17 +1422,27 @@
       });
     })();
 
-    // Contact form (front-end only; wire to backend/Formspree later)
+    // Contact form: submits to Formspree, which emails dev@antheonph.com
     var form = document.getElementById('contact-form');
     if (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
+      form.addEventListener('submit', function () {
         window.dataLayer.push({ event: 'form_submit', form_id: 'contact' });
         var btn = form.querySelector('button[type="submit"]');
-        btn.textContent = 'Thank you. We will be in touch.';
+        btn.textContent = 'Sending…';
         btn.style.opacity = '0.75';
         btn.disabled = true;
+        // form submits normally to Formspree; no preventDefault here
       });
+    }
+    if (window.location.search.indexOf('sent=true') !== -1) {
+      var contactGrid = document.querySelector('.contact-grid');
+      if (contactGrid) {
+        var notice = document.createElement('div');
+        notice.className = 'form-sent-notice';
+        notice.innerHTML = '<strong>Thanks - your message is in.</strong><span>We will be in touch shortly to schedule your Systems Audit.</span>';
+        var formCol = form ? form.closest('div') : null;
+        if (formCol) { formCol.innerHTML = ''; formCol.appendChild(notice); }
+      }
     }
   </script>
 
