@@ -12,6 +12,16 @@
   })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
   <!-- End Google Tag Manager -->
 
+  <!-- MailerLite Universal -->
+  <script>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '2505448');
+  </script>
+  <!-- End MailerLite Universal -->
+
   <title>Systems and Process Engineering for Growing Businesses | Antheon</title>
   <meta name="description" content="Antheon builds CRMs, custom systems, and AI-powered automations that streamline your operations. We engineer the processes behind medium to large businesses.">
   <link rel="canonical" href="https://antheonph.com/">
@@ -1066,25 +1076,24 @@
           </div>
 
           <div>
-            <form id="contact-form" action="https://formspree.io/dev@antheonph.com" method="POST" novalidate>
-              <input type="hidden" name="_subject" value="New Systems Audit inquiry — Antheon website">
-              <input type="hidden" name="_next" value="?sent=true#contact">
-              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <form id="contact-form" action="https://assets.mailerlite.com/jsonp/2505448/forms/192811915807818959/subscribe" method="POST" target="ml_hidden_iframe" novalidate>
+              <input type="hidden" name="ml-submit" value="1">
+              <input type="hidden" name="anticsrf" value="true">
               <div class="field">
                 <label for="name">Full name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required>
+                <input type="text" id="name" name="fields[name]" placeholder="Your name" required>
               </div>
               <div class="field">
                 <label for="email">Business email</label>
-                <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                <input type="email" id="email" name="fields[email]" placeholder="you@company.com" required>
               </div>
               <div class="field">
                 <label for="company">Company</label>
-                <input type="text" id="company" name="company" placeholder="Company name">
+                <input type="text" id="company" name="fields[company]" placeholder="Company name">
               </div>
               <div class="field">
                 <label for="interest">What do you need</label>
-                <select id="interest" name="interest">
+                <select id="interest" name="fields[last_name]">
                   <option value="">Choose a focus</option>
                   <option>Systems Audit</option>
                   <option>Custom CRM build</option>
@@ -1097,10 +1106,11 @@
               </div>
               <div class="field">
                 <label for="message">Tell us how your business runs today</label>
-                <textarea id="message" name="message" placeholder="Where does it feel manual, messy, or slow right now?"></textarea>
+                <textarea id="message" name="fields[country]" placeholder="Where does it feel manual, messy, or slow right now?"></textarea>
               </div>
               <button type="submit" class="btn btn-primary" data-cta="form-submit">Send and Book My Audit</button>
             </form>
+            <iframe name="ml_hidden_iframe" style="display:none" aria-hidden="true"></iframe>
           </div>
         </div>
       </div>
@@ -1422,27 +1432,22 @@
       });
     })();
 
-    // Contact form: submits to Formspree, which emails dev@antheonph.com
+    // Contact form: submits to MailerLite (account 2505448, form 192811915807818959)
+    // via a hidden iframe target, so the page never navigates away.
     var form = document.getElementById('contact-form');
     if (form) {
       form.addEventListener('submit', function () {
         window.dataLayer.push({ event: 'form_submit', form_id: 'contact' });
-        var btn = form.querySelector('button[type="submit"]');
-        btn.textContent = 'Sending…';
-        btn.style.opacity = '0.75';
-        btn.disabled = true;
-        // form submits normally to Formspree; no preventDefault here
+        var formCol = form.closest('div');
+        setTimeout(function () {
+          if (!formCol) return;
+          var notice = document.createElement('div');
+          notice.className = 'form-sent-notice';
+          notice.innerHTML = '<strong>Thanks - your message is in.</strong><span>We will be in touch shortly to schedule your Systems Audit.</span>';
+          formCol.innerHTML = '';
+          formCol.appendChild(notice);
+        }, 600);
       });
-    }
-    if (window.location.search.indexOf('sent=true') !== -1) {
-      var contactGrid = document.querySelector('.contact-grid');
-      if (contactGrid) {
-        var notice = document.createElement('div');
-        notice.className = 'form-sent-notice';
-        notice.innerHTML = '<strong>Thanks - your message is in.</strong><span>We will be in touch shortly to schedule your Systems Audit.</span>';
-        var formCol = form ? form.closest('div') : null;
-        if (formCol) { formCol.innerHTML = ''; formCol.appendChild(notice); }
-      }
     }
   </script>
 
