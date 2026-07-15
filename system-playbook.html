@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Systems Playbook | Antheon</title>
+<meta name="description" content="See a sample of the engineered system Antheon would build for your industry: ads &amp; marketing, medical, or construction. Pick your industry to see how it works.">
+<link rel="canonical" href="https://antheonph.com/system-playbook.html">
+<meta name="robots" content="noindex, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Systems Playbook | Antheon">
+<meta property="og:description" content="Pick your industry to see the kind of connected system, website, CRM, automation, and AI, Antheon would engineer for a business like yours.">
+<meta property="og:image" content="https://antheonph.com/asset/og-image.jpg">
+<meta property="og:url" content="https://antheonph.com/system-playbook.html">
+<meta property="og:site_name" content="Antheon">
+
+<link rel="icon" type="image/png" href="asset/Ann.png">
+<link rel="apple-touch-icon" href="asset/Ann.png">
+<meta name="theme-color" content="#1A1230">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --bg-alt: #F7F7F5;
+    --text: #111114;
+    --text-muted: #5C5C66;
+    --border: #E6E6E9;
+    --border-strong: #CBCBD1;
+
+    --brand-violet: #9333EA;
+    --brand-blue: #3B82F6;
+    --brand-gradient: linear-gradient(105deg, #9333EA 0%, #6D48E6 50%, #3B82F6 100%);
+    --brand-ink: #1A1230;
+
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --maxw: 1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    opacity: 0;
+    animation: pageFade 0.6s ease-out 0.1s forwards;
+    overflow-x: hidden;
+  }
+  @keyframes pageFade { to { opacity: 1; } }
+
+  h1, h2, h3, h4 { text-wrap: balance; word-break: normal; overflow-wrap: normal; }
+  h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
+  h3 { font-family: var(--font-body); font-weight: 600; line-height: 1.25; }
+  p { line-height: 1.7; }
+  a { color: var(--text); text-decoration: none; transition: color 0.2s ease, opacity 0.2s ease; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  .accent { color: var(--brand-violet); }
+  hr { border: none; height: 1px; background: var(--border); margin: 0; }
+
+  /* --- Header (matches antheonph.com) --- */
+  header {
+    position: sticky; top: 0; z-index: 60;
+    border-bottom: 1px solid var(--border);
+  }
+  header::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+  }
+  nav.site-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .brand img { height: 34px; width: auto; display: block; }
+  .brand .wordmark { font-family: var(--font-body); font-weight: 700; font-size: 20px; letter-spacing: 0.02em; }
+  .brand .wordmark .ant { color: var(--text); }
+  .brand .wordmark .heon { color: var(--brand-violet); }
+
+  .nav-cta { display: inline-flex; white-space: nowrap; }
+  @media (max-width: 400px) {
+    nav.site-nav { gap: 10px; height: 64px; }
+    .brand img { height: 28px; }
+    .nav-cta { padding: 9px 14px; font-size: 13px; }
+  }
+
+  /* --- Buttons --- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 15px 30px; font-family: var(--font-body); font-size: 16px; font-weight: 600;
+    letter-spacing: 0.01em; cursor: pointer; border: none; border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.2s ease, background 0.2s ease;
+    text-align: center;
+  }
+  .btn-primary { background: var(--brand-gradient); color: #fff; box-shadow: 0 8px 24px -8px rgba(109,72,230,0.55); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -8px rgba(109,72,230,0.65); color: #fff; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+  .btn-outline:hover { border-color: var(--text); }
+  .btn-sm { padding: 11px 22px; font-size: 15px; }
+
+  /* --- Sections --- */
+  section { padding: 84px 0; }
+  @media (min-width: 768px) { section { padding: 120px 0; } }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px;
+    border: 1px solid var(--border); border-radius: 999px; background: #fff;
+    font-size: 13px; color: var(--text-muted); margin-bottom: 24px;
+  }
+  .hero-badge img { height: 14px; width: auto; }
+  .hero-badge strong { color: var(--text); font-weight: 700; }
+
+  .section-head { max-width: 760px; margin-bottom: 48px; }
+  .section-head h2 { font-size: 36px; margin-bottom: 16px; }
+  .section-head p { font-size: 18px; color: var(--text-muted); max-width: 640px; }
+  @media (min-width: 768px) { .section-head h2 { font-size: 48px; } }
+  @media (max-width: 767px) { .section-head h2 { font-size: 28px; } .section-head { margin-bottom: 36px; } }
+
+  /* --- Industry picker --- */
+  .picker-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 700px) { .picker-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .industry-card {
+    display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%;
+    border: 1px solid var(--border); background: var(--bg); padding: 30px 26px;
+    font-family: inherit; cursor: pointer; border-radius: 4px;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .industry-card:hover { border-color: var(--brand-violet); transform: translateY(-4px); box-shadow: 0 20px 40px -22px rgba(147,51,234,0.4); background: var(--bg-alt); }
+  .industry-card .ic-icon {
+    width: 46px; height: 46px; border: 1px solid var(--border); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; color: var(--brand-violet); flex-shrink: 0;
+  }
+  .industry-card .ic-icon svg { width: 22px; height: 22px; }
+  .industry-card h3 { font-size: 21px; margin: 18px 0 10px; }
+  .industry-card p { font-size: 15px; color: var(--text-muted); margin-bottom: 18px; flex-grow: 1; }
+  .industry-card .card-cta { font-size: 14px; font-weight: 700; color: var(--brand-violet); display: inline-flex; align-items: center; gap: 6px; }
+  .industry-card:hover .card-cta { gap: 10px; }
+  .card-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+
+  /* --- Sub-nav shown once an industry is selected --- */
+  .subnav {
+    position: sticky; top: 71px; z-index: 55; background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 14px 0;
+  }
+  @media (max-width: 400px) { .subnav { top: 63px; } }
+  .subnav .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .subnav-back { font-size: 14px; font-weight: 600; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .subnav-back:hover { color: var(--brand-violet); }
+  .subnav-back svg { width: 16px; height: 16px; }
+  .subnav-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .subnav-tab {
+    padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; font-size: 14px;
+    font-weight: 600; color: var(--text-muted); background: #fff; cursor: pointer; font-family: inherit;
+  }
+  @media (max-width: 480px) {
+    .subnav-tab { padding: 7px 13px; font-size: 13px; }
+  }
+  .subnav-tab:hover { color: var(--text); }
+  .subnav-tab.active { color: #fff; background: var(--brand-gradient); border-color: transparent; }
+
+  /* --- Industry system sections --- */
+  section.system { padding: 56px 0 80px; }
+  @media (min-width: 768px) { section.system { padding: 72px 0 96px; } }
+  .industry-tag {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--brand-violet); margin-bottom: 12px;
+  }
+  .problem { font-size: 17px; color: var(--text-muted); max-width: 720px; margin: 0 0 32px; }
+  @media (min-width: 768px) { .problem { font-size: 18px; } }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
+  @media (min-width: 700px) { .grid-2 { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  .card { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 26px; }
+  .card h3 { font-size: 19px; margin-bottom: 6px; }
+  .card .card-kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .card ul { margin: 0; padding-left: 20px; }
+  .card li { margin-bottom: 8px; font-size: 15px; color: var(--text); }
+  .card li:last-child { margin-bottom: 0; }
+
+  .diagram-wrap {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+    padding: 20px; margin-bottom: 32px;
+  }
+  .diagram-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .diagram-scroll > svg { display: block; width: 640px; max-width: none; height: auto; }
+  @media (min-width: 768px) {
+    .diagram-scroll { overflow-x: visible; }
+    .diagram-scroll > svg { width: 100%; max-width: none; height: auto; }
+  }
+  .diagram-wrap text { font-family: 'Instrument Sans', sans-serif; }
+  .diagram-hint { display: none; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; }
+  .diagram-hint svg { width: 14px; height: 14px; color: var(--brand-violet); }
+  @media (max-width: 767px) {
+    .diagram-hint { display: flex; }
+    .diagram-wrap { padding: 14px; }
+  }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; padding-left: 4px; }
+  .legend .item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); }
+  .legend .sw { width: 10px; height: 10px; border-radius: 3px; }
+
+  .expert-note {
+    display: flex; gap: 12px; align-items: flex-start;
+    margin: 16px 0; padding: 16px 18px;
+    background: var(--bg-alt); border-left: 3px solid var(--brand-violet); border-radius: 4px;
+  }
+  .expert-note svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; color: var(--brand-violet); }
+  .expert-note p { margin: 0; font-size: 13.5px; line-height: 1.65; color: var(--text-muted); }
+  .expert-note strong { color: var(--text); font-weight: 600; }
+
+  .components { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 32px; }
+  @media (min-width: 640px) { .components { grid-template-columns: 1fr 1fr; } }
+  .component-card { background: var(--bg); padding: 22px 24px; }
+  .component-card .label { font-size: 13px; font-weight: 700; color: var(--brand-violet); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .component-card p { margin: 0; font-size: 15px; color: var(--text-muted); }
+
+  .outcome { background: var(--bg-alt); border-left: 3px solid var(--brand-violet); padding: 22px 24px; margin-bottom: 20px; }
+  .outcome .label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--brand-violet); margin-bottom: 6px; }
+  .outcome p { margin: 0; font-size: 16px; color: var(--text); }
+
+  .note { margin-top: 20px; padding: 18px 22px; background: var(--bg-alt); font-size: 14px; color: var(--text-muted); border-radius: 4px; }
+  .note strong { color: var(--text); }
+
+
+  /* --- Footer (matches antheonph.com) --- */
+  footer { background: var(--brand-ink); color: rgba(255,255,255,0.72); padding: 64px 0 40px; }
+  footer .brand .wordmark .ant { color: #fff; }
+  footer .brand .wordmark .heon { color: #C4B5FD; }
+  footer .f-about { font-size: 15px; max-width: 340px; margin-top: 18px; line-height: 1.7; }
+  .foot-bottom { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 14px; text-align: center; }
+
+  /* --- Scroll reveal --- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body { opacity: 1; animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="site-nav container">
+    <a href="system-playbook.html" class="brand" id="logoHome" aria-label="Systems Playbook home">
+      <img src="asset/Ann.png" alt="Antheon logo, AN monogram in violet and blue" width="40" height="34" decoding="async">
+    </a>
+    <a href="index.htm#contact" class="btn btn-primary btn-sm nav-cta">Book a Systems Audit</a>
+  </nav>
+</header>
+
+<!-- Sub-nav: appears once an industry is chosen -->
+<div class="subnav" id="subnav" hidden>
+  <div class="container">
+    <a href="#" class="subnav-back" id="backToPicker">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      All industries
+    </a>
+    <div class="subnav-tabs">
+      <button class="subnav-tab" data-industry="ads">Ads &amp; Marketing</button>
+      <button class="subnav-tab" data-industry="medical">Medical</button>
+      <button class="subnav-tab" data-industry="construction">Construction</button>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+
+  <section id="picker">
+    <div class="container">
+      <div class="section-head" style="text-align:center; max-width:640px; margin-left:auto; margin-right:auto;">
+        <a href="index.htm#contact" class="hero-badge">
+          <img src="asset/Ann.png" alt="" width="16" height="14">
+          <span><strong>Antheon</strong> &middot; Systems &amp; Process Engineering</span>
+        </a>
+        <h2>Which of these looks the most like your business?</h2>
+        <p style="margin:0 auto;">Choose an industry to open its playbook. You can switch between them any time.</p>
+      </div>
+      <div class="picker-grid">
+        <button class="industry-card" data-industry="ads" type="button">
+          <span class="ic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-6v6"/></svg></span>
+          <h3>Ads &amp; Marketing</h3>
+          <p>Companies running paid ads that need to know which leads are actually turning into revenue.</p>
+          <span class="card-cta">See the system<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="industry-card" data-industry="medical" type="button">
+          <span class="ic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 8.5c0 4.2-8.8 9.7-8.8 9.7s-8.8-5.5-8.8-9.7a4.3 4.3 0 0 1 8.8-1.9 4.3 4.3 0 0 1 8.8 1.9Z"/><path d="M4.5 11h3l1.5-3 2.5 6 1.5-3h4.5"/></svg></span>
+          <h3>Medical</h3>
+          <p>Practices and clinics where intake, insurance, and follow-up live in too many disconnected places.</p>
+          <span class="card-cta">See the system<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="industry-card" data-industry="construction" type="button">
+          <span class="ic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20a8 8 0 0 1 16 0"/><path d="M2 20h20"/><path d="M12 20V8"/><circle cx="12" cy="5" r="2.4"/></svg></span>
+          <h3>Construction</h3>
+          <p>Contractors juggling bids, schedules, and client updates across email, spreadsheets, and phone calls.</p>
+          <span class="card-cta">See the system<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ADS / MARKETING ================= -->
+  <section class="system" id="ads" hidden>
+    <div class="container">
+      <span class="industry-tag">Companies running paid ads</span>
+      <h2>Your lead response &amp; attribution system</h2>
+      <p class="problem">Money is going into ads, but it's hard to say which leads came from which campaign, who followed up, or how fast. Leads sit in a form or an inbox while follow-up happens inconsistently, so budget decisions end up being guesses instead of numbers.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>What we'd look at first</h3>
+          <ul>
+            <li>Every way a lead can reach you: landing pages, forms, calls, DMs, chat widgets</li>
+            <li>How long it currently takes to respond to a new lead, per channel</li>
+            <li>Where campaign and ad data gets lost between your ad account, your site, and your CRM</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What usually turns up</h3>
+          <ul>
+            <li>No consistent first-response time, so leads go cold within the hour</li>
+            <li>Campaign, keyword, and creative data never makes it into the CRM record</li>
+            <li>Follow-up depends on memory, some leads get five touches, others get none</li>
+            <li>No loop back to the ad account, so decisions get made on clicks instead of revenue</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="diagram-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Swipe to see the full diagram
+      </p>
+      <div class="diagram-wrap">
+        <div class="diagram-scroll">
+        <svg viewBox="0 0 680 370" width="680" height="370" role="img" aria-labelledby="ads-title ads-desc">
+          <title id="ads-title">Lead response and attribution system</title>
+          <desc id="ads-desc">Ad spend feeds a landing page, CRM, and follow-up flow to the customer. A reporting loop runs above, and an AI scoring layer sits below.</desc>
+          <defs>
+            <marker id="arrV-ads" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#9333EA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="arrB-ads" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="arrD-ads" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1A1230" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          </defs>
+          <rect x="115" y="40" width="438" height="280" rx="8" fill="none" stroke="#CBCBD1" stroke-width="1" stroke-dasharray="6 4"/>
+          <g><rect x="5" y="160" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#E6E6E9"/><text x="55" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#111114">Ad spend</text></g>
+          <g><rect x="563" y="160" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#E6E6E9"/><text x="613" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#111114">Customer</text></g>
+          <g><rect x="125" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="190" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Spend data</text></g>
+          <g><rect x="269" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="334" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Attribution</text></g>
+          <g><rect x="413" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="478" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Ad reports</text></g>
+          <line x1="413" y1="92" x2="399" y2="92" stroke="#9333EA" stroke-width="1.6" marker-end="url(#arrV-ads)"/>
+          <line x1="269" y1="92" x2="255" y2="92" stroke="#9333EA" stroke-width="1.6" marker-end="url(#arrV-ads)"/>
+          <g><rect x="125" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="190" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Landing page</text></g>
+          <g><rect x="269" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="334" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">CRM</text></g>
+          <g><rect x="413" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="478" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Follow-up</text></g>
+          <line x1="105" y1="182" x2="125" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-ads)"/>
+          <line x1="255" y1="182" x2="269" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-ads)"/>
+          <line x1="399" y1="182" x2="413" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-ads)"/>
+          <line x1="543" y1="182" x2="563" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-ads)"/>
+          <g><rect x="269" y="250" width="130" height="44" rx="6" fill="#1A1230" stroke="#1A1230"/><text x="334" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">AI scoring</text></g>
+          <line x1="334" y1="204" x2="334" y2="250" stroke="#1A1230" stroke-width="1.6" marker-end="url(#arrD-ads)"/>
+          <path d="M399,272 L613,272 L613,204" fill="none" stroke="#1A1230" stroke-width="1.6" marker-end="url(#arrD-ads)"/>
+        </svg>
+        </div>
+        <div class="expert-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <p><strong>A reference model, not a proposal.</strong> This is how a lead response system typically comes together for a paid-ads business, illustrative of the thinking, not a blueprint for yours. Every ad account, CRM, and sales process is different, so what we'd actually design and build is determined by your Systems Audit, never assumed in advance.</p>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="sw" style="background:#9333EA"></span>Attribution flow</span>
+          <span class="item"><span class="sw" style="background:#3B82F6"></span>Lead flow</span>
+          <span class="item"><span class="sw" style="background:#1A1230"></span>AI layer</span>
+        </div>
+      </div>
+
+      <div class="components">
+        <div class="component-card"><div class="label">Website</div><p>High-intent landing pages that pass campaign and UTM data straight into the CRM, not just into an inbox.</p></div>
+        <div class="component-card"><div class="label">CRM</div><p>One pipeline per lead source, every lead tagged at entry with campaign, ad, and channel data.</p></div>
+        <div class="component-card"><div class="label">Automation</div><p>Instant lead routing and first-touch response the moment a form is submitted, plus a follow-up cadence if no one responds in time.</p></div>
+        <div class="component-card"><div class="label">AI layer</div><p>Lead scoring from form data and behavior, a drafted first follow-up message, and a cost-per-qualified-lead summary by campaign.</p></div>
+      </div>
+
+      <div class="outcome">
+        <div class="label">What changes</div>
+        <p>Time to first response goes from hours to minutes, you can see exactly which leads get zero follow-up, and you get real cost-per-close by campaign instead of just cost-per-click.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MEDICAL ================= -->
+  <section class="system" id="medical" hidden>
+    <div class="container">
+      <span class="industry-tag">Medical &amp; healthcare practices</span>
+      <h2>Your patient intake &amp; care coordination system</h2>
+      <p class="problem">New patients call or book online, but intake paperwork, insurance verification, and scheduling live in different tools, or on paper. Front-desk staff re-key the same data by hand, no-shows go unfollowed, and referrals or recall visits fall through the cracks.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>What we'd look at first</h3>
+          <ul>
+            <li>The full patient journey: first contact, booking, intake, insurance verification, visit, follow-up</li>
+            <li>Every place staff re-key the same patient information</li>
+            <li>What happens, if anything, after a missed appointment or an unbooked follow-up</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What usually turns up</h3>
+          <ul>
+            <li>Intake forms collected on paper or PDF, then entered by hand into the practice system</li>
+            <li>No automated insurance or eligibility check before the visit, causing day-of delays</li>
+            <li>No-show follow-up left to staff memory</li>
+            <li>Recall tracking done informally, so patients quietly drop out of care</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="diagram-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Swipe to see the full diagram
+      </p>
+      <div class="diagram-wrap">
+        <div class="diagram-scroll">
+        <svg viewBox="0 0 680 370" width="680" height="370" role="img" aria-labelledby="med-title med-desc">
+          <title id="med-title">Patient intake and care coordination system</title>
+          <desc id="med-desc">A referral leads to online intake, a patient CRM, and a scheduling flow to the patient. A compliance and recall reporting loop runs above, and an AI triage layer sits below.</desc>
+          <defs>
+            <marker id="arrV-med" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#9333EA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="arrB-med" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="arrD-med" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1A1230" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          </defs>
+          <rect x="115" y="40" width="438" height="280" rx="8" fill="none" stroke="#CBCBD1" stroke-width="1" stroke-dasharray="6 4"/>
+          <g><rect x="5" y="160" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#E6E6E9"/><text x="55" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#111114">Referral</text></g>
+          <g><rect x="563" y="160" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#E6E6E9"/><text x="613" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#111114">Patient</text></g>
+          <g><rect x="125" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="190" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Compliance</text></g>
+          <g><rect x="269" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="334" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Insurance</text></g>
+          <g><rect x="413" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="478" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Recall data</text></g>
+          <line x1="413" y1="92" x2="399" y2="92" stroke="#9333EA" stroke-width="1.6" marker-end="url(#arrV-med)"/>
+          <line x1="269" y1="92" x2="255" y2="92" stroke="#9333EA" stroke-width="1.6" marker-end="url(#arrV-med)"/>
+          <g><rect x="125" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="190" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Online intake</text></g>
+          <g><rect x="269" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="334" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Patient CRM</text></g>
+          <g><rect x="413" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="478" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Scheduling</text></g>
+          <line x1="105" y1="182" x2="125" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-med)"/>
+          <line x1="255" y1="182" x2="269" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-med)"/>
+          <line x1="399" y1="182" x2="413" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-med)"/>
+          <line x1="543" y1="182" x2="563" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-med)"/>
+          <g><rect x="269" y="250" width="130" height="44" rx="6" fill="#1A1230" stroke="#1A1230"/><text x="334" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">AI triage</text></g>
+          <line x1="334" y1="204" x2="334" y2="250" stroke="#1A1230" stroke-width="1.6" marker-end="url(#arrD-med)"/>
+          <path d="M399,272 L613,272 L613,204" fill="none" stroke="#1A1230" stroke-width="1.6" marker-end="url(#arrD-med)"/>
+        </svg>
+        </div>
+        <div class="expert-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <p><strong>A reference model, not a proposal.</strong> This is how a patient coordination system typically comes together for a practice like yours, illustrative of the thinking, not a blueprint for your clinic. Every EHR, payer mix, and care workflow is different, so what we'd actually design and build is determined by your Systems Audit, never assumed in advance.</p>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="sw" style="background:#9333EA"></span>Compliance flow</span>
+          <span class="item"><span class="sw" style="background:#3B82F6"></span>Care flow</span>
+          <span class="item"><span class="sw" style="background:#1A1230"></span>AI layer</span>
+        </div>
+      </div>
+
+      <div class="components">
+        <div class="component-card"><div class="label">Website</div><p>Online booking and digital intake forms that write directly into the patient record, no paper re-entry.</p></div>
+        <div class="component-card"><div class="label">CRM</div><p>A single patient record tracking intake, insurance status, visit history, and recall dates.</p></div>
+        <div class="component-card"><div class="label">Automation</div><p>Automated reminders and no-show follow-up, eligibility checks on booking, and recall reminders for return visits.</p></div>
+        <div class="component-card"><div class="label">AI layer</div><p>Flags incomplete intake forms, drafts patient communication for staff review, and triages reported symptoms for the care team.</p></div>
+      </div>
+
+      <div class="outcome">
+        <div class="label">What changes</div>
+        <p>Hours of front-desk data entry removed every week, fewer no-shows, and a much higher share of patients on recall who actually come back.</p>
+      </div>
+      <div class="note"><strong>A note on compliance:</strong> anything touching patient health information gets scoped against your specific compliance requirements, like HIPAA, during the audit. We never assume, we confirm.</div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONSTRUCTION ================= -->
+  <section class="system" id="construction" hidden>
+    <div class="container">
+      <span class="industry-tag">Construction &amp; contracting companies</span>
+      <h2>Your bid-to-build project tracking system</h2>
+      <p class="problem">Estimating, bidding, scheduling, and client updates happen across email threads, spreadsheets, and phone calls. Nobody has one place that shows which bids are out, which jobs are active, or where a project actually stands, and change orders get lost in email.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>What we'd look at first</h3>
+          <ul>
+            <li>The full process from RFP received to estimate, bid, win or loss, scheduling, build, and closeout</li>
+            <li>Where bid data, project status, and client communication currently live</li>
+            <li>How change orders and approvals are documented today</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What usually turns up</h3>
+          <ul>
+            <li>Bids tracked in spreadsheets with no visibility into win rate or deadlines</li>
+            <li>No shared system between office staff and site crews, changes get communicated verbally and lost</li>
+            <li>Change orders approved over email with no paper trail, causing billing disputes</li>
+            <li>Clients calling for status updates because there's no self-serve way to check progress</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="diagram-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Swipe to see the full diagram
+      </p>
+      <div class="diagram-wrap">
+        <div class="diagram-scroll">
+        <svg viewBox="0 0 680 370" width="680" height="370" role="img" aria-labelledby="con-title con-desc">
+          <title id="con-title">Bid to build project tracking system</title>
+          <desc id="con-desc">An RFP leads to estimating, a project CRM, and a scheduling flow to the client. A documentation reporting loop runs above, and an AI status layer sits below.</desc>
+          <defs>
+            <marker id="arrV-con" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#9333EA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="arrB-con" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="arrD-con" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1A1230" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          </defs>
+          <rect x="115" y="40" width="438" height="280" rx="8" fill="none" stroke="#CBCBD1" stroke-width="1" stroke-dasharray="6 4"/>
+          <g><rect x="5" y="160" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#E6E6E9"/><text x="55" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#111114">RFP / lead</text></g>
+          <g><rect x="563" y="160" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#E6E6E9"/><text x="613" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#111114">Client</text></g>
+          <g><rect x="125" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="190" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Billing data</text></g>
+          <g><rect x="269" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="334" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Change orders</text></g>
+          <g><rect x="413" y="70" width="130" height="44" rx="6" fill="#F5F3FF" stroke="#C4B5FD"/><text x="478" y="96" text-anchor="middle" font-size="13" font-weight="600" fill="#6D28D9">Job reports</text></g>
+          <line x1="413" y1="92" x2="399" y2="92" stroke="#9333EA" stroke-width="1.6" marker-end="url(#arrV-con)"/>
+          <line x1="269" y1="92" x2="255" y2="92" stroke="#9333EA" stroke-width="1.6" marker-end="url(#arrV-con)"/>
+          <g><rect x="125" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="190" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Bid &amp; estimate</text></g>
+          <g><rect x="269" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="334" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Project CRM</text></g>
+          <g><rect x="413" y="160" width="130" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/><text x="478" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="#1E40AF">Scheduling</text></g>
+          <line x1="105" y1="182" x2="125" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-con)"/>
+          <line x1="255" y1="182" x2="269" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-con)"/>
+          <line x1="399" y1="182" x2="413" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-con)"/>
+          <line x1="543" y1="182" x2="563" y2="182" stroke="#3B82F6" stroke-width="1.6" marker-end="url(#arrB-con)"/>
+          <g><rect x="269" y="250" width="130" height="44" rx="6" fill="#1A1230" stroke="#1A1230"/><text x="334" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">AI status</text></g>
+          <line x1="334" y1="204" x2="334" y2="250" stroke="#1A1230" stroke-width="1.6" marker-end="url(#arrD-con)"/>
+          <path d="M399,272 L613,272 L613,204" fill="none" stroke="#1A1230" stroke-width="1.6" marker-end="url(#arrD-con)"/>
+        </svg>
+        </div>
+        <div class="expert-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <p><strong>A reference model, not a proposal.</strong> This is how a bid-to-build system typically comes together for a contracting business, illustrative of the thinking, not a blueprint for yours. Every estimating process, crew structure, and client base is different, so what we'd actually design and build is determined by your Systems Audit, never assumed in advance.</p>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="sw" style="background:#9333EA"></span>Documentation flow</span>
+          <span class="item"><span class="sw" style="background:#3B82F6"></span>Project flow</span>
+          <span class="item"><span class="sw" style="background:#1A1230"></span>AI layer</span>
+        </div>
+      </div>
+
+      <div class="components">
+        <div class="component-card"><div class="label">Website</div><p>A client-facing project portal showing bid status, timeline, and documents, cutting down status-check calls.</p></div>
+        <div class="component-card"><div class="label">CRM</div><p>One pipeline from RFP to bid to active project to closeout, visible to office and field alike.</p></div>
+        <div class="component-card"><div class="label">Automation</div><p>Bid-deadline reminders, schedule change notifications, and a change-order workflow with a digital paper trail.</p></div>
+        <div class="component-card"><div class="label">AI layer</div><p>Drafts estimate summaries from scope documents, flags bids at risk of missing deadlines, and generates a weekly status digest.</p></div>
+      </div>
+
+      <div class="outcome">
+        <div class="label">What changes</div>
+        <p>Real visibility into your bid win-rate, fewer status-update calls, faster change-order turnaround, and fewer billing disputes.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <span class="brand"><span class="wordmark"><span class="ant">ANT</span><span class="heon">HEON</span></span></span>
+        <p class="f-about">Systems and process engineering for growing businesses. We build the CRMs, automations, and AI-powered systems behind how you operate.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Antheon. Engineered for how you operate.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var industries = ['ads', 'medical', 'construction'];
+    var picker = document.getElementById('picker');
+    var subnav = document.getElementById('subnav');
+    var sections = {};
+    industries.forEach(function (key) { sections[key] = document.getElementById(key); });
+
+    function showPicker() {
+      picker.hidden = false;
+      subnav.hidden = true;
+      industries.forEach(function (key) { sections[key].hidden = true; });
+      history.replaceState(null, '', location.pathname);
+    }
+
+    function showIndustry(key) {
+      if (!sections[key]) return showPicker();
+      picker.hidden = true;
+      subnav.hidden = false;
+      industries.forEach(function (other) {
+        sections[other].hidden = other !== key;
+      });
+      subnav.querySelectorAll('.subnav-tab').forEach(function (tab) {
+        tab.classList.toggle('active', tab.getAttribute('data-industry') === key);
+      });
+      history.replaceState(null, '', '#' + key);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+
+    document.querySelectorAll('[data-industry]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        showIndustry(el.getAttribute('data-industry'));
+      });
+    });
+
+    document.getElementById('backToPicker').addEventListener('click', function (e) {
+      e.preventDefault();
+      showPicker();
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    });
+
+    document.getElementById('logoHome').addEventListener('click', function (e) {
+      e.preventDefault();
+      showPicker();
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    });
+
+    var initial = location.hash.replace('#', '');
+    if (industries.indexOf(initial) !== -1) {
+      showIndustry(initial);
+    } else {
+      showPicker();
+    }
+  })();
+
+  // Scroll reveal
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || reduce) {
+      els.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+</script>
+
+</body>
+</html>
