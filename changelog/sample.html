@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --ink:#0e1a2b; --ink-soft:#3a4658; --line:rgba(14,26,43,.10);
+    --bg:#fbfaf7; --card:#ffffff; --accent:#0fa9a0; --cta:#1f9d57;
+    --serif:'Source Serif 4',Georgia,serif; --sans:'DM Sans',-apple-system,sans-serif;
+  }
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .container{max-width:1120px;margin:0 auto;padding:0 48px}
+  a{text-decoration:none;color:inherit}
+  section{scroll-margin-top:80px}
+
+  /* Nav */
+  header{position:sticky;top:0;background:rgba(251,250,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:-.01em}
+  .brand b{color:var(--accent)}
+  .nav-links{display:flex;gap:34px;font-size:.95rem;font-weight:500;color:var(--ink-soft)}
+  .nav-cta{background:var(--cta);color:#fff;font-weight:700;font-size:.92rem;padding:11px 22px;border-radius:999px}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:84px 0 72px}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+  .hero h1{font-family:var(--serif);font-size:3.4rem;line-height:1.08;font-weight:600;letter-spacing:-.02em;margin-bottom:22px}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p{font-size:1.18rem;color:var(--ink-soft);max-width:30ch;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-primary{background:var(--cta);color:#fff;font-weight:700;padding:15px 30px;border-radius:999px;font-size:1rem}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);font-weight:600;padding:15px 28px;border-radius:999px;font-size:1rem}
+  .hero-art{aspect-ratio:4/3;border-radius:20px;background:
+      radial-gradient(120% 120% at 80% 10%, #18c2b6 0%, transparent 55%),
+      linear-gradient(150deg,#0e1a2b 0%,#16314a 100%);
+    box-shadow:0 30px 70px rgba(14,26,43,.22);position:relative;overflow:hidden}
+  .hero-art::after{content:'';position:absolute;left:32px;right:32px;top:38px;bottom:38px;border:1px solid rgba(255,255,255,.16);border-radius:12px}
+
+  /* Logos strip */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}
+  .strip-row{display:flex;align-items:center;justify-content:space-between;gap:24px;opacity:.55}
+  .strip-row span{font-family:var(--serif);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
+
+  /* Section heading */
+  .sec-head{text-align:center;max-width:46ch;margin:0 auto 46px}
+  .sec-head .eyebrow{margin-bottom:12px}
+  .sec-head h2{font-family:var(--serif);font-size:2.1rem;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
+  .sec-head p{color:var(--ink-soft)}
+
+  /* Features */
+  .features{padding:78px 0}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px}
+  .card .ico{width:46px;height:46px;border-radius:12px;background:linear-gradient(150deg,#0fa9a0,#18c2b6);margin-bottom:18px}
+  .card h3{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:8px}
+  .card p{font-size:.98rem;color:var(--ink-soft)}
+
+  /* Stats */
+  .stats{background:#f3f1ec;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:60px 0}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+  .stat .n{font-family:var(--serif);font-size:2.6rem;font-weight:600;color:var(--accent);line-height:1}
+  .stat .l{font-size:.92rem;color:var(--ink-soft);margin-top:6px}
+
+  /* Steps */
+  .steps{padding:78px 0}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .step .num{font-family:var(--serif);font-size:1.1rem;font-weight:600;width:38px;height:38px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .step h3{font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:6px}
+  .step p{font-size:.96rem;color:var(--ink-soft)}
+
+  /* Quote */
+  .quote{padding:84px 0;text-align:center}
+  .quote blockquote{font-family:var(--serif);font-size:2rem;line-height:1.4;font-weight:400;font-style:italic;max-width:24ch;margin:0 auto 26px}
+  .quote .who{font-weight:600}
+  .quote .role{color:var(--ink-soft);font-size:.92rem}
+
+  /* Pricing */
+  .pricing{background:#f3f1ec;border-top:1px solid var(--line);padding:78px 0}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px}
+  .plan.is-featured{border-color:var(--accent);box-shadow:0 20px 50px -20px rgba(15,169,160,.5)}
+  .plan .tier{font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.8rem;color:var(--ink-soft)}
+  .plan .price{font-family:var(--serif);font-size:2.4rem;font-weight:600;margin:10px 0 4px}
+  .plan .price span{font-size:.95rem;font-weight:500;color:var(--ink-soft)}
+  .plan ul{list-style:none;margin:18px 0 22px}
+  .plan li{font-size:.95rem;color:var(--ink-soft);padding:7px 0;border-top:1px solid var(--line)}
+  .plan .btn-primary{display:block;text-align:center}
+  .plan.is-featured .btn-primary{background:var(--accent)}
+
+  /* FAQ */
+  .faq{padding:78px 0;max-width:760px;margin:0 auto}
+  .qa{border-top:1px solid var(--line);padding:22px 0}
+  .qa:last-child{border-bottom:1px solid var(--line)}
+  .qa h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin-bottom:6px}
+  .qa p{color:var(--ink-soft);font-size:.98rem}
+
+  /* CTA band */
+  .band{background:var(--ink);color:#fff;border-radius:24px;margin:0 auto 70px;max-width:1120px;padding:56px;text-align:center}
+  .band h2{font-family:var(--serif);font-size:2.2rem;font-weight:600;margin-bottom:14px}
+  .band p{color:rgba(255,255,255,.72);max-width:46ch;margin:0 auto 26px}
+  .band .btn-primary{background:var(--cta)}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:48px 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+  .foot-grid h5{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+  .foot-grid a{display:block;font-size:.95rem;color:var(--ink);padding:5px 0}
+  .foot-bottom{border-top:1px solid var(--line);margin-top:36px;padding-top:24px;color:var(--ink-soft);font-size:.88rem;display:flex;justify-content:space-between;gap:16px}
+
+  /* Tablet */
+  @media(max-width:900px){
+    .container{padding:0 34px}
+    .hero{grid-template-columns:1fr 1fr;gap:34px;padding:60px 0 52px}
+    .hero h1{font-size:2.5rem}
+    .grid,.step-grid,.price-grid{grid-template-columns:1fr 1fr}
+    .grid .card:last-child,.step:last-child,.plan:last-child{grid-column:1 / -1}
+    .stats-row{grid-template-columns:1fr 1fr;gap:30px}
+    .band{margin:0 34px 56px;padding:44px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  /* Mobile */
+  @media(max-width:560px){
+    .container{padding:0 22px}
+    .nav-links{display:none}
+    .nav{height:64px}
+    .hero{grid-template-columns:1fr;gap:30px;padding:44px 0 40px}
+    .hero h1{font-size:2.2rem}
+    .hero p{max-width:none}
+    .hero-art{order:-1}
+    .grid,.step-grid,.price-grid,.stats-row{grid-template-columns:1fr}
+    .grid .card:last-child,.step:last-child,.plan:last-child{grid-column:auto}
+    .strip-row span:nth-child(n+4){display:none}
+    .quote blockquote{font-size:1.5rem}
+    .band{margin:0 22px 44px;padding:36px 26px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">North<b>field</b></div>
+      <nav class="nav-links"><a>Product</a><a>Solutions</a><a>Pricing</a><a>Resources</a></nav>
+      <a class="nav-cta">Get started</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <div class="eyebrow">Built for growing teams</div>
+        <h1>Run your business on <em>one</em> calm dashboard.</h1>
+        <p>Everything your team needs to plan, sell, and deliver - without ten browser tabs.</p>
+        <div class="hero-cta">
+          <a class="btn-primary">Start free</a>
+          <a class="btn-ghost">Book a demo</a>
+        </div>
+      </div>
+      <div class="hero-art"></div>
+    </section>
+
+    <section class="strip">
+      <div class="container strip-row">
+        <span>Aperture</span><span>Lumen</span><span>Vasari</span><span>Hearth</span><span>Quill</span>
+      </div>
+    </section>
+
+    <section class="container features">
+      <div class="sec-head"><div class="eyebrow">Features</div><h2>Everything in its place</h2><p>Three tools your team already wishes it had.</p></div>
+      <div class="grid">
+        <div class="card"><div class="ico"></div><h3>Plan</h3><p>Roadmaps, sprints, and a shared calendar that stays in sync automatically.</p></div>
+        <div class="card"><div class="ico"></div><h3>Sell</h3><p>A pipeline that updates itself, so nothing slips between a call and a close.</p></div>
+        <div class="card"><div class="ico"></div><h3>Deliver</h3><p>Hand off to delivery in one click and track every milestone in real time.</p></div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-row">
+        <div class="stat"><div class="n">12k+</div><div class="l">Teams onboarded</div></div>
+        <div class="stat"><div class="n">98%</div><div class="l">Renewal rate</div></div>
+        <div class="stat"><div class="n">4.9</div><div class="l">Average rating</div></div>
+        <div class="stat"><div class="n">30m</div><div class="l">Saved per day</div></div>
+      </div>
+    </section>
+
+    <section class="container steps">
+      <div class="sec-head"><div class="eyebrow">How it works</div><h2>Up and running in an afternoon</h2></div>
+      <div class="step-grid">
+        <div class="step"><div class="num">1</div><h3>Connect</h3><p>Link the tools you already use. Imports run in the background.</p></div>
+        <div class="step"><div class="num">2</div><h3>Configure</h3><p>Pick a template, set your stages, invite the team.</p></div>
+        <div class="step"><div class="num">3</div><h3>Ship</h3><p>Watch work move across one board everyone can trust.</p></div>
+      </div>
+    </section>
+
+    <section class="container quote">
+      <blockquote>"We replaced four tools with one and stopped arguing about where things live."</blockquote>
+      <div class="who">Dana Okafor</div>
+      <div class="role">Operations Lead, Vasari Studio</div>
+    </section>
+
+    <section class="pricing">
+      <div class="container">
+        <div class="sec-head"><div class="eyebrow">Pricing</div><h2>Simple, honest plans</h2><p>Start free. Upgrade when it pays for itself.</p></div>
+        <div class="price-grid">
+          <div class="plan"><div class="tier">Starter</div><div class="price">$0<span>/mo</span></div><ul><li>Up to 3 seats</li><li>Core boards</li><li>Email support</li></ul><a class="btn-ghost" style="display:block;text-align:center">Choose Starter</a></div>
+          <div class="plan is-featured"><div class="tier">Growth</div><div class="price">$24<span>/seat</span></div><ul><li>Unlimited boards</li><li>Automations</li><li>Priority support</li></ul><a class="btn-primary">Choose Growth</a></div>
+          <div class="plan"><div class="tier">Scale</div><div class="price">Custom</div><ul><li>SSO and SAML</li><li>Audit logs</li><li>Dedicated manager</li></ul><a class="btn-ghost" style="display:block;text-align:center">Talk to sales</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container faq">
+      <div class="sec-head"><div class="eyebrow">FAQ</div><h2>Questions, answered</h2></div>
+      <div class="qa"><h4>Can I import from my old tools?</h4><p>Yes. Most teams import boards and contacts in under ten minutes.</p></div>
+      <div class="qa"><h4>Is there a free plan?</h4><p>The Starter plan is free for up to three people, forever.</p></div>
+      <div class="qa"><h4>Do you offer onboarding?</h4><p>Every paid plan includes a guided setup call with a specialist.</p></div>
+      <div class="qa"><h4>How does billing work?</h4><p>Monthly or annual, per active seat. Cancel anytime, no lock-in.</p></div>
+      <div class="qa"><h4>Where is my data stored?</h4><p>Encrypted at rest in your region, with daily backups.</p></div>
+    </section>
+
+    <section class="container">
+      <div class="band">
+        <h2>Ready when you are.</h2>
+        <p>Join the teams shipping faster with a single source of truth. No credit card needed.</p>
+        <a class="btn-primary">Create your workspace</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div><div class="brand">North<b>field</b></div><p style="color:var(--ink-soft);font-size:.92rem;margin-top:10px;max-width:26ch">One calm place to plan, sell, and deliver.</p></div>
+        <div><h5>Product</h5><a>Features</a><a>Pricing</a><a>Changelog</a><a>Roadmap</a></div>
+        <div><h5>Company</h5><a>About</a><a>Careers</a><a>Blog</a><a>Contact</a></div>
+        <div><h5>Legal</h5><a>Privacy</a><a>Terms</a><a>Security</a><a>Status</a></div>
+      </div>
+      <div class="foot-bottom"><span>&copy; 2026 Northfield Inc.</span><span>Made for teams that ship.</span></div>
+    </div>
+  </footer>
+</body>
+</html>

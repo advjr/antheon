@@ -444,7 +444,7 @@
     /* --- Work tease (projects preview) --- */
     #work-tease { background: var(--bg); }
     .tease-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 44px; }
-    @media (min-width: 700px) { .tease-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 700px) { .tease-grid { grid-template-columns: repeat(2, 1fr); } }
     .tease-card {
       border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg);
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -452,10 +452,16 @@
     .tease-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(17,17,20,0.2); border-color: var(--border-strong); }
     .tease-chrome { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: var(--bg-alt); border-bottom: 1px solid var(--border); }
     .tease-chrome span { width: 7px; height: 7px; border-radius: 50%; background: var(--border-strong); }
-    .tease-screen { aspect-ratio: 16 / 10; padding: 18px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(160deg, #FBFAFF 0%, #F5F3FF 55%, #F2F6FF 100%); }
+    .tease-url {
+      flex: 1; height: 16px; border-radius: 4px; background: #fff; border: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 8px; font-size: 9px; color: var(--text-muted);
+      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    }
+    .tease-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 10; padding: 18px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(160deg, #FBFAFF 0%, #F5F3FF 55%, #F2F6FF 100%); }
     .tease-bar { height: 9px; border-radius: 3px; background: rgba(17,17,20,0.08); }
     .tease-bar.w-60 { width: 60%; } .tease-bar.w-35 { width: 35%; } .tease-bar.w-45 { width: 45%; }
     .tease-block { flex: 1; border-radius: 8px; background: var(--brand-gradient); opacity: 0.16; min-height: 40px; }
+    .tease-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: var(--bg-alt); }
     .tease-cta { text-align: center; }
 
     /* --- Process steps --- */
@@ -866,24 +872,29 @@
 
         <div class="tease-grid">
           <div class="tease-card reveal">
-            <div class="tease-chrome"><span></span><span></span><span></span></div>
-            <div class="tease-screen" aria-hidden="true">
-              <div class="tease-bar w-35"></div>
-              <div class="tease-block"></div>
+            <div class="tease-chrome">
+              <span></span><span></span><span></span>
+              <div class="tease-url">naturalartform.com</div>
+            </div>
+            <div class="tease-screen">
+              <div class="tease-bar w-35" aria-hidden="true"></div>
+              <div class="tease-block" aria-hidden="true"></div>
+              <video class="tease-video" autoplay muted loop playsinline poster="asset/naturalartform-preview.jpg" aria-label="Scrolling preview of the Natural ArtForm website">
+                <source src="asset/naturalartform-scroll.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
           <div class="tease-card reveal">
-            <div class="tease-chrome"><span></span><span></span><span></span></div>
-            <div class="tease-screen" aria-hidden="true">
-              <div class="tease-bar w-60"></div>
-              <div class="tease-block"></div>
+            <div class="tease-chrome">
+              <span></span><span></span><span></span>
+              <div class="tease-url">optimumep.com.au</div>
             </div>
-          </div>
-          <div class="tease-card reveal">
-            <div class="tease-chrome"><span></span><span></span><span></span></div>
-            <div class="tease-screen" aria-hidden="true">
-              <div class="tease-bar w-45"></div>
-              <div class="tease-block"></div>
+            <div class="tease-screen">
+              <div class="tease-bar w-60" aria-hidden="true"></div>
+              <div class="tease-block" aria-hidden="true"></div>
+              <video class="tease-video" autoplay muted loop playsinline poster="asset/optimumep-preview.jpg" aria-label="Scrolling preview of the Optimum Exercise Physiology website">
+                <source src="asset/optimumep-scroll.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
         </div>
@@ -1511,6 +1522,22 @@
         }, 600);
       });
     }
+  </script>
+
+  <script>
+    // Force-mute and (re)start the project preview videos: some browsers ignore the
+    // muted/autoplay attributes on file:// or slow-loading sources unless set via JS too.
+    (function () {
+      document.querySelectorAll('.tease-video').forEach(function (video) {
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        var tryPlay = function () { video.play().catch(function () {}); };
+        tryPlay();
+        video.addEventListener('loadeddata', tryPlay);
+        video.addEventListener('canplay', tryPlay);
+      });
+    })();
   </script>
 
 </body>

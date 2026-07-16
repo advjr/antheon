@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Website Building Progress | Client XXX</title>
+<meta name="description" content="Internal changelog of updates and improvements shipped on client-xxx.com.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="../images/favicon-512.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0a0a0a;
+  --deep:#111111;
+  --gold:#c9a84c;
+  --gold-light:#e8d48b;
+  --gold-dim:#8a7233;
+  --cream:#f5f0e8;
+  --warm-white:#faf8f4;
+  --text-light:#e8e4dc;
+  --text-mid:#c4b8a8;
+  --text-dim:#8a8078;
+  --t-bg:#FAF8F4;
+  --t-card:#FFFFFF;
+  --t-alt:#F3F0EC;
+  --t-heading:#1A1A1A;
+  --t-body:#3D3A37;
+  --t-muted:#5A5550;
+  --t-border:rgba(0,0,0,0.08);
+  --t-gold-bg:rgba(201,168,76,0.08);
+  --t-gold-border:rgba(201,168,76,0.20);
+  --t-gold-on-light:#7A6520;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans',-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden}
+body{background:var(--t-bg);color:var(--t-body);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+::selection{background:var(--gold);color:var(--black)}
+a{color:var(--gold-dim);text-decoration:none;transition:color .2s}
+a:hover{color:var(--gold)}
+
+/* Layout */
+.wrap{max-width:780px;margin:0 auto;padding:80px 32px 120px}
+@media(max-width:640px){.wrap{padding:60px 20px 80px}}
+
+/* Breadcrumb */
+.crumbs{display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--t-muted);margin-bottom:48px;flex-wrap:wrap}
+.crumbs-left{display:flex;align-items:center;gap:8px}
+.crumbs-left a{color:var(--gold-dim)}
+.crumbs-left .sep{opacity:.5}
+.crumbs-left .here{color:var(--t-heading)}
+.crumbs-back{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);display:flex;align-items:center;gap:6px}
+.crumbs-back:hover{color:var(--gold)}
+
+/* Header */
+.title{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,3.6rem);font-weight:400;line-height:1.1;color:var(--t-heading);margin-bottom:16px}
+.title em{font-style:italic;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{font-family:var(--font-body);font-size:1.1rem;color:var(--t-muted);margin-bottom:18px;line-height:1.6}
+.note{font-family:var(--font-body);font-size:.85rem;color:var(--t-muted);font-style:italic;margin-bottom:48px;line-height:1.6;padding:14px 18px;border-left:2px solid var(--gold);background:var(--t-gold-bg);border-radius:0 6px 6px 0}
+
+/* Stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:60px;background:var(--t-card);border:1px solid var(--t-border);border-radius:10px;overflow:hidden}
+.stat{padding:20px 16px;text-align:center;border-right:1px solid var(--t-border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:400;color:var(--gold-dim);line-height:1;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:6px}
+.stat-num span.icon{font-size:1.2rem}
+.stat-label{font-family:var(--font-body);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--t-muted);font-weight:500}
+@media(max-width:640px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--t-border)}
+  .stat:nth-child(2n){border-right:none}
+  .stat:nth-child(odd){border-right:1px solid var(--t-border)}
+  .stat:nth-last-child(-n+2){border-bottom:none}
+}
+
+/* Build phases — vertical timeline */
+.phases{margin-bottom:60px}
+.phases-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.phases-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.timeline{list-style:none;margin:0;padding:4px 0 0;display:flex}
+.tl-item{flex:1 1 0;min-width:0;position:relative;text-align:center;padding:0 5px}
+/* horizontal connector behind the circles; gold once a phase is complete */
+.tl-item:not(:last-child)::before{content:'';position:absolute;top:40px;left:50%;width:100%;height:2px;background:var(--t-border);z-index:0}
+.is-done:not(:last-child)::before{background:var(--gold)}
+/* hourglass slot sits above the circle (only the current phase shows one) */
+.tl-top{height:30px;display:flex;align-items:flex-end;justify-content:center}
+.tl-hourglass{font-size:1.1rem;line-height:1;margin-bottom:9px;transform-origin:50% 50%;animation:tl-flip 4s ease-in-out infinite}
+@keyframes tl-flip{0%,38%{transform:rotate(0deg)}50%,88%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
+/* circle markers */
+.tl-marker{position:relative;z-index:1;width:22px;height:22px;border-radius:50%;margin:0 auto;background:var(--t-card);border:2px solid var(--t-border);display:flex;align-items:center;justify-content:center}
+.is-done .tl-marker{background:var(--gold);border-color:var(--gold)}
+.is-done .tl-marker::after{content:'\2713';color:var(--black);font-size:.66rem;font-weight:700;line-height:1}
+.is-current .tl-marker{border-color:var(--gold);box-shadow:0 0 0 4px var(--t-gold-bg)}
+.is-current .tl-marker::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--gold);animation:tl-pulse 1.8s ease-in-out infinite}
+@keyframes tl-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.55);opacity:.55}}
+/* labels below the circle */
+.tl-body{margin-top:12px}
+.tl-phase{font-family:var(--font-body);font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:4px}
+.tl-title{font-family:var(--font-display);font-size:.92rem;font-weight:400;color:var(--t-heading);line-height:1.22;margin-bottom:3px}
+.tl-status{font-family:var(--font-body);font-size:.7rem;color:var(--t-muted)}
+.is-upcoming .tl-title{color:var(--t-muted)}
+.is-done .tl-status{color:#2D7A4A}
+.is-current .tl-phase,.is-current .tl-status{color:var(--t-gold-on-light)}
+.is-current .tl-status{font-weight:600}
+@media(prefers-reduced-motion:reduce){.is-current .tl-marker::after,.tl-hourglass{animation:none}}
+
+/* Live preview — device frames */
+.previews{margin-bottom:60px}
+.previews-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.previews-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.previews-sub{font-family:var(--font-body);font-size:.9rem;color:var(--t-muted);margin-bottom:24px;line-height:1.6}
+.device-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.device{margin:0;display:flex;flex-direction:column;gap:12px}
+.device figcaption{font-family:var(--font-body);font-size:.66rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--t-heading);text-align:center}
+.device figcaption span{display:block;margin-top:3px;font-weight:500;letter-spacing:1px;color:var(--t-muted);font-size:.6rem}
+
+/* identical container: each screen is the same box; the iframe renders the static
+   sample site at its true breakpoint width, scaled to fill the box and cropped */
+.screen{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;background:#fff;
+  border:1px solid var(--t-border);border-radius:14px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.04),0 18px 40px -12px rgba(0,0,0,0.22);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease}
+.screen::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5)}
+/* .vp = the scrolling track (translateY animated); the iframe inside is scaled to width */
+.vp{position:absolute;top:0;left:0;will-change:transform;animation:vp-scroll 18s ease-in-out infinite alternate}
+.vp iframe{display:block;border:0;background:#fff;pointer-events:none;transform-origin:top left}
+/* each box is ~226px wide; scale = box-width / breakpoint-width. iframe height is taller
+   than the box so the track can pan; --d is the scaled scroll distance (page height - box) */
+.vp-desktop iframe{width:1440px;height:2800px;transform:scale(.16)}
+.vp-tablet iframe{width:820px;height:3800px;transform:scale(.2805)}
+.vp-mobile iframe{width:390px;height:5200px;transform:scale(.5897)}
+.vp-desktop{--d:148px;animation-duration:7s}
+.vp-tablet{--d:766px}
+.vp-mobile{--d:2766px;animation-duration:24s}
+@keyframes vp-scroll{from{transform:translateY(0)}to{transform:translateY(calc(var(--d) * -1))}}
+/* pause the pan on hover/focus so the framed view holds still under the View prompt */
+.device:hover .vp,.screen:focus-visible .vp{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.vp{animation:none}}
+
+/* Hover -> reveal "View" */
+.screen-hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(to top,rgba(10,12,18,.55),rgba(10,12,18,.18));
+  opacity:0;transition:opacity .3s ease;border-radius:14px}
+.view-pill{font-family:var(--font-body);font-size:.74rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--black);background:var(--gold);padding:11px 22px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);transform:translateY(6px);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.device:hover .screen{transform:translateY(-4px);border-color:var(--t-gold-border);box-shadow:0 1px 2px rgba(0,0,0,0.04),0 26px 50px -12px rgba(0,0,0,0.30)}
+.device:hover .screen-hover{opacity:1}
+.device:hover .view-pill{transform:translateY(0)}
+.screen:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.screen:focus-visible .screen-hover{opacity:1}
+
+@media(max-width:640px){
+  .device-row{gap:10px}
+  .device figcaption{font-size:.58rem;letter-spacing:1px}
+  /* boxes shrink to ~100px wide on small phones; rescale iframes + pan distance to match */
+  .vp-desktop iframe{transform:scale(.0694)}
+  .vp-tablet iframe{transform:scale(.122)}
+  .vp-mobile iframe{transform:scale(.2564)}
+  .vp-desktop{--d:61px}
+  .vp-tablet{--d:331px}
+  .vp-mobile{--d:1200px}
+}
+@media(hover:none){.screen-hover{opacity:1;background:linear-gradient(to top,rgba(10,12,18,.45),transparent 55%)}.view-pill{transform:none}}
+
+/* Entry blocks */
+.entry{margin-bottom:64px;position:relative}
+.entry::before{content:'';position:absolute;left:-32px;top:8px;bottom:0;width:1px;background:var(--t-border)}
+.entry::after{content:'';position:absolute;left:-37px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px var(--t-bg),0 0 0 4px var(--t-gold-border)}
+@media(max-width:640px){.entry::before,.entry::after{display:none}}
+
+.entry-meta{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.entry-date{font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light)}
+.entry-version{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:1px;color:var(--t-card);background:var(--gold);padding:3px 10px;border-radius:999px}
+.entry-title{font-family:var(--font-display);font-size:1.65rem;font-weight:400;color:var(--t-heading);line-height:1.25;margin-bottom:14px}
+.entry-title .icon{margin-right:8px}
+
+.entry-section{margin-top:24px}
+.entry-section-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--t-heading);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.entry-section-label .icon{font-size:1rem}
+.entry-section-label .path{font-family:'SF Mono','Menlo',monospace;font-size:.75rem;font-weight:500;color:var(--gold-dim);background:var(--t-gold-bg);padding:2px 8px;border-radius:4px;letter-spacing:0;text-transform:none;margin-left:4px}
+
+.entry-list{list-style:none;padding:0}
+.entry-list li{display:flex;gap:10px;padding:7px 0;font-family:var(--font-body);font-size:.95rem;color:var(--t-body);line-height:1.6;border-bottom:1px solid var(--t-border)}
+.entry-list li:last-child{border-bottom:none}
+.entry-list .badge{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:4px;height:fit-content;margin-top:2px;white-space:nowrap}
+.entry-list .badge.new{background:rgba(45,122,74,0.1);color:#2D7A4A}
+.entry-list .badge.updated{background:rgba(74,144,196,0.1);color:#3a72a8}
+.entry-list .badge.fixed{background:rgba(201,168,76,0.12);color:var(--t-gold-on-light)}
+.entry-list .badge.removed{background:rgba(201,58,58,0.08);color:#a82d2d}
+.entry-list code{font-family:'SF Mono','Menlo',monospace;font-size:.82rem;color:var(--gold-dim);background:var(--t-gold-bg);padding:1px 6px;border-radius:3px}
+.entry-list strong{color:var(--t-heading);font-weight:600}
+
+/* Changelog empty state */
+.changelog-empty{margin-bottom:64px;padding:56px 32px;text-align:center;background:var(--t-card);border:1px dashed var(--t-border);border-radius:12px}
+.changelog-empty-icon{font-size:2rem;line-height:1;margin-bottom:14px}
+.changelog-empty-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:var(--t-heading);margin-bottom:8px}
+.changelog-empty-desc{font-family:var(--font-body);font-size:.92rem;color:var(--t-muted);line-height:1.6;max-width:420px;margin:0 auto}
+
+/* Footer */
+.foot{margin-top:96px;padding-top:32px;border-top:1px solid var(--t-border);font-family:var(--font-body);font-size:.8rem;color:var(--t-muted);text-align:center;line-height:1.7}
+.foot a{color:var(--gold-dim)}
+
+/* Team strip */
+.team-strip{background:var(--t-card);border:1px solid var(--t-border);border-radius:12px;padding:24px 28px 22px;margin-bottom:48px;box-shadow:var(--t-card-shadow)}
+.team-strip-label{font-family:var(--font-body);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.team-strip-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 26px}
+.team-member{display:flex;align-items:center;gap:16px}
+/* Avatar sized to match the canonical 84px coach-thumb used across the new-site */
+.team-avatar{width:84px;height:84px;border-radius:50%;flex-shrink:0;overflow:hidden;background:linear-gradient(135deg,var(--gold),var(--gold-dim));box-shadow:0 2px 8px rgba(0,0,0,0.12);border:1px solid var(--t-gold-border)}
+.team-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:560px){.team-avatar{width:72px;height:72px}}
+.team-name{font-family:var(--font-display);font-size:1.02rem;font-weight:600;color:var(--t-heading);line-height:1.2}
+.team-role{font-family:var(--font-body);font-size:.76rem;color:var(--t-muted);margin-top:3px;line-height:1.45}
+.team-meta{margin-top:20px;padding-top:14px;border-top:1px solid var(--t-border);font-family:var(--font-body);font-size:.82rem;color:var(--t-muted);line-height:1.6}
+.team-meta strong{color:var(--t-heading);font-weight:600}
+
+/* Reference-doc menu (top of page, above the changelog entries) */
+.docs-menu{margin-bottom:60px}
+.docs-menu-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.docs-menu-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.docs-menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:640px){.docs-menu-grid{grid-template-columns:1fr}}
+.docs-card{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--t-card);border:1px solid var(--t-border);border-radius:10px;text-decoration:none;color:var(--t-body);transition:border-color .2s,background .2s,transform .2s}
+.docs-card:hover{border-color:var(--t-gold-border);background:var(--t-gold-bg);transform:translateY(-1px)}
+.docs-card-icon{font-family:var(--font-display);font-size:1.6rem;color:var(--gold-dim);line-height:1;flex-shrink:0;margin-top:2px}
+.docs-card-body{flex:1;min-width:0}
+.docs-card-eyebrow{font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:4px}
+.docs-card-title{font-family:var(--font-display);font-size:1.1rem;color:var(--t-heading);line-height:1.25;margin-bottom:4px}
+.docs-card-desc{font-family:var(--font-body);font-size:.85rem;color:var(--t-muted);line-height:1.55}
+.docs-card-cta{font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dim);flex-shrink:0;align-self:center;margin-left:4px}
+@media(max-width:680px){.team-grid{grid-template-columns:1fr;gap:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="crumbs">
+    <div class="crumbs-left">
+      <a href="../">Client XXX</a>
+      <span class="sep">/</span>
+      <span class="here">Progress</span>
+    </div>
+    <a href="../" class="crumbs-back">Back to site &rsaquo;</a>
+  </nav>
+
+  <h1 class="title">Website Building <em>Progress</em></h1>
+  <p class="subtitle">Tracking the build of client-xxx.com, from discovery through launch</p>
+  <p class="note">This page is internal-only and is not indexed by search engines. It tracks where the build currently stands across each phase, plus the structural, content, and design updates shipped along the way.</p>
+
+  <section class="team-strip" aria-label="Who's building this site">
+    <div class="team-strip-label">Who's building this site</div>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-avatar"><img src="team/christian-orbista.jpg" alt="Christian Orbista" loading="lazy"></div>
+        <div class="team-info">
+          <div class="team-name">Christian Orbista</div>
+          <div class="team-role">Web Dev</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar"><img src="team/anthony-devera.jpg" alt="Anthony Devera" loading="lazy"></div>
+        <div class="team-info">
+          <div class="team-name">Anthony Devera</div>
+          <div class="team-role">Web Dev</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar"><img src="team/brandon-chen.png" alt="Brandon Chen" loading="lazy"></div>
+        <div class="team-info">
+          <div class="team-name">Brandon Chen</div>
+          <div class="team-role">Performance Specialist (SEO / AEO / GEO)</div>
+        </div>
+      </div>
+    </div>
+    <p class="team-meta">Reviewed by <strong>Stephanie Lim</strong> and <strong>Ryan Chua</strong>.</p>
+  </section>
+
+  <section class="phases" aria-label="Website build phases">
+    <div class="phases-label">Build phases</div>
+    <ol class="timeline">
+      <li class="tl-item is-done">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 1</div>
+          <div class="tl-title">Discover and audit</div>
+          <div class="tl-status">Complete</div>
+        </div>
+      </li>
+      <li class="tl-item is-done">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 2</div>
+          <div class="tl-title">Strategy and plan</div>
+          <div class="tl-status">Complete</div>
+        </div>
+      </li>
+      <li class="tl-item is-current">
+        <div class="tl-top"><span class="tl-hourglass" aria-hidden="true">&#9203;</span></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 3</div>
+          <div class="tl-title">Build and configure</div>
+          <div class="tl-status">In progress</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 4</div>
+          <div class="tl-title">Review and QA</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 5</div>
+          <div class="tl-title">Launch and deploy</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 6</div>
+          <div class="tl-title">Optimise and monitor</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 7</div>
+          <div class="tl-title">Ongoing</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num"><span class="icon">&#128193;</span>5</div><div class="stat-label">Public Pages</div></div>
+    <div class="stat"><div class="stat-num"><span class="icon">&#127909;</span>18</div><div class="stat-label">Videos Integrated</div></div>
+    <div class="stat"><div class="stat-num"><span class="icon">&#129489;&#8205;&#127979;</span>7</div><div class="stat-label">Coach Profiles</div></div>
+    <div class="stat"><div class="stat-num"><span class="icon">&#127942;</span>5</div><div class="stat-label">Champion Cards</div></div>
+  </div>
+
+  <section class="previews" aria-label="Live preview of the website">
+    <div class="previews-label">Live preview</div>
+    <p class="previews-sub">The current build of <a href="../" target="_blank" rel="noopener">client-xxx.com</a>, shown across three screen sizes.</p>
+    <div class="device-row">
+
+      <figure class="device">
+        <a class="screen" href="../" target="_blank" rel="noopener" aria-label="View the desktop build">
+          <span class="vp vp-desktop"><iframe src="sample.html" title="Desktop preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
+          <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
+        </a>
+        <figcaption>Desktop <span>1440px</span></figcaption>
+      </figure>
+
+      <figure class="device">
+        <a class="screen" href="../" target="_blank" rel="noopener" aria-label="View the tablet build">
+          <span class="vp vp-tablet"><iframe src="sample.html" title="Tablet preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
+          <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
+        </a>
+        <figcaption>Tablet <span>820px</span></figcaption>
+      </figure>
+
+      <figure class="device">
+        <a class="screen" href="../" target="_blank" rel="noopener" aria-label="View the mobile build">
+          <span class="vp vp-mobile"><iframe src="sample.html" title="Mobile preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
+          <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
+        </a>
+        <figcaption>Mobile <span>390px</span></figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section class="docs-menu" aria-label="Reference documents">
+    <div class="docs-menu-label">Reference docs</div>
+    <div class="docs-menu-grid">
+      <a href="/new-site/seo-report/" class="docs-card">
+        <div class="docs-card-icon">&#128214;</div>
+        <div class="docs-card-body">
+          <div class="docs-card-eyebrow">Standing implementation report</div>
+          <div class="docs-card-title">SEO, AEO, GEO report</div>
+          <div class="docs-card-desc">What we did across search, answer, and generative engines on the rebuild, and why each choice was made. Updated when material work ships.</div>
+        </div>
+        <span class="docs-card-cta">Open &rsaquo;</span>
+      </a>
+      <a href="/new-site/redirect-plan/" class="docs-card">
+        <div class="docs-card-icon">&#128279;</div>
+        <div class="docs-card-body">
+          <div class="docs-card-eyebrow">Transition plan</div>
+          <div class="docs-card-title">301 redirect plan, legacy to new site</div>
+          <div class="docs-card-desc">Every legacy WordPress URL on the primary domain mapped to its new destination, ahead of the production cutover.</div>
+        </div>
+        <span class="docs-card-cta">Open &rsaquo;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== CHANGELOG ENTRIES ==================== -->
+  <!-- New <article class="entry"> ... </article> blocks go here, newest first. -->
+  <div class="changelog-empty">
+    <div class="changelog-empty-icon">&#128221;</div>
+    <div class="changelog-empty-title">No updates logged yet</div>
+    <p class="changelog-empty-desc">This is where shipped updates will appear, newest first. The first entry will show here once work goes live.</p>
+  </div>
+
+  <footer class="foot">
+    <p>Client XXX Academy Pte. Ltd. &middot; UEN 200911106E &middot; <a href="../">client-xxx.com</a></p>
+    <p style="margin-top:6px;font-size:.75rem;color:var(--t-muted);">Internal-only update log. Last updated 5 May 2026.</p>
+  </footer>
+
+</div>
+</body>
+</html>
