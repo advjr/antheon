@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device preview</title>
+<link rel="icon" type="image/png" href="../asset/Ann.png">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;background:#e9e9ee;display:flex;flex-direction:column;align-items:center;
+    padding:22px 16px 40px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  .bar{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;justify-content:center}
+  .bar a{font-size:13px;font-weight:600;color:#6D28D9;text-decoration:none}
+  .bar a:hover{color:#9333EA}
+  .bar span{font-size:11px;color:#5C5C66;text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
+  .frame{
+    border:0;border-radius:14px;background:#fff;
+    box-shadow:0 30px 70px rgba(10,10,20,0.25);
+    max-width:96vw;max-height:82vh;
+  }
+  .missing{font-size:15px;color:#3D3A37}
+</style>
+</head>
+<body>
+  <div class="bar">
+    <a href="index.html">&larr; Back to dashboard</a>
+    <span id="deviceLabel"></span>
+  </div>
+  <iframe class="frame" id="previewFrame" src="sample.html" title="Device preview"></iframe>
+
+  <script>
+    var sizes = { desktop: [1440, 900], tablet: [820, 900], mobile: [390, 844] };
+    var device = new URLSearchParams(location.search).get('device');
+    var size = sizes[device] || sizes.desktop;
+    var resolvedDevice = sizes[device] ? device : 'desktop';
+    var label = resolvedDevice.charAt(0).toUpperCase() + resolvedDevice.slice(1);
+
+    var frame = document.getElementById('previewFrame');
+    frame.style.width = size[0] + 'px';
+    frame.style.height = size[1] + 'px';
+
+    document.getElementById('deviceLabel').textContent = label + ' · ' + size[0] + '×' + size[1];
+    document.title = label + ' preview';
+  </script>
+</body>
+</html>

@@ -140,9 +140,18 @@
     .band{margin:0 22px 44px;padding:36px 26px}
     .foot-grid{grid-template-columns:1fr 1fr}
   }
+
+  /* Sample-preview watermark: fixed, centered, low-opacity so the page underneath still reads through */
+  .sample-watermark{
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);
+    z-index:9999;pointer-events:none;width:100vw;text-align:center;
+    font-family:var(--sans);font-size:clamp(1.1rem,4.2vw,2.6rem);font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(128,128,128,0.55);mix-blend-mode:difference;white-space:nowrap;
+  }
 </style>
 </head>
 <body>
+  <div class="sample-watermark" aria-hidden="true">Sample Website Only</div>
   <header>
     <div class="container nav">
       <div class="brand">North<b>field</b></div>

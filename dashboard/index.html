@@ -7,62 +7,124 @@
 <meta name="description" content="Internal changelog of updates and improvements shipped on client-xxx.com.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0a0a0a">
-<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-<link rel="icon" type="image/png" sizes="512x512" href="../images/favicon-512.png">
-<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../asset/Ann.png">
+<link rel="apple-touch-icon" href="../asset/Ann.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --black:#0a0a0a;
-  --deep:#111111;
-  --gold:#c9a84c;
-  --gold-light:#e8d48b;
-  --gold-dim:#8a7233;
-  --cream:#f5f0e8;
-  --warm-white:#faf8f4;
+  --black:#FFFFFF;
+  --deep:#1A1230;
+  --gold:#9333EA;
+  --gold-light:#3B82F6;
+  --gold-dim:#6D28D9;
+  --cream:#F7F7F5;
+  --warm-white:#FFFFFF;
   --text-light:#e8e4dc;
   --text-mid:#c4b8a8;
   --text-dim:#8a8078;
-  --t-bg:#FAF8F4;
+  --t-bg:#FFFFFF;
   --t-card:#FFFFFF;
-  --t-alt:#F3F0EC;
-  --t-heading:#1A1A1A;
+  --t-alt:#F7F7F5;
+  --t-heading:#111114;
   --t-body:#3D3A37;
-  --t-muted:#5A5550;
-  --t-border:rgba(0,0,0,0.08);
-  --t-gold-bg:rgba(201,168,76,0.08);
-  --t-gold-border:rgba(201,168,76,0.20);
-  --t-gold-on-light:#7A6520;
-  --font-display:'DM Serif Display',Georgia,serif;
-  --font-body:'DM Sans',-apple-system,sans-serif;
+  --t-muted:#5C5C66;
+  --t-border:#E6E6E9;
+  --t-gold-bg:rgba(147,51,234,0.08);
+  --t-gold-border:rgba(147,51,234,0.20);
+  --t-gold-on-light:#6D28D9;
+  --brand-gradient:linear-gradient(105deg,#9333EA 0%,#6D48E6 50%,#3B82F6 100%);
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Instrument Sans',-apple-system,sans-serif;
 }
 html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden}
-body{background:var(--t-bg);color:var(--t-body);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{background:var(--t-bg);color:var(--t-body);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;padding-top:53px}
 ::selection{background:var(--gold);color:var(--black)}
 a{color:var(--gold-dim);text-decoration:none;transition:color .2s}
 a:hover{color:var(--gold)}
 
-/* Layout */
-.wrap{max-width:780px;margin:0 auto;padding:80px 32px 120px}
-@media(max-width:640px){.wrap{padding:60px 20px 80px}}
+/* Antheon brand bar */
+.antheon-bar{background:var(--deep);padding:12px 0;position:fixed;top:0;left:0;right:0;z-index:100}
+.antheon-bar-inner{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.antheon-bar-left{display:flex;align-items:center}
+.antheon-brand{display:flex;align-items:center;gap:9px}
+.antheon-brand img{display:block;width:22px;height:19px}
+.antheon-wordmark{font-family:var(--font-body);font-weight:700;font-size:.9rem;letter-spacing:.04em;color:#fff}
+.antheon-wordmark .heon{background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.antheon-bar-right{display:flex;align-items:center;gap:16px}
+.live-indicator{display:flex;align-items:center;gap:7px;font-family:var(--font-body);font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.75)}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#ef4444;flex-shrink:0;box-shadow:0 0 0 0 rgba(239,68,68,0.55);animation:live-pulse 1.8s ease-in-out infinite}
+@keyframes live-pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.55)}70%{box-shadow:0 0 0 6px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.preview-btn{font-family:var(--font-body);font-size:.74rem;font-weight:700;letter-spacing:.3px;color:#fff;background:var(--brand-gradient);padding:7px 16px;border-radius:999px;transition:opacity .2s}
+.preview-btn:hover{opacity:.86;color:#fff}
+@media(prefers-reduced-motion:reduce){.live-dot{animation:none}}
+@media(max-width:640px){.antheon-bar-inner{padding:0 20px}.live-indicator span:last-child{display:none}}
 
-/* Breadcrumb */
-.crumbs{display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--t-muted);margin-bottom:48px;flex-wrap:wrap}
-.crumbs-left{display:flex;align-items:center;gap:8px}
-.crumbs-left a{color:var(--gold-dim)}
-.crumbs-left .sep{opacity:.5}
-.crumbs-left .here{color:var(--t-heading)}
-.crumbs-back{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);display:flex;align-items:center;gap:6px}
-.crumbs-back:hover{color:var(--gold)}
+/* Mobile nav burger (opens the sidebar as a drawer) */
+.nav-burger{display:none;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:none;color:#fff;cursor:pointer;padding:0;margin-right:6px;flex-shrink:0}
+.nav-burger svg{width:22px;height:22px;display:block}
+@media(max-width:860px){.nav-burger{display:flex}}
+
+/* Backdrop behind the mobile sidebar drawer */
+.sidebar-backdrop{display:none;position:fixed;top:53px;left:0;right:0;bottom:0;background:rgba(10,10,20,0.4);z-index:80}
+@media(max-width:860px){.sidebar-backdrop.is-open{display:block}}
+
+/* Dashboard shell: sidebar + main content */
+.dash-shell{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;align-items:stretch;gap:44px}
+@media(max-width:860px){.dash-shell{flex-direction:column;padding:0;gap:0}}
+
+.sidebar{width:216px;flex-shrink:0;padding:0 24px 0 0;border-right:1px solid var(--t-border)}
+.sidebar-inner{position:sticky;top:0;padding:40px 0}
+@media(max-width:860px){
+  .sidebar{
+    position:fixed;top:53px;left:0;bottom:0;z-index:90;
+    width:78vw;max-width:300px;border-right:1px solid var(--t-border);
+    background:var(--t-bg);padding:0;overflow-y:auto;
+    transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 0 40px rgba(0,0,0,0.18);
+  }
+  .sidebar.is-open{transform:translateX(0)}
+  .sidebar-inner{position:static;padding:24px 20px}
+}
+
+.side-client{padding:0 14px 18px;margin-bottom:10px;border-bottom:1px solid var(--t-border)}
+.side-client-name{font-family:var(--font-display);font-size:1.35rem;color:var(--t-heading);line-height:1.2}
+.side-client-tag{font-family:var(--font-body);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--t-muted);margin-top:4px}
+@media(max-width:860px){.side-client{padding:0 0 14px;margin-bottom:12px}}
+
+.side-nav{display:flex;flex-direction:column;gap:2px}
+.side-nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;font-family:var(--font-body);font-size:.88rem;font-weight:600;color:var(--t-muted);cursor:pointer;transition:background .2s,color .2s;border:none;background:none;text-align:left;width:100%}
+.side-nav-item .icon{font-size:1rem;width:20px;text-align:center;flex-shrink:0}
+.side-nav-item:hover{background:var(--t-alt);color:var(--t-heading)}
+.side-nav-item.is-active{background:var(--t-gold-bg);color:var(--gold-dim)}
+
+.dash-main{flex:1;min-width:0}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.is-active{display:block}
+
+/* Reused empty-state card (proposal / contract placeholders, changelog) */
+.changelog-empty,.empty-card{margin-bottom:64px;padding:56px 32px;text-align:center;background:var(--t-card);border:1px dashed var(--t-border);border-radius:12px}
+.changelog-empty-icon,.empty-card-icon{font-size:2rem;line-height:1;margin-bottom:14px}
+.changelog-empty-title,.empty-card-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:var(--t-heading);margin-bottom:8px}
+.changelog-empty-desc,.empty-card-desc{font-family:var(--font-body);font-size:.92rem;color:var(--t-muted);line-height:1.6;max-width:420px;margin:0 auto}
+
+/* Simple panel heading (Proposal / Contract / Documents) */
+.panel-heading{font-family:var(--font-display);font-size:1.9rem;font-weight:400;color:var(--t-heading);margin-bottom:10px}
+.panel-sub{font-family:var(--font-body);font-size:1rem;color:var(--t-muted);margin-bottom:32px;line-height:1.6}
+
+/* Layout */
+.wrap{max-width:780px;margin:0 auto;padding:56px 32px 120px}
+@media(max-width:640px){.wrap{padding:40px 20px 80px}}
 
 /* Header */
 .title{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,3.6rem);font-weight:400;line-height:1.1;color:var(--t-heading);margin-bottom:16px}
-.title em{font-style:italic;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.title em{font-style:italic;background:var(--brand-gradient);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .subtitle{font-family:var(--font-body);font-size:1.1rem;color:var(--t-muted);margin-bottom:18px;line-height:1.6}
 .note{font-family:var(--font-body);font-size:.85rem;color:var(--t-muted);font-style:italic;margin-bottom:48px;line-height:1.6;padding:14px 18px;border-left:2px solid var(--gold);background:var(--t-gold-bg);border-radius:0 6px 6px 0}
 
@@ -87,6 +149,10 @@ a:hover{color:var(--gold)}
 .phases-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
 .timeline{list-style:none;margin:0;padding:4px 0 0;display:flex}
 .tl-item{flex:1 1 0;min-width:0;position:relative;text-align:center;padding:0 5px}
+@media(max-width:640px){
+  .timeline{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:4px 20px 10px}
+  .tl-item{flex:0 0 130px;min-width:130px;padding:0 10px}
+}
 /* horizontal connector behind the circles; gold once a phase is complete */
 .tl-item:not(:last-child)::before{content:'';position:absolute;top:40px;left:50%;width:100%;height:2px;background:var(--t-border);z-index:0}
 .is-done:not(:last-child)::before{background:var(--gold)}
@@ -116,6 +182,8 @@ a:hover{color:var(--gold)}
 .previews{margin-bottom:60px}
 .previews-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:8px;display:flex;align-items:center;gap:10px}
 .previews-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.changelog-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.changelog-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
 .previews-sub{font-family:var(--font-body);font-size:.9rem;color:var(--t-muted);margin-bottom:24px;line-height:1.6}
 .device-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .device{margin:0;display:flex;flex-direction:column;gap:12px}
@@ -188,26 +256,27 @@ a:hover{color:var(--gold)}
 .entry-section-label .icon{font-size:1rem}
 .entry-section-label .path{font-family:'SF Mono','Menlo',monospace;font-size:.75rem;font-weight:500;color:var(--gold-dim);background:var(--t-gold-bg);padding:2px 8px;border-radius:4px;letter-spacing:0;text-transform:none;margin-left:4px}
 
+/* Multi-file box: label + comma-separated paths, for sections touching several pages */
+.entry-section-files{display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--t-gold-bg);border-radius:8px;margin-bottom:14px;flex-wrap:wrap}
+.entry-section-files-label{font-family:var(--font-body);font-size:.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t-heading);flex-shrink:0}
+.entry-section-files-paths{font-family:'SF Mono','Menlo',monospace;font-size:.72rem;color:var(--gold-dim);line-height:1.5}
+
 .entry-list{list-style:none;padding:0}
 .entry-list li{display:flex;gap:10px;padding:7px 0;font-family:var(--font-body);font-size:.95rem;color:var(--t-body);line-height:1.6;border-bottom:1px solid var(--t-border)}
 .entry-list li:last-child{border-bottom:none}
 .entry-list .badge{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:4px;height:fit-content;margin-top:2px;white-space:nowrap}
 .entry-list .badge.new{background:rgba(45,122,74,0.1);color:#2D7A4A}
 .entry-list .badge.updated{background:rgba(74,144,196,0.1);color:#3a72a8}
-.entry-list .badge.fixed{background:rgba(201,168,76,0.12);color:var(--t-gold-on-light)}
+.entry-list .badge.fixed{background:var(--t-gold-bg);color:var(--t-gold-on-light)}
 .entry-list .badge.removed{background:rgba(201,58,58,0.08);color:#a82d2d}
 .entry-list code{font-family:'SF Mono','Menlo',monospace;font-size:.82rem;color:var(--gold-dim);background:var(--t-gold-bg);padding:1px 6px;border-radius:3px}
 .entry-list strong{color:var(--t-heading);font-weight:600}
 
-/* Changelog empty state */
-.changelog-empty{margin-bottom:64px;padding:56px 32px;text-align:center;background:var(--t-card);border:1px dashed var(--t-border);border-radius:12px}
-.changelog-empty-icon{font-size:2rem;line-height:1;margin-bottom:14px}
-.changelog-empty-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:var(--t-heading);margin-bottom:8px}
-.changelog-empty-desc{font-family:var(--font-body);font-size:.92rem;color:var(--t-muted);line-height:1.6;max-width:420px;margin:0 auto}
-
 /* Footer */
 .foot{margin-top:96px;padding-top:32px;border-top:1px solid var(--t-border);font-family:var(--font-body);font-size:.8rem;color:var(--t-muted);text-align:center;line-height:1.7}
 .foot a{color:var(--gold-dim)}
+.foot-powered{margin-top:14px;font-size:.72rem;color:var(--t-muted);display:flex;align-items:center;justify-content:center;gap:7px}
+.foot-powered img{height:16px;width:auto;display:block}
 
 /* Team strip */
 .team-strip{background:var(--t-card);border:1px solid var(--t-border);border-radius:12px;padding:24px 28px 22px;margin-bottom:48px;box-shadow:var(--t-card-shadow)}
@@ -224,10 +293,7 @@ a:hover{color:var(--gold)}
 .team-meta{margin-top:20px;padding-top:14px;border-top:1px solid var(--t-border);font-family:var(--font-body);font-size:.82rem;color:var(--t-muted);line-height:1.6}
 .team-meta strong{color:var(--t-heading);font-weight:600}
 
-/* Reference-doc menu (top of page, above the changelog entries) */
-.docs-menu{margin-bottom:60px}
-.docs-menu-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.docs-menu-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+/* Reference-doc menu (Documents tab) */
 .docs-menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 @media(max-width:640px){.docs-menu-grid{grid-template-columns:1fr}}
 .docs-card{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--t-card);border:1px solid var(--t-border);border-radius:10px;text-decoration:none;color:var(--t-body);transition:border-color .2s,background .2s,transform .2s}
@@ -242,48 +308,53 @@ a:hover{color:var(--gold)}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <nav class="crumbs">
-    <div class="crumbs-left">
-      <a href="../">Client XXX</a>
-      <span class="sep">/</span>
-      <span class="here">Progress</span>
+<header class="antheon-bar">
+  <div class="antheon-bar-inner">
+    <div class="antheon-bar-left">
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a href="https://antheonph.com" class="antheon-brand" aria-label="Antheon home" target="_blank" rel="noopener">
+        <img src="../asset/Ann.png" alt="" width="22" height="19">
+        <span class="antheon-wordmark"><span class="ant">ANT</span><span class="heon">HEON</span></span>
+      </a>
     </div>
-    <a href="../" class="crumbs-back">Back to site &rsaquo;</a>
-  </nav>
+    <div class="antheon-bar-right">
+      <span class="live-indicator"><span class="live-dot" aria-hidden="true"></span><span>Live</span></span>
+      <a href="sample.html" target="_blank" rel="noopener" class="preview-btn">Preview</a>
+    </div>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="dash-shell">
+
+  <aside class="sidebar" id="sidebar">
+   <div class="sidebar-inner">
+    <div class="side-client">
+      <div class="side-client-name">Client XXX</div>
+      <div class="side-client-tag">Client Portal</div>
+    </div>
+    <nav class="side-nav" aria-label="Dashboard sections">
+      <button type="button" class="side-nav-item is-active" data-tab="updates" aria-selected="true"><span class="icon">&#128227;</span> Updates</button>
+      <button type="button" class="side-nav-item" data-tab="marketing" aria-selected="false"><span class="icon">&#128200;</span> Marketing</button>
+      <button type="button" class="side-nav-item" data-tab="proposal" aria-selected="false"><span class="icon">&#128196;</span> Proposal</button>
+      <button type="button" class="side-nav-item" data-tab="contract" aria-selected="false"><span class="icon">&#128221;</span> Contract</button>
+      <button type="button" class="side-nav-item" data-tab="documents" aria-selected="false"><span class="icon">&#128193;</span> Documents</button>
+    </nav>
+   </div>
+  </aside>
+
+  <main class="dash-main">
+  <div class="wrap">
+
+  <div id="panel-updates" class="tab-panel is-active">
 
   <h1 class="title">Website Building <em>Progress</em></h1>
   <p class="subtitle">Tracking the build of client-xxx.com, from discovery through launch</p>
   <p class="note">This page is internal-only and is not indexed by search engines. It tracks where the build currently stands across each phase, plus the structural, content, and design updates shipped along the way.</p>
-
-  <section class="team-strip" aria-label="Who's building this site">
-    <div class="team-strip-label">Who's building this site</div>
-    <div class="team-grid">
-      <div class="team-member">
-        <div class="team-avatar"><img src="team/christian-orbista.jpg" alt="Christian Orbista" loading="lazy"></div>
-        <div class="team-info">
-          <div class="team-name">Christian Orbista</div>
-          <div class="team-role">Web Dev</div>
-        </div>
-      </div>
-      <div class="team-member">
-        <div class="team-avatar"><img src="team/anthony-devera.jpg" alt="Anthony Devera" loading="lazy"></div>
-        <div class="team-info">
-          <div class="team-name">Anthony Devera</div>
-          <div class="team-role">Web Dev</div>
-        </div>
-      </div>
-      <div class="team-member">
-        <div class="team-avatar"><img src="team/brandon-chen.png" alt="Brandon Chen" loading="lazy"></div>
-        <div class="team-info">
-          <div class="team-name">Brandon Chen</div>
-          <div class="team-role">Performance Specialist (SEO / AEO / GEO)</div>
-        </div>
-      </div>
-    </div>
-    <p class="team-meta">Reviewed by <strong>Stephanie Lim</strong> and <strong>Ryan Chua</strong>.</p>
-  </section>
 
   <section class="phases" aria-label="Website build phases">
     <div class="phases-label">Build phases</div>
@@ -363,11 +434,11 @@ a:hover{color:var(--gold)}
 
   <section class="previews" aria-label="Live preview of the website">
     <div class="previews-label">Live preview</div>
-    <p class="previews-sub">The current build of <a href="../" target="_blank" rel="noopener">client-xxx.com</a>, shown across three screen sizes.</p>
+    <p class="previews-sub">The current build of <a href="sample.html" target="_blank" rel="noopener">client-xxx.com</a>, shown across three screen sizes.</p>
     <div class="device-row">
 
       <figure class="device">
-        <a class="screen" href="../" target="_blank" rel="noopener" aria-label="View the desktop build">
+        <a class="screen" href="preview.html?device=desktop" target="_blank" rel="noopener" aria-label="View the desktop build">
           <span class="vp vp-desktop"><iframe src="sample.html" title="Desktop preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
           <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
         </a>
@@ -375,7 +446,7 @@ a:hover{color:var(--gold)}
       </figure>
 
       <figure class="device">
-        <a class="screen" href="../" target="_blank" rel="noopener" aria-label="View the tablet build">
+        <a class="screen" href="preview.html?device=tablet" target="_blank" rel="noopener" aria-label="View the tablet build">
           <span class="vp vp-tablet"><iframe src="sample.html" title="Tablet preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
           <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
         </a>
@@ -383,7 +454,7 @@ a:hover{color:var(--gold)}
       </figure>
 
       <figure class="device">
-        <a class="screen" href="../" target="_blank" rel="noopener" aria-label="View the mobile build">
+        <a class="screen" href="preview.html?device=mobile" target="_blank" rel="noopener" aria-label="View the mobile build">
           <span class="vp vp-mobile"><iframe src="sample.html" title="Mobile preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
           <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
         </a>
@@ -393,8 +464,101 @@ a:hover{color:var(--gold)}
     </div>
   </section>
 
-  <section class="docs-menu" aria-label="Reference documents">
-    <div class="docs-menu-label">Reference docs</div>
+  <!-- ==================== CHANGELOG ENTRIES ==================== -->
+  <!-- New <article class="entry"> ... </article> blocks go here, newest first. -->
+  <div class="changelog-label">Changelog</div>
+
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="entry-date">2 May 2026</span>
+      <span class="entry-version">v1.12</span>
+    </div>
+    <h3 class="entry-title"><span class="icon">&#128197;</span>Trial class bookings now auto-confirm and sync to the front-desk calendar</h3>
+    <p>Trial sign-ups used to sit in an inbox waiting on someone to confirm them by hand, so new families could wait a day or more to hear back. Bookings now write straight to the same calendar the front desk already works from, and a confirmation email goes out the moment a class is booked.</p>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128197;</span>Booking system <span class="path">book.html, api/bookings.js</span></div>
+      <ul class="entry-list">
+        <li><span class="badge new">Added</span><span><strong>Instant calendar sync</strong> on every trial booking. The front desk's calendar updates the moment a class is booked, with no manual entry.</span></li>
+        <li><span class="badge new">Added</span><span><strong>Automatic confirmation email</strong> to the parent or guardian with class time, location, and what to bring.</span></li>
+        <li><span class="badge fixed">Fixed</span><span>Double-booking on peak Saturday slots, where two families could both be confirmed into the same 8-seat class.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="entry-date">27 April 2026</span>
+      <span class="entry-version">v1.11</span>
+    </div>
+    <h3 class="entry-title"><span class="icon">&#127942;</span>Champion cards now scale correctly across tablet and mobile</h3>
+    <p>On tablets, the champion card grid was overflowing its container, and on narrower phones the card text ran under the trophy artwork. Cards now reflow cleanly at every breakpoint, and the trophy art keeps its aspect ratio instead of stretching.</p>
+
+    <div class="entry-section">
+      <div class="entry-section-files">
+        <div class="entry-section-files-label">Coach profiles</div>
+        <div class="entry-section-files-paths">ashlyn.html, josh.html, lisa.html, ruth.html, sarah.html, thomas.html</div>
+      </div>
+      <ul class="entry-list">
+        <li><span class="badge fixed">Fixed</span><span>Champion card grid collapsing to a single column too early on iPad-width screens, leaving large empty gaps on either side.</span></li>
+        <li><span class="badge new">Added</span><span>A shorter card layout on phones under 380px wide, so all details stay on screen without scrolling inside the card.</span></li>
+        <li><span class="badge updated">Updated</span><span>Coach profile photos cropped to a consistent 4:5 ratio across all six profiles, replacing the mismatched crops from the original site.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="entry-date">19 April 2026</span>
+      <span class="entry-version">v1.10</span>
+    </div>
+    <h3 class="entry-title"><span class="icon">&#128220;</span>Waiver and consent form updated to the April 2026 version</h3>
+    <p>The liability waiver shown on the site was one revision behind the version the front desk hands out in person, so new sign-ups were agreeing to different terms than returning families. Both copies now pull from the same source document, so the site and the front desk are never out of sync again.</p>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128220;</span>Waivers &amp; consent <span class="path">waiver.html, book.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge updated">Updated</span><span>Waiver copy brought in line with the signed April 2026 agreement, matching the printed version used at the front desk.</span></li>
+        <li><span class="badge fixed">Fixed</span><span>Consent checkbox on the booking form that could be submitted unchecked on Safari, letting a booking through without consent recorded.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  </div><!-- /#panel-updates -->
+
+  <div id="panel-marketing" class="tab-panel">
+    <h2 class="panel-heading">Marketing</h2>
+    <p class="panel-sub">Campaigns, content, and performance reporting for your website.</p>
+    <div class="empty-card">
+      <div class="empty-card-icon">&#128200;</div>
+      <div class="empty-card-title">Coming soon</div>
+      <p class="empty-card-desc">Marketing reporting for your site is on the way. Check back here once it's live.</p>
+    </div>
+  </div>
+
+  <div id="panel-proposal" class="tab-panel">
+    <h2 class="panel-heading">Proposal</h2>
+    <p class="panel-sub">The scope, timeline, and investment for your project.</p>
+    <div class="empty-card">
+      <div class="empty-card-icon">&#128196;</div>
+      <div class="empty-card-title">No proposal on file yet</div>
+      <p class="empty-card-desc">Your project proposal will appear here as soon as it's ready to share.</p>
+    </div>
+  </div>
+
+  <div id="panel-contract" class="tab-panel">
+    <h2 class="panel-heading">Contract</h2>
+    <p class="panel-sub">Your service agreement with Antheon for this project.</p>
+    <div class="empty-card">
+      <div class="empty-card-icon">&#128221;</div>
+      <div class="empty-card-title">No contract on file yet</div>
+      <p class="empty-card-desc">Your signed agreement will appear here once contracting is complete.</p>
+    </div>
+  </div>
+
+  <div id="panel-documents" class="tab-panel">
+    <h2 class="panel-heading">Documents</h2>
+    <p class="panel-sub">Reference material and reports related to your website build.</p>
     <div class="docs-menu-grid">
       <a href="/new-site/seo-report/" class="docs-card">
         <div class="docs-card-icon">&#128214;</div>
@@ -415,21 +579,64 @@ a:hover{color:var(--gold)}
         <span class="docs-card-cta">Open &rsaquo;</span>
       </a>
     </div>
-  </section>
-
-  <!-- ==================== CHANGELOG ENTRIES ==================== -->
-  <!-- New <article class="entry"> ... </article> blocks go here, newest first. -->
-  <div class="changelog-empty">
-    <div class="changelog-empty-icon">&#128221;</div>
-    <div class="changelog-empty-title">No updates logged yet</div>
-    <p class="changelog-empty-desc">This is where shipped updates will appear, newest first. The first entry will show here once work goes live.</p>
   </div>
 
   <footer class="foot">
     <p>Client XXX Academy Pte. Ltd. &middot; UEN 200911106E &middot; <a href="../">client-xxx.com</a></p>
     <p style="margin-top:6px;font-size:.75rem;color:var(--t-muted);">Internal-only update log. Last updated 5 May 2026.</p>
+    <p class="foot-powered">Powered by <a href="https://antheonph.com" target="_blank" rel="noopener"><img src="../asset/Ann.png" alt="Antheon"></a></p>
   </footer>
 
-</div>
+  </div><!-- /.wrap -->
+  </main>
+
+</div><!-- /.dash-shell -->
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.side-nav-item');
+    var panels = document.querySelectorAll('.tab-panel');
+    function activate(tab) {
+      buttons.forEach(function (b) {
+        var on = b.getAttribute('data-tab') === tab;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('is-active', p.id === 'panel-' + tab);
+      });
+    }
+    var burger = document.getElementById('navBurger');
+    var sidebar = document.getElementById('sidebar');
+    var backdrop = document.getElementById('sidebarBackdrop');
+    function openSidebar() {
+      sidebar.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true');
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    burger.addEventListener('click', function () {
+      if (sidebar.classList.contains('is-open')) closeSidebar(); else openSidebar();
+    });
+    backdrop.addEventListener('click', closeSidebar);
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var tab = btn.getAttribute('data-tab');
+        activate(tab);
+        history.replaceState(null, '', '#' + tab);
+        closeSidebar();
+      });
+    });
+    var initial = (location.hash || '#updates').slice(1);
+    if (!document.querySelector('.side-nav-item[data-tab="' + initial + '"]')) initial = 'updates';
+    activate(initial);
+  })();
+</script>
+
 </body>
 </html>
