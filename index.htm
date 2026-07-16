@@ -385,7 +385,10 @@
     .media-frame { border: 1px solid var(--border); overflow: hidden; border-radius: 2px; }
     .media-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .media-frame.tall { aspect-ratio: 4 / 3; margin-top: 28px; }
-    .media-frame.wide { aspect-ratio: 16 / 7; margin-bottom: 48px; }
+    .media-frame.wide {
+      aspect-ratio: 1600 / 860; margin-bottom: 48px; border-radius: 16px;
+      box-shadow: 0 1px 2px rgba(17,17,20,0.05), 0 50px 90px -30px rgba(109,72,230,0.35);
+    }
     @media (max-width: 767px) { .media-frame.wide { aspect-ratio: 4 / 3; margin-bottom: 36px; } }
 
     /* --- Approach: dark brand section --- */
@@ -961,29 +964,36 @@
     <section id="outcomes">
       <div class="container">
         <div class="section-head">
-          <h2>What an engineered operation actually changes.</h2>
-          <p>The point of the work is not the software. It is what your business feels once the systems are in place.</p>
+          <h2>Your own dashboard, for the whole build.</h2>
+          <p>Every project ships with a private client dashboard, so you are never left wondering where things stand or digging through email for the latest file.</p>
         </div>
 
         <div class="media-frame wide">
-          <img src="asset/analytics-screen.jpg" alt="Live operations dashboard showing performance metrics" loading="lazy" width="1600" height="700">
+          <img src="asset/client-dashboard-screen.jpg" alt="Antheon client dashboard showing build progress, phase timeline, and live site preview" loading="lazy" width="1600" height="860">
+        </div>
+
+        <div class="tease-cta" style="margin-bottom:48px;">
+          <a href="dashboard/index.html" class="btn btn-outline" target="_blank" rel="noopener" data-cta="outcomes-view-sample-dashboard">
+            View a Sample Dashboard
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
 
         <div class="proof-grid">
           <div class="proof">
-            <div class="metric">Hours back</div>
-            <p>The repetitive admin, data entry, and copy-paste between tools gets automated. Your team spends its week on the work that actually needs a person.</p>
-            <div class="who">For operations teams<span>Manual workload drops week over week</span></div>
+            <div class="metric">See the build</div>
+            <p>A phase-by-phase timeline shows exactly where your project stands, alongside a live preview of the actual site across desktop, tablet, and mobile as we build it.</p>
+            <div class="who">For anyone waiting on a launch<span>No more "how's it going" emails</span></div>
           </div>
           <div class="proof">
-            <div class="metric">One source</div>
-            <p>Sales, operations, and support run on the same live data. No more chasing which spreadsheet or inbox holds the current version.</p>
-            <div class="who">For founders and managers<span>Decisions made on clean, current data</span></div>
+            <div class="metric">One place for paperwork</div>
+            <p>Your proposal, signed contract, and reference documents live in the same dashboard as the build itself, so nothing gets buried in an inbox.</p>
+            <div class="who">For founders and decision-makers<span>Everything signed and on file</span></div>
           </div>
           <div class="proof">
-            <div class="metric">Room to grow</div>
-            <p>When volume climbs, the system absorbs it. You take on more customers without the chaos or a new hire for every new task.</p>
-            <div class="who">For scaling businesses<span>Growth without the operational drag</span></div>
+            <div class="metric">Every update, logged</div>
+            <p>Each shipped change is dated, versioned, and explained in plain language, from a small fix to a new feature, so you always know what changed and why.</p>
+            <div class="who">For your whole team<span>A running record, not a guessing game</span></div>
           </div>
         </div>
 
