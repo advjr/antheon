@@ -1,0 +1,194 @@
+/* ============================================================
+   PROPOSAL GATEWAY (login gate)
+   Namespaced to #gateway-container so it never collides with
+   the site's own design tokens. Same look on the dark and
+   light themed pages - this is the agency's gate, not the
+   client's, so it intentionally doesn't follow the site theme.
+   ============================================================ */
+
+#gateway-container {
+  --gw-bg-deep: #0b0b1a;
+  --gw-card-navy: #111126;
+  --gw-text-main: #f3f4f6;
+  --gw-text-dim: #9ca3af;
+  --gw-accent-purple: #7c5dfa;
+  --gw-accent-blue: #3b82f6;
+  --gw-error-red: #ef4444;
+
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  background-color: var(--gw-bg-deep);
+  color: var(--gw-text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30000;
+}
+
+#gateway-container .login-card {
+  background: var(--gw-card-navy);
+  padding: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid #1a1a1a36;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: gwCardIn 0.8s ease-out 0.1s forwards;
+}
+
+@keyframes gwCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#gateway-container .logo-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#gateway-container .logo-image { max-width: 100px; height: auto; }
+
+#gateway-container .proposal-note { margin-bottom: 2rem; }
+#gateway-container .proposal-note strong {
+  display: block; font-size: 1.25rem; margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #fff, #9ca3af);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#gateway-container .proposal-note p { font-size: 0.95rem; color: var(--gw-text-dim); line-height: 1.4; }
+
+#gateway-container .input-group { text-align: left; margin-bottom: 1.2rem; }
+#gateway-container .input-group label {
+  display: block; font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--gw-accent-purple); margin-bottom: 0.6rem; font-weight: 700;
+}
+
+#gateway-container .password-wrapper { position: relative; display: flex; align-items: center; }
+
+#gateway-container .login-card input {
+  width: 100%; padding: 1rem; background: #161630;
+  border: 1px solid #2d2d50; border-radius: 12px; color: white;
+  font-size: 1rem; outline: none; transition: all 0.3s ease; box-sizing: border-box;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+#gateway-container .login-card input:focus {
+  border-color: var(--gw-accent-purple); box-shadow: 0 0 15px rgba(124, 93, 250, 0.1);
+}
+
+#gateway-container .toggle-password {
+  position: absolute; right: 0.9rem; display: flex; align-items: center; justify-content: center;
+  background: none; border: none; padding: 0; color: var(--gw-text-dim);
+  cursor: pointer; transition: color 0.3s; user-select: none;
+}
+#gateway-container .toggle-password:hover { color: var(--gw-accent-purple); }
+
+#gateway-container .btn-unlock {
+  width: 100%; padding: 1rem; margin-top: 1rem;
+  background: linear-gradient(135deg, var(--gw-accent-purple) 0%, var(--gw-accent-blue) 100%);
+  border: none; border-radius: 50px; color: white; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+#gateway-container .btn-unlock:hover {
+  transform: translateY(-2px); box-shadow: 0 10px 20px rgba(78, 70, 229, 0.3);
+}
+
+#gateway-container #error-msg { color: var(--gw-error-red); font-size: 0.85rem; margin-top: 1rem; min-height: 1.2rem; font-weight: 500; }
+
+.gw-transition-overlay {
+  position: fixed; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(135deg, #7c5dfa, #3b82f6);
+  z-index: 29000; transition: left 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+}
+.gw-transition-overlay.active { left: 0; }
+
+#site-content { display: none; opacity: 0; transition: opacity 0.6s ease; }
+#site-content.gw-visible { display: block; opacity: 1; }
+
+/* ============================================================
+   BUILD PRELOADER
+   Shown for ~5s after the gateway unlocks, before the site
+   reveals - a hammer "building" the house, in Magna's brand
+   black + construction yellow.
+   ============================================================ */
+#buildPreloader {
+  --pl-bg: #0B0D0F;
+  --pl-yellow: #FFC72C;
+  position: fixed; inset: 0; z-index: 28000;
+  background: var(--pl-bg);
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+#buildPreloader.fade-out { opacity: 0; }
+
+.preload-scene { position: relative; width: 140px; height: 140px; }
+.preload-house { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--pl-yellow); }
+.preload-hammer {
+  position: absolute; width: 54px; height: 54px; top: -8px; right: -2px;
+  color: var(--pl-yellow);
+  transform-origin: 78% 82%;
+  animation: plHammerSwing 1.15s ease-in-out infinite;
+}
+.preload-dust {
+  position: absolute; left: 58%; top: 34%; width: 24px; height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--pl-yellow), rgba(255,199,44,0) 70%);
+  transform: scale(0.4); opacity: 0;
+  animation: plDustPuff 1.15s ease-in-out infinite;
+}
+
+@keyframes plHammerSwing {
+  0%   { transform: rotate(-42deg); }
+  48%  { transform: rotate(-42deg); }
+  62%  { transform: rotate(10deg); }
+  72%  { transform: rotate(-8deg); }
+  84%  { transform: rotate(2deg); }
+  100% { transform: rotate(-42deg); }
+}
+@keyframes plHouseImpact {
+  0%, 58%  { transform: scale(1) translateY(0); }
+  63%      { transform: scale(0.97) translateY(1.5px); }
+  72%      { transform: scale(1.015) translateY(0); }
+  100%     { transform: scale(1) translateY(0); }
+}
+.preload-house { animation: plHouseImpact 1.15s ease-in-out infinite; }
+@keyframes plDustPuff {
+  0%, 60%   { opacity: 0; transform: scale(0.4); }
+  64%       { opacity: 0.9; transform: scale(1); }
+  78%, 100% { opacity: 0; transform: scale(1.7); }
+}
+
+.preload-track {
+  width: 180px; height: 3px; border-radius: 3px;
+  background: rgba(255,199,44,0.18); overflow: hidden;
+}
+.preload-bar {
+  width: 0%; height: 100%; border-radius: 3px;
+  background: var(--pl-yellow);
+  animation: plFillBar 2s linear forwards;
+}
+@keyframes plFillBar { from { width: 0%; } to { width: 100%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .preload-hammer, .preload-house, .preload-dust { animation: none; }
+  .preload-bar { animation-duration: .01ms; width: 100%; }
+}

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Our Work | Antheon</title>
+  <meta name="description" content="A look at the websites and web systems Antheon has engineered for clients, connected straight into their CRMs and automations.">
+  <link rel="canonical" href="https://antheonph.com/projects/">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/png" href="../asset/Ann.png">
+  <link rel="apple-touch-icon" href="../asset/Ann.png">
+  <meta name="theme-color" content="#1A1230">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       ANTHEON. Projects / Our Work
+       Shares tokens with index.htm (Pattern C: Editorial Minimal)
+       ======================================== */
+    :root {
+      --bg: #FFFFFF;
+      --bg-alt: #F7F7F5;
+      --text: #111114;
+      --text-muted: #5C5C66;
+      --border: #E6E6E9;
+      --border-strong: #CBCBD1;
+
+      --brand-violet: #9333EA;
+      --brand-blue: #3B82F6;
+      --brand-gradient: linear-gradient(105deg, #9333EA 0%, #6D48E6 50%, #3B82F6 100%);
+      --brand-ink: #1A1230;
+
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --maxw: 1280px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body); font-size: 18px; line-height: 1.7;
+      color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      opacity: 0; animation: pageFade 0.6s ease-out 0.1s forwards; overflow-x: hidden;
+    }
+    @keyframes pageFade { to { opacity: 1; } }
+
+    h1, h2, h3, h4 { text-wrap: balance; word-break: normal; overflow-wrap: normal; }
+    h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.08; }
+    h3 { font-family: var(--font-body); font-weight: 600; line-height: 1.25; }
+    a { color: var(--text); text-decoration: none; transition: color 0.2s ease, opacity 0.2s ease; }
+
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .container { padding: 0 48px; } }
+    .accent { color: var(--brand-violet); }
+    hr { border: none; height: 1px; background: var(--border); margin: 0; }
+
+    /* --- Header (shared) --- */
+    header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); }
+    header::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px);
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { height: 34px; width: auto; display: block; }
+    .brand .wordmark { font-family: var(--font-body); font-weight: 700; font-size: 20px; letter-spacing: 0.02em; }
+    .brand .wordmark .ant { color: var(--text); }
+    .brand .wordmark .heon { color: var(--brand-violet); }
+    .nav-links { display: none; align-items: center; gap: 36px; }
+    .nav-links a { font-size: 16px; font-weight: 500; color: var(--text-muted); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--brand-violet); font-weight: 700; }
+    .nav-links .mobile-cta { display: none; }
+    @media (min-width: 900px) { .nav-links { display: flex; } }
+
+    .nav-burger {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: none; border: none; cursor: pointer;
+      color: var(--text); flex-shrink: 0; position: relative; z-index: 201;
+    }
+    .nav-burger svg { width: 24px; height: 24px; }
+    .nav-burger .icon-close { display: none; }
+    .nav-burger[aria-expanded="true"] .icon-open { display: none; }
+    .nav-burger[aria-expanded="true"] .icon-close { display: block; }
+    @media (min-width: 900px) { .nav-burger { display: none; } }
+    @media (max-width: 899px) {
+      .nav-links {
+        display: flex; flex-direction: column; align-items: stretch;
+        position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+        background: #fff; z-index: 200; padding: 104px 32px 40px; gap: 0; overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.4s;
+        visibility: hidden;
+      }
+      .nav-links a { padding: 18px 0; border-top: 1px solid var(--border); font-size: 19px; }
+      .nav-links a:first-child { border-top: none; }
+      .nav-links .mobile-cta { display: inline-flex; margin-top: 24px; border-top: none; color: #fff; }
+      .nav-links.mobile-open { transform: translateX(0); visibility: visible; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 15px 30px; font-family: var(--font-body); font-size: 16px; font-weight: 600;
+      letter-spacing: 0.01em; cursor: pointer; border: none; border-radius: 10px;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.2s ease, background 0.2s ease;
+      text-align: center;
+    }
+    .btn-primary { background: var(--brand-gradient); color: #fff; box-shadow: 0 8px 24px -8px rgba(109,72,230,0.55); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -8px rgba(109,72,230,0.65); color:#fff; }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+    .btn-outline:hover { border-color: var(--text); }
+    .btn-sm { padding: 11px 22px; font-size: 15px; }
+    .btn-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+    .nav-cta { display: none; }
+    @media (min-width: 900px) { .nav-cta { display: inline-flex; } }
+
+    section { padding: 84px 0; }
+    @media (min-width: 768px) { section { padding: 120px 0; } }
+
+    .section-head { max-width: 760px; margin-bottom: 56px; }
+    .section-head h1 { font-size: 40px; margin-bottom: 20px; }
+    .section-head p { font-size: 18px; color: var(--text-muted); max-width: 640px; }
+    @media (min-width: 768px){ .section-head h1 { font-size: 52px; } }
+    @media (max-width: 767px){ .section-head h1 { font-size: 30px; } .section-head{ margin-bottom: 40px; } }
+
+    .page-hero { padding: 72px 0 24px; background: linear-gradient(160deg, #FBFAFF 0%, var(--bg) 55%); }
+    @media (min-width: 768px) { .page-hero { padding: 96px 0 8px; } }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px;
+      border: 1px solid var(--border); border-radius: 999px; background: #fff;
+      font-size: 13px; color: var(--text-muted); margin-bottom: 22px;
+    }
+    .eyebrow strong { color: var(--text); font-weight: 700; }
+
+    /* --- Projects grid: 4 website-preview containers --- */
+    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 780px) { .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; } }
+
+    .project-card {
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      background: var(--bg); display: flex; flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -18px rgba(17,17,20,0.18); border-color: var(--border-strong); }
+
+    /* Fake browser chrome so each container reads as a "website preview" */
+    .browser-chrome {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; background: var(--bg-alt); border-bottom: 1px solid var(--border);
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+    .browser-url {
+      flex: 1; height: 22px; border-radius: 6px; background: #fff; border: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 10px; font-size: 11px; color: var(--text-muted);
+      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    }
+
+    /* Placeholder wireframe "screenshot" -- swap for a real preview image or <iframe> later */
+    .mock-screen {
+      position: relative; overflow: hidden;
+      aspect-ratio: 16 / 10; padding: 22px; display: flex; flex-direction: column; gap: 14px;
+      background: linear-gradient(160deg, #FBFAFF 0%, #F5F3FF 55%, #F2F6FF 100%);
+    }
+    /* Scrolling site-preview video, layered over the wireframe as a fallback while it loads/if missing */
+    .mock-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: var(--bg-alt); }
+
+    /* Blurred "coming soon" preview: mostly obscured, with a brief periodic glance of clarity */
+    .mock-video.is-blurred { filter: blur(9px) saturate(1.05); animation: glancePeek 9s ease-in-out infinite; }
+    @keyframes glancePeek {
+      0%, 84%, 100% { filter: blur(9px) saturate(1.05); }
+      90% { filter: blur(1.5px) saturate(1.1); }
+    }
+    .coming-soon-badge {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+      background: rgba(17,17,20,0.32);
+      color: #fff; font-size: 24px; font-weight: 700; letter-spacing: 0.01em; text-align: center;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4); pointer-events: none;
+    }
+    .coming-soon-badge img { width: 44px; height: auto; filter: drop-shadow(0 4px 14px rgba(0,0,0,0.4)); }
+    .mock-bar { height: 12px; border-radius: 4px; background: rgba(17,17,20,0.08); }
+    .mock-bar.w-70 { width: 70%; } .mock-bar.w-45 { width: 45%; } .mock-bar.w-30 { width: 30%; }
+    .mock-hero-block {
+      flex: 1; border-radius: 10px; background: var(--brand-gradient); opacity: 0.16;
+      min-height: 60px;
+    }
+    .mock-row { display: flex; gap: 10px; }
+    .mock-row > div { flex: 1; height: 40px; border-radius: 8px; background: #fff; border: 1px solid var(--border); }
+
+    .project-info { padding: 26px 26px 28px; display: flex; flex-direction: column; flex: 1; }
+    .project-info .p-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-violet); margin-bottom: 8px; }
+    .project-info h3 { font-size: 21px; margin-bottom: 10px; }
+    .project-info p { font-size: 15px; color: var(--text-muted); margin-bottom: 18px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .project-tags span {
+      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+      border: 1px solid var(--border); color: var(--text-muted);
+    }
+    .project-info .btn { margin-top: auto; align-self: flex-start; }
+
+    .cta-band {
+      margin-top: 72px; padding: 40px; border-radius: 16px; text-align: center;
+      background: var(--bg-alt); border: 1px solid var(--border);
+    }
+    .cta-band h2 { font-size: 28px; margin-bottom: 14px; }
+    .cta-band p { color: var(--text-muted); max-width: 560px; margin: 0 auto 26px; }
+    @media (min-width: 768px) { .cta-band h2 { font-size: 34px; } }
+
+    /* --- Footer (shared) --- */
+    footer { background: var(--brand-ink); color: rgba(255,255,255,0.72); padding: 72px 0 40px; }
+    .foot-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    @media (min-width: 768px) { .foot-grid { grid-template-columns: 2fr 1fr 1fr; gap: 48px; } }
+    footer .brand .wordmark .ant { color: #fff; }
+    footer .brand .wordmark .heon { color: #C4B5FD; }
+    footer .f-about { font-size: 15px; max-width: 340px; margin-top: 18px; line-height: 1.7; }
+    footer h4 { font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 18px; }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 12px; }
+    footer a { color: rgba(255,255,255,0.72); font-size: 15px; }
+    footer a:hover { color: #fff; }
+    .foot-bottom { margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 14px; text-align: center; }
+
+    @media (prefers-reduced-motion: reduce) { body { opacity: 1; animation: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="container">
+      <a href="../index.htm" class="brand" aria-label="Antheon home">
+        <img src="../asset/Ann.png" alt="Antheon logo, AN monogram in violet and blue" width="40" height="34" decoding="async">
+      </a>
+      <div class="nav-links">
+        <a href="../index.htm#capabilities">Capabilities</a>
+        <a href="index.html" class="active">Projects</a>
+        <a href="../index.htm#process">How We Work</a>
+        <a href="../index.htm#engagements">Engagements</a>
+        <a href="../index.htm#faq">FAQ</a>
+        <a href="../index.htm#contact" class="btn btn-primary btn-sm mobile-cta">Book a Systems Audit</a>
+      </div>
+      <a href="../index.htm#contact" class="btn btn-primary btn-sm nav-cta">Book a Systems Audit</a>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <a href="../index.htm" class="eyebrow">
+          <img src="../asset/Ann.png" alt="" width="16" height="14">
+          <span><strong>Antheon</strong> · Our Work</span>
+        </a>
+        <div class="section-head" style="margin-bottom:0;">
+          <h1>Websites we've <span class="accent">engineered</span>.</h1>
+          <p>A sample of the sites we build and connect straight into a client's CRM and automations. Each preview below is a placeholder slot &mdash; swap in a real screenshot, link, and description as each project ships.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+
+        <div class="projects-grid">
+
+          <!-- Project 1: Natural ArtForm (Shopify) -->
+          <article class="project-card">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">naturalartform.com</div>
+            </div>
+            <div class="mock-screen">
+              <div class="mock-bar w-30" aria-hidden="true"></div>
+              <div class="mock-hero-block" aria-hidden="true"></div>
+              <div class="mock-row" aria-hidden="true"><div></div><div></div><div></div></div>
+              <video class="mock-video" autoplay muted loop playsinline poster="../asset/naturalartform-preview.jpg" aria-label="Scrolling preview of the Natural ArtForm website">
+                <source src="../asset/naturalartform-scroll.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="project-info">
+              <span class="p-eyebrow">Shopify Store</span>
+              <h3>Natural ArtForm</h3>
+              <p>An Australian wellness brand selling handcrafted, chemical-free recovery and skincare, transdermal magnesium creams, DMSO muscle rubs, and aluminum-free deodorant, for athletes, tradies, and growing families. The Shopify storefront leads with founder credibility and product education, backed by a product-matching quiz and ingredient guides that help first-time buyers find the right formula.</p>
+              <div class="project-tags"><span>Shopify</span><span>E-commerce</span><span>Wellness</span></div>
+              <a href="https://www.naturalartform.com/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Visit site</a>
+            </div>
+          </article>
+
+          <!-- Project 2: Optimum Exercise Physiology -->
+          <article class="project-card">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">optimumep.com.au</div>
+            </div>
+            <div class="mock-screen">
+              <div class="mock-bar w-45" aria-hidden="true"></div>
+              <div class="mock-hero-block" aria-hidden="true"></div>
+              <div class="mock-row" aria-hidden="true"><div></div><div></div><div></div></div>
+              <video class="mock-video" autoplay muted loop playsinline poster="../asset/optimumep-preview.jpg" aria-label="Scrolling preview of the Optimum Exercise Physiology website">
+                <source src="../asset/optimumep-scroll.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="project-info">
+              <span class="p-eyebrow">Website</span>
+              <h3>Optimum Exercise Physiology</h3>
+              <p>An allied health practice across Clare, Balaklava, and Eudunda, South Australia, offering exercise physiology, personal training, running assessments, group classes, and home visits for injury recovery and chronic condition management. The site leads with an approachable, clinically credible tone and makes booking, Medicare/DVA/NDIS funding, and the onsite gym easy to find.</p>
+              <div class="project-tags"><span>Website</span><span>Allied Health</span><span>Booking</span></div>
+              <a href="optimumep/index.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Visit site</a>
+            </div>
+          </article>
+
+          <!-- Project 3: Magna Constructions -->
+          <article class="project-card">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">Proposal Website</div>
+            </div>
+            <div class="mock-screen">
+              <div class="mock-bar w-70" aria-hidden="true"></div>
+              <div class="mock-hero-block" aria-hidden="true"></div>
+              <div class="mock-row" aria-hidden="true"><div></div><div></div><div></div></div>
+              <video class="mock-video is-blurred" autoplay muted loop playsinline poster="../asset/magnaco-preview.jpg" aria-label="Scrolling preview of the Magna Constructions website">
+                <source src="../asset/magnaco-scroll.mp4" type="video/mp4">
+              </video>
+              <div class="coming-soon-badge" aria-hidden="true">
+                <img src="../asset/Ann.png" alt="">
+                <span>Coming Soon!</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="p-eyebrow">Website</span>
+              <h3>Magna Constructions</h3>
+              <p>A national insurance repair and building restoration contractor serving domestic, commercial, and industrial clients across SA, VIC, NSW, ACT, and QLD. The site presents 24-hour emergency callouts, building assessments, and catastrophe response with a professional, reassuring tone, and gives clients a portal for claim and excess payment information.</p>
+              <div class="project-tags"><span>Website</span><span>Insurance Repair</span><span>Restoration</span></div>
+              <a href="#" class="btn btn-outline btn-sm btn-disabled" aria-disabled="true" tabindex="-1">Coming Soon</a>
+            </div>
+          </article>
+
+          <!-- Project 4: Indie Lane Photography -->
+          <article class="project-card">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">Proposal Website</div>
+            </div>
+            <div class="mock-screen">
+              <div class="mock-bar w-30" aria-hidden="true"></div>
+              <div class="mock-hero-block" aria-hidden="true"></div>
+              <div class="mock-row" aria-hidden="true"><div></div><div></div><div></div></div>
+              <video class="mock-video is-blurred" autoplay muted loop playsinline poster="../asset/indielane-preview.jpg" aria-label="Scrolling preview of the Indie Lane Photography website">
+                <source src="../asset/indielane-scroll.mp4" type="video/mp4">
+              </video>
+              <div class="coming-soon-badge" aria-hidden="true">
+                <img src="../asset/Ann.png" alt="">
+                <span>Coming Soon!</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="p-eyebrow">Website</span>
+              <h3>Indie Lane Photography</h3>
+              <p>A branding, commercial, and lifestyle photography business run by Donna Nugent, based in the Byron Bay region and serving businesses, schools, councils, and individuals across Northern NSW and the Gold Coast. The site leads with warm, storytelling imagery and natural light to make booking a shoot feel approachable for camera-shy clients.</p>
+              <div class="project-tags"><span>Website</span><span>Photography</span><span>Booking</span></div>
+              <a href="#" class="btn btn-outline btn-sm btn-disabled" aria-disabled="true" tabindex="-1">Coming Soon</a>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="cta-band">
+          <h2>Want your site built like this?</h2>
+          <p>Every site we ship plugs straight into the CRM and automations behind it. Tell us what you're building and we'll show you what it could look like.</p>
+          <a href="../index.htm#contact" class="btn btn-primary">Book a Systems Audit</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <span class="brand"><span class="wordmark"><span class="ant">ANT</span><span class="heon">HEON</span></span></span>
+          <p class="f-about">Systems and process engineering for growing businesses. We build the CRMs, automations, and AI-powered systems behind how you operate.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="../index.htm#approach">Approach</a></li>
+            <li><a href="../index.htm#capabilities">Capabilities</a></li>
+            <li><a href="index.html">Projects</a></li>
+            <li><a href="../index.htm#process">How We Work</a></li>
+            <li><a href="../index.htm#engagements">Engagements</a></li>
+            <li><a href="../index.htm#faq">FAQ</a></li>
+            <li><a href="../index.htm#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Work With Us</h4>
+          <ul>
+            <li><a href="../index.htm#contact">Book a Systems Audit</a></li>
+            <li><a href="mailto:dev@antheonph.com">dev@antheonph.com</a></li>
+            <li><a href="https://wa.me/639914746063" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>&copy; 2026 Antheon. Engineered for how you operate.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Force-mute and (re)start the project preview videos: some browsers ignore the
+    // muted/autoplay attributes on file:// or slow-loading sources unless set via JS too.
+    (function () {
+      document.querySelectorAll('.mock-video').forEach(function (video) {
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        var tryPlay = function () { video.play().catch(function () {}); };
+        tryPlay();
+        video.addEventListener('loadeddata', tryPlay);
+        video.addEventListener('canplay', tryPlay);
+      });
+    })();
+
+    // Mobile burger menu (same behavior as index.htm)
+    (function () {
+      var burger = document.querySelector('.nav-burger');
+      var navLinks = document.querySelector('.nav-links');
+      if (!burger || !navLinks) return;
+      function closeMenu() {
+        navLinks.classList.remove('mobile-open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      burger.addEventListener('click', function () {
+        var isOpen = navLinks.classList.toggle('mobile-open');
+        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+      document.addEventListener('click', function (e) {
+        if (navLinks.classList.contains('mobile-open') && !navLinks.contains(e.target) && !burger.contains(e.target)) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

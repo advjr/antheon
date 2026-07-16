@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 66" role="img" aria-label="Magna Constructions">
+  <style>
+    .mg-word { font-family: 'Montserrat', Arial, sans-serif; font-weight: 900; }
+    .mg-sub  { font-family: 'Montserrat', Arial, sans-serif; font-weight: 700; letter-spacing: 4.2px; }
+  </style>
+  <!-- roof / reinstatement chevron mark -->
+  <g fill="none" stroke="#F58220" stroke-width="4" stroke-linecap="square">
+    <path d="M4 30 L20 15 L36 30"/>
+  </g>
+  <path d="M4 40 L20 25 L36 40" fill="none" stroke="#F58220" stroke-width="4" stroke-linecap="square" opacity="0.45"/>
+  <text x="48" y="34" class="mg-word" font-size="30" fill="#FFFFFF">MAGNA</text>
+  <text x="49" y="54" class="mg-sub" font-size="12.5" fill="#F58220">CONSTRUCTIONS</text>
+</svg>
