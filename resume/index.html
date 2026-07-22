@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthony De Vera Jr — Website Developer & AI Specialist</title>
+  <meta name="description" content="Anthony De Vera Jr — Website Developer, AI Specialist, Automation & Respond.io Specialist. Building custom websites, AI agents, and streamlined business processes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-soft: #2b2b2b;
+      --paper: #f7f6f3;
+      --paper-card: #ffffff;
+      --muted: #8a8a86;
+      --line: #e7e5e0;
+      --accent: #c8a35b;      /* warm brass */
+      --sidebar: #171717;
+      --sidebar-line: #2e2e2e;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --display: 'Space Grotesk', var(--sans);
+      --maxw: 760px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; background: none; border: none; cursor: pointer; color: inherit; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ---------- LAYOUT ---------- */
+    .shell { display: flex; min-height: 100vh; }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 340px;
+      background: var(--sidebar);
+      color: #ededed;
+      padding: 48px 36px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      flex-shrink: 0;
+    }
+    .sidebar::-webkit-scrollbar { width: 6px; }
+    .sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+    .avatar-wrap { text-align: center; }
+    .avatar {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--sidebar-line);
+      padding: 4px;
+      background: #222;
+    }
+    .name {
+      font-family: var(--display);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-top: 18px;
+      line-height: 1.1;
+    }
+    .role-tag {
+      color: var(--accent);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* Nav tabs */
+    .nav-tabs { display: flex; flex-direction: column; gap: 4px; }
+    .nav-tabs button {
+      display: flex; align-items: center; gap: 12px;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-family: var(--display);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #a9a9a9;
+      transition: all .18s ease;
+      position: relative;
+    }
+    .nav-tabs button .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #444; transition: all .18s ease; flex-shrink: 0;
+    }
+    .nav-tabs button:hover { color: #f0f0f0; background: #1f1f1f; }
+    .nav-tabs button.active { color: #fff; background: #232323; }
+    .nav-tabs button.active .dot { background: var(--accent); transform: scale(1.4); }
+
+    .side-block h3 {
+      font-family: var(--display);
+      font-size: 0.7rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.86rem;
+      color: #cfcfcf;
+      margin-bottom: 12px;
+      word-break: break-word;
+    }
+    .contact-item svg { flex-shrink: 0; margin-top: 3px; width: 15px; height: 15px; stroke: var(--accent); }
+    .contact-item svg.icon-fill { fill: var(--accent); stroke: none; }
+    .contact-item a:hover { color: #fff; }
+
+    .edu-item .deg { font-weight: 600; font-size: 0.88rem; color: #f0f0f0; }
+    .edu-item .school { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    .side-cta { display: flex; flex-direction: column; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--display);
+      font-size: 0.76rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      border-radius: 8px;
+      transition: all .2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-solid { background: var(--accent); color: #171717; font-weight: 600; }
+    .btn-solid:hover { background: #d9b872; transform: translateY(-2px); }
+    .btn-ghost { border: 1px solid var(--sidebar-line); color: #ededed; }
+    .btn-ghost:hover { border-color: var(--accent); }
+    .btn-outline { border: 1px solid var(--line); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-disabled { border: 1px solid var(--line); color: var(--muted); cursor: default; }
+
+    .divider { height: 1px; background: var(--sidebar-line); }
+
+    /* ---------- MAIN ---------- */
+    .main { flex: 1; padding: 0 0 80px; min-width: 0; }
+
+    /* WhatsApp floating bubble (desktop/tablet) */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 60;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 26px rgba(0,0,0,.28);
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .wa-float:hover { background: #1ebe5b; transform: translateY(-3px) scale(1.05); box-shadow: 0 14px 32px rgba(0,0,0,.34); }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* WhatsApp fixed bar (mobile) */
+    .wa-bar {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      background: #25D366;
+      align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 20px;
+      font-family: var(--display); font-size: 0.85rem; font-weight: 600;
+      color: #fff;
+    }
+    .wa-bar svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+    /* Thank-you download modal */
+    .ty-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(12,12,12,.88); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .ty-overlay.show { display: flex; }
+    .ty-card {
+      background: var(--paper-card);
+      border-radius: 20px;
+      padding: 40px 36px 38px;
+      max-width: 400px; width: 100%;
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(0,0,0,.5);
+      animation: tyPop .45s cubic-bezier(.2,.9,.3,1.2);
+    }
+    @keyframes tyPop { from { opacity: 0; transform: translateY(18px) scale(.94); } to { opacity: 1; transform: none; } }
+    .ty-timer { position: relative; width: 108px; height: 108px; margin: 0 auto 24px; }
+    .ty-timer svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ty-timer .ty-track { fill: none; stroke: var(--line); stroke-width: 6; }
+    .ty-timer .ty-prog {
+      fill: none; stroke: var(--accent); stroke-width: 6; stroke-linecap: round;
+    }
+    .ty-num {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-weight: 700; font-size: 2.4rem; color: var(--ink);
+    }
+    .ty-title { font-family: var(--display); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
+    .ty-sub { color: var(--ink-soft); margin-top: 8px; font-size: 0.98rem; }
+    .ty-note { color: var(--muted); margin-top: 18px; font-size: 0.75rem; letter-spacing: .5px; }
+
+    .panel { display: none; max-width: var(--maxw); margin: 0 auto; padding: 90px 44px 0; animation: fadeUp .5s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    .kicker {
+      font-family: var(--display);
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 18px;
+    }
+    .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+
+    /* About panel */
+    .about h1 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+    }
+    .about .lede {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      margin-top: 22px;
+      max-width: 600px;
+    }
+    .about .titles { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+    .about .titles span { font-size: 0.8rem; color: var(--muted); display: inline-flex; align-items: center; }
+    .about .titles span:not(:last-child)::after { content: "•"; margin-left: 10px; color: var(--line); }
+
+    .block { margin-top: 56px; }
+    .sec-title {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .sec-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 26px; }
+
+    /* Experience jump-nav */
+    .exp-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: -6px 0 34px; }
+    .exp-nav a {
+      font-size: 0.78rem; font-weight: 500;
+      padding: 8px 15px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      color: var(--ink-soft);
+      background: var(--paper-card);
+      transition: all .18s ease;
+      white-space: nowrap;
+    }
+    .exp-nav a:hover { border-color: var(--accent); color: var(--accent); }
+    .exp-nav a.active { background: var(--accent); border-color: var(--accent); color: #171717; font-weight: 600; }
+
+    .skill-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-grid .skill {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      transition: all .2s ease;
+    }
+    .skill-grid .skill:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.04); }
+
+    .tools-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
+    .tool-group h4 {
+      font-family: var(--display);
+      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--ink); margin-bottom: 14px;
+    }
+    .tool-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tool-list span {
+      font-size: 0.8rem; padding: 5px 12px;
+      background: var(--paper-card); border: 1px solid var(--line);
+      border-radius: 6px; color: var(--ink-soft);
+    }
+    .note {
+      margin-top: 24px;
+      border-left: 3px solid var(--accent);
+      padding: 4px 0 4px 18px;
+      font-size: 0.86rem; color: var(--muted); font-style: italic;
+      max-width: 560px;
+    }
+
+    /* Experience panel */
+    .exp {
+      position: relative;
+      padding-left: 28px;
+      padding-bottom: 40px;
+      border-left: 1.5px solid var(--line);
+    }
+    .exp:last-child { padding-bottom: 0; }
+    .exp::before {
+      content: "";
+      position: absolute; left: -6.5px; top: 5px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--paper); border: 2px solid var(--accent);
+    }
+    .exp .job-title { font-family: var(--display); font-size: 1.08rem; font-weight: 600; }
+    .exp .company { color: var(--accent); font-size: 0.85rem; font-weight: 500; margin-top: 2px; }
+    .exp ul { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
+    .exp ul li { position: relative; padding-left: 18px; font-size: 0.9rem; color: var(--ink-soft); }
+    .exp ul li::before {
+      content: ""; position: absolute; left: 0; top: 9px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+    }
+    .keyskills { margin-top: 16px; font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+    .keyskills b { color: var(--ink); font-weight: 600; }
+
+    /* Projects panel */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .project-card {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: all .25s ease;
+    }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,.06); border-color: #d8d4cb; }
+
+    .mockup-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 12px; background: #efece6; border-bottom: 1px solid var(--line);
+    }
+    .mockup-bar .dot { width: 7px; height: 7px; border-radius: 50%; background: #d8d5cf; }
+    .mockup-bar .url {
+      margin-left: 6px; font-size: 0.68rem; color: var(--muted);
+      background: #fff; border: 1px solid var(--line); border-radius: 6px;
+      padding: 3px 10px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .mockup-screen {
+      aspect-ratio: 16 / 10; position: relative; overflow: hidden;
+      background: var(--bg-alt, #efece6);
+    }
+    .mockup-screen video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block; background: #efece6;
+    }
+
+    .project-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .project-title { font-family: var(--display); font-size: 1.02rem; font-weight: 700; }
+    .ptags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ptags span {
+      font-size: 0.68rem; padding: 3px 9px; border-radius: 20px;
+      background: var(--paper); border: 1px solid var(--line); color: var(--muted);
+    }
+    .project-desc { font-size: 0.85rem; color: var(--ink-soft); flex: 1; }
+    .project-cta { margin-top: 6px; }
+    .project-cta .btn { width: 100%; }
+
+    .more-projects { margin-top: 30px; text-align: center; }
+
+    /* Testimonials */
+    .tst-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .tst-card {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: all .25s ease;
+    }
+    .tst-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,.06); border-color: #d8d4cb; }
+    .tst-card.wide { grid-column: 1 / -1; }
+    .tst-media {
+      position: relative; background: #111;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .tst-media video { width: 100%; height: 100%; display: block; }
+    .tst-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tst-card.portrait .tst-media { aspect-ratio: 9 / 16; max-height: 460px; }
+    .tst-card.wide .tst-media { aspect-ratio: 16 / 9; }
+    .tst-body { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .tst-name { font-family: var(--display); font-size: 1.02rem; font-weight: 700; }
+    .tst-role { font-size: 0.78rem; color: var(--muted); }
+    .tst-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.68rem; font-weight: 600; color: var(--accent);
+      font-family: var(--display); letter-spacing: .5px; text-transform: uppercase;
+    }
+    .tst-badge svg { width: 13px; height: 13px; fill: var(--accent); }
+
+    /* Footer */
+    .foot {
+      max-width: var(--maxw); margin: 70px auto 0; padding: 0 44px 40px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .shell { flex-direction: column; }
+      .sidebar {
+        width: 100%; height: auto; position: relative;
+        flex-direction: column; align-items: stretch;
+        padding: 40px 26px;
+      }
+      .nav-tabs { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .panel { padding: 56px 26px 0; }
+      .tools-cols { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr; }
+      .tst-grid { grid-template-columns: 1fr; }
+      .foot { padding: 0 26px 40px; }
+      .main { padding-bottom: 140px; }
+      .wa-float { display: none; }
+      .wa-bar { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .foot { flex-direction: column; align-items: flex-start; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <div class="avatar-wrap">
+        <img class="avatar" src="asset/profile-photo.jpg" alt="Anthony De Vera Jr" />
+        <div class="name">Anthony<br />De Vera Jr</div>
+        <div class="role-tag">Developer · AI Specialist · System Engineer</div>
+      </div>
+
+      <nav class="nav-tabs" id="navTabs">
+        <button data-tab="about" class="active"><span class="dot"></span>About Me</button>
+        <button data-tab="experience"><span class="dot"></span>Experience</button>
+        <button data-tab="projects"><span class="dot"></span>Projects</button>
+        <button data-tab="testimonials"><span class="dot"></span>Testimonials</button>
+      </nav>
+
+      <div class="side-cta">
+        <a class="btn btn-solid" id="downloadCvBtn" href="Anthony - Resume 2026.pdf" download="Anthony De Vera Jr - Resume.pdf">Download CV</a>
+        <a class="btn btn-ghost" href="graphic.html">Graphic Designs</a>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="side-block">
+        <h3>Contact</h3>
+        <div class="contact-item">
+          <svg class="icon-fill" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          <a href="https://wa.me/639914746063" target="_blank" rel="noopener">+63 991 474 6063</a>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          <a href="mailto:anthony@antheonph.com">anthony@antheonph.com</a>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Cavite, 4110 Philippines</span>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <a href="https://www.antheonph.com" target="_blank" rel="noopener">www.antheonph.com</a>
+        </div>
+      </div>
+
+      <div class="side-block edu-item">
+        <h3>Education</h3>
+        <div class="deg">BS in Electronics &amp; Communications Engineering</div>
+        <div class="school">Polytechnic University of the Philippines — Maragondon Campus<br />2020 – 2024</div>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+      <!-- ABOUT ME -->
+      <section class="panel about active" id="panel-about">
+        <span class="kicker">About Me</span>
+        <h1>Website Developer<br />&amp; AI Specialist</h1>
+        <p class="lede">I build custom websites, intelligent AI agents, and streamlined business processes — taking projects from planning through deployment while keeping design clean and systems efficient.</p>
+        <div class="titles">
+          <span>Automation</span>
+          <span>AI Process / SOPs Implementation</span>
+          <span>Respond.io Specialist</span>
+          <span>Project Management</span>
+        </div>
+
+        <div class="block">
+          <h2 class="sec-title">What I Do</h2>
+          <p class="sec-sub">Core areas of expertise.</p>
+          <div class="skill-grid">
+            <div class="skill">Website Development</div>
+            <div class="skill">AI Specialist</div>
+            <div class="skill">Funnel Design</div>
+            <div class="skill">Graphic Designing</div>
+            <div class="skill">Respond.io Specialist</div>
+            <div class="skill">Automations</div>
+            <div class="skill">Process &amp; SOPs Improvement</div>
+            <div class="skill">CRM Integrations</div>
+            <div class="skill">Custom CRM Creation</div>
+            <div class="skill">CMS Management</div>
+            <div class="skill">Email Marketing</div>
+            <div class="skill">WordPress Development</div>
+            <div class="skill">Copywriting &amp; Blogs</div>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2 class="sec-title">Tools I Use</h2>
+          <p class="sec-sub">Platforms and systems I work with day to day.</p>
+          <div class="tools-cols">
+            <div class="tool-group">
+              <h4>Website Management</h4>
+              <div class="tool-list">
+                <span>WordPress</span><span>Squarespace</span><span>Zoho</span>
+                <span>Shopify</span><span>Systeme.io</span><span>Wix</span><span>Weebly</span>
+              </div>
+            </div>
+            <div class="tool-group">
+              <h4>CRM &amp; Automation</h4>
+              <div class="tool-list">
+                <span>Zoho</span><span>WeTravel</span><span>Mailchimp</span><span>MailerLite</span>
+                <span>Zapier</span><span>HubSpot</span><span>Meta Business Suite</span>
+              </div>
+            </div>
+            <div class="tool-group">
+              <h4>Website Development</h4>
+              <div class="tool-list">
+                <span>GitHub</span><span>Vercel</span><span>Supabase</span><span>Firebase</span><span>HTML</span>
+                <span>CSS</span><span>JavaScript</span><span>React JS</span>
+                <span>Bootstrap</span><span>Claude Code</span><span>Gemini Code / Antigravity</span>
+              </div>
+            </div>
+          </div>
+          <p class="note">Based on my experience working with various tools, I'm highly adaptable and can quickly learn to navigate and implement any preferred CMS or CRM system of your choice.</p>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="panel" id="panel-experience">
+        <span class="kicker">Experience</span>
+        <h2 class="sec-title" style="font-size:1.9rem;margin-bottom:6px;">Work Experience</h2>
+        <p class="sec-sub">A track record across web development, AI, and business operations.</p>
+
+        <nav class="exp-nav">
+          <a href="#exp-1">Website Developer &amp; PM</a>
+          <a href="#exp-2">Respond.io Expert &amp; AI Specialist</a>
+          <a href="#exp-3">Admin Support</a>
+          <a href="#exp-4">WordPress Developer</a>
+          <a href="#exp-5">Social Media Manager</a>
+        </nav>
+
+        <div class="exp" id="exp-1" style="scroll-margin-top: 100px;">
+          <div class="job-title">Website Developer &amp; Project Manager</div>
+          <div class="company">Zelixlabs · Singapore</div>
+          <ul>
+            <li>Built custom websites for clients using Claude Code while strictly following the company's SOPs and development standards.</li>
+            <li>Developed Shopify themes, WordPress websites, and static HTML sites, using GitHub and Vercel for deployment and version control.</li>
+            <li>Managed website projects end to end — planning, development, testing, deployment, and client deliverables.</li>
+            <li>Improved internal workflows by identifying opportunities to streamline project execution and team efficiency.</li>
+            <li>Performed domain migrations, redirections, DNS configuration, and website transfers to ensure seamless launches.</li>
+            <li>Created and maintained Claude Skills, leveraging advanced features to improve development speed, consistency, and automation.</li>
+            <li>Delivered websites across industries while ensuring country-specific compliance, particularly for healthcare and medical professionals.</li>
+            <li>Collaborated with stakeholders and team members to deliver high-quality websites on schedule.</li>
+          </ul>
+          <p class="keyskills"><b>Key Skills:</b> Claude Code · Project Management · Website Development · Shopify Theme Development · WordPress · HTML &amp; CSS · GitHub · Vercel · Domain Management · DNS Configuration · Website Migration · SOP Compliance · Process Improvement · AI-Assisted Development · Healthcare Website Compliance</p>
+        </div>
+
+        <div class="exp" id="exp-2" style="scroll-margin-top: 100px;">
+          <div class="job-title">Respond.io Expert &amp; AI Specialist</div>
+          <div class="company">Zelixlabs · Singapore</div>
+          <ul>
+            <li>Designed and built AI Agents using Respond.io, enabling automated customer support and business operations available 24/7.</li>
+            <li>Managed the complete AI Agent lifecycle — planning, configuration, testing, deployment, and post-launch support.</li>
+            <li>Worked directly with clients to gather requirements and customize AI Agents to their workflows, services, and customer needs.</li>
+            <li>Integrated AI Agents with clients' preferred channels, including websites and social media, for seamless omnichannel interactions.</li>
+            <li>Configured AI workflows, automation rules, knowledge bases, and backend processes to improve response times and efficiency.</li>
+            <li>Performed testing, optimization, troubleshooting, and ongoing maintenance to continuously improve AI Agent performance.</li>
+            <li>Managed broadcast campaigns through Respond.io for announcements, promotions, and business updates.</li>
+            <li>Developed AI solutions beyond Respond.io — process automation, implementation strategies, internal tools, and SOPs.</li>
+          </ul>
+          <p class="keyskills"><b>Key Skills:</b> Respond.io · AI Agent Development · Conversational AI · AI Automation · Workflow Automation · Business Process Optimization · Client Consultation · AI Testing &amp; QA · AI Deployment · Omnichannel Integration · Broadcast Campaigns · SOP Development · Prompt Engineering · Customer Support Automation</p>
+        </div>
+
+        <div class="exp" id="exp-3" style="scroll-margin-top: 100px;">
+          <div class="job-title">Admin Support in Travel Agency</div>
+          <div class="company">Client-based · UAE</div>
+          <ul>
+            <li>Provided administrative support for a travel company, ensuring seamless operations and coordination.</li>
+            <li>Maintained and updated the company website, managing trip listings, modifications, and removals via WordPress and CMS platforms.</li>
+            <li>Managed trip creation and bookings via WeTravel CRM — handling add-ons, payment links, and nationality checks for visa requirements.</li>
+            <li>Facilitated communication by creating group chats for participants, Project Managers, and Operations Leads.</li>
+            <li>Distributed essential forms including flight details and feedback surveys, and prepared certificates for select trips.</li>
+            <li>Collaborated with Marketing and Operations, contributing strategic insights while ensuring brand consistency.</li>
+            <li>Processed invoices for B2B trips, supporting financial transactions and client relationships.</li>
+          </ul>
+          <p class="keyskills"><b>Key Skills:</b> Website Management · WordPress &amp; CMS · WeTravel CRM · Trip Coordination · Payment Processing · Nationality &amp; Visa Compliance · Client Communication · Marketing Collaboration · Invoice Processing · Data Management · Canva Designing</p>
+        </div>
+
+        <div class="exp" id="exp-4" style="scroll-margin-top: 100px;">
+          <div class="job-title">WordPress Developer <span style="font-weight:400;color:var(--muted);font-size:.85rem;">(Health &amp; Wellness Niche)</span></div>
+          <div class="company">Optimum Metabolic Health · Australia</div>
+          <ul>
+            <li>Designed custom web components including logos, banners, and icons for various pages.</li>
+            <li>Created funnel designs and website templates with cohesive branding and clean, appealing layouts.</li>
+            <li>Developed responsive design elements optimized for mobile and desktop viewing.</li>
+            <li>Ensured user-centric designs focused on simplicity and functionality.</li>
+          </ul>
+          <p class="keyskills"><b>Key Skills:</b> Website Design &amp; Development · WordPress &amp; CMS Platforms · CRM Integrations · HTML &amp; CSS · Plugin &amp; Theme Customization · Website Maintenance · Mailchimp Integrations</p>
+        </div>
+
+        <div class="exp" id="exp-5" style="scroll-margin-top: 100px;">
+          <div class="job-title">Social Media Manager <span style="font-weight:400;color:var(--muted);font-size:.85rem;">(Sports Niche)</span></div>
+          <div class="company">Paddle Fit Perth · Australia</div>
+          <ul>
+            <li>Managed social media platforms (Instagram, Facebook &amp; LinkedIn), creating content such as short-form video and photo edits.</li>
+            <li>Developed and executed content strategies using Meta Business Suite and Canva to drive consistent, on-brand posts.</li>
+            <li>Led paid campaigns and boosted lead generation.</li>
+            <li>Tracked performance using Google Analytics and Facebook Insights, optimizing campaigns based on metrics and reporting results.</li>
+          </ul>
+          <p class="keyskills"><b>Key Skills:</b> Social Media Strategy · Content Planning · Content Creation · Paid Ads · Analytics · Community Engagement · Marketing Strategy · Marketing Automations &amp; Integrations</p>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="panel" id="panel-projects">
+        <span class="kicker">Projects</span>
+        <h2 class="sec-title" style="font-size:1.9rem;margin-bottom:6px;">Websites I've Built</h2>
+        <p class="sec-sub">A sample of the work I've built and launched straight into clients' CRM and automations.</p>
+
+        <div class="project-grid">
+          <!-- Natural ArtForm -->
+          <div class="project-card">
+            <div class="mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">Live Preview</span>
+            </div>
+            <div class="mockup-screen">
+              <video class="proj-video" autoplay muted loop playsinline src="asset/web/naturalartform.mp4"></video>
+            </div>
+            <div class="project-body">
+              <div class="project-title">Natural ArtForm</div>
+              <div class="ptags"><span>Shopify</span><span>E-commerce</span><span>Wellness</span></div>
+              <p class="project-desc">Australian wellness brand selling handcrafted skincare and recovery products for athletes and families — featuring founder credibility, product education, a matching quiz, and ingredient guides.</p>
+              <div class="project-cta">
+                <a class="btn btn-outline" href="https://www.naturalartform.com/" target="_blank" rel="noopener">Visit Site →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Optimum Exercise Physiology -->
+          <div class="project-card">
+            <div class="mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">Live Preview</span>
+            </div>
+            <div class="mockup-screen">
+              <video class="proj-video" autoplay muted loop playsinline src="asset/web/optimumep.mp4"></video>
+            </div>
+            <div class="project-body">
+              <div class="project-title">Optimum Exercise Physiology</div>
+              <div class="ptags"><span>Website</span><span>Allied Health</span><span>Booking</span></div>
+              <p class="project-desc">South Australian allied health practice offering exercise physiology, personal training, and injury recovery services across multiple locations, with easy booking and funding information.</p>
+              <div class="project-cta">
+                <a class="btn btn-outline" href="projects/optimumep/index.html" target="_blank" rel="noopener">Visit Site →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Magna Constructions -->
+          <div class="project-card">
+            <div class="mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">Live Preview</span>
+            </div>
+            <div class="mockup-screen">
+              <video class="proj-video" autoplay muted loop playsinline src="asset/web/magnaco.mp4"></video>
+            </div>
+            <div class="project-body">
+              <div class="project-title">Magna Constructions</div>
+              <div class="ptags"><span>Website</span><span>Insurance Repair</span><span>Restoration</span></div>
+              <p class="project-desc">National insurance repair and building restoration contractor, presenting emergency callouts and catastrophe response with a client portal for claim management.</p>
+              <div class="project-cta">
+                <a class="btn btn-outline" href="projects/magna-constructions/index.htm" target="_blank" rel="noopener">Visit Site →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Indie Lane Photography -->
+          <div class="project-card">
+            <div class="mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">Live Preview</span>
+            </div>
+            <div class="mockup-screen">
+              <video class="proj-video" autoplay muted loop playsinline src="asset/web/indielane.mp4"></video>
+            </div>
+            <div class="project-body">
+              <div class="project-title">Indie Lane Photography</div>
+              <div class="ptags"><span>Website</span><span>Photography</span><span>Booking</span></div>
+              <p class="project-desc">Northern NSW-based branding and commercial photography business emphasizing warm imagery and natural light to encourage bookings from camera-shy clients.</p>
+              <div class="project-cta">
+                <a class="btn btn-outline" href="projects/indielanephotography/index.html" target="_blank" rel="noopener">Visit Site →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lake View Dental -->
+          <div class="project-card">
+            <div class="mockup-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="url">Live Preview</span>
+            </div>
+            <div class="mockup-screen">
+              <video class="proj-video" autoplay muted loop playsinline src="asset/web/lakeviewdental.mp4"></video>
+            </div>
+            <div class="project-body">
+              <div class="project-title">Lake View Dental</div>
+              <div class="ptags"><span>Website</span><span>Dental</span><span>Booking</span></div>
+              <p class="project-desc">Sunshine Coast dental practice in Birtinya offering gentle, prevention-first family dentistry — extraction-free braces, same-day crowns, and airway care, presented with an easy booking flow.</p>
+              <div class="project-cta">
+                <a class="btn btn-outline" href="projects/lakeviewdental/index.html" target="_blank" rel="noopener">Visit Site →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="more-projects">
+          <a class="btn btn-outline" href="https://www.antheonph.com/projects/index.html" target="_blank" rel="noopener">See More Projects →</a>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="panel" id="panel-testimonials">
+        <span class="kicker">Testimonials</span>
+        <h2 class="sec-title" style="font-size:1.9rem;margin-bottom:6px;">What Clients Say</h2>
+        <p class="sec-sub">Real words from people I've worked with.</p>
+
+        <div class="tst-grid">
+          <!-- Kate (video) -->
+          <div class="tst-card wide">
+            <div class="tst-media">
+              <video src="asset/testimonial/Kate.mp4" controls preload="metadata" playsinline></video>
+            </div>
+            <div class="tst-body">
+              <div>
+                <div class="tst-name">Kate</div>
+                <div class="tst-role">Client</div>
+              </div>
+              <span class="tst-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Video</span>
+            </div>
+          </div>
+
+          <!-- Valery -->
+          <div class="tst-card portrait">
+            <div class="tst-media">
+              <video src="asset/testimonial/Valery.mp4" controls preload="metadata" playsinline></video>
+            </div>
+            <div class="tst-body">
+              <div>
+                <div class="tst-name">Valery</div>
+                <div class="tst-role">Client</div>
+              </div>
+              <span class="tst-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Video</span>
+            </div>
+          </div>
+
+          <!-- Mark -->
+          <div class="tst-card wide">
+            <div class="tst-media">
+              <video src="asset/testimonial/Mark.mp4" controls preload="metadata" playsinline></video>
+            </div>
+            <div class="tst-body">
+              <div>
+                <div class="tst-name">Mark</div>
+                <div class="tst-role">Client</div>
+              </div>
+              <span class="tst-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Video</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <a class="wa-float" href="https://wa.me/639914746063" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+  <div class="ty-overlay" id="tyOverlay" role="dialog" aria-modal="true" aria-live="polite">
+    <div class="ty-card">
+      <div class="ty-timer">
+        <svg viewBox="0 0 100 100">
+          <circle class="ty-track" cx="50" cy="50" r="45"></circle>
+          <circle class="ty-prog" id="tyProg" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <span class="ty-num" id="tyNum">5</span>
+      </div>
+      <h3 class="ty-title">Thank you for downloading my CV!</h3>
+      <p class="ty-sub">Talk to you soon! 👋</p>
+      <p class="ty-note">Returning to the homepage…</p>
+    </div>
+  </div>
+
+  <a class="wa-bar" href="https://wa.me/639914746063" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    Chat me on WhatsApp
+  </a>
+
+  <script src="asset/cv-data.js"></script>
+  <script>
+    // Thank-you modal with animated 5s circular countdown, then reload to homepage
+    function showThankYou() {
+      const overlay = document.getElementById('tyOverlay');
+      const prog = document.getElementById('tyProg');
+      const num = document.getElementById('tyNum');
+      if (!overlay || !prog || !num) { setTimeout(() => location.reload(), 5000); return; }
+
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+
+      const R = 45, C = 2 * Math.PI * R, TOTAL = 5000;
+      prog.style.strokeDasharray = C;
+      prog.style.strokeDashoffset = C;
+
+      const start = performance.now();
+      function frame(now) {
+        const elapsed = Math.min(now - start, TOTAL);
+        num.textContent = Math.max(1, Math.ceil((TOTAL - elapsed) / 1000));
+        const p = (elapsed % 1000) / 1000;        // 0→1 each second
+        prog.style.strokeDashoffset = C * (1 - p); // ring fills, then snaps at each tick
+        if (elapsed < TOTAL) {
+          requestAnimationFrame(frame);
+        } else {
+          location.reload();
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    const downloadCvBtn = document.getElementById('downloadCvBtn');
+    if (downloadCvBtn) {
+      downloadCvBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filename = downloadCvBtn.getAttribute('download') || 'Resume.pdf';
+
+        function dataUriToBlob(dataUri) {
+          const [meta, b64] = dataUri.split(',');
+          const mime = (meta.match(/:(.*?);/) || [])[1] || 'application/pdf';
+          const bin = atob(b64);
+          const bytes = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+          return new Blob([bytes], { type: mime });
+        }
+
+        // Primary: use the embedded base64 PDF — works on file://, http(s) and iOS Safari
+        if (window.CV_PDF_DATAURI) {
+          try {
+            const blob = dataUriToBlob(window.CV_PDF_DATAURI);
+            const blobUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 1500);
+            showThankYou();
+            return;
+          } catch (err) { /* fall through */ }
+        }
+
+        // Fallback: fetch the file, else native navigation
+        const url = downloadCvBtn.getAttribute('href');
+        fetch(url)
+          .then((res) => res.blob())
+          .then((blob) => {
+            const blobUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 1500);
+            showThankYou();
+          })
+          .catch(() => { window.location.href = url; });
+      });
+    }
+
+    document.querySelectorAll('.proj-video').forEach((video) => {
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      const tryPlay = () => video.play().catch(() => {});
+      tryPlay();
+      video.addEventListener('loadeddata', tryPlay);
+      video.addEventListener('canplay', tryPlay);
+    });
+
+    const buttons = document.querySelectorAll('.nav-tabs button');
+    const panels = document.querySelectorAll('.panel');
+    const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'));
+        panels.forEach((p) => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById('panel-' + btn.dataset.tab);
+        panel.classList.add('active');
+        if (isMobile()) {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+      });
+    });
+
+    const expNavLinks = document.querySelectorAll('.exp-nav a');
+    expNavLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        expNavLinks.forEach((l) => l.classList.remove('active'));
+        link.classList.add('active');
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

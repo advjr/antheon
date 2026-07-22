@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthony De Vera Jr — Graphic Design Portfolio</title>
+  <meta name="description" content="Graphic design portfolio of Anthony De Vera Jr — branding, social media, Meta ads, product design, email design, web design and video." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-soft: #2b2b2b;
+      --paper: #f7f6f3;
+      --paper-card: #ffffff;
+      --muted: #8a8a86;
+      --line: #e7e5e0;
+      --accent: #c8a35b;
+      --dark: #171717;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --display: 'Space Grotesk', var(--sans);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ---------- HEADER ---------- */
+    .top {
+      background: var(--dark);
+      color: #ededed;
+      padding: 20px 0;
+      position: sticky; top: 0; z-index: 40;
+    }
+    .top-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--sidebar-line, #2e2e2e); }
+    .brand .who { font-family: var(--display); font-weight: 700; font-size: 1rem; line-height: 1.1; }
+    .brand .who span { display: block; font-family: var(--sans); font-weight: 400; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-top: 3px; }
+    .back-link {
+      font-family: var(--display); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid #2e2e2e; padding: 10px 18px; border-radius: 8px;
+      transition: all .2s ease; white-space: nowrap;
+    }
+    .back-link:hover { border-color: var(--accent); color: #fff; }
+
+    /* ---------- HERO ---------- */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 60px 28px 30px; }
+    .kicker {
+      font-family: var(--display); font-size: 0.72rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--accent);
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px;
+    }
+    .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+    .hero h1 {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: -1.5px; line-height: 1.05;
+    }
+    .hero p { color: var(--ink-soft); margin-top: 16px; max-width: 620px; font-size: 1.02rem; }
+
+    /* ---------- FILTERS ---------- */
+    .filters {
+      max-width: 1200px; margin: 0 auto; padding: 24px 28px 10px;
+      display: flex; flex-wrap: wrap; gap: 9px;
+      position: sticky; top: 84px; z-index: 30;
+    }
+    .filters::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: var(--paper);
+      -webkit-mask: linear-gradient(#000 70%, transparent);
+      mask: linear-gradient(#000 70%, transparent);
+    }
+    .chip {
+      font-family: var(--display); font-size: 0.8rem; font-weight: 600;
+      padding: 9px 16px; border: 1px solid var(--line); border-radius: 22px;
+      background: var(--paper-card); color: var(--ink-soft);
+      transition: all .18s ease; display: inline-flex; align-items: center; gap: 7px;
+    }
+    .chip span {
+      font-size: 0.68rem; color: var(--muted); font-weight: 500;
+      background: var(--paper); padding: 1px 7px; border-radius: 10px;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+    .chip.active { background: var(--accent); border-color: var(--accent); color: #171717; }
+    .chip.active span { background: rgba(0,0,0,.12); color: #171717; }
+
+    @media (max-width: 760px) {
+      .top-inner { padding: 0 18px; gap: 10px; }
+      .brand img { width: 38px; height: 38px; }
+      .brand .who { font-size: 0.88rem; }
+      .brand .who span { font-size: 0.62rem; }
+      .back-link { padding: 8px 12px; font-size: 0.68rem; }
+      .hero { padding: 36px 18px 20px; }
+      .filters {
+        top: 68px;
+        padding: 16px 18px 12px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .filters::-webkit-scrollbar { display: none; }
+      .chip { flex-shrink: 0; white-space: nowrap; }
+      .gallery { padding: 16px 18px 70px; }
+    }
+
+    /* ---------- GALLERY (masonry) ---------- */
+    .gallery {
+      max-width: 1200px; margin: 0 auto; padding: 20px 28px 90px;
+      column-count: 4; column-gap: 16px;
+    }
+    @media (max-width: 1100px) { .gallery { column-count: 3; } }
+    @media (max-width: 760px)  { .gallery { column-count: 2; } }
+    @media (max-width: 460px)  { .gallery { column-count: 1; } }
+
+    .card {
+      break-inside: avoid; margin-bottom: 16px;
+      border-radius: 12px; overflow: hidden; position: relative;
+      background: var(--paper-card); border: 1px solid var(--line);
+      cursor: pointer; transition: transform .22s ease, box-shadow .22s ease;
+      display: block;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,.10); }
+    .card img { width: 100%; display: block; }
+    .card.hide { display: none; }
+    .card .play {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.18); transition: background .2s ease;
+    }
+    .card:hover .play { background: rgba(0,0,0,.30); }
+    .card .play svg { width: 54px; height: 54px; filter: drop-shadow(0 4px 12px rgba(0,0,0,.4)); }
+    .card .vtag {
+      position: absolute; top: 10px; left: 10px;
+      font-family: var(--display); font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase;
+      background: rgba(0,0,0,.6); color: #fff; padding: 4px 9px; border-radius: 20px;
+    }
+
+    /* ---------- LIGHTBOX ---------- */
+    .lb {
+      position: fixed; inset: 0; z-index: 100; display: none;
+      background: rgba(15,15,15,.92); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 30px;
+    }
+    .lb.open { display: flex; }
+    .lb img, .lb iframe {
+      max-width: 90vw; max-height: 88vh; border-radius: 8px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6); background: #000;
+    }
+    .lb iframe { width: 80vw; height: 82vh; border: 0; }
+    .lb-close, .lb-nav {
+      position: fixed; color: #fff; background: rgba(255,255,255,.1);
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s ease; z-index: 101;
+    }
+    .lb-close:hover, .lb-nav:hover { background: var(--accent); color: #171717; }
+    .lb-close { top: 22px; right: 26px; }
+    .lb-nav.prev { left: 24px; top: 50%; transform: translateY(-50%); }
+    .lb-nav.next { right: 24px; top: 50%; transform: translateY(-50%); }
+    .lb-nav svg, .lb-close svg { width: 22px; height: 22px; }
+    @media (max-width: 600px) {
+      .lb-nav { width: 40px; height: 40px; }
+      .lb-nav.prev { left: 8px; } .lb-nav.next { right: 8px; }
+      .lb iframe { width: 94vw; height: 70vh; }
+    }
+
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.6);
+      text-align: center; padding: 30px 20px; font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html">
+        <img src="asset/profile-photo.jpg" alt="Anthony De Vera Jr" />
+        <div class="who">Anthony De Vera Jr<span>Graphic Design</span></div>
+      </a>
+      <a class="back-link" href="index.html">← Back to Résumé</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="kicker">Portfolio</span>
+    <h1>Graphic Design Work</h1>
+    <p>A collection of branding, social media, advertising, product, email and web design — plus short-form video. Tap any piece to view it full size.</p>
+  </section>
+
+  <div class="filters" id="filters">
+      <button class="chip active" data-f="all">All <span>68</span></button>
+      <button class="chip" data-f="Branding">Branding <span>4</span></button>
+      <button class="chip" data-f="Social-Media-Post">Social Media <span>31</span></button>
+      <button class="chip" data-f="DTC-Meta-Ads-Graphics">Meta Ads / DTC <span>8</span></button>
+      <button class="chip" data-f="Product-Design">Product Design <span>4</span></button>
+      <button class="chip" data-f="Email-Design">Email Design <span>3</span></button>
+      <button class="chip" data-f="Website-Design">Web Design <span>2</span></button>
+      <button class="chip" data-f="Video-Sample">Video Samples <span>11</span></button>
+      <button class="chip" data-f="Uncategorized">Other Work <span>5</span></button>
+  </div>
+
+  <main class="gallery" id="gallery"></main>
+
+  <div class="lb" id="lb">
+    <button class="lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="lb-nav prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div id="lbStage"></div>
+    <button class="lb-nav next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
+
+  <footer>
+    Designed &amp; built by Anthony De Vera Jr · <a href="index.html">View Résumé</a>
+  </footer>
+
+  <script>
+    const ITEMS = [
+  {src:"asset/graphics/Branding/01_1ND3hislsowdtlLGQKqkuSOmYbdasX4o7.jpg",cat:"Branding",v:0,id:"1ND3hislsowdtlLGQKqkuSOmYbdasX4o7"},
+  {src:"asset/graphics/Branding/02_1NLfV7DYjJYae07RET1BIwE-VqZDWhNxn.jpg",cat:"Branding",v:0,id:"1NLfV7DYjJYae07RET1BIwE-VqZDWhNxn"},
+  {src:"asset/graphics/Branding/03_1gK-8nYNW641YDZsTgCZy_ZzISDn96O9b.jpg",cat:"Branding",v:0,id:"1gK-8nYNW641YDZsTgCZy_ZzISDn96O9b"},
+  {src:"asset/graphics/Branding/04_1zZOTeovROiVHKSjTYBRrApbY7Ypwy8D-.jpg",cat:"Branding",v:0,id:"1zZOTeovROiVHKSjTYBRrApbY7Ypwy8D-"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Post/01_1CC3QWdDaAQr4kdu04KPNQhswPzqs5CYd.jpg",cat:"Social-Media-Post",v:0,id:"1CC3QWdDaAQr4kdu04KPNQhswPzqs5CYd"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Post/02_1DQURej7NUUjLPUBAcvImJ3SRwNizw483.jpg",cat:"Social-Media-Post",v:0,id:"1DQURej7NUUjLPUBAcvImJ3SRwNizw483"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Post/03_1_dSkAb_osd3F_f9l4Q5-c3ZBod5adHSy.jpg",cat:"Social-Media-Post",v:0,id:"1_dSkAb_osd3F_f9l4Q5-c3ZBod5adHSy"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Post/04_12QXgVs6kIhz5CYFF6RViW9AnjlB05Dq2.jpg",cat:"Social-Media-Post",v:0,id:"12QXgVs6kIhz5CYFF6RViW9AnjlB05Dq2"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Programs/01_1u5oAZAe1eq7rYAaHhqHUzTjUT77Yxd0D.jpg",cat:"Social-Media-Post",v:0,id:"1u5oAZAe1eq7rYAaHhqHUzTjUT77Yxd0D"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Programs/02_1FKe8r4pvNMqi58gUvYHTBBtGgPVXKWUq.jpg",cat:"Social-Media-Post",v:0,id:"1FKe8r4pvNMqi58gUvYHTBBtGgPVXKWUq"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Programs/03_13RJcAnDVj9UwtlN8_RBJL4LJBx536PlQ.jpg",cat:"Social-Media-Post",v:0,id:"13RJcAnDVj9UwtlN8_RBJL4LJBx536PlQ"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Programs/04_1INHAbn1Y512qdmJE_EGkZ4rZ1NCDB-2a.jpg",cat:"Social-Media-Post",v:0,id:"1INHAbn1Y512qdmJE_EGkZ4rZ1NCDB-2a"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Programs/05_1dw_B_dHRaB_w1ssPgVTBMCBYIp_CwtjE.jpg",cat:"Social-Media-Post",v:0,id:"1dw_B_dHRaB_w1ssPgVTBMCBYIp_CwtjE"},
+  {src:"asset/graphics/Social-Media-Post/Carousel-Posts/Paddle-Programs/06_1LZW2Irx_hC2Oh3Mab8JkvgZS-_Fsdtq1.jpg",cat:"Social-Media-Post",v:0,id:"1LZW2Irx_hC2Oh3Mab8JkvgZS-_Fsdtq1"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/01_113Cnph8Ri0ded1Rk9OAf2uTP_pJk6P9E.jpg",cat:"Social-Media-Post",v:0,id:"113Cnph8Ri0ded1Rk9OAf2uTP_pJk6P9E"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/02_1U3MmV6gDhI6Jt1Ljlq__a5zv01FEA7uW.jpg",cat:"Social-Media-Post",v:0,id:"1U3MmV6gDhI6Jt1Ljlq__a5zv01FEA7uW"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/03_1o-5exwWMUNOOPPh-bAnwm_3lmS-HoY2s.jpg",cat:"Social-Media-Post",v:0,id:"1o-5exwWMUNOOPPh-bAnwm_3lmS-HoY2s"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/04_1d0IBI2fV4M5bN0pcD4KPtf7Y3tM5fZGw.jpg",cat:"Social-Media-Post",v:0,id:"1d0IBI2fV4M5bN0pcD4KPtf7Y3tM5fZGw"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/05_1yHuw0SZyrWpGkX_ixXTMg-VaJmPxlCjA.jpg",cat:"Social-Media-Post",v:0,id:"1yHuw0SZyrWpGkX_ixXTMg-VaJmPxlCjA"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/06_1rZTbCu1QrVBa6BSArFZFYzr9Qp6MeeJq.jpg",cat:"Social-Media-Post",v:0,id:"1rZTbCu1QrVBa6BSArFZFYzr9Qp6MeeJq"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/07_1f_1zVDOTHmEDkimuN9QS6Evn867swIkQ.jpg",cat:"Social-Media-Post",v:0,id:"1f_1zVDOTHmEDkimuN9QS6Evn867swIkQ"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/08_1kXZv9dABxZaaIsfVgTffLCnOV0IJYvFz.jpg",cat:"Social-Media-Post",v:0,id:"1kXZv9dABxZaaIsfVgTffLCnOV0IJYvFz"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/09_1ZAJsXVQuJZO2fxv0yMqoaYc7u0WLOFdH.jpg",cat:"Social-Media-Post",v:0,id:"1ZAJsXVQuJZO2fxv0yMqoaYc7u0WLOFdH"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/10_1VRi9FN0H-lMJdk2umo9cRN8-QBXeUYtV.jpg",cat:"Social-Media-Post",v:0,id:"1VRi9FN0H-lMJdk2umo9cRN8-QBXeUYtV"},
+  {src:"asset/graphics/Social-Media-Post/Event-Posts/11_1wUd_yvvZvAwN95iubBuV0dz7fyNi-xra.jpg",cat:"Social-Media-Post",v:0,id:"1wUd_yvvZvAwN95iubBuV0dz7fyNi-xra"},
+  {src:"asset/graphics/Social-Media-Post/Fashion-Merch/01_1PySifXKhshUEDJKUcTEe7tWUb4f5Yg3A.jpg",cat:"Social-Media-Post",v:0,id:"1PySifXKhshUEDJKUcTEe7tWUb4f5Yg3A"},
+  {src:"asset/graphics/Social-Media-Post/Fashion-Merch/02_1DJ8U8-SjLRj0y5v0C4ZkOK4_yjIo3BFj.jpg",cat:"Social-Media-Post",v:0,id:"1DJ8U8-SjLRj0y5v0C4ZkOK4_yjIo3BFj"},
+  {src:"asset/graphics/Social-Media-Post/Fashion-Merch/03_13ZVnrRPUDsm8aY0Dwnh43VPL_hXaN7pD.jpg",cat:"Social-Media-Post",v:0,id:"13ZVnrRPUDsm8aY0Dwnh43VPL_hXaN7pD"},
+  {src:"asset/graphics/Social-Media-Post/Fashion-Merch/04_1qYinTzyxES3PGkEysokdrd86oeurB5LR.jpg",cat:"Social-Media-Post",v:0,id:"1qYinTzyxES3PGkEysokdrd86oeurB5LR"},
+  {src:"asset/graphics/Social-Media-Post/Real-Estate/01_1N98E9UtpYJIyEtcFOhwDx8u4ZVPrTE1N.jpg",cat:"Social-Media-Post",v:0,id:"1N98E9UtpYJIyEtcFOhwDx8u4ZVPrTE1N"},
+  {src:"asset/graphics/Social-Media-Post/Real-Estate/02_1GyKnciDN-2TvKPZFdCqmfBg4xOaJiz-B.jpg",cat:"Social-Media-Post",v:0,id:"1GyKnciDN-2TvKPZFdCqmfBg4xOaJiz-B"},
+  {src:"asset/graphics/Social-Media-Post/Travel/01_11KVu2tibMN6q1lSTCSfnwaZNsa_nrF7h.jpg",cat:"Social-Media-Post",v:0,id:"11KVu2tibMN6q1lSTCSfnwaZNsa_nrF7h"},
+  {src:"asset/graphics/Social-Media-Post/Travel/02_1OEmIUJ3Xw9w8hEMczjaOf72zYSRMyvuj.jpg",cat:"Social-Media-Post",v:0,id:"1OEmIUJ3Xw9w8hEMczjaOf72zYSRMyvuj"},
+  {src:"asset/graphics/Social-Media-Post/Travel/03_1uBuaeaq4t-Lr19EKhii_pWTaZwAJBrm6.jpg",cat:"Social-Media-Post",v:0,id:"1uBuaeaq4t-Lr19EKhii_pWTaZwAJBrm6"},
+  {src:"asset/graphics/Social-Media-Post/Travel/04_1LCukEtvR4rd7REFE-ZnSalNR429A3Qdx.jpg",cat:"Social-Media-Post",v:0,id:"1LCukEtvR4rd7REFE-ZnSalNR429A3Qdx"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/01_13R5xrfzUukuVIY0qyKmp92uX2Xe7_26b.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"13R5xrfzUukuVIY0qyKmp92uX2Xe7_26b"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/02_17sjg0UoM4ecS6cJTXwvSLyWTBUDcTCgg.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"17sjg0UoM4ecS6cJTXwvSLyWTBUDcTCgg"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/03_1LpQvmDp8DvaTQVF1cvWGDpSBTZ-AfXIF.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"1LpQvmDp8DvaTQVF1cvWGDpSBTZ-AfXIF"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/04_1Qm9KrYu8QZGRkVrnFRDYfqZWOATaWquv.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"1Qm9KrYu8QZGRkVrnFRDYfqZWOATaWquv"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/05_1RGTjz337zQBp05GgJGsWjn1vs35b8LaJ.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"1RGTjz337zQBp05GgJGsWjn1vs35b8LaJ"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/06_1SKD1l2WbMR97l82FmgOmGycU2SZ7ZDyW.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"1SKD1l2WbMR97l82FmgOmGycU2SZ7ZDyW"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/07_1ZXO6pP4KqHZnwgX9ymSjQfiE-YItNh4H.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"1ZXO6pP4KqHZnwgX9ymSjQfiE-YItNh4H"},
+  {src:"asset/graphics/DTC-Meta-Ads-Graphics/08_1_E4i2lPh3sIAORyHK4iIUamTAicW60nU.jpg",cat:"DTC-Meta-Ads-Graphics",v:0,id:"1_E4i2lPh3sIAORyHK4iIUamTAicW60nU"},
+  {src:"asset/graphics/Product-Design/01_1ND54RjuoHIT0wSi1f82XtJwPRDVqKY-Y.jpg",cat:"Product-Design",v:0,id:"1ND54RjuoHIT0wSi1f82XtJwPRDVqKY-Y"},
+  {src:"asset/graphics/Product-Design/02_1NEvLwNnQZSDWQFBF-uupwrqCXrAIZ1tW.jpg",cat:"Product-Design",v:0,id:"1NEvLwNnQZSDWQFBF-uupwrqCXrAIZ1tW"},
+  {src:"asset/graphics/Product-Design/03_1NJ2S5zHxPrgN3LDqVkcNPY637Rc6PG7q.jpg",cat:"Product-Design",v:0,id:"1NJ2S5zHxPrgN3LDqVkcNPY637Rc6PG7q"},
+  {src:"asset/graphics/Product-Design/04_1vUBDoY7azxaU5rIm3HMUENv-WPO9eWtK.jpg",cat:"Product-Design",v:0,id:"1vUBDoY7azxaU5rIm3HMUENv-WPO9eWtK"},
+  {src:"asset/graphics/Email-Design/01_1NXVVhlu4qTTtHwVqnbDxpwBbP62Mg-HP.jpg",cat:"Email-Design",v:0,id:"1NXVVhlu4qTTtHwVqnbDxpwBbP62Mg-HP"},
+  {src:"asset/graphics/Email-Design/02_1NXkBUXLqDpxFHVv_2_dii0WY0-o8vTWL.jpg",cat:"Email-Design",v:0,id:"1NXkBUXLqDpxFHVv_2_dii0WY0-o8vTWL"},
+  {src:"asset/graphics/Email-Design/03_1Ngnnqj9fbIqijQb-W6qh9BU_YOEpdqwl.jpg",cat:"Email-Design",v:0,id:"1Ngnnqj9fbIqijQb-W6qh9BU_YOEpdqwl"},
+  {src:"asset/graphics/Website-Design/01_1FA0TPfue05fPELHK8sEWRg2eBfHJBkpX.jpg",cat:"Website-Design",v:1,id:"1FA0TPfue05fPELHK8sEWRg2eBfHJBkpX"},
+  {src:"asset/graphics/Website-Design/02_1dnq5Y_WtQU__Tzm3H6FmPez6S7ZrbYz-.jpg",cat:"Website-Design",v:0,id:"1dnq5Y_WtQU__Tzm3H6FmPez6S7ZrbYz-"},
+  {src:"asset/graphics/Video-Sample/01_151WESHI4-IsupQ3XmQ_kFTSG00pNYYuF.jpg",cat:"Video-Sample",v:1,id:"151WESHI4-IsupQ3XmQ_kFTSG00pNYYuF"},
+  {src:"asset/graphics/Video-Sample/02_17Y1mfcR9dIlJQS-vJFbSwIDbZkHcpnVw.jpg",cat:"Video-Sample",v:1,id:"17Y1mfcR9dIlJQS-vJFbSwIDbZkHcpnVw"},
+  {src:"asset/graphics/Video-Sample/03_1AwHJwyzS7D1SvorsMS60J5Tc5ibACQ2f.jpg",cat:"Video-Sample",v:1,id:"1AwHJwyzS7D1SvorsMS60J5Tc5ibACQ2f"},
+  {src:"asset/graphics/Video-Sample/04_1NW5hpU7XM1oSZP99SsNtaRmyAld9E6FY.jpg",cat:"Video-Sample",v:1,id:"1NW5hpU7XM1oSZP99SsNtaRmyAld9E6FY"},
+  {src:"asset/graphics/Video-Sample/05_1NuPx4ahz7CjK8qTN7qKRo0DxjRx-g4Ol.jpg",cat:"Video-Sample",v:1,id:"1NuPx4ahz7CjK8qTN7qKRo0DxjRx-g4Ol"},
+  {src:"asset/graphics/Video-Sample/06_1PQcLi9QxNRtDaOzfzrUrJ5DalQNA22xq.jpg",cat:"Video-Sample",v:1,id:"1PQcLi9QxNRtDaOzfzrUrJ5DalQNA22xq"},
+  {src:"asset/graphics/Video-Sample/07_1SSve2vXHkItDxhL5zbiIIgG5tK6LQfkx.jpg",cat:"Video-Sample",v:1,id:"1SSve2vXHkItDxhL5zbiIIgG5tK6LQfkx"},
+  {src:"asset/graphics/Video-Sample/08_1Ut5eqq2R0ifBvfJjP9nwsdmAMD19hyNh.jpg",cat:"Video-Sample",v:1,id:"1Ut5eqq2R0ifBvfJjP9nwsdmAMD19hyNh"},
+  {src:"asset/graphics/Video-Sample/09_1Z5V-a56l2ArI-5GUycQ7HBmdCFiSosjr.jpg",cat:"Video-Sample",v:1,id:"1Z5V-a56l2ArI-5GUycQ7HBmdCFiSosjr"},
+  {src:"asset/graphics/Video-Sample/10_1ghrr3-dEZdOBLqpEyJVEzslvnJ-SYHM_.jpg",cat:"Video-Sample",v:1,id:"1ghrr3-dEZdOBLqpEyJVEzslvnJ-SYHM_"},
+  {src:"asset/graphics/Video-Sample/11_1lDeTvNL0Qab1sMtZNQXlFMMqq_5MmdhX.jpg",cat:"Video-Sample",v:1,id:"1lDeTvNL0Qab1sMtZNQXlFMMqq_5MmdhX"},
+  {src:"asset/graphics/Uncategorized/01_16iplS79BMHrBQrV40E8luac1F98adMo2.jpg",cat:"Uncategorized",v:0,id:"16iplS79BMHrBQrV40E8luac1F98adMo2"},
+  {src:"asset/graphics/Uncategorized/02_1JRXT91Txd0aSZxKIhjV770-Qi863wjLa.jpg",cat:"Uncategorized",v:0,id:"1JRXT91Txd0aSZxKIhjV770-Qi863wjLa"},
+  {src:"asset/graphics/Uncategorized/03_1NgF-Xdis7c5UPg3Mz-zIWDmFerDC94pY.jpg",cat:"Uncategorized",v:0,id:"1NgF-Xdis7c5UPg3Mz-zIWDmFerDC94pY"},
+  {src:"asset/graphics/Uncategorized/04_1m0qhONQV1zvwQM3zav7rod751r0Ar6I9.jpg",cat:"Uncategorized",v:0,id:"1m0qhONQV1zvwQM3zav7rod751r0Ar6I9"},
+  {src:"asset/graphics/Uncategorized/05_1m3hzMuW3Mr0vmyOUzqR0ZfCefwUn8vpT.jpg",cat:"Uncategorized",v:0,id:"1m3hzMuW3Mr0vmyOUzqR0ZfCefwUn8vpT"}
+    ];
+
+    const gallery = document.getElementById('gallery');
+    const PLAY_SVG = '<div class="play"><svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)"/><path d="M10 8l6 4-6 4z" fill="#fff"/></svg></div>';
+
+    ITEMS.forEach((it, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.cat = it.cat;
+      card.dataset.index = i;
+      card.innerHTML = '<img loading="lazy" src="' + it.src + '" alt="">' +
+        (it.v ? '<span class="vtag">Video</span>' + PLAY_SVG : '');
+      card.addEventListener('click', () => openLightbox(i));
+      gallery.appendChild(card);
+    });
+
+    // Filters
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const f = chip.dataset.f;
+        document.querySelectorAll('.card').forEach(card => {
+          card.classList.toggle('hide', !(f === 'all' || card.dataset.cat === f));
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Lightbox
+    const lb = document.getElementById('lb');
+    const stage = document.getElementById('lbStage');
+    let current = 0;
+
+    function visibleIndexes() {
+      return ITEMS.map((_, i) => i).filter(i =>
+        !document.querySelector('.card[data-index="' + i + '"]').classList.contains('hide'));
+    }
+    function openLightbox(i) {
+      current = i;
+      render();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function render() {
+      const it = ITEMS[current];
+      if (it.v) {
+        stage.innerHTML = '<iframe src="https://drive.google.com/file/d/' + it.id +
+          '/preview" allow="autoplay" allowfullscreen></iframe>';
+      } else {
+        stage.innerHTML = '<img src="' + it.src + '" alt="">';
+      }
+    }
+    function closeLightbox() {
+      lb.classList.remove('open');
+      stage.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+    function step(dir) {
+      const vis = visibleIndexes();
+      let pos = vis.indexOf(current);
+      pos = (pos + dir + vis.length) % vis.length;
+      current = vis[pos];
+      render();
+    }
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+    document.getElementById('lbNext').addEventListener('click', () => step(1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+  </script>
+</body>
+</html>

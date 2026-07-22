@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strength Testing | Optimum Exercise Physiology</title>
+    <meta name="description" content="Safely test your strength in a specific lift under the guidance of an Exercise Physiologist with our Strength Testing sessions.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        /* =========================================================
+           VARIABLES & CORE (Sync with index.html)
+           ========================================================= */
+        :root {
+            --brand-blue: #33aad3; 
+            --brand-blue-dark: #258db1;
+            --brand-dark: #2a2a2a;
+            --brand-darker: #1a1a1a;
+            --brand-light: #f5f7f9;
+            --brand-white: #ffffff;
+            --text-body: #4a4a4a;
+            --text-muted: #717171;
+            --optimum-cyan: #3fb2c1;
+            --optimum-light: #f5f7f9;
+            --optimum-dark: #2a2a2a;
+            --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            color: var(--brand-dark);
+            background-color: var(--brand-white);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; margin: 0; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        img { max-width: 100%; display: block; }
+
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
+        #app-root { width: 100%; min-height: 100vh; display: flex; flex-direction: column;}
+        
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.8rem 5%; background: white; position: fixed; top: 0; width: 100%;
+            box-sizing: border-box; z-index: 1000; color: var(--brand-dark);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        
+        .brand-logo img { height: 50px; width: auto; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links > a, .nav-item-wrap > a { margin: 0 1.2rem; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; color: inherit; display: flex; align-items: center; gap: 0.4rem; position: relative; }
+        
+        /* HIGHLIGHT ACTIVE STYLE */
+        .active-link { 
+            color: var(--brand-blue) !important; 
+            position: relative;
+        }
+        .active-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--brand-blue);
+        }
+
+        .nav-item-wrap { position: relative; display: flex; align-items: center; height: 60px; }
+        .dropdown-chevron { font-size: 0.7rem; opacity: 0.6; transition: transform 0.3s var(--ease-out); }
+        .nav-item-wrap:hover .dropdown-chevron { transform: rotate(180deg); color: var(--brand-blue); }
+
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(15px);
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
+            min-width: 240px; opacity: 0; visibility: hidden; padding: 1rem 0;
+            border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.04); transition: all 0.4s var(--ease-out); z-index: 1001; pointer-events: none;
+        }
+        .nav-item-wrap:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: all; }
+        .dropdown-menu a { padding: 0.8rem 1.5rem; display: flex; align-items: center; justify-content: space-between; color: var(--brand-dark) !important; font-size: 0.9rem; font-weight: 500; transition: all 0.3s var(--ease-out); border-left: 3px solid transparent; }
+        .dropdown-menu a:hover { background: rgba(51, 170, 211, 0.06); color: var(--brand-blue) !important; border-left-color: var(--brand-blue); padding-left: 1.8rem; }
+        
+        /* --- NESTED FLYOUT STYLES (NEW) --- */
+        .dropdown-item-wrap {
+            position: relative;
+        }
+        
+        .flyout-menu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            padding: 1rem 0;
+            border-radius: 16px;
+            box-shadow: 15px 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s var(--ease-out);
+            z-index: 1002;
+            pointer-events: none;
+        }
+
+        .dropdown-item-wrap:hover .flyout-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            pointer-events: all;
+        }
+
+        .flyout-menu a {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .dropdown-menu .has-flyout > i {
+            font-size: 0.6rem;
+            opacity: 0.5;
+            transition: transform 0.3s var(--ease-out);
+        }
+        .dropdown-item-wrap:hover .has-flyout > i {
+            transform: translateX(3px);
+            color: var(--brand-blue);
+            opacity: 1;
+        }
+
+        .nav-links .mobile-only-btn { display: none; }
+        
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: inherit; z-index: 2100; }
+        .btn-primary { background: var(--brand-blue); color: white !important; padding: 1rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: 0.3s; display: inline-flex; justify-content: center; align-items: center; border: none; cursor: pointer; text-align: center; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(63, 178, 193, 0.3); background: var(--brand-blue-dark); }
+        .btn-outline { background: transparent; color: var(--brand-blue); padding: 1rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; border: 2px solid var(--brand-blue); transition: 0.3s; display: inline-flex; justify-content: center; align-items: center; text-align: center; }
+        .btn-outline:hover { background: var(--brand-blue); color: white; transform: translateY(-2px); }
+
+        /* =========================================================
+           PAGE STYLES
+           ========================================================= */
+        .section-padding { padding: 6rem 8%; width: 100%; box-sizing: border-box; }
+        .page-header { background: var(--brand-light); padding: 8rem 8% 5rem; text-align: center; }
+        .page-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: var(--brand-dark); }
+        .page-header h1 span { color: var(--brand-blue); }
+        .page-header p { font-size: 1.15rem; color: var(--text-body); max-width: 800px; margin: 1.5rem auto 2.5rem; line-height: 1.7; }
+
+        .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .approach-img { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .approach-img img { width: 100%; height: 500px; object-fit: cover; transition: transform 0.6s var(--ease-out); }
+        .approach-img:hover img { transform: scale(1.05); }
+
+        .section-title { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--brand-dark); line-height: 1.2; }
+        .section-title span { color: var(--brand-blue); }
+        .section-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        /* Added Styles for Checkmark Lists */
+        .feature-list { list-style: none; padding: 0; margin: 0; }
+        .feature-list li { position: relative; padding-left: 2.5rem; margin-bottom: 1.2rem; font-size: 1.1rem; line-height: 1.6; color: var(--text-body); }
+        .feature-list li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 3px; color: var(--brand-blue); font-size: 1.2rem; }
+        .feature-list-white li { color: white; }
+        .feature-list-white li::before { color: white; opacity: 0.9; }
+
+        .journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 4rem; }
+        .journey-card { background: white; padding: 3rem; border-radius: 24px; border: 1px solid #f0f0f0; transition: all 0.4s var(--ease-out); display: flex; flex-direction: column; }
+        .journey-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--brand-blue); }
+        .journey-icon { width: 60px; height: 60px; background: var(--brand-light); color: var(--brand-blue); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .journey-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .journey-card p { color: var(--text-body); line-height: 1.6; flex-grow: 1; margin-bottom: 2rem; }
+        .journey-link { font-weight: 700; color: var(--brand-blue); display: flex; align-items: center; gap: 0.5rem; }
+        .journey-link i { transition: transform 0.3s; }
+        .journey-link:hover i { transform: translateX(5px); }
+
+        .cta-banner { background: var(--brand-blue); color: white; padding: 5rem 8%; border-radius: 32px; text-align: center; margin: 4rem 8%; position: relative; overflow: hidden; }
+        .cta-banner h2 { font-size: 3rem; margin-bottom: 1.5rem; }
+        .cta-banner p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto 3rem; }
+        .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-banner .btn-white { background: white; color: var(--brand-blue); padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; transition: 0.3s; }
+        .cta-banner .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .cta-banner .btn-outline-white { border: 2px solid white; color: white; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; transition: 0.3s; }
+        .cta-banner .btn-outline-white:hover { background: white; color: var(--brand-blue); }
+
+        /* =========================================================
+           RE-UPDATED FOOTER STYLES (MOCKUP ADJUSTMENTS)
+           ========================================================= */
+        footer { 
+            background: #0f0f0f; /* Deep neutral black */
+            color: white; 
+            padding: 5rem 8% 2rem; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .footer-logo-wrap { margin-bottom: 3rem; }
+        .footer-logo-wrap img { height: 65px; width: auto; filter: brightness(1.1); }
+        
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 4rem; }
+        
+        .footer-col h4 { 
+            font-size: 1.15rem; 
+            margin-bottom: 1.8rem; 
+            font-weight: 700; 
+            color: var(--brand-blue); /* Headings in blue as requested */
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col ul li { margin-bottom: 0.9rem; color: rgba(255,255,255,0.8); }
+        
+        .footer-col ul li a { 
+            color: rgba(255,255,255,0.7); 
+            transition: 0.4s var(--ease-out); 
+            font-size: 0.95rem; 
+            display: inline-block; 
+            position: relative;
+        }
+        .footer-col ul li a:hover { 
+            color: var(--brand-blue); /* Link hover in blue */
+            transform: translateX(8px); 
+        }
+
+        .footer-bottom { 
+            border-top: 1px solid rgba(255,255,255,0.08); 
+            padding-top: 2rem; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: rgba(255,255,255,0.4); 
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================================
+           RESPONSIVE FIXES
+           ========================================================= */
+        @media (max-width: 992px) {
+            .approach-grid, .journey-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .approach-img img { height: 400px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .header-cta { display: none; }
+            
+            .nav-links {
+                position: fixed; 
+                top: 0; 
+                right: -100%; 
+                width: 100%; 
+                height: 100vh; 
+                background: white;
+                display: flex; 
+                flex-direction: column; 
+                justify-content: flex-start; 
+                align-items: flex-start;
+                padding: 6rem 5% 4rem; 
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: -15px 0 40px rgba(0,0,0,0.1); 
+                z-index: 2000; 
+                overflow-y: auto;
+                box-sizing: border-box;
+            }
+            .nav-links.active { right: 0; }
+            
+            .nav-links > a, .nav-item-wrap { 
+                width: 100%; 
+                margin: 0; 
+                height: auto; 
+                display: block;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            .nav-links > a, .nav-item-wrap > a { 
+                padding: 1.2rem 0; 
+                font-size: 1.4rem; 
+                font-weight: 700; 
+                width: 100%; 
+                color: var(--brand-dark);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0;
+            }
+            
+            .nav-item-wrap .dropdown-chevron {
+                font-size: 1rem;
+                transition: transform 0.3s;
+            }
+
+            .dropdown-menu { 
+                position: static; 
+                transform: none !important; 
+                opacity: 0; 
+                visibility: hidden; 
+                box-shadow: none; 
+                background: var(--brand-light); 
+                border: none; 
+                padding: 0; 
+                max-height: 0; 
+                overflow: hidden; 
+                margin: 0; 
+                width: 100%; 
+                border-radius: 0; 
+                transition: all 0.3s ease-in-out;
+                pointer-events: none;
+            }
+            
+            .nav-item-wrap.mobile-expanded .dropdown-menu { 
+                opacity: 1;
+                visibility: visible;
+                max-height: 500px; 
+                padding: 0.5rem 0;
+                pointer-events: all;
+            }
+            
+            .nav-item-wrap.mobile-expanded .dropdown-chevron {
+                transform: rotate(180deg);
+                color: var(--brand-blue);
+            }
+
+            .dropdown-menu a {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+                background: transparent;
+            }
+            
+            .dropdown-menu a:last-child {
+                border-bottom: none;
+            }
+
+            /* Nested Flyout Mobile Adjustments */
+            .flyout-menu {
+                position: static;
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                box-shadow: none;
+                background: rgba(0,0,0,0.02);
+                border: none;
+                pointer-events: all;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+                backdrop-filter: none;
+            }
+            .dropdown-item-wrap.mobile-inner-expanded .flyout-menu {
+                max-height: 600px;
+                padding-bottom: 0.5rem;
+            }
+            .dropdown-item-wrap.mobile-inner-expanded > .has-flyout > i {
+                transform: rotate(90deg);
+                color: var(--brand-blue);
+            }
+            .dropdown-menu .has-flyout > i {
+                position: absolute;
+                right: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 0.8rem;
+                pointer-events: none;
+            }
+
+            /* Add the Book Now button into the mobile menu */
+            .nav-links .mobile-only-btn { 
+                display: flex; 
+                width: 100%; 
+                margin-top: 2rem;
+                justify-content: flex-start;
+            }
+
+            .nav-links .mobile-only-btn .btn-primary {
+                color: white !important;
+                background: var(--brand-blue);
+            }
+
+            .active-link::after {
+                display: none; /* Remove line underline on mobile for cleaner look */
+            }
+            .active-link {
+                color: var(--brand-blue) !important;
+            }
+
+            .cta-banner h2 { font-size: 2.2rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-root">
+        
+        <header id="navbar">
+            <a href="index.html" class="brand-logo">
+                <img src="./Assets/logo.png" alt="Optimum EP Logo">
+            </a>
+            <nav class="nav-links" id="nav-menu">
+                
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">About Us <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./our-approach.html">Our Approach</a>
+                        <a href="./faq.html">FAQ</a>
+                        <a href="./our-team.html">Our Team</a>
+                    </div>
+                </div>
+
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">How we can help <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./exercise-physiology.html">Exercise Physiology</a>
+                        
+                        <div class="dropdown-item-wrap">
+                            <a href="javascript:void(0)" class="has-flyout inner-toggle">Group Classes <i class="fa-solid fa-chevron-right"></i></a>
+                            <div class="flyout-menu">
+                                <a href="./personal-training.html">Personal Training</a>
+                                <a href="./running-assessments.html">Running Assessments</a>
+                                <a href="./body-composition.html">Body Composition & Fitness Testing</a>
+                                <a href="./onero-strong-bones.html">Onero Strong Bones</a>
+                                <a href="./prostate-cancer-expo-program.html">Prostate Cancer ExPO Program</a>
+                                <a href="./diabetes-education.html">Diabetes Education</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">Classes <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./ep-group.html">EP Group</a>
+                        <a href="./onerostrongbones.html">Onero Strong Bones</a>
+                        <a href="./strength-testing.html">Strength Testing</a>
+                        <a href="./timetable.html">Timetable</a>
+                    </div>
+                </div>
+
+                <a href="./gym.html">Gym</a>
+                <a href="./blog.html">Blog</a>
+                <a href="./contact.html">Contact</a>
+                <a href="./referral.html">Referrals</a>
+                <div class="mobile-only-btn">
+                    <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" class="btn-primary" style="width: 100%;">Book Now</a>
+                </div>
+
+                
+            </nav>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                
+                <div class="mobile-toggle" id="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="fade-up">
+                    <h1>Strength <span>Testing</span></h1>
+                    <p>Safely measure your strength and progress under the expert guidance of an Exercise Physiologist.</p>
+                </div>
+            </div>
+
+            <!-- EP Group Main Intro -->
+            <section id="ep-intro" class="section-padding">
+                <div class="approach-grid">
+                    <div class="approach-img fade-up">
+                        <!-- Placeholder representing the image used in your design -->
+                        <img src="https://fitnesscfgyms.com/stcloudfl/wp-content/uploads/sites/2/2024/10/shutterstock_2202091595.jpg" alt="exercising">
+                    </div>
+                    <div class="fade-up">
+                        <h2 class="section-title"><span>Strength</span> Testing</h2>
+                        <p class="section-text">These sessions are a little different from our usual classes and focus on testing your strength in one specific lift — generally the deadlift, back squat, or overhead press, but can be adapted to one of your regular gym exercises. You will choose one strength assessment for the session, and that is where our full focus will be. These are undertaken once every 3 months.</p>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                            <a href="tel:0888730628" class="btn-primary">Call to book</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Who is this for? (Blue Background) -->
+            <section class="section-padding" style="background: var(--brand-blue); color: white;">
+                <div class="fade-up" style="max-width: 900px; margin: 0 auto;">
+                    <h2 style="color: white; margin-bottom: 2.5rem; text-align: center; font-size: 2.5rem;">This Class is for you if ...</h2>
+                    <ul class="feature-list feature-list-white">
+                        <li>You want to safely test your strength in a specific lift under the guidance of an Exercise Physiologist</li>
+                        <li>You would like to find out your 1-repetition maximum, or 3-repetition maximum if that is more appropriate for you</li>
+                        <li>You want the reassurance of strict testing protocols and close supervision to ensure safety throughout the session</li>
+                        <li>You are curious to see just how strong you are</li>
+                        <li>You want to better understand the right training loads to help support strength and bone health</li>
+                        <li>You are looking for a structured and evidence-based way to measure your progress in lifting</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Final CTA -->
+            <div class="cta-banner fade-up">
+                <h2>Book your strength test</h2>
+                <div class="cta-btns">
+                    <a href="tel:0888730628" class="btn-white">Call to Book</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-logo-wrap">
+                <img src="./Assets/logo1.png" alt="Optimum EP Logo">
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Bookings</a></li>
+                        <li><a href="index.html">Classes</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="our-approach.html">Our Approach</a></li>
+                        <li><a href="our-team.html">Meet our team</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="faq.html">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our locations</h4>
+                    <ul>
+                        <li><a href="#">Clare</a></li>
+                        <li><a href="#">Balaklava</a></li>
+                        <li><a href="#">Eudunda</a></li>
+                        <li><a href="#">Home Visits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Details</h4>
+                    <ul>
+                        <li><a href="#">Phone: 08 8873 0628</a></li>
+                        <li><a href="#">Fax: 8121 6139</a></li>
+                        <li><a href="#">Email Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Optimum Exercise Physiology. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.fromTo(entry.target, 
+                            { y: 40, opacity: 0 }, 
+                            { y: 0, opacity: 1, duration: 1, ease: "power2.out" }
+                        );
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        }
+
+        // Navigation Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            const isActive = navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars', !isActive);
+            icon.classList.toggle('fa-xmark', isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        });
+
+        // Mobile Dropdowns
+        document.querySelectorAll('.nav-item-wrap > a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 768 && link.classList.contains('mobile-dropdown-toggle')) {
+                    e.preventDefault();
+                    const wrap = link.parentElement;
+                    const isExpanded = wrap.classList.contains('mobile-expanded');
+                    
+                    // Collapse others
+                    document.querySelectorAll('.nav-item-wrap').forEach(other => {
+                        if(other !== wrap) other.classList.remove('mobile-expanded');
+                    });
+                    
+                    // Toggle current
+                    wrap.classList.toggle('mobile-expanded', !isExpanded);
+                }
+            });
+        });
+
+        // Inner toggle for flyout items on mobile
+        document.querySelectorAll('.inner-toggle').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const wrap = link.parentElement;
+                    wrap.classList.toggle('mobile-inner-expanded');
+                }
+            });
+        });
+
+        window.onload = initAnimations;
+    </script>
+</body>
+</html>

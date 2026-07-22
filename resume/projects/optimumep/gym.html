@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimum EP | Gym</title>
+    <meta name="description" content="Exercise in a safe, clinical, and welcoming gym environment. Access personalized programs, flexible visits, and expert support at Optimum EP.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        /* =========================================================
+           VARIABLES & CORE
+           ========================================================= */
+        :root {
+            --brand-blue: #33aad3; /* Matches the teal/blue from mockups */
+            --brand-blue-dark: #258db1;
+            --brand-dark: #2a2a2a;
+            --brand-darker: #1a1a1a;
+            --brand-light: #f5f7f9;
+            --brand-white: #ffffff;
+            --text-body: #4a4a4a;
+            --text-muted: #717171;
+            
+            --bg-deep: #0b0b1a;
+            --card-navy: #111126;
+            --accent-purple: #7c5dfa;
+            --accent-blue: #3b82f6;
+            --error-red: #ef4444;
+
+            /* New Variables for updated section */
+            --optimum-cyan: #3fb2c1;
+            --optimum-light: #f5f7f9;
+            --optimum-dark: #2a2a2a;
+            --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            color: var(--brand-dark);
+            background-color: var(--brand-light);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; margin: 0; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        img { max-width: 100%; display: block; }
+        ul { line-height: 1.6; }
+
+        /* =========================================================
+           NAVIGATION & APP STRUCTURE
+           ========================================================= */
+        #app-root { display: flex; opacity: 1; width: 100%; min-height: 100vh; flex-direction: column;}
+        .page-view { display: none; flex: 1; }
+        .page-view.active { display: block; }
+        
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.8rem 5%; background: white; position: fixed; top: 0; width: 100%;
+            box-sizing: border-box; z-index: 1000; color: var(--brand-dark);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        
+        .brand-logo img { height: 50px; width: auto; transition: opacity 0.4s ease; }
+        
+        /* UPDATED NAV LINKS FOR DROPDOWNS */
+        .nav-links { display: flex; align-items: center; }
+        .nav-links > a, .nav-item-wrap > a { margin: 0 1.2rem; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; color: inherit; display: flex; align-items: center; gap: 0.4rem; position: relative; }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--brand-blue) !important; }
+        
+        /* DROPDOWN DESKTOP STYLES */
+        .nav-item-wrap { position: relative; display: flex; align-items: center; height: 60px; }
+        .dropdown-chevron { font-size: 0.7rem; opacity: 0.6; transition: transform 0.3s var(--ease-out); }
+        .nav-item-wrap:hover .dropdown-chevron { transform: rotate(180deg); color: var(--brand-blue); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            padding: 1rem 0;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 1001;
+            pointer-events: none;
+        }
+        
+        .nav-item-wrap:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        .dropdown-menu a {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--brand-dark) !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s var(--ease-out);
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(51, 170, 211, 0.06);
+            color: var(--brand-blue) !important;
+            border-left-color: var(--brand-blue);
+            padding-left: 1.8rem;
+        }
+
+        /* --- ACTIVE LINK STYLES --- */
+        .nav-item-wrap > a.active-link, .nav-links > a.active-link {
+            color: var(--brand-blue) !important;
+        }
+        .nav-item-wrap > a.active-link::after, .nav-links > a.active-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--brand-blue);
+            border-radius: 2px;
+        }
+        .dropdown-menu a.active-link, .flyout-menu a.active-link {
+            background: rgba(51, 170, 211, 0.06);
+            color: var(--brand-blue) !important;
+            border-left-color: var(--brand-blue);
+            padding-left: 1.8rem;
+        }
+
+        /* --- NESTED FLYOUT STYLES (NEW) --- */
+        .dropdown-item-wrap {
+            position: relative;
+        }
+        
+        .flyout-menu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            padding: 1rem 0;
+            border-radius: 16px;
+            box-shadow: 15px 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s var(--ease-out);
+            z-index: 1002;
+            pointer-events: none;
+        }
+
+        .dropdown-item-wrap:hover .flyout-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            pointer-events: all;
+        }
+
+        .flyout-menu a {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.85rem;
+            border-left: 3px solid transparent;
+            transition: all 0.3s var(--ease-out);
+        }
+        .flyout-menu a:hover {
+            background: rgba(51, 170, 211, 0.06);
+            color: var(--brand-blue) !important;
+            border-left-color: var(--brand-blue);
+            padding-left: 1.8rem;
+        }
+
+        .dropdown-menu .has-flyout > i {
+            font-size: 0.6rem;
+            opacity: 0.5;
+            transition: transform 0.3s var(--ease-out);
+        }
+        .dropdown-item-wrap:hover .has-flyout > i {
+            transform: translateX(3px);
+            color: var(--brand-blue);
+            opacity: 1;
+        }
+
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: inherit; z-index: 2100; }
+        
+        .btn-primary {
+            background: var(--brand-blue); color: white !important; padding: 1rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+            transition: 0.3s; display: inline-flex; justify-content: center; align-items: center; border: none; cursor: pointer; text-align: center; font-family: 'Inter', sans-serif;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(63, 178, 193, 0.3); background: var(--brand-blue-dark); }
+        
+        .btn-outline {
+            background: transparent; color: var(--brand-white); padding: 1rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+            border: 2px solid var(--brand-white); transition: 0.3s; display: inline-flex; justify-content: center; align-items: center; text-align: center;
+        }
+        .btn-outline:hover { background: var(--brand-blue); color: white; transform: translateY(-2px); border-color: var(--brand-white); }
+
+        .nav-overlay {
+            display: none;
+        }
+
+        .nav-links .mobile-only-btn { display: none; }
+
+        /* =========================================================
+           HOME PAGE COMPONENTS
+           ========================================================= */
+        .hero {
+            position: relative; height: 100vh; width: 100%; display: flex; 
+            align-items: center; justify-content: center; 
+            text-align: center; 
+            padding: 0 8%; color: white; overflow: hidden; background: var(--brand-darker); box-sizing: border-box;
+        }
+        .hero-video-bg { 
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; 
+            width: auto; height: auto; z-index: 0; transform: translate(-50%, -50%); 
+            object-fit: cover; opacity: 0.6;
+        }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1; }
+        .hero-content { max-width: 800px; z-index: 2; position: relative; }
+        .hero-content h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; }
+        .hero-content h1 span { color: var(--brand-blue); }
+        .hero-content p { font-size: 1.15rem; color: rgba(255,255,255,0.9); margin-bottom: 2.5rem; line-height: 1.6; margin-left: auto; margin-right: auto; max-width: 600px; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+        .section-padding { padding: 6rem 8%; width: 100%; box-sizing: border-box; }
+        
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        
+        .intro-img { overflow: hidden; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .intro-img img { width: 100%; transition: transform 0.6s var(--ease-out); }
+        .intro-img:hover img { transform: scale(1.1); }
+
+        .section-title { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--brand-dark); line-height: 1.2; }
+        .section-title span { color: var(--brand-blue); }
+        .section-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        /* =========================================================
+           WHAT WE OFFER SECTION
+           ========================================================= */
+        .what-we-offer { background: white; text-align: center; }
+        .offer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 2.5rem; 
+            margin-top: 4rem; 
+        }
+        .offer-card { 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
+            background: white; 
+            display: flex; 
+            flex-direction: column;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+            border: 1px solid #f0f0f0;
+        }
+        .offer-image-wrapper {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+        .offer-card img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        .offer-card-content { 
+            background: white; 
+            color: var(--brand-dark); 
+            padding: 2rem 1.5rem; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            border-top: 4px solid var(--brand-blue);
+        }
+        .offer-card-content h3 { 
+            font-size: 1.35rem; 
+            font-weight: 700; 
+            text-align: center;
+            margin: 0;
+            color: var(--brand-dark);
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(63, 178, 193, 0.15);
+        }
+        .offer-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* =========================================================
+           REPLACED WHY SECTION STYLES
+           ========================================================= */
+        #why { background: #fff; padding: 6rem 8%; }
+        .section-tag { color: var(--brand-blue); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; display: block; margin-bottom: 0.5rem; }
+        .why-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 25px; 
+            margin-top: 50px; 
+        }
+        .why-item { 
+            padding: 3rem 2rem; 
+            border-radius: 24px; 
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            transition: all 0.5s var(--ease-out); 
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .why-icon-box {
+            width: 70px;
+            height: 70px;
+            background: var(--optimum-light);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--optimum-cyan);
+            font-size: 1.8rem;
+            transition: 0.5s var(--ease-out);
+        }
+        .why-item h3 { 
+            color: var(--optimum-dark); 
+            font-size: 1.25rem; 
+            margin-bottom: 1rem; 
+            font-weight: 800; 
+            font-family: 'Outfit', sans-serif;
+        }
+        .why-item p { 
+            font-size: 0.95rem; 
+            color: #666; 
+            line-height: 1.6; 
+            margin: 0; 
+        }
+        .why-item:hover { 
+            transform: translateY(-12px); 
+            border-color: var(--optimum-cyan);
+            box-shadow: 0 20px 40px rgba(63, 193, 219, 0.15);
+        }
+        .why-item:hover .why-icon-box {
+            background: var(--optimum-cyan);
+            color: #fff;
+            transform: rotateY(180deg);
+        }
+        .m-reveal { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* =========================================================
+           UPDATED STYLISH SAFE EXPERT SECTION
+           ========================================================= */
+        .safe-expert-stylish {
+            padding: 6rem 8%;
+            background: var(--brand-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .safe-container {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            color: white;
+        }
+        .safe-text-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            width: fit-content;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .safe-text-col h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.1;
+            font-weight: 700;
+        }
+        .safe-text-col p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+        .mini-cards {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .mini-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .mini-card i { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .mini-card span { font-weight: 700; font-size: 1rem; }
+        .mini-card small { opacity: 0.7; font-size: 0.8rem; }
+
+        .safe-img-col {
+            position: relative;
+        }
+        .safe-img-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+        .safe-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        .safe-img-wrapper:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 992px) {
+            .safe-container { grid-template-columns: 1fr; gap: 3rem; }
+            .safe-text-col { text-align: center; align-items: center; }
+            .safe-text-col p { margin: 0 auto; }
+            .mini-cards { width: 100%; }
+
+            /* Nested Flyout Mobile Adjustments */
+            .flyout-menu {
+                position: static;
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                box-shadow: none;
+                background: rgba(0,0,0,0.02);
+                border: none;
+                pointer-events: all;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+                backdrop-filter: none;
+            }
+            .dropdown-item-wrap.mobile-inner-expanded .flyout-menu {
+                max-height: 600px;
+                padding-bottom: 0.5rem;
+            }
+            .dropdown-item-wrap.mobile-inner-expanded > .has-flyout > i {
+                transform: rotate(90deg);
+                color: var(--brand-blue);
+            }
+            .dropdown-menu .has-flyout > i {
+                position: absolute;
+                right: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 0.8rem;
+                pointer-events: none;
+            }
+        }
+
+        /* =========================================================
+           OTHER STYLES
+           ========================================================= */
+        /* Updated Page Header to match exercise-physiology.html style */
+        .page-header { background: #ffffff; padding: 6.5rem 8% 1rem; text-align: center; color: var(--brand-dark); margin-top: 30px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .page-header h1 { font-size: 3.3rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.02em; line-height: 1.1; }
+        .page-header h1 .highlight { color: var(--brand-blue); }
+        .page-header p { font-size: 1.2rem; color: var(--text-body); max-width: 850px; margin: 0 auto 2.5rem; line-height: 1.6; font-family: 'Inter', sans-serif; font-weight: 400; }
+        
+        .content-container { max-width: 1000px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .blue-banner { background: var(--brand-blue); color: white; padding: 3rem; border-radius: 12px; margin: 3rem 0; text-align: center; }
+        .blue-banner h2 { margin-bottom: 2rem; font-size: 2rem; }
+        
+        .blue-box { background: var(--brand-blue); color: white; padding: 3rem; border-radius: 12px; margin: 2rem 0; }
+        .blue-box h3 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+        .blue-box p { margin-bottom: 1rem; line-height: 1.6; }
+        .blue-box ul { padding-left: 1.5rem; margin-bottom: 0; }
+        .blue-box li { margin-bottom: 1rem; font-size: 1.05rem; }
+        
+        .info-box { background: white; padding: 3rem; border-radius: 12px; border: 1px solid #eaeaea; margin: 2rem 0; }
+        .info-box h3 { font-size: 2rem; margin-bottom: 1.5rem; color: var(--brand-dark); text-align: center;}
+        .info-box p { margin-bottom: 1rem; line-height: 1.6; color: var(--text-body); }
+        .info-box ul { padding-left: 1.5rem; }
+        .info-box li { margin-bottom: 0.8rem; font-size: 1.05rem; color: var(--text-body); }
+
+        .class-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 3rem; }
+        .class-intro-grid img { border-radius: 12px; height: auto; min-height: 400px; width: 100%; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .class-intro-text h2 { font-size: 2.2rem; margin-bottom: 1.5rem; color: var(--brand-dark); }
+        .class-intro-text h2 span { color: var(--brand-blue); }
+        .class-intro-text p { font-size: 1.05rem; line-height: 1.7; color: var(--text-body); margin-bottom: 1rem; }
+
+        .booking-banner { background: var(--brand-blue); color: white; padding: 3rem 2rem; text-align: center; border-radius: 12px; transition: 0.3s; }
+        .booking-banner h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+        .booking-banner p { margin-bottom: 1.5rem; line-height: 1.6; }
+        .booking-link { font-weight: 600; font-size: 1.1rem; text-decoration: underline; color: white; cursor: pointer; display: inline-block; margin-top: 1rem; }
+        .booking-link:hover { opacity: 0.8; }
+
+        .classes-options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+        .class-option-card { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; cursor: pointer; transition: 0.3s; }
+        .class-option-card:hover { background: white; color: var(--brand-blue); transform: translateY(-5px); }
+        .class-option-card h4 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+        
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 4rem 0; }
+        .step-card { text-align: center; background: white; padding: 2rem; border-radius: 12px; border: 1px solid #eee; }
+        .step-card i { font-size: 2.5rem; color: var(--brand-blue); margin-bottom: 1rem; }
+        .step-card h4 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--brand-dark); }
+        .step-card p { font-size: 0.95rem; color: var(--text-body); }
+
+        .image-banner { position: relative; height: 300px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; margin: 4rem 0; border-radius: 12px; overflow: hidden;}
+        .image-banner img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .image-banner .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2; }
+        .image-banner-content { z-index: 3; position: relative; padding: 0 2rem; }
+        .image-banner h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+
+        .faq-section { background: white; padding: 4rem 8%; width: 100%; box-sizing: border-box; }
+        .faq-section h2 { text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--brand-dark); }
+        .faq-section h2 span { color: var(--brand-blue); }
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 0; }
+        .faq-header {
+            width: 100%; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; background: none; border: none; color: inherit; text-align: left; font-size: 1.1rem; font-weight: 600; transition: color 0.3s;
+        }
+        .faq-header:hover { color: var(--brand-blue); }
+        .faq-header h4 { margin: 0; font-family: 'Inter', sans-serif; flex-grow: 1; }
+        .faq-icon { font-size: 1.2rem; margin-left: 1rem; transition: transform 0.3s ease; color: var(--brand-blue); }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 400px ease, padding 0.3s ease; }
+        .faq-content p { padding-bottom: 1.5rem; margin: 0; color: var(--text-body); line-height: 1.6; font-size: 1rem; white-space: pre-line; }
+        .faq-item.active .faq-content { max-height: 400px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        .testimonials { background: var(--brand-light); padding: 5rem 8%; text-align: center; }
+        .testimonials h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .testimonials h2 span { color: var(--brand-blue); }
+        .testimonials p.sub { color: var(--brand-blue); margin-bottom: 3rem; font-weight: 500; }
+        .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .test-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; }
+        .test-card .stars { color: #f59e0b; margin-bottom: 1rem; font-size: 0.9rem; }
+        .test-card p { font-size: 0.95rem; line-height: 1.6; color: var(--text-body); margin-bottom: 1.5rem; font-style: italic; }
+        .test-card strong { display: block; font-size: 0.95rem; color: var(--brand-dark); }
+
+        /* =========================================================
+           RE-UPDATED FOOTER STYLES (MOCKUP ADJUSTMENTS)
+           ========================================================= */
+        footer { 
+            background: #0f0f0f; /* Deep neutral black */
+            color: white; 
+            padding: 5rem 8% 2rem; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .footer-logo-wrap { margin-bottom: 3rem; }
+        .footer-logo-wrap img { height: 65px; width: auto; filter: brightness(1.1); }
+        
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 4rem; }
+        
+        .footer-col h4 { 
+            font-size: 1.15rem; 
+            margin-bottom: 1.8rem; 
+            font-weight: 700; 
+            color: var(--brand-blue); /* Headings in blue as requested */
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col ul li { margin-bottom: 0.9rem; color: rgba(255,255,255,0.8); }
+        
+        .footer-col ul li a { 
+            color: rgba(255,255,255,0.7); 
+            transition: 0.4s var(--ease-out); 
+            font-size: 0.95rem; 
+            display: inline-block; 
+            position: relative;
+        }
+        .footer-col ul li a:hover { 
+            color: var(--brand-blue); /* Link hover in blue */
+            transform: translateX(8px); 
+        }
+
+        .footer-bottom { 
+            border-top: 1px solid rgba(255,255,255,0.08); 
+            padding-top: 2rem; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: rgba(255,255,255,0.4); 
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================================
+           RESPONSIVE (MODERN MOBILE NAV UPDATES)
+           ========================================================= */
+        @media (max-width: 1024px) {
+            .why-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 992px) {
+            .intro-grid, .class-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .offer-grid, .steps-grid, .test-grid { grid-template-columns: repeat(2, 1fr); }
+            .classes-options-grid { grid-template-columns: 1fr; }
+            
+            .nav-item-wrap { height: auto; width: 100%; display: block; position: relative; }
+            .dropdown-menu { 
+                position: static; 
+                transform: none !important; 
+                opacity: 1 !important; 
+                visibility: visible !important; 
+                box-shadow: none; 
+                background: rgba(0,0,0,0.02); 
+                border: none; 
+                pointer-events: all;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+                backdrop-filter: none;
+            }
+            .nav-item-wrap.mobile-expanded .dropdown-menu {
+                max-height: 1200px;
+                padding-bottom: 0.5rem;
+            }
+            .nav-item-wrap.mobile-expanded .dropdown-chevron {
+                transform: rotate(180deg);
+                color: var(--brand-blue);
+            }
+            .nav-item-wrap.mobile-expanded > a {
+                color: var(--brand-blue) !important;
+            }
+            .nav-item-wrap .dropdown-chevron {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 0.9rem;
+                pointer-events: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; transition: color 0.3s ease; }
+            
+            .nav-links.active ~ div .mobile-toggle i.fa-xmark {
+                color: var(--brand-blue);
+            }
+
+            .header-cta { display: none; }
+
+            .nav-links {
+                position: fixed; 
+                top: 0; 
+                right: -110%; 
+                width: 75%; 
+                height: 100vh; 
+                background: white;
+                display: flex; 
+                flex-direction: column; 
+                justify-content: flex-start; 
+                align-items: flex-start; 
+                padding: 6rem 2rem; 
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
+                box-shadow: -15px 0 40px rgba(0,0,0,0.1);
+                z-index: 2000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .nav-links > a, .nav-item-wrap > a { 
+                margin: 0.5rem 0; 
+                padding: 1rem 0;
+                font-size: 1.3rem; 
+                font-weight: 700; 
+                color: var(--brand-dark) !important;
+                font-family: 'Outfit', sans-serif;
+                width: 100%;
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            
+            .dropdown-menu a {
+                padding: 0.8rem 1rem;
+                font-size: 1.05rem;
+                font-weight: 600;
+                color: var(--text-body) !important;
+                border-left: 3px solid transparent;
+                border-bottom: none;
+                justify-content: flex-start;
+                gap: 0.5rem;
+            }
+            .dropdown-menu a:hover { 
+                padding-left: 1.2rem; 
+                background: rgba(51, 170, 211, 0.05); 
+                border-left-color: var(--brand-blue);
+            }
+            .dropdown-menu a.active-link, .flyout-menu a.active-link {
+                padding-left: 1.2rem;
+            }
+            .nav-links > a.active-link::after, .nav-item-wrap > a.active-link::after {
+                display: none;
+            }
+
+            .nav-links .mobile-only-btn { 
+                display: flex; 
+                width: 100%; 
+                margin-top: 2rem;
+                justify-content: flex-start;
+            }
+
+            .nav-links .mobile-only-btn .btn-primary {
+                color: white !important;
+                background: var(--brand-blue);
+            }
+
+            .hero {
+                height: 100vh;
+                padding: 0 5%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            .hero-content {
+                max-width: 100%;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+                max-width: 90%;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .hero-btns .btn-primary,
+            .hero-btns .btn-outline {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .intro-btns {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+                max-width: 320px;
+                margin: 2rem auto 0;
+            }
+            .intro-btns .btn-primary, 
+            .intro-btns .btn-outline {
+                width: 100%;
+                box-sizing: border-box;
+                min-width: 0 !important;
+            }
+
+            .offer-grid, .steps-grid, .test-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .faq-section h2 { font-size: 2rem; }
+            .why-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <div id="app-root">
+        
+        <header id="navbar">
+            <a href="index.html" class="brand-logo">
+                <img id="brand-logo-img" src="./Assets/logo.png" alt="Optimum EP Logo">
+            </a>
+            <nav class="nav-links" id="nav-menu">
+                
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">About Us <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./our-approach.html">Our Approach</a>
+                        <a href="./faq.html">FAQ</a>
+                        <a href="./our-team.html">Our Team</a>
+                    </div>
+                </div>
+
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">How we can help <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./exercise-physiology.html">Exercise Physiology</a>
+                        
+                        <div class="dropdown-item-wrap">
+                            <a href="javascript:void(0)" class="has-flyout inner-toggle">Group Classes <i class="fa-solid fa-chevron-right"></i></a>
+                            <div class="flyout-menu">
+                                <a href="./personal-training.html">Personal Training</a>
+                                <a href="./running-assessments.html">Running Assessments</a>
+                                <a href="./body-composition.html">Body Composition & Fitness Testing</a>
+                                <a href="./onero-strong-bones.html">Onero Strong Bones</a>
+                                <a href="./prostate-cancer-expo-program.html">Prostate Cancer ExPO Program</a>
+                                <a href="./diabetes-education.html">Diabetes Education</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">Classes <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./ep-group.html">EP Group</a>
+                        <a href="./onerostrongbones.html">Onero Strong Bones</a>
+                        <a href="./strength-testing.html">Strength Testing</a>
+                        <a href="./timetable.html">Timetable</a>
+                    </div>
+                </div>
+
+                <a href="./gym.html">Gym</a>
+                <a href="./blog.html">Blog</a>
+                <a href="./contact.html">Contact</a>
+                <a href="./referral.html">Referrals</a>
+                <div class="mobile-only-btn">
+                    <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" class="btn-primary" style="width: 100%;">Book Now</a>
+                </div>
+
+                
+            </nav>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                
+                <div class="mobile-toggle" id="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+        <main id="view-service" class="page-view active">
+            <div class="page-header">
+                <h1><span class="highlight">Gym</span></h1>
+            </div>
+            
+            <div class="content-container fade-up">
+                <!-- SECTION 1: INTRO -->
+                <div class="class-intro-grid">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80" alt="Optimum Open Gym">
+                    <div class="class-intro-text">
+                        <h2>Optimum <span>Open Gym</span></h2>
+                        <p>Our gym is available for clients who want to complete their exercise program outside of group class times in a safe and private environment, with experts on hand. This is a great option for people who want extra flexibility with their training while still following a program designed specifically for their body, goals, and health needs. All gym users begin with an initial assessment with an Exercise Physiologist to make sure they are safe to exercise independently and to receive a personalised gym program. Your program can then be followed each visit using a paper copy or through our free app. With casual visits, discounted passes, and 3-month memberships available, Open Gym gives you the flexibility to exercise in a way that suits you.</p>
+                        
+                        <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" class="btn-primary" style="margin-top: 1rem;">Book your Initial Assessment</a>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: WHY USE OUR GYM -->
+                <div class="blue-box" style="text-align: left;">
+                    <p style="font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem;">Open Gym is for you if:</p>
+                    <ul>
+                        <li>You want the flexibility to exercise outside of scheduled class times</li> 
+                        <li>You would like to follow a personalised program designed by an Exercise Physiologist</li> 
+                        <li>You want to exercise in a safe, clinical, and welcoming gym environment</li> <li>You have health concerns, past injuries, or specific goals and want to know you are doing the right exercises for your body</li> 
+                        <li>You enjoy exercising independently, but still want the confidence of having a structured plan in place</li> 
+                        <li>You want the option of casual visits, discounted passes, or a membership to suit your routine</li>
+                    </ul>
+                </div>
+
+                <!-- SECTION 3: GYM FACILITIES -->
+                <div class="info-box">
+                    <h3 style="margin-bottom: 0.5rem;">Gym Facilities</h3>
+                    <p style="text-align: center; margin-bottom: 2.5rem;">Our gym is designed to cater for people of all fitness levels and abilities, with a wide range of equipment to support safe and effective exercise.</p>
+                    
+                    <h4 style="margin-top: 1.5rem; font-size: 1.25rem; color: var(--brand-blue); font-family: 'Outfit', sans-serif;">Cardio</h4>
+                    <p style="margin-bottom: 1.5rem;">Access a range of cardio equipment including treadmills, cross trainers, upright and recumbent bikes, seated arm cycles, seated x trainer, and Concept2 rower.</p>
+                    
+                    <h4 style="margin-top: 1.5rem; font-size: 1.25rem; color: var(--brand-blue); font-family: 'Outfit', sans-serif;">Pin-loaded and cable machines</h4>
+                    <p style="margin-bottom: 1.5rem;">Use an extensive range of resistance machines and cable equipment to support safe, full body strength training.</p>
+                    
+                    <h4 style="margin-top: 1.5rem; font-size: 1.25rem; color: var(--brand-blue); font-family: 'Outfit', sans-serif;">Free weights</h4>
+                    <p style="margin-bottom: 1rem;">Our free weights area includes dumbbells, barbells, kettlebells, benches, balls and much more.</p>
+                </div>
+
+                <!-- SECTION 4: GETTING STARTED / PAYMENT -->
+                <div class="blue-box" style="text-align: left;">
+                    <h3 style="text-align: left; font-size: 1.8rem; margin-bottom: 1rem;">Before you start</h3>
+                    <p>All gym users are required to complete an initial assessment with one of our Exercise Physiologists before accessing the gym. This allows us to ensure you are safe to exercise, understand your goals and any health considerations, and create an individualised gym program for you. Your program will then be available for you to follow at each session, either on paper or through our free app.</p>
+                    
+                    <h3 style="text-align: left; font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1rem;">Flexible payment options</h3>
+                    <p>We offer a range of options to suit how often you would like to attend:</p>
+                    <ul>
+                        <li>Pay as you go casual visits</li>
+                        <li>Discounted gym passes</li>
+                        <li>3-month memberships</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-logo-wrap">
+                <img src="./Assets/logo1.png" alt="Optimum EP Logo">
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="font-family: 'Inter';">Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Bookings</a></li>
+                        <li><a href="index.html">Classes</a></li>
+                        <li><a href="#">Class Timetable</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">How it works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="font-family: 'Inter';">About</h4>
+                    <ul>
+                        <li><a href="index.html#faq-section">What is Exercise Physiology</a></li>
+                        <li><a href="#">Meet our team</a></li>
+                        <li><a href="#">Our Clinic and Gym</a></li>
+                        <li><a href="index.html#faq-section">Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="font-family: 'Inter';">Our locations</h4>
+                    <ul>
+                        <li><a href="#">Clare</a></li>
+                        <li><a href="#">Balaklava</a></li>
+                        <li><a href="#">Eudunda</a></li>
+                        <li><a href="#">Home Visits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="font-family: 'Inter';">Contact Details</h4>
+                    <ul>
+                        <li><a href="#">Phone: 08 8873 0628</a></li>
+                        <li><a href="#">Fax: 8121 6139</a></li>
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">See our contact details</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Optimum Exercise Physiology. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ---------------------------------------------------------
+        // SPA ROUTER LOGIC
+        // ---------------------------------------------------------
+        function navigate(viewId) {
+            document.querySelectorAll('.page-view').forEach(page => {
+                page.classList.remove('active');
+            });
+            const viewElement = document.getElementById(viewId);
+            if(viewElement) {
+                viewElement.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            closeMobileNav();
+
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-link'));
+            const fadeUps = document.querySelectorAll(`#${viewId} .fade-up`);
+            fadeUps.forEach(el => {
+                gsap.fromTo(el, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", overwrite: "auto" });
+            });
+            
+            if(viewId === 'view-home') {
+                gsap.fromTo(".m-reveal", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, delay: 0.2 });
+            }
+        }
+
+        // ---------------------------------------------------------
+        // INITIALIZATION
+        // ---------------------------------------------------------
+        window.addEventListener('DOMContentLoaded', () => {
+            // Site is visible by default now.
+            gsap.from(".fade-in", { y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power2.out" });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.fromTo(entry.target, 
+                            { y: 50, opacity: 0 }, 
+                            { y: 0, opacity: 1, duration: 1, ease: "power2.out" }
+                        );
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.fade-up, .m-reveal').forEach(el => observer.observe(el));
+        });
+
+        // ---------------------------------------------------------
+        // MOBILE NAV LOGIC
+        // ---------------------------------------------------------
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navOverlay = document.getElementById('nav-overlay');
+
+        function toggleMobileNav() {
+            const isActive = navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            
+            if(isActive) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-xmark');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMobileNav() {
+            if(navMenu) navMenu.classList.remove('active');
+            document.querySelectorAll('.nav-item-wrap').forEach(w => w.classList.remove('mobile-expanded'));
+            document.querySelectorAll('.dropdown-item-wrap').forEach(w => w.classList.remove('mobile-inner-expanded'));
+            if(menuToggle) {
+                const icon = menuToggle.querySelector('i');
+                if(icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-xmark');
+                }
+            }
+            document.body.style.overflow = '';
+        }
+
+        if(menuToggle) menuToggle.addEventListener('click', toggleMobileNav);
+        if(navOverlay) navOverlay.addEventListener('click', closeMobileNav);
+
+        document.querySelectorAll('.nav-item-wrap > a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 992) {
+                    if (link.classList.contains('mobile-dropdown-toggle')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const wrap = link.parentElement;
+                        const wasExpanded = wrap.classList.contains('mobile-expanded');
+                        
+                        document.querySelectorAll('.nav-item-wrap').forEach(w => w.classList.remove('mobile-expanded'));
+                        
+                        if (!wasExpanded) {
+                            wrap.classList.add('mobile-expanded');
+                        }
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.inner-toggle').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const wrap = link.parentElement;
+                    wrap.classList.toggle('mobile-inner-expanded');
+                }
+            });
+        });
+
+        document.querySelectorAll('.dropdown-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (!link.classList.contains('inner-toggle') && navMenu && navMenu.classList.contains('active')) {
+                    closeMobileNav();
+                }
+            });
+        });
+
+        document.querySelectorAll('.nav-links > a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!link.classList.contains('mobile-dropdown-toggle')) {
+                    if (navMenu && navMenu.classList.contains('active')) {
+                        closeMobileNav();
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

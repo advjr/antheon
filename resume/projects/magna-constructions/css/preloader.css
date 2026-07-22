@@ -1,0 +1,74 @@
+/* ============================================================
+   BUILD PRELOADER
+   Shown briefly on page load before the site reveals - a hammer
+   "building" the house, in Magna's brand black + construction yellow.
+   ============================================================ */
+#site-content { display: none; opacity: 0; transition: opacity 0.6s ease; }
+#site-content.gw-visible { display: block; opacity: 1; }
+
+#buildPreloader {
+  --pl-bg: #0B0D0F;
+  --pl-yellow: #FFC72C;
+  position: fixed; inset: 0; z-index: 28000;
+  background: var(--pl-bg);
+  display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+#buildPreloader.fade-out { opacity: 0; }
+
+.preload-scene { position: relative; width: 140px; height: 140px; }
+.preload-house { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--pl-yellow); }
+.preload-hammer {
+  position: absolute; width: 54px; height: 54px; top: -8px; right: -2px;
+  color: var(--pl-yellow);
+  transform-origin: 78% 82%;
+  animation: plHammerSwing 1.15s ease-in-out infinite;
+}
+.preload-dust {
+  position: absolute; left: 58%; top: 34%; width: 24px; height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--pl-yellow), rgba(255,199,44,0) 70%);
+  transform: scale(0.4); opacity: 0;
+  animation: plDustPuff 1.15s ease-in-out infinite;
+}
+
+@keyframes plHammerSwing {
+  0%   { transform: rotate(-42deg); }
+  48%  { transform: rotate(-42deg); }
+  62%  { transform: rotate(10deg); }
+  72%  { transform: rotate(-8deg); }
+  84%  { transform: rotate(2deg); }
+  100% { transform: rotate(-42deg); }
+}
+@keyframes plHouseImpact {
+  0%, 58%  { transform: scale(1) translateY(0); }
+  63%      { transform: scale(0.97) translateY(1.5px); }
+  72%      { transform: scale(1.015) translateY(0); }
+  100%     { transform: scale(1) translateY(0); }
+}
+.preload-house { animation: plHouseImpact 1.15s ease-in-out infinite; }
+@keyframes plDustPuff {
+  0%, 60%   { opacity: 0; transform: scale(0.4); }
+  64%       { opacity: 0.9; transform: scale(1); }
+  78%, 100% { opacity: 0; transform: scale(1.7); }
+}
+
+.preload-track {
+  width: 180px; height: 3px; border-radius: 3px;
+  background: rgba(255,199,44,0.18); overflow: hidden;
+}
+.preload-bar {
+  width: 0%; height: 100%; border-radius: 3px;
+  background: var(--pl-yellow);
+  animation: plFillBar 2s linear forwards;
+}
+@keyframes plFillBar { from { width: 0%; } to { width: 100%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .preload-hammer, .preload-house, .preload-dust { animation: none; }
+  .preload-bar { animation-duration: .01ms; width: 100%; }
+}

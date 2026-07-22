@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Approach | Optimum Exercise Physiology</title>
+    <meta name="description" content="Learn about our clinical approach to movement and health at Optimum Exercise Physiology.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        /* =========================================================
+           VARIABLES & CORE
+           ========================================================= */
+        :root {
+            --brand-blue: #33aad3; 
+            --brand-blue-dark: #258db1;
+            --brand-dark: #2a2a2a;
+            --brand-darker: #1a1a1a;
+            --brand-light: #f5f7f9;
+            --brand-white: #ffffff;
+            --text-body: #4a4a4a;
+            --text-muted: #717171;
+            
+            --bg-deep: #0b0b1a;
+            --card-navy: #111126;
+            --accent-purple: #7c5dfa;
+            --accent-blue: #3b82f6;
+            --error-red: #ef4444;
+
+            --optimum-cyan: #3fb2c1;
+            --optimum-light: #f5f7f9;
+            --optimum-dark: #2a2a2a;
+            --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+            
+            --nav-height: 80px; 
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            color: var(--brand-dark);
+            background-color: var(--brand-white);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; margin: 0; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        img { max-width: 100%; display: block; }
+
+        /* =========================================================
+           NAVIGATION & APP STRUCTURE (Copied from index.html)
+           ========================================================= */
+        #app-root { width: 100%; min-height: 100vh; display: flex; flex-direction: column;}
+        
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.8rem 5%; background: white; position: fixed; top: 0; width: 100%;
+            height: var(--nav-height);
+            box-sizing: border-box; z-index: 1000; color: var(--brand-dark);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        
+        .brand-logo img { height: 50px; width: auto; transition: opacity 0.4s ease; }
+        
+        .nav-links { display: flex; align-items: center; }
+        .nav-links > a, .nav-item-wrap > a { margin: 0 1.2rem; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; color: inherit; display: flex; align-items: center; gap: 0.4rem; position: relative; }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--brand-blue) !important; }
+        
+        .nav-item-wrap { position: relative; display: flex; align-items: center; height: 60px; }
+        .dropdown-chevron { font-size: 0.7rem; opacity: 0.6; transition: transform 0.3s var(--ease-out); }
+        .nav-item-wrap:hover .dropdown-chevron { transform: rotate(180deg); color: var(--brand-blue); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            padding: 1rem 0;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 1001;
+            pointer-events: none;
+        }
+        
+        .nav-item-wrap:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        .dropdown-menu a {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--brand-dark) !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s var(--ease-out);
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(51, 170, 211, 0.06);
+            color: var(--brand-blue) !important;
+            border-left-color: var(--brand-blue);
+            padding-left: 1.8rem;
+        }
+
+        .dropdown-item-wrap {
+            position: relative;
+        }
+        
+        .flyout-menu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            padding: 1rem 0;
+            border-radius: 16px;
+            box-shadow: 15px 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s var(--ease-out);
+            z-index: 1002;
+            pointer-events: none;
+        }
+
+        .dropdown-item-wrap:hover .flyout-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            pointer-events: all;
+        }
+
+        .flyout-menu a {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .dropdown-menu .has-flyout > i {
+            font-size: 0.6rem;
+            opacity: 0.5;
+            transition: transform 0.3s var(--ease-out);
+        }
+        .dropdown-item-wrap:hover .has-flyout > i {
+            transform: translateX(3px);
+            color: var(--brand-blue);
+            opacity: 1;
+        }
+
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: inherit; z-index: 2100; }
+        
+        .btn-primary {
+            background: var(--brand-blue); color: white !important; padding: 1rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+            transition: 0.3s; display: inline-flex; justify-content: center; align-items: center; border: none; cursor: pointer; text-align: center; font-family: 'Inter', sans-serif;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(63, 178, 193, 0.3); background: var(--brand-blue-dark); }
+        
+        .btn-outline {
+            background: transparent; color: var(--brand-blue); padding: 1rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+            border: 2px solid var(--brand-blue); transition: 0.3s; display: inline-flex; justify-content: center; align-items: center; text-align: center;
+        }
+        .btn-outline:hover { background: var(--brand-blue); color: white; transform: translateY(-2px); border-color: var(--brand-blue); }
+
+        .nav-links .mobile-only-btn { display: none; }
+
+        /* =========================================================
+           PAGE STYLES
+           ========================================================= */
+        .section-padding { padding: 6rem 8%; width: 100%; box-sizing: border-box; }
+        .page-header { background: var(--brand-light); padding: 120px 8% 5rem; text-align: center; }
+        .page-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: var(--brand-dark); }
+        .page-header h1 span { color: var(--brand-blue); }
+        .page-header p { font-size: 1.15rem; color: var(--text-body); max-width: 800px; margin: 1.5rem auto 2.5rem; line-height: 1.7; }
+
+        .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .approach-img { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .approach-img img { width: 100%; height: 500px; object-fit: cover; transition: transform 0.6s var(--ease-out); }
+        .approach-img:hover img { transform: scale(1.05); }
+
+        .section-title { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--brand-dark); line-height: 1.2; }
+        .section-title span { color: var(--brand-blue); }
+        .section-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        .journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 4rem; }
+        .journey-card { background: white; padding: 3rem; border-radius: 24px; border: 1px solid #f0f0f0; transition: all 0.4s var(--ease-out); display: flex; flex-direction: column; }
+        .journey-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--brand-blue); }
+        .journey-icon { width: 60px; height: 60px; background: var(--brand-light); color: var(--brand-blue); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .journey-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .journey-card p { color: var(--text-body); line-height: 1.6; flex-grow: 1; margin-bottom: 2rem; }
+        .journey-link { font-weight: 700; color: var(--brand-blue); display: flex; align-items: center; gap: 0.5rem; }
+        .journey-link i { transition: transform 0.3s; }
+        .journey-link:hover i { transform: translateX(5px); }
+
+        .cta-banner { background: var(--brand-blue); color: white; padding: 5rem 8%; border-radius: 32px; text-align: center; margin: 4rem 8%; position: relative; overflow: hidden; }
+        .cta-banner h2 { font-size: 3rem; margin-bottom: 1.5rem; }
+        .cta-banner p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto 3rem; }
+        .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-banner .btn-white { background: white; color: var(--brand-blue); padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; transition: 0.3s; }
+        .cta-banner .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .cta-banner .btn-outline-white { border: 2px solid white; color: white; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; transition: 0.3s; }
+        .cta-banner .btn-outline-white:hover { background: white; color: var(--brand-blue); }
+
+        /* =========================================================
+           FOOTER (Copied from index.html)
+           ========================================================= */
+        footer { 
+            background: #0f0f0f; 
+            color: white; 
+            padding: 5rem 8% 2rem; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .footer-logo-wrap { margin-bottom: 3rem; }
+        .footer-logo-wrap img { height: 65px; width: auto; filter: brightness(1.1); }
+        
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 4rem; }
+        
+        .footer-col h4 { 
+            font-size: 1.15rem; 
+            margin-bottom: 1.8rem; 
+            font-weight: 700; 
+            color: var(--brand-blue); 
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col ul li { margin-bottom: 0.9rem; color: rgba(255,255,255,0.8); }
+        
+        .footer-col ul li a { 
+            color: rgba(255,255,255,0.7); 
+            transition: 0.4s var(--ease-out); 
+            font-size: 0.95rem; 
+            display: inline-block; 
+            position: relative;
+        }
+        .footer-col ul li a:hover { 
+            color: var(--brand-blue); 
+            transform: translateX(8px); 
+        }
+
+        .footer-bottom { 
+            border-top: 1px solid rgba(255,255,255,0.08); 
+            padding-top: 2rem; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: rgba(255,255,255,0.4); 
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================================
+           RESPONSIVE (Copied from index.html)
+           ========================================================= */
+        @media (max-width: 992px) {
+            .approach-grid, .journey-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .approach-img img { height: 400px; }
+            
+            .nav-item-wrap { height: auto; width: 100%; display: block; position: relative; }
+            .dropdown-menu { 
+                position: static; 
+                transform: none !important; 
+                opacity: 1 !important; 
+                visibility: visible !important; 
+                box-shadow: none; 
+                background: rgba(0,0,0,0.02); 
+                border: none; 
+                pointer-events: all;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+                backdrop-filter: none;
+            }
+            .nav-item-wrap.mobile-expanded .dropdown-menu {
+                max-height: 1200px;
+                padding-bottom: 0.5rem;
+            }
+            .nav-item-wrap.mobile-expanded .dropdown-chevron {
+                transform: rotate(180deg);
+                color: var(--brand-blue);
+            }
+            .nav-item-wrap.mobile-expanded > a {
+                color: var(--brand-blue) !important;
+            }
+            .nav-item-wrap .dropdown-chevron {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 0.9rem;
+                pointer-events: none;
+            }
+            .flyout-menu {
+                position: static;
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                box-shadow: none;
+                background: rgba(0,0,0,0.02);
+                border: none;
+                pointer-events: all;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+                backdrop-filter: none;
+            }
+            .dropdown-item-wrap.mobile-inner-expanded .flyout-menu {
+                max-height: 1200px;
+                padding-bottom: 0.5rem;
+            }
+            .dropdown-menu .has-flyout > i {
+                position: absolute;
+                right: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 0.8rem;
+                pointer-events: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .header-cta { display: none; }
+
+            .nav-links {
+                position: fixed; 
+                top: 0; 
+                right: -110%; 
+                width: 75%; 
+                height: 100vh; 
+                background: white;
+                display: flex; 
+                flex-direction: column; 
+                justify-content: flex-start; 
+                align-items: flex-start; 
+                padding: 6rem 2rem; 
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
+                box-shadow: -15px 0 40px rgba(0,0,0,0.1);
+                z-index: 2000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .nav-links > a, .nav-item-wrap > a { 
+                margin: 0.5rem 0; 
+                padding: 1rem 0;
+                font-size: 1.3rem; 
+                font-weight: 700; 
+                color: var(--brand-dark) !important;
+                font-family: 'Outfit', sans-serif;
+                width: 100%;
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            
+            .dropdown-menu a {
+                padding: 0.8rem 1rem;
+                font-size: 1.05rem;
+                font-weight: 600;
+                color: var(--text-body) !important;
+                border-left: 3px solid transparent;
+                border-bottom: none;
+                justify-content: flex-start;
+                gap: 0.5rem;
+            }
+
+            .nav-links .mobile-only-btn { 
+                display: flex; 
+                width: 100%; 
+                margin-top: 2rem;
+                justify-content: flex-start;
+            }
+            .nav-links .mobile-only-btn .btn-primary {
+                color: white !important;
+                background: var(--brand-blue);
+            }
+
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-root">
+        
+        <header id="navbar">
+            <a href="./index.html" class="brand-logo">
+                <img id="brand-logo-img" src="./Assets/logo.png" alt="Optimum EP Logo">
+            </a>
+            <nav class="nav-links" id="nav-menu">
+                
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">About Us <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./our-approach.html">Our Approach</a>
+                        <a href="./faq.html">FAQ</a>
+                        <a href="./our-team.html">Our Team</a>
+                    </div>
+                </div>
+
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">How we can help <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./exercise-physiology.html">Exercise Physiology</a>
+                        
+                        <div class="dropdown-item-wrap">
+                            <a href="javascript:void(0)" class="has-flyout inner-toggle">Group Classes <i class="fa-solid fa-chevron-right"></i></a>
+                            <div class="flyout-menu">
+                                <a href="./personal-training.html">Personal Training</a>
+                                <a href="./running-assessments.html">Running Assessments</a>
+                                <a href="./body-composition.html">Body Composition & Fitness Testing</a>
+                                <a href="./onero-strong-bones.html">Onero Strong Bones</a>
+                                <a href="./prostate-cancer-expo-program.html">Prostate Cancer ExPO Program</a>
+                                <a href="./diabetes-education.html">Diabetes Education</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item-wrap">
+                    <a href="javascript:void(0)" class="mobile-dropdown-toggle">Classes <i class="fa-solid fa-chevron-down dropdown-chevron"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="./ep-group.html">EP Group</a>
+                        <a href="./onerostrongbones.html">Onero Strong Bones</a>
+                        <a href="./strength-testing.html">Strength Testing</a>
+                        <a href="./timetable.html">Timetable</a>
+                    </div>
+                </div>
+
+                <a href="./gym.html">Gym</a>
+                <a href="./blog.html">Blog</a>
+                <a href="./contact.html">Contact</a>
+                <a href="./referral.html">Referrals</a>
+                <div class="mobile-only-btn">
+                    <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" class="btn-primary" style="width: 100%;">Book Now</a>
+                </div>
+
+            </nav>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" class="btn-primary header-cta">Book Now</a>
+                <div class="mobile-toggle" id="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="fade-up">
+                    <h1>What is <span>Exercise Physiology?</span></h1>
+                    <p>Accredited Exercise Physiologists (AEPs) are university qualified allied health professionals. We specialise in exercise prescription and the delivery of evidence-based movement programs for the treatment and prevention of chronic diseases.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" rel="noopener noreferrer" class="btn-primary">Book Consultation</a>
+                        <a href="#experts" class="btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experts in Exercise -->
+            <section id="experts" class="section-padding">
+                <div class="approach-grid">
+                    <div class="approach-img fade-up">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Clinical Exercise">
+                    </div>
+                    <div class="fade-up">
+                        <h2 class="section-title">We are the <span>Experts in Exercise</span></h2>
+                        <p class="section-text">Accredited Exercise Physiologists help people to manage and improve a broad range of conditions including diabetes, heart disease, obesity, chronic respiratory diseases, osteoporosis, arthritis, cancer, and musculoskeletal injuries.</p>
+                        <p class="section-text" style="font-weight: 700; color: var(--brand-dark);">No other allied health professional undertakes the university level training to the depth of Exercise Physiologists in these chronic conditions, making us the primary experts in clinical movement.</p>
+                        <p class="section-text">Whether you're recovering from surgery or managing a lifelong condition, we provide the roadmap to help you move with confidence again.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expectations & Journey -->
+            <section class="section-padding" style="background: var(--brand-light);">
+                <div style="text-align: center;">
+                    <h2 class="section-title">Your <span>Pathway</span> to Health</h2>
+                    <p class="section-text" style="max-width: 600px; margin: 0 auto;">We believe in transparency and empowering our clients with the knowledge they need to succeed.</p>
+                </div>
+
+                <div class="journey-grid">
+                    <div class="journey-card fade-up">
+                        <div class="journey-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                        <h3>The First Consult</h3>
+                        <p>Discover what happens during your initial assessment and how we begin building your roadmap to success. We evaluate your history, goals, and movement capacity.</p>
+                        <a href="https://www.optimumep.com.au/uploads/8/7/4/9/87495000/new_client_success_book.pdf" target="_blank" class="journey-link">
+                            View Success Book (PDF) <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="journey-card fade-up">
+                        <div class="journey-icon"><i class="fa-solid fa-route"></i></div>
+                        <h3>Your Journey</h3>
+                        <p>We map out your progression from initial consultation through to achieving your long-term health and movement goals. It's about sustainable, life-changing progress.</p>
+                        <a href="https://drive.google.com/file/d/14ADbIg6Ct0P4dgKtwDteEu145RnrPgAW/view" target="_blank" rel="noopener noreferrer" class="journey-link">
+                            Learn About Your Journey <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA -->
+            <div class="cta-banner fade-up">
+                <h2>Ready to move better?</h2>
+                <p>Join us and experience the expertise of university-qualified health professionals dedicated to your recovery and performance.</p>
+                <div class="cta-btns">
+                    <a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank" rel="noopener noreferrer" class="btn-white">Book Now</a>
+                    <a href="our-team.html" class="btn-outline-white">Meet the Team</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-logo-wrap">
+                <img src="./Assets/logo2.png" alt="Optimum EP Logo">
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="https://book.nookal.com/bookings/book/Ca99FA97-Ac2d-2EF5-EAbf-ABEb3A9cA22f" target="_blank">Bookings</a></li>
+                        <li><a href="./classes.html">Classes</a></li>
+                        <li><a href="./timetable.html">Timetable</a></li>
+                        <li><a href="./exercise-physiology.html">Services</a></li>
+                        <li><a href="./our-approach.html">How it works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#faq-section">What is Exercise Physiology</a></li>
+                        <li><a href="./our-team.html">Meet our team</a></li>
+                        <li><a href="./gym.html">Our Clinic and Gym</a></li>
+                        <li><a href="./faq.html">Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our locations</h4>
+                    <ul>
+                        <li><a href="./contact.html">Clare</a></li>
+                        <li><a href="./contact.html">Balaklava</a></li>
+                        <li><a href="./contact.html">Eudunda</a></li>
+                        <li><a href="./contact.html">Home Visits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Details</h4>
+                    <ul>
+                        <li><a href="tel:0888730628">Phone: 08 8873 0628</a></li>
+                        <li><a href="javascript:void(0)">Fax: 8121 6139</a></li>
+                        <li><a href="./contact.html">Email</a></li>
+                        <li><a href="./contact.html">See our contact details</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Optimum Exercise Physiology. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.fromTo(entry.target, 
+                            { y: 40, opacity: 0 }, 
+                            { y: 0, opacity: 1, duration: 1, ease: "power2.out" }
+                        );
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        }
+
+        // Navigation Toggle Logic (Copied from index.html)
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        function toggleMobileNav() {
+            const isActive = navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            
+            if(isActive) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-xmark');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMobileNav() {
+            navMenu.classList.remove('active');
+            document.querySelectorAll('.nav-item-wrap').forEach(w => w.classList.remove('mobile-expanded'));
+            document.querySelectorAll('.dropdown-item-wrap').forEach(w => w.classList.remove('mobile-inner-expanded'));
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-xmark');
+            }
+            document.body.style.overflow = '';
+        }
+
+        function closeAllNavigationMenus() {
+            closeMobileNav();
+            const menus = document.querySelectorAll('.dropdown-menu, .flyout-menu');
+            menus.forEach(m => { m.style.display = 'none'; });
+            setTimeout(() => { menus.forEach(m => { m.style.display = ''; }); }, 10);
+        }
+
+        menuToggle.addEventListener('click', toggleMobileNav);
+
+        document.querySelectorAll('.nav-item-wrap > a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 992) {
+                    if (link.classList.contains('mobile-dropdown-toggle')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const wrap = link.parentElement;
+                        const wasExpanded = wrap.classList.contains('mobile-expanded');
+                        document.querySelectorAll('.nav-item-wrap').forEach(w => w.classList.remove('mobile-expanded'));
+                        if (!wasExpanded) wrap.classList.add('mobile-expanded');
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.inner-toggle').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const wrap = link.parentElement;
+                    wrap.classList.toggle('mobile-inner-expanded');
+                }
+            });
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const isToggle = link.classList.contains('mobile-dropdown-toggle') || link.classList.contains('inner-toggle');
+                if (!isToggle) closeAllNavigationMenus();
+            });
+        });
+
+        window.onload = initAnimations;
+    </script>
+</body>
+</html>
