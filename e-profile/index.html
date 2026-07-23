@@ -14,8 +14,8 @@
 
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#1B3A4B">
-<link rel="icon" href="asset/mockup-profile.png" sizes="any">
-<link rel="apple-touch-icon" href="asset/mockup-profile.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231B3A4B'/%3E%3Cpath d='M12 3.4c-1.7 0-2.9 1.1-3.9 1.1-.9 0-1.6-.6-2.5-.6-1.5 0-2.5 1.3-2.5 3.4 0 3.3 1.9 7.6 3.2 10.2.6 1.2 1.1 2.3 1.9 2.3.9 0 1.1-1.3 1.4-2.7.2-1.1.6-2.5 1.4-2.5s1.2 1.4 1.4 2.5c.3 1.4.5 2.7 1.4 2.7.8 0 1.3-1.1 1.9-2.3 1.3-2.6 3.2-6.9 3.2-10.2 0-2.1-1-3.4-2.5-3.4-.9 0-1.6.6-2.5.6-1 0-2.2-1.1-3.9-1.1z' fill='%2333AAD3'/%3E%3C/svg%3E" sizes="any">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231B3A4B'/%3E%3Cpath d='M12 3.4c-1.7 0-2.9 1.1-3.9 1.1-.9 0-1.6-.6-2.5-.6-1.5 0-2.5 1.3-2.5 3.4 0 3.3 1.9 7.6 3.2 10.2.6 1.2 1.1 2.3 1.9 2.3.9 0 1.1-1.3 1.4-2.7.2-1.1.6-2.5 1.4-2.5s1.2 1.4 1.4 2.5c.3 1.4.5 2.7 1.4 2.7.8 0 1.3-1.1 1.9-2.3 1.3-2.6 3.2-6.9 3.2-10.2 0-2.1-1-3.4-2.5-3.4-.9 0-1.6.6-2.5.6-1 0-2.2-1.1-3.9-1.1z' fill='%2333AAD3'/%3E%3C/svg%3E">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dr. Li Wei | General, Cosmetic &amp; Implant Dentist, Hong Kong">
@@ -1159,11 +1159,11 @@ body.loaded header,body.loaded main,body.loaded footer{opacity:1;transition:opac
     <div class="foot-bottom">
       <span>© 2026 Dr. Li Wei · 李蔚牙科醫生</span>
       <div class="foot-legal">
-        <a href="#"><span data-lang="en">Privacy</span><span data-lang="zh">私隱政策</span></a>
+        <a href="privacy.html"><span data-lang="en">Privacy</span><span data-lang="zh">私隱政策</span></a>
         <span class="sep">·</span>
-        <a href="#"><span data-lang="en">Terms</span><span data-lang="zh">條款</span></a>
+        <a href="terms.html"><span data-lang="en">Terms</span><span data-lang="zh">條款</span></a>
         <span class="sep">·</span>
-        <a href="#faq"><span data-lang="en">Medical Disclaimer</span><span data-lang="zh">醫療聲明</span></a>
+        <a href="disclaimers.html"><span data-lang="en">Medical Disclaimer</span><span data-lang="zh">醫療聲明</span></a>
         <span class="sep">·</span>
         <button type="button" id="cookie-settings"><span data-lang="en">Cookie Settings</span><span data-lang="zh">Cookie 設定</span></button>
       </div>
@@ -1192,8 +1192,8 @@ body.loaded header,body.loaded main,body.loaded footer{opacity:1;transition:opac
     <div class="cookie-text">
       <strong data-lang="en">We value your privacy.</strong>
       <strong data-lang="zh">我們重視你的私隱。</strong>
-      <p data-lang="en">This site uses cookies for analytics and measurement. Choose which categories you allow. Read our <a href="#">Privacy Policy</a>.</p>
-      <p data-lang="zh">本網站使用 cookies 作分析及成效評估。請選擇你允許的類別。請參閱我們的<a href="#">私隱政策</a>。</p>
+      <p data-lang="en">This site uses cookies for analytics and measurement. Choose which categories you allow. Read our <a href="privacy.html">Privacy Policy</a>.</p>
+      <p data-lang="zh">本網站使用 cookies 作分析及成效評估。請選擇你允許的類別。請參閱我們的<a href="privacy.html">私隱政策</a>。</p>
     </div>
     <div class="cookie-actions">
       <button class="ck-btn" type="button" data-consent="reject"><span data-lang="en">Reject all</span><span data-lang="zh">全部拒絕</span></button>
@@ -1325,6 +1325,95 @@ document.getElementById('bookform').addEventListener('submit', function(e){
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 })();
 
+/* ============== Shared scroll controller: eased anchor jumps + slow
+   momentum wheel scroll — makes every scroll on the site (nav clicks,
+   back-to-top, mouse wheel) feel like one slow, smooth motion instead of
+   the browser's default instant/linear scroll. ============== */
+var smoothScrollTo = (function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var headerEl = document.querySelector('header');
+  var ctrl = { anchorActive: false, wheelRaf: null };
+
+  function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+  function animateScrollTo(targetY) {
+    var startY = window.pageYOffset;
+    var diff = targetY - startY;
+    if (Math.abs(diff) < 1) return;
+    var duration = Math.min(1500, Math.max(600, Math.abs(diff) * 0.8));
+    var startTime = null;
+    ctrl.anchorActive = true;
+    function step(timestamp) {
+      if (!ctrl.anchorActive) return; // interrupted by manual scroll
+      if (startTime === null) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      window.scrollTo({ top: startY + diff * easeInOutQuad(progress), left: 0, behavior: 'instant' });
+      if (progress < 1) { requestAnimationFrame(step); } else { ctrl.anchorActive = false; }
+    }
+    requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    var id = link.getAttribute('href').slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var offset = headerEl ? headerEl.offsetHeight : 0;
+      var targetY = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      if (reduce) {
+        window.scrollTo({ top: targetY, left: 0, behavior: 'instant' });
+      } else {
+        animateScrollTo(targetY);
+      }
+      if (history.pushState) { history.pushState(null, '', '#' + id); }
+    });
+  });
+
+  // --- Mouse wheel: slow, trailing momentum scroll instead of an instant jump ---
+  if (!reduce && 'ontouchstart' in window === false) {
+    var virtualY = window.pageYOffset;
+    var wheelTargetY = window.pageYOffset;
+
+    function wheelLoop() {
+      virtualY += (wheelTargetY - virtualY) * 0.11;
+      if (Math.abs(wheelTargetY - virtualY) < 0.4) {
+        virtualY = wheelTargetY;
+        window.scrollTo({ top: virtualY, left: 0, behavior: 'instant' });
+        ctrl.wheelRaf = null;
+        return;
+      }
+      window.scrollTo({ top: virtualY, left: 0, behavior: 'instant' });
+      ctrl.wheelRaf = requestAnimationFrame(wheelLoop);
+    }
+
+    window.addEventListener('wheel', function (e) {
+      ctrl.anchorActive = false; // manual scroll takes over from any anchor animation
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      virtualY = window.pageYOffset;
+      // Starting a fresh gesture (no momentum currently running)? Resync the
+      // target to the page's real position first — otherwise this would add
+      // the wheel delta on top of a stale target left over from before an
+      // anchor-link jump or back-to-top, and the page would ease back to
+      // wherever it was before that jump.
+      if (!ctrl.wheelRaf) { wheelTargetY = window.pageYOffset; }
+      wheelTargetY = Math.min(maxScroll, Math.max(0, wheelTargetY + e.deltaY * 0.7));
+      e.preventDefault();
+      if (!ctrl.wheelRaf) { ctrl.wheelRaf = requestAnimationFrame(wheelLoop); }
+    }, { passive: false });
+
+    window.addEventListener('scroll', function () {
+      if (!ctrl.wheelRaf && !ctrl.anchorActive) { wheelTargetY = window.pageYOffset; }
+    }, { passive: true });
+  }
+
+  return function (targetY) {
+    if (reduce) { window.scrollTo({ top: targetY, left: 0, behavior: 'instant' }); }
+    else { animateScrollTo(targetY); }
+  };
+})();
+
 /* ============== Sticky bar + back-to-top visibility ============== */
 var bar = document.getElementById('sticky-bar');
 var totop = document.getElementById('totop');
@@ -1337,7 +1426,7 @@ function onScrollUI(){
 }
 window.addEventListener('scroll', onScrollUI, {passive:true});
 totop.addEventListener('click', function(){
-  window.scrollTo({top:0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  smoothScrollTo(0);
 });
 
 /* ============== Cookie consent ============== */
