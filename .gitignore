@@ -1,3 +1,10 @@
 projects/assets/*.mov
 resume/asset/*.mov
 resume/asset/testimonial/originals/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
