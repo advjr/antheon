@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>E-Profile for Professionals | Antheon</title>
+  <meta name="description" content="Antheon's E-Profile is a personal, compliance-ready website for professionals, doctors, dentists, financial advisors, business owners and more. Build trust, credibility and visibility online. Book a free E-Profile, one month free on Antheon's domain.">
+  <link rel="canonical" href="https://antheonph.com/e-profile/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="E-Profile for Professionals | Antheon">
+  <meta property="og:description" content="A personal, compliance-ready website that gives professionals trust, credibility and visibility online. Book a free E-Profile, one month free.">
+  <meta property="og:image" content="https://antheonph.com/e-profile/asset/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://antheonph.com/e-profile/">
+  <meta property="og:site_name" content="Antheon">
+  <meta property="og:locale" content="en_PH">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://antheonph.com/e-profile/asset/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="../asset/Ann.png">
+  <link rel="apple-touch-icon" href="../asset/Ann.png">
+  <meta name="theme-color" content="#1A1230">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Antheon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       ANTHEON, E-Profile (sub-page)
+       Follows Antheon branding tokens, but styled as an
+       internal document page, not a second marketing site.
+       ======================================== */
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-alt: #F7F7F5;
+      --text: #111114;
+      --text-muted: #5C5C66;
+      --border: #E6E6E9;
+      --border-strong: #CBCBD1;
+
+      --brand-violet: #9333EA;
+      --brand-blue: #3B82F6;
+      --brand-gradient: linear-gradient(105deg, #9333EA 0%, #6D48E6 50%, #3B82F6 100%);
+      --brand-ink: #1A1230;
+
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --wrap: 860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { text-wrap: balance; word-break: normal; overflow-wrap: normal; }
+    h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.12; }
+    h3 { font-family: var(--font-body); font-weight: 600; line-height: 1.3; }
+    p { line-height: 1.7; }
+    a { color: var(--text); text-decoration: none; transition: color 0.2s ease; }
+    .accent { color: var(--brand-violet); }
+
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    /* --- Slim sub-page bar (breadcrumb style, not a site nav) --- */
+    .subbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: saturate(160%) blur(12px);
+      -webkit-backdrop-filter: saturate(160%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .subbar-inner { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .crumb { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .crumb img { height: 24px; width: auto; display: block; }
+    .crumb .wm { font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+    .crumb .wm .ant { color: var(--text); }
+    .crumb .wm .heon { color: var(--brand-violet); }
+    .crumb .sep { color: var(--border-strong); }
+    .crumb .here { font-size: 15px; color: var(--text-muted); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width: 520px) {
+      .crumb .wm { display: none; }
+      .crumb .sep { display: none; }
+      .crumb .here { display: inline; font-size: 15px; font-weight: 700; color: var(--text); }
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 13px 26px; font-family: var(--font-body); font-size: 15px; font-weight: 600; letter-spacing: 0.01em;
+      cursor: pointer; border: none; border-radius: 9px; text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-primary { background: var(--brand-gradient); color: #fff; box-shadow: 0 6px 18px -8px rgba(109,72,230,0.55); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -8px rgba(109,72,230,0.6); color: #fff; }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+    .btn-outline:hover { border-color: var(--text); }
+    .btn-sm { padding: 9px 18px; font-size: 14px; }
+
+    /* --- Page intro (not a full hero) --- */
+    .intro { padding: 60px 0 40px; }
+    @media (min-width: 768px) { .intro { padding: 84px 0 48px; } }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-violet); margin-bottom: 18px; }
+    .kicker::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand-gradient); }
+    .intro h1 { font-size: 40px; margin-bottom: 20px; }
+    @media (min-width: 768px) { .intro h1 { font-size: 56px; } }
+    .intro .lead { font-size: 19px; color: var(--text-muted); max-width: 620px; margin-bottom: 26px; }
+    .intro .lead strong { color: var(--text); }
+    .intro-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .intro-note { font-size: 13px; color: var(--text-muted); margin-top: 16px; }
+    .intro-note strong { color: var(--text); }
+
+    /* --- Section rhythm --- */
+    .block { padding: 44px 0; border-top: 1px solid var(--border); }
+    @media (min-width: 768px) { .block { padding: 60px 0; } }
+    .block > .wrap > .kicker { margin-bottom: 14px; }
+    .block h2 { font-size: 30px; margin-bottom: 16px; }
+    @media (min-width: 768px) { .block h2 { font-size: 38px; } }
+    .block p.body { color: var(--text-muted); margin-bottom: 16px; }
+    .block p.body:last-child { margin-bottom: 0; }
+    .block p.body strong { color: var(--text); }
+
+    /* Role illustrations */
+    .role-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 26px; }
+    @media (min-width: 640px) { .role-grid { grid-template-columns: repeat(4, 1fr); } }
+    .role-card { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.2s ease, background 0.2s ease; }
+    .role-card:hover { border-color: var(--border-strong); background: var(--bg-alt); }
+    .role-card svg { width: 22px; height: 22px; color: var(--brand-violet); flex-shrink: 0; }
+    .role-card span { font-size: 13.5px; font-weight: 600; }
+
+    /* Sample E-Profile showcase */
+    .sample-frame { position: relative; margin-top: 24px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 30px 60px -34px rgba(109,72,230,0.35); }
+    .sample-chrome { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--bg-alt); border-bottom: 1px solid var(--border); }
+    .sample-chrome span { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
+    .sample-url { flex: 1; margin-left: 8px; height: 20px; border-radius: 5px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 10px; font-size: 11px; color: var(--text-muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .sample-preview { position: relative; display: block; }
+    .sample-flag { position: absolute; top: 14px; left: 14px; z-index: 3; background: var(--brand-gradient); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+
+    /* Reproduction of the actual Dr. Li Wei hero, her real palette and layout, scaled into the preview frame */
+    .dlw-hero { display: block; position: relative; background: #1B3A4B; color: #fff; overflow: hidden; }
+    .dlw-media { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; }
+    .dlw-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+    .dlw-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,58,75,0.55) 0%, rgba(27,58,75,0.1) 38%, rgba(27,58,75,0.94) 84%, #1B3A4B 100%); }
+    .dlw-copy { position: relative; z-index: 2; margin-top: -108px; padding: 0 22px 26px; }
+    .dlw-eyebrow { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; letter-spacing: 0.15em; text-transform: uppercase; color: #5CC4E6; display: inline-flex; align-items: center; gap: 8px; }
+    .dlw-eyebrow::before { content: ""; width: 16px; height: 1px; background: #5CC4E6; display: inline-block; }
+    .dlw-h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 24px; line-height: 1.16; margin: 10px 0 10px; color: #fff; }
+    .dlw-h1 em { color: #5CC4E6; font-style: italic; }
+    .dlw-lead { font-size: 13px; line-height: 1.55; color: #9DB4BF; max-width: 340px; margin-bottom: 16px; }
+    .dlw-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .dlw-btn { display: inline-flex; align-items: center; font-size: 12.5px; font-weight: 600; padding: 9px 16px; border-radius: 2px; }
+    .dlw-btn-gold { background: #FF8C7A; color: #fff; }
+    .dlw-btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.32); color: #fff; }
+    .dlw-cred { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid rgba(255,255,255,0.16); }
+    @media (min-width: 640px) { .dlw-cred { grid-template-columns: repeat(4, 1fr); } }
+    .dlw-cred-item { padding: 14px 16px; border-right: 1px solid rgba(255,255,255,0.16); border-bottom: 1px solid rgba(255,255,255,0.16); }
+    .dlw-cred-item:nth-child(2n) { border-right: none; }
+    @media (min-width: 640px) { .dlw-cred-item { border-bottom: none; } .dlw-cred-item:nth-child(2n) { border-right: 1px solid rgba(255,255,255,0.16); } .dlw-cred-item:nth-child(4n) { border-right: none; } }
+    .dlw-cred-item .k { font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #5CC4E6; display: block; }
+    .dlw-cred-item .v { font-size: 12.5px; color: #fff; margin-top: 4px; display: block; }
+
+    .sample-feats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .sfeat { font-size: 12.5px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-muted); }
+    .sample-caption { font-size: 13.5px; color: var(--text-muted); margin-top: 16px; }
+    .sample-caption strong { color: var(--text); }
+    .sample-notice { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; padding: 12px 14px; background: var(--bg-alt); border-radius: 8px; font-size: 13px; color: var(--text-muted); }
+    .sample-notice svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--brand-violet); }
+    .sample-notice strong { color: var(--text); }
+
+    /* Value list (why it matters) */
+    .why-grid { display: grid; grid-template-columns: 1fr; gap: 2px; margin-top: 24px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    @media (min-width: 640px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+    .why { background: var(--bg); padding: 22px 22px; }
+    .why h3 { font-size: 17px; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+    .why h3 svg { width: 18px; height: 18px; color: var(--brand-violet); flex-shrink: 0; }
+    .why p { font-size: 14.5px; color: var(--text-muted); }
+
+    /* Compliance callout */
+    .callout { margin-top: 24px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .callout-top { padding: 22px 24px; background: var(--bg-alt); border-bottom: 1px solid var(--border); }
+    .country-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .flagchip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border: 1px solid var(--border-strong); border-radius: 999px; font-size: 13px; font-weight: 600; background: #fff; }
+    .flagchip.new { border-color: var(--brand-violet); color: var(--brand-violet); }
+    .flag-icon { width: 20px; height: 14px; border-radius: 3px; flex-shrink: 0; display: block; box-shadow: 0 0 0 1px rgba(17,17,20,0.08); }
+    .callout-body { padding: 24px; }
+    .callout-body p { color: var(--text-muted); margin-bottom: 14px; font-size: 15px; }
+    .callout-body p strong { color: var(--text); }
+    .comp-list { list-style: none; margin-top: 6px; }
+    .comp-list li { position: relative; padding: 8px 0 8px 26px; font-size: 14.5px; color: var(--text); border-top: 1px solid var(--border); }
+    .comp-list li:first-child { border-top: none; }
+    .comp-list li::before { content: ""; position: absolute; left: 4px; top: 15px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-gradient); }
+    .sg-note { margin-top: 18px; padding: 16px 18px; border-left: 3px solid var(--brand-violet); background: #FBF8FF; border-radius: 0 8px 8px 0; font-size: 14.5px; color: var(--text-muted); }
+    .sg-note strong { color: var(--text); }
+
+    /* Standards */
+    .std-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 24px; }
+    @media (min-width: 640px) { .std-grid { grid-template-columns: repeat(3, 1fr); } }
+    .std { border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; }
+    .std .abbr { font-family: var(--font-display); font-size: 30px; line-height: 1; color: var(--brand-violet); }
+    .std .full { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); margin: 6px 0 12px; }
+    .std h3 { font-size: 16px; margin-bottom: 6px; }
+    .std p { font-size: 14px; color: var(--text-muted); }
+    .std-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; font-size: 15px; font-weight: 600; color: var(--brand-violet); border-bottom: 1px solid var(--brand-violet); padding-bottom: 2px; transition: gap 0.2s ease, color 0.2s ease; }
+    .std-link:hover { gap: 12px; color: var(--brand-blue); border-color: var(--brand-blue); }
+    .std-link svg { width: 15px; height: 15px; }
+
+    /* Pricing */
+    .plans { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 26px; }
+    @media (min-width: 820px) { .plans { grid-template-columns: repeat(3, 1fr); } }
+    .plan { border: 1px solid var(--border); border-radius: 14px; padding: 26px 24px; display: flex; flex-direction: column; }
+    .plan.featured { position: relative; background: var(--brand-ink); color: #fff; border-color: transparent; }
+    .plan-flag { position: absolute; top: -11px; left: 24px; background: var(--brand-gradient); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+    .plan-name { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-violet); }
+    .plan.featured .plan-name { color: #C4B5FD; }
+    .plan .price { font-family: var(--font-display); font-size: 34px; line-height: 1; margin: 14px 0 4px; }
+    .plan .price small { font-family: var(--font-body); font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .plan.featured .price small { color: rgba(255,255,255,0.7); }
+    .plan .price-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+    .plan.featured .price-sub { color: rgba(255,255,255,0.72); }
+    .save-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--brand-violet); background: rgba(147,51,234,0.1); padding: 2px 9px; border-radius: 999px; margin-left: 6px; }
+    .plan ul { list-style: none; margin-bottom: 20px; flex-grow: 1; }
+    .plan li { font-size: 14px; padding: 8px 0 8px 22px; position: relative; border-top: 1px solid var(--border); }
+    .plan.featured li { border-top: 1px solid rgba(255,255,255,0.14); }
+    .plan li:first-child { border-top: none; }
+    .plan li::before { content: "✓"; position: absolute; left: 0; top: 8px; font-size: 13px; font-weight: 700; color: var(--brand-blue); }
+    .plan.featured li::before { color: #C4B5FD; }
+    .plan .btn { width: 100%; }
+    .plan.featured .btn-outline { border-color: rgba(255,255,255,0.4); color: #fff; }
+    .plan.featured .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+    .price-note { margin-top: 20px; font-size: 14px; color: var(--text-muted); }
+    .price-note strong { color: var(--text); }
+
+    /* FAQ */
+    .faq-item { border-top: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: var(--font-body); text-align: left; color: var(--text); }
+    .faq-q h3 { font-size: 17px; }
+    .faq-q .chev { flex-shrink: 0; width: 18px; height: 18px; color: var(--brand-violet); transition: transform 0.25s ease; }
+    .faq-item.open .chev { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-a p { font-size: 15px; color: var(--text-muted); padding-bottom: 10px; }
+    .faq-a p:last-child { padding-bottom: 22px; }
+    .faq-a p strong { color: var(--text); }
+
+    /* CTA card */
+    .cta-card { margin-top: 26px; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; background: linear-gradient(160deg, #FBFAFF 0%, #F5F3FF 60%, #F2F6FF 100%); text-align: center; }
+    .cta-card h2 { font-size: 30px; margin-bottom: 10px; }
+    .cta-card p { color: var(--text-muted); max-width: 460px; margin: 0 auto 22px; font-size: 15px; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .cta-contact { margin-top: 20px; font-size: 14px; color: var(--text-muted); }
+    .cta-contact a { color: var(--brand-violet); font-weight: 600; }
+
+    /* Footer, minimal */
+    footer { border-top: 1px solid var(--border); padding: 28px 0 40px; }
+    .foot-inner { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--text-muted); }
+    .foot-inner a { color: var(--text-muted); font-weight: 500; }
+    .foot-inner a:hover { color: var(--brand-violet); }
+
+    /* Summary popup */
+    .summary-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      background: rgba(17,17,20,0.55); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .summary-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .summary-modal {
+      position: relative; width: 100%; max-width: 480px; max-height: 86vh;
+      background: #fff; border-radius: 18px; padding: 40px 32px 24px;
+      box-shadow: 0 40px 80px -20px rgba(17,17,20,0.4);
+      display: flex; flex-direction: column;
+      transform: translateY(10px) scale(0.98); transition: transform 0.25s ease;
+    }
+    .summary-overlay.is-open .summary-modal { transform: none; }
+    .summary-close {
+      position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-alt); border: none; cursor: pointer; color: var(--text-muted);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .summary-close:hover { background: var(--border); color: var(--text); }
+    .summary-close svg { width: 16px; height: 16px; }
+
+    .summary-slides { position: relative; min-height: 180px; }
+    .summary-slide { display: none; }
+    .summary-slide.is-active { display: block; animation: summaryFade 0.3s ease; }
+    @keyframes summaryFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .summary-eyebrow { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-violet); margin-bottom: 14px; }
+    .summary-slide h3 { font-size: 24px; margin-bottom: 12px; }
+    .summary-slide p { font-size: 15px; color: var(--text-muted); }
+    .summary-outro-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+    .summary-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .summary-navbtn {
+      display: inline-flex; align-items: center; gap: 6px; background: none; border: none; cursor: pointer;
+      font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text); padding: 6px 4px;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    .summary-navbtn svg { width: 15px; height: 15px; }
+    .summary-navbtn:hover { color: var(--brand-violet); }
+    .summary-navbtn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+    .summary-dots { display: flex; gap: 6px; }
+    .summary-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong); transition: background 0.2s ease, transform 0.2s ease; }
+    .summary-dots span.is-active { background: var(--brand-violet); transform: scale(1.3); }
+    @media (max-width: 480px) { .summary-modal { padding: 34px 22px 20px; } }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .summary-slide.is-active { animation: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- Shared SVG defs: a reusable 5-point star used by the flag icons below -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="star5" d="M0,-1 0.2245,-0.309 0.951,-0.309 0.363,0.118 0.588,0.809 0,0.382 -0.588,0.809 -0.363,0.118 -0.951,-0.309 -0.2245,-0.309 Z"/>
+    </defs>
+  </svg>
+
+  <!-- Slim sub-page bar -->
+  <div class="subbar">
+    <div class="subbar-inner">
+      <a href="#top" class="crumb" aria-label="Scroll to top of E-Profile">
+        <img src="../asset/Ann.png" alt="Antheon logo" width="28" height="24">
+        <span class="wm"><span class="ant">ANT</span><span class="heon">HEON</span></span>
+        <span class="sep">/</span>
+        <span class="here">E-Profile</span>
+      </a>
+      <button type="button" id="summaryOpen" class="btn btn-outline btn-sm">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <defs>
+            <linearGradient id="summaryIconGrad" x1="10" y1="1" x2="19" y2="21" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#3B82F6"/>
+              <stop offset="50%" stop-color="#6D48E6"/>
+              <stop offset="100%" stop-color="#9333EA"/>
+            </linearGradient>
+          </defs>
+          <circle cx="12" cy="12" r="8.5" fill="none" stroke="url(#summaryIconGrad)" stroke-width="5"/>
+        </svg>
+        Summary of E-Profile
+      </button>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- Intro -->
+    <section class="intro">
+      <div class="wrap">
+        <span class="kicker">E-Profile · Now in the Philippines</span>
+        <h1>A professional presence, <span class="accent">engineered to be trusted.</span></h1>
+        <p class="lead">An <strong>E-Profile</strong> is a personal, compliance-ready website for a single professional, not a company. Your digital calling card and credibility reference: the place future clients and partners find, verify, and contact you.</p>
+        <div class="intro-actions">
+          <a href="#pricing" class="btn btn-primary" data-cta="intro-book">Book a Free E-Profile</a>
+          <a href="#sample" class="btn btn-outline">See a Real Sample</a>
+        </div>
+        <p class="intro-note">Free to start, we build it and run it <strong>1 month free</strong> on Antheon's domain. No card required. Now onboarding professionals across Metro Manila, Cebu, Davao, and beyond.</p>
+      </div>
+    </section>
+
+    <!-- What it is -->
+    <section class="block" id="what">
+      <div class="wrap">
+        <span class="kicker">What it is</span>
+        <h2>One professional. One credible presence online.</h2>
+        <p class="body">Most professionals live inside a company website, a directory listing, or a social feed they don't control. An <strong>E-Profile puts you at the centre</strong>, a website about you, the individual, and the work you do.</p>
+        <p class="body">It gives you a place to <strong>be visible online</strong>, present your credentials, showcase your services and past work, and open the door to new clients, referrals, and collaborations with partners. Whoever you are, it's your reference point: the link you hand out, the page people check before they trust you, and the channel that turns interest into a real conversation.</p>
+        <div class="role-grid">
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+            <span>Doctors</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.4c-1.7 0-2.9 1.1-3.9 1.1-.9 0-1.6-.6-2.5-.6-1.5 0-2.5 1.3-2.5 3.4 0 3.3 1.9 7.6 3.2 10.2.6 1.2 1.1 2.3 1.9 2.3.9 0 1.1-1.3 1.4-2.7.2-1.1.6-2.5 1.4-2.5s1.2 1.4 1.4 2.5c.3 1.4.5 2.7 1.4 2.7.8 0 1.3-1.1 1.9-2.3 1.3-2.6 3.2-6.9 3.2-10.2 0-2.1-1-3.4-2.5-3.4-.9 0-1.6.6-2.5.6-1 0-2.2-1.1-3.9-1.1z"/></svg>
+            <span>Dentists</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+            <span>Financial Advisors</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <span>Business Owners</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0zM5 7h14"/></svg>
+            <span>Lawyers</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
+            <span>Consultants</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+            <span>Real Estate Agents</span>
+          </div>
+          <div class="role-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+            <span>Any Professional</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample E-Profile -->
+    <section class="block" id="sample">
+      <div class="wrap">
+        <span class="kicker">See it in action</span>
+        <h2>A sample E-Profile, <span class="accent">Dr. Li Wei</span>, Medical Professional</h2>
+        <p class="body">This is a mock up, built to show what an E-Profile looks like for a medical professional. It's not a real business or a real practitioner, but it's built with the same format, quality, and compliance approach as a real one: a bilingual homepage with credentials, treatments, FAQs, and a booking call-to-action, following the standard already used in Hong Kong, Singapore, and Australia, and now brought to the Philippines.</p>
+
+        <p class="sample-notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>
+          <span><strong>This is a sample, not a real person.</strong> "Dr. Li Wei" is a fictional profile built purely to demonstrate what an E-Profile can look like. No real practitioner is portrayed.</span>
+        </p>
+
+        <div class="sample-frame">
+          <div class="sample-chrome">
+            <span></span><span></span><span></span>
+            <div class="sample-url">drliwei.com</div>
+          </div>
+          <a href="sample/index.html" target="_blank" rel="noopener" class="sample-preview dlw-hero" data-cta="sample-preview">
+            <span class="sample-flag">Sample profile</span>
+            <div class="dlw-media">
+              <img src="sample/asset/mockup-profile.png" alt="Dr. Li Wei, general, cosmetic and implant dentist, in her Hong Kong clinic" width="1416" height="768" loading="lazy" decoding="async">
+            </div>
+            <div class="dlw-copy">
+              <span class="dlw-eyebrow">General, Cosmetic &amp; Implant Dentist, Hong Kong</span>
+              <h3 class="dlw-h1">Dentistry that is gentle, honest, and truly <em>personal</em>.</h3>
+              <p class="dlw-lead">Dr. Li Wei cares for the whole family, from routine check ups to cosmetic work and dental implants, at a calm pace, with every option clearly explained.</p>
+              <div class="dlw-cta">
+                <span class="dlw-btn dlw-btn-gold">Book an appointment →</span>
+                <span class="dlw-btn dlw-btn-outline">See treatments</span>
+              </div>
+            </div>
+            <div class="dlw-cred">
+              <div class="dlw-cred-item"><span class="k">BDS</span><span class="v">Registered dentist</span></div>
+              <div class="dlw-cred-item"><span class="k">12+ years</span><span class="v">In clinical practice</span></div>
+              <div class="dlw-cred-item"><span class="k">Implants</span><span class="v">Restorative dentistry</span></div>
+              <div class="dlw-cred-item"><span class="k">Invisalign</span><span class="v">Clear aligner provider</span></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="sample-feats">
+          <span class="sfeat">Bilingual EN / 中文 toggle</span>
+          <span class="sfeat">Credentials &amp; experience block</span>
+          <span class="sfeat">Treatments &amp; services grid</span>
+          <span class="sfeat">FAQ with schema markup</span>
+          <span class="sfeat">Book / WhatsApp call-to-action</span>
+          <span class="sfeat">Legal disclaimers built in</span>
+        </div>
+
+        <p class="sample-caption"><strong>About this example:</strong> a mock up styled for the Hong Kong market, used only to illustrate the E-Profile standard, the same structure, credentials layout, and compliance approach Antheon builds for doctors, dentists, and other professionals here in the Philippines.</p>
+
+        <a href="sample/index.html" target="_blank" rel="noopener" class="std-link" data-cta="sample-view-live">
+          View the sample E-Profile
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Why it matters -->
+    <section class="block" id="why">
+      <div class="wrap">
+        <span class="kicker">Why it matters</span>
+        <h2>Trust, credibility, and visibility, in one link.</h2>
+        <p class="body">People search for you before they ever call. An E-Profile decides what they find: a credible, controlled presence instead of scattered listings or nothing at all.</p>
+        <div class="why-grid">
+          <div class="why">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.5-3 7-7 9-4-2-7-4.5-7-9V6z"/></svg>Builds trust</h3>
+            <p>A clear, professional site with your credentials signals that you're established and accountable, before the first conversation.</p>
+          </div>
+          <div class="why">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.9 7.2 17l.9-5.4L4.2 7.7l5.4-.8z"/></svg>Proves credibility</h3>
+            <p>Qualifications, licences, experience, and past work in one place, a credential reference anyone can verify.</p>
+          </div>
+          <div class="why">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>Makes you visible</h3>
+            <p>Show up when someone searches your name or service, on Google and in AI answers, instead of being invisible.</p>
+          </div>
+          <div class="why">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H5.2L4 17.2z"/><path d="M8 9h8M8 12h5"/></svg>Your digital calling card</h3>
+            <p>One link for your bio, business card, email signature, and socials. Hand it out once, everything's there.</p>
+          </div>
+          <div class="why">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h9M4 12h9M4 18h6"/><circle cx="19" cy="6" r="1.6"/><circle cx="19" cy="12" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Advertises your work</h3>
+            <p>Promote your services, showcase results, and invite collaborations with future clients and business partners.</p>
+          </div>
+          <div class="why">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Easy to reach</h3>
+            <p>Clear contact paths, call, message, book, or enquire, so an interested visitor becomes a real lead in one tap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compliance -->
+    <section class="block" id="compliance">
+      <div class="wrap">
+        <span class="kicker">Effective &amp; compliant</span>
+        <h2>Not a demo, a real standard already in use abroad.</h2>
+        <p class="body">The E-Profile isn't a test project. It's an ongoing move in markets where professionals are expected to have a credible, lawful online presence, and where the law dictates exactly what that presence may say.</p>
+        <div class="callout">
+          <div class="callout-top">
+            <div class="country-row">
+              <span class="flagchip">
+                <svg class="flag-icon" viewBox="0 0 30 20" aria-hidden="true">
+                  <defs><clipPath id="hkClip"><rect width="30" height="20" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#hkClip)">
+                    <rect width="30" height="20" fill="#DE2910"/>
+                    <g fill="#fff" transform="translate(15,10)">
+                      <path id="hkPetal" d="M0,-1 C2,-3 2.2,-6 0,-8 C-2.2,-6 -2,-3 0,-1 Z"/>
+                      <use href="#hkPetal" transform="rotate(72)"/>
+                      <use href="#hkPetal" transform="rotate(144)"/>
+                      <use href="#hkPetal" transform="rotate(216)"/>
+                      <use href="#hkPetal" transform="rotate(288)"/>
+                    </g>
+                  </g>
+                </svg>
+                Hong Kong
+              </span>
+              <span class="flagchip">
+                <svg class="flag-icon" viewBox="0 0 30 20" aria-hidden="true">
+                  <defs><clipPath id="sgClip"><rect width="30" height="20" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#sgClip)">
+                    <rect width="30" height="20" fill="#fff"/>
+                    <rect width="30" height="10" fill="#EF3340"/>
+                    <circle cx="8" cy="5" r="3.4" fill="#fff"/>
+                    <circle cx="9.4" cy="5" r="3" fill="#EF3340"/>
+                    <g fill="#fff">
+                      <use href="#star5" transform="translate(14,3) scale(0.9)"/>
+                      <use href="#star5" transform="translate(16.3,4.3) scale(0.9)"/>
+                      <use href="#star5" transform="translate(15.4,6.8) scale(0.9)"/>
+                      <use href="#star5" transform="translate(12.6,6.8) scale(0.9)"/>
+                      <use href="#star5" transform="translate(11.7,4.3) scale(0.9)"/>
+                    </g>
+                  </g>
+                </svg>
+                Singapore
+              </span>
+              <span class="flagchip">
+                <svg class="flag-icon" viewBox="0 0 30 20" aria-hidden="true">
+                  <defs><clipPath id="auClip"><rect width="30" height="20" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#auClip)">
+                    <rect width="30" height="20" fill="#00247D"/>
+                    <rect x="0" y="0" width="15" height="10" fill="#00247D"/>
+                    <path d="M0,0 L15,10 M15,0 L0,10" stroke="#fff" stroke-width="1.6"/>
+                    <path d="M0,0 L15,10 M15,0 L0,10" stroke="#CF142B" stroke-width="0.7"/>
+                    <path d="M7.5,0 V10 M0,5 H15" stroke="#fff" stroke-width="2.4"/>
+                    <path d="M7.5,0 V10 M0,5 H15" stroke="#CF142B" stroke-width="1"/>
+                    <use href="#star5" fill="#fff" transform="translate(7.5,14) scale(1.1)"/>
+                    <use href="#star5" fill="#fff" transform="translate(22,4) scale(1.3)"/>
+                    <use href="#star5" fill="#fff" transform="translate(25,8) scale(0.9)"/>
+                    <use href="#star5" fill="#fff" transform="translate(24,13) scale(1.3)"/>
+                    <use href="#star5" fill="#fff" transform="translate(20,15) scale(1.1)"/>
+                    <use href="#star5" fill="#fff" transform="translate(19,10) scale(0.7)"/>
+                  </g>
+                </svg>
+                Australia
+              </span>
+              <span class="flagchip new">
+                <svg class="flag-icon" viewBox="0 0 30 20" aria-hidden="true">
+                  <defs><clipPath id="phClip"><rect width="30" height="20" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#phClip)">
+                    <rect width="30" height="10" fill="#0038A8"/>
+                    <rect y="10" width="30" height="10" fill="#CE1126"/>
+                    <path d="M0,0 L14,10 L0,20 Z" fill="#fff"/>
+                    <use href="#star5" fill="#FCD116" transform="translate(2.2,2.2) scale(0.5)"/>
+                    <use href="#star5" fill="#FCD116" transform="translate(2.2,17.8) scale(0.5)"/>
+                    <use href="#star5" fill="#FCD116" transform="translate(11,10) scale(0.5)"/>
+                    <g stroke="#FCD116" stroke-width="0.6" transform="translate(4.6,10)">
+                      <line x1="0" y1="-3" x2="0" y2="-1.6"/>
+                      <line x1="0" y1="3" x2="0" y2="1.6"/>
+                      <line x1="-3" y1="0" x2="-1.6" y2="0"/>
+                      <line x1="3" y1="0" x2="1.6" y2="0"/>
+                      <line x1="-2.1" y1="-2.1" x2="-1.1" y2="-1.1"/>
+                      <line x1="2.1" y1="-2.1" x2="1.1" y2="-1.1"/>
+                      <line x1="-2.1" y1="2.1" x2="-1.1" y2="1.1"/>
+                      <line x1="2.1" y1="2.1" x2="1.1" y2="1.1"/>
+                      <circle r="1.4" fill="#FCD116" stroke="none"/>
+                    </g>
+                  </g>
+                </svg>
+                Philippines · onboarding
+              </span>
+            </div>
+          </div>
+          <div class="callout-body">
+            <p>In many countries, a professional's website is governed by law, especially in regulated fields like medicine and finance. There are strict rules on what may be advertised, what must be disclosed, and how a practitioner may present themselves to the public.</p>
+            <p>That's where Antheon's E-Profile comes in. We follow each country's governing laws and build the required content, disclaimers, and disclosures into your site, so it stays lawful while still reflecting <strong>your goals and requirements as the client</strong>.</p>
+            <ul class="comp-list">
+              <li>Required legal disclaimers and disclosures included</li>
+              <li>Advertising and publicity rules respected by design</li>
+              <li>Privacy and data-handling notices where the law requires them</li>
+              <li>Your content and intent preserved, within the rules</li>
+            </ul>
+            <div class="sg-note"><strong>Example, Singapore:</strong> strict rules govern what medical practitioners may publish online, covering how services are described and what claims must, or must not, appear. Antheon builds the E-Profile to meet them from day one, so it's compliant while still presenting you clearly and credibly.</div>
+            <div class="sg-note"><strong>Bringing this to the Philippines:</strong> as we onboard Filipino professionals, we build each E-Profile around the standards you already answer to, including PRC licensing for doctors and dentists, the relevant rules for lawyers and financial advisors, and the Data Privacy Act for how client information is handled, so your profile stays credible, professional, and ready as local requirements evolve.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Standards -->
+    <section class="block" id="standards">
+      <div class="wrap">
+        <span class="kicker">Antheon web standards</span>
+        <h2>Built for how people, and AI, find you.</h2>
+        <p class="body">Every E-Profile is engineered to modern standards, not just "a website." We build for three ways you get discovered: classic search, direct answers, and AI-generated results.</p>
+        <div class="std-grid">
+          <div class="std">
+            <div class="abbr">SEO</div>
+            <div class="full">Search Engine Optimization</div>
+            <h3>Rank in search</h3>
+            <p>Appear when someone searches your name or service on Google, Bing, and other search engines.</p>
+          </div>
+          <div class="std">
+            <div class="abbr">AEO</div>
+            <div class="full">Answer Engine Optimization</div>
+            <h3>Be the direct answer</h3>
+            <p>Be served as the direct answer, featured snippets, voice results, and "people also ask" boxes.</p>
+          </div>
+          <div class="std">
+            <div class="abbr">GEO</div>
+            <div class="full">Generative Engine Optimization</div>
+            <h3>Get cited by AI</h3>
+            <p>Get mentioned and recommended by AI tools like ChatGPT, Gemini, and AI Overviews.</p>
+          </div>
+        </div>
+        <a href="../antheon-standard.html" target="_blank" rel="noopener" class="std-link" data-cta="standards-learn">
+          See the difference between SEO, AEO &amp; GEO
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="block" id="pricing">
+      <div class="wrap">
+        <span class="kicker">Get started</span>
+        <h2>Start free. Keep it your way.</h2>
+        <p class="body">Book a free E-Profile and we'll build it and run it for one month, free, on Antheon's domain. Love it? Choose how to keep it live.</p>
+        <div class="plans">
+          <div class="plan featured">
+            <span class="plan-flag">Start here</span>
+            <span class="plan-name">Free E-Profile</span>
+            <div class="price">Free <small>/ first month</small></div>
+            <p class="price-sub">On an Antheon domain · no card required</p>
+            <ul>
+              <li>Full E-Profile built for you</li>
+              <li>Live for 1 month on our domain</li>
+              <li>Country-compliant content &amp; disclaimers</li>
+              <li>SEO, AEO &amp; GEO ready</li>
+              <li>No commitment, decide after</li>
+            </ul>
+            <a href="https://wa.me/639914746063?text=Hi%20Antheon%2C%20I%27d%20like%20to%20book%20a%20Free%20E-Profile." target="_blank" rel="noopener" class="btn btn-primary" data-cta="pricing-free">Book a Free E-Profile</a>
+          </div>
+          <div class="plan">
+            <span class="plan-name">Option 1 · Your Domain</span>
+            <div class="price">Own it <small>fully</small></div>
+            <p class="price-sub">e.g. www.yoursite.com, yours to keep</p>
+            <ul>
+              <li>Your own custom domain</li>
+              <li>Full setup handled by Antheon</li>
+              <li>Independent, professional address</li>
+              <li>Ideal for building your own brand</li>
+              <li>Scoped &amp; quoted to your needs</li>
+            </ul>
+            <a href="https://wa.me/639914746063?text=Hi%20Antheon%2C%20I%27d%20like%20to%20set%20up%20my%20E-Profile%20on%20my%20own%20domain%20(Option%201)." target="_blank" rel="noopener" class="btn btn-outline" data-cta="pricing-own-domain">Set up my domain</a>
+          </div>
+          <div class="plan">
+            <span class="plan-name">Option 2 · Our Domain</span>
+            <div class="price">PHP 499 <small>/ month</small></div>
+            <p class="price-sub">or PHP 3,499 / year <span class="save-tag">Save ~42%</span></p>
+            <ul>
+              <li>Hosted on Antheon's domain</li>
+              <li>Hosting &amp; upkeep included</li>
+              <li>Kept compliant &amp; up to date</li>
+              <li>Monthly: PHP 499</li>
+              <li>Annual: PHP 3,499 (best value)</li>
+            </ul>
+            <a href="https://wa.me/639914746063?text=Hi%20Antheon%2C%20I%27d%20like%20to%20start%20a%20subscription%20on%20Antheon%27s%20domain%20(Option%202)." target="_blank" rel="noopener" class="btn btn-outline" data-cta="pricing-subscription">Start a subscription</a>
+          </div>
+        </div>
+        <p class="price-note"><strong>Not sure which fits?</strong> Start with the free E-Profile. After your month, keep it on your own domain (Option 1) or subscribe on Antheon's domain (Option 2), PHP 499 monthly or PHP 3,499 yearly. No lock-in.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block" id="faq">
+      <div class="wrap">
+        <span class="kicker">Questions</span>
+        <h2>What professionals ask.</h2>
+        <div style="margin-top:20px;">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>What exactly is an E-Profile?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p>A personal website for a single professional, not a company. It presents who you are, your credentials, your services and work, and how to reach you in one credible, controlled place. Think of it as your digital calling card and credibility reference.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>Can I see a sample E-Profile before I book mine?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p>Yes, the <a href="sample/index.html" target="_blank" rel="noopener">"Dr. Li Wei" E-Profile</a> is a mock up built for a medical professional (a dentist), showing the credentials layout, treatments grid, FAQ, and booking flow. It's a fictional profile, no real practitioner is portrayed, used only to demonstrate the standard and structure Antheon builds for professionals in the Philippines.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>Who is it for?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p>Any professional or individual who wants a credible presence online, doctors, dentists, financial advisors, business owners, lawyers, consultants, real estate agents, coaches, and more. If people look you up before they trust you, it's for you.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>How is the free E-Profile free?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p>We build your E-Profile and run it live for one full month on Antheon's domain, no cost, no card required. It's a real, working site, not a preview. After the month, you choose whether to keep it, with no obligation to continue.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>What are the options and prices after the free month?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p><strong>Option 1, Your own domain:</strong> run it fully under your own web address, like www.yoursite.com. We set it up end to end; scope and cost are quoted to your needs.</p><p><strong>Option 2, Antheon's domain:</strong> keep it live by subscription for PHP 499 per month or PHP 3,499 per year, with hosting, upkeep, and compliance handled.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>How do you keep my profile compliant with the law?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p>Many countries regulate what a professional's website may say, especially in medicine and finance. We build your E-Profile to follow the governing rules of your country and profession, adding required disclaimers and disclosures, already a live standard in Hong Kong, Singapore, and Australia, and now brought to the Philippines.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><h3>What are SEO, AEO, and GEO?</h3><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><p><strong>SEO</strong> gets you ranking in search engines. <strong>AEO</strong> makes you the direct answer in snippets and voice results. <strong>GEO</strong> gets you mentioned by AI tools like ChatGPT and AI Overviews. Every Antheon E-Profile is built to all three.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Contact -->
+    <section class="block" id="contact">
+      <div class="wrap">
+        <div class="cta-card">
+          <h2>Book your <span class="accent">free E-Profile</span>.</h2>
+          <p>Tell us who you are and what you do. We'll build your E-Profile and run it free for one month on Antheon's domain, no card, no commitment.</p>
+          <div class="cta-actions">
+            <a href="https://wa.me/639914746063" target="_blank" rel="noopener" class="btn btn-primary" data-cta="contact-whatsapp">Message on WhatsApp</a>
+            <a href="mailto:dev@antheonph.com?subject=Free%20E-Profile" class="btn btn-outline" data-cta="contact-email">Email us</a>
+          </div>
+          <p class="cta-contact">Or reach us at <a href="mailto:dev@antheonph.com">dev@antheonph.com</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <span>© 2026 Antheon · E-Profile</span>
+      <a href="../index.htm">← Back to Antheon</a>
+    </div>
+  </footer>
+
+  <!-- Summary popup: a quick slide through overview for anyone who doesn't want to read the whole page -->
+  <div class="summary-overlay" id="summaryOverlay" aria-hidden="true">
+    <div class="summary-modal" role="dialog" aria-modal="true" aria-labelledby="summarySlideTitle">
+      <button type="button" class="summary-close" id="summaryClose" aria-label="Close summary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+
+      <div class="summary-slides" id="summarySlides">
+        <div class="summary-slide is-active" data-slide="0">
+          <span class="summary-eyebrow">1 / 7 · What it is</span>
+          <h3 id="summarySlideTitle">A personal website, not a company site.</h3>
+          <p>An E-Profile is a compliance-ready website built for a single professional, not a company. It's your digital calling card and credibility reference: the place clients and partners find, verify, and contact you.</p>
+        </div>
+        <div class="summary-slide" data-slide="1">
+          <span class="summary-eyebrow">2 / 7 · Who it's for</span>
+          <h3>Any professional who wants to be found and trusted.</h3>
+          <p>Doctors, dentists, financial advisors, business owners, lawyers, consultants, real estate agents, and any individual professional who wants a credible presence online.</p>
+        </div>
+        <div class="summary-slide" data-slide="2">
+          <span class="summary-eyebrow">3 / 7 · Why it matters</span>
+          <h3>Trust, credibility, and visibility, in one link.</h3>
+          <p>It builds trust, proves your credentials, makes you visible in search and AI results, works as your digital calling card, advertises your work, and gives people an easy way to reach you.</p>
+        </div>
+        <div class="summary-slide" data-slide="3">
+          <span class="summary-eyebrow">4 / 7 · Compliance built in</span>
+          <h3>Built to each country's rules, not just a template.</h3>
+          <p>Already a live standard in Hong Kong, Singapore, and Australia, now brought to the Philippines. Antheon builds the required disclaimers and disclosures into every E-Profile, so it stays lawful while reflecting your goals.</p>
+        </div>
+        <div class="summary-slide" data-slide="4">
+          <span class="summary-eyebrow">5 / 7 · Modern standards</span>
+          <h3>Built for search, answers, and AI.</h3>
+          <p>Every E-Profile is engineered for SEO (ranking in search), AEO (being the direct answer), and GEO (getting recommended by AI tools like ChatGPT), so you're found however people look for you.</p>
+        </div>
+        <div class="summary-slide" data-slide="5">
+          <span class="summary-eyebrow">6 / 7 · Pricing</span>
+          <h3>Start free. Keep it your way.</h3>
+          <p>Book a free E-Profile and Antheon builds and runs it for one month, free, on Antheon's domain. After that, keep it on your own domain, or continue on Antheon's domain for PHP 499 a month or PHP 3,499 a year.</p>
+        </div>
+        <div class="summary-slide" data-slide="6">
+          <span class="summary-eyebrow">7 / 7 · That's the short version</span>
+          <h3>For more information, refer to the full page.</h3>
+          <p>This was just the quick version. Close this to scroll through the full page for the sample E-Profile, the complete pricing breakdown, and answers to common questions.</p>
+          <div class="summary-outro-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="summaryDone">Close and read more</button>
+            <a href="sample/index.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm" data-cta="summary-view-sample">View E-Profile Sample</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-nav">
+        <button type="button" class="summary-navbtn" id="summaryPrev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+          Back
+        </button>
+        <div class="summary-dots" id="summaryDots" aria-hidden="true"></div>
+        <button type="button" class="summary-navbtn summary-navbtn-next" id="summaryNext" aria-label="Next slide">
+          Next
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://antheonph.com/e-profile/#service",
+        "name": "E-Profile for Professionals",
+        "provider": { "@type": "Organization", "name": "Antheon", "url": "https://antheonph.com/" },
+        "serviceType": "Professional digital profile website",
+        "description": "A personal, compliance-ready website for a professional, doctor, dentist, financial advisor, business owner, and more, built to each country's laws and to SEO, AEO, and GEO standards.",
+        "areaServed": ["Philippines", "Hong Kong", "Singapore", "Australia"],
+        "offers": [
+          { "@type": "Offer", "name": "Free E-Profile, first month on Antheon's domain", "price": "0", "priceCurrency": "PHP" },
+          { "@type": "Offer", "name": "Antheon domain subscription, monthly", "price": "499", "priceCurrency": "PHP" },
+          { "@type": "Offer", "name": "Antheon domain subscription, annual", "price": "3499", "priceCurrency": "PHP" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://antheonph.com/" },
+          { "@type": "ListItem", "position": 2, "name": "E-Profile", "item": "https://antheonph.com/e-profile/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What exactly is an E-Profile?", "acceptedAnswer": { "@type": "Answer", "text": "A personal website for a single professional, not a company. It presents who you are, your credentials, your services and work, and how to reach you in one credible, controlled place. It acts as your digital calling card and credibility reference." } },
+          { "@type": "Question", "name": "Can I see a sample E-Profile before I book mine?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The 'Dr. Li Wei' E-Profile is a mock up built for a medical professional (a dentist), showing the credentials layout, treatments grid, FAQ, and booking flow. It is a fictional profile, no real practitioner is portrayed, used only to demonstrate the standard and structure Antheon builds for professionals in the Philippines." } },
+          { "@type": "Question", "name": "Who is an E-Profile for?", "acceptedAnswer": { "@type": "Answer", "text": "Any professional or individual who wants a credible presence online, doctors, dentists, financial advisors, business owners, lawyers, consultants, real estate agents, coaches, and more." } },
+          { "@type": "Question", "name": "How is the free E-Profile free?", "acceptedAnswer": { "@type": "Answer", "text": "Antheon builds your E-Profile and runs it live for one full month on Antheon's domain at no cost and with no card required. After the month, you choose to keep it on your own domain or on Antheon's domain by subscription, with no obligation." } },
+          { "@type": "Question", "name": "What are the prices after the free month?", "acceptedAnswer": { "@type": "Answer", "text": "Option 1: run the E-Profile fully under your own domain, set up by Antheon and quoted to your needs. Option 2: keep it on Antheon's domain by subscription for PHP 499 per month or PHP 3,499 per year." } },
+          { "@type": "Question", "name": "How do you keep my profile compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Antheon builds your E-Profile to follow the governing rules of your country and profession, adding required disclaimers and disclosures. This is a live standard in Hong Kong, Singapore, and Australia, and is now offered in the Philippines." } },
+          { "@type": "Question", "name": "What are SEO, AEO, and GEO?", "acceptedAnswer": { "@type": "Answer", "text": "SEO gets you ranking in search engines. AEO makes you the direct answer in snippets and voice results. GEO gets you mentioned by AI tools like ChatGPT and AI Overviews. Every Antheon E-Profile is built to all three." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // CTA tracking (GTM dataLayer if present)
+    window.dataLayer = window.dataLayer || [];
+    document.querySelectorAll('[data-cta]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        window.dataLayer.push({ event: 'cta_click', cta_id: el.getAttribute('data-cta') });
+      });
+    });
+
+    // FAQ accordion: one open at a time
+    (function () {
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function (item) {
+        var btn = item.querySelector('.faq-q');
+        var panel = item.querySelector('.faq-a');
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('open');
+          items.forEach(function (other) {
+            other.classList.remove('open');
+            other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+            other.querySelector('.faq-a').style.maxHeight = null;
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+
+    // Shared scroll controller: eased anchor jumps + slow momentum wheel scroll (same as the main Antheon site)
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var headerEl = document.querySelector('.subbar');
+      var ctrl = { anchorActive: false, wheelRaf: null };
+
+      // --- Anchor clicks: slow start, accelerates into the section ---
+      function easeInQuad(t) { return t * t; }
+
+      function animateScrollTo(targetY) {
+        var startY = window.pageYOffset;
+        var diff = targetY - startY;
+        if (Math.abs(diff) < 1) return;
+        var duration = Math.min(1400, Math.max(500, Math.abs(diff) * 0.7));
+        var startTime = null;
+        ctrl.anchorActive = true;
+        function step(timestamp) {
+          if (!ctrl.anchorActive) return; // interrupted by manual scroll
+          if (startTime === null) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          window.scrollTo({ top: startY + diff * easeInQuad(progress), left: 0, behavior: 'instant' });
+          if (progress < 1) { requestAnimationFrame(step); } else { ctrl.anchorActive = false; }
+        }
+        requestAnimationFrame(step);
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        var id = link.getAttribute('href').slice(1);
+        if (!id) return;
+        var target = document.getElementById(id);
+        if (!target) return;
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var offset = headerEl ? headerEl.offsetHeight : 0;
+          var targetY = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          if (reduce) {
+            window.scrollTo({ top: targetY, left: 0, behavior: 'instant' });
+          } else {
+            animateScrollTo(targetY);
+          }
+          if (history.pushState) { history.pushState(null, '', '#' + id); }
+        });
+      });
+
+      // --- Mouse wheel: slow, trailing momentum scroll instead of an instant jump ---
+      if (!reduce && 'ontouchstart' in window === false) {
+        var virtualY = window.pageYOffset;
+        var targetY = window.pageYOffset;
+
+        function wheelLoop() {
+          virtualY += (targetY - virtualY) * 0.11;
+          if (Math.abs(targetY - virtualY) < 0.4) {
+            virtualY = targetY;
+            window.scrollTo({ top: virtualY, left: 0, behavior: 'instant' });
+            ctrl.wheelRaf = null;
+            return;
+          }
+          window.scrollTo({ top: virtualY, left: 0, behavior: 'instant' });
+          ctrl.wheelRaf = requestAnimationFrame(wheelLoop);
+        }
+
+        window.addEventListener('wheel', function (e) {
+          ctrl.anchorActive = false; // manual scroll takes over from any anchor animation
+          var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          virtualY = window.pageYOffset;
+          targetY = Math.min(maxScroll, Math.max(0, targetY + e.deltaY * 0.7));
+          e.preventDefault();
+          if (!ctrl.wheelRaf) { ctrl.wheelRaf = requestAnimationFrame(wheelLoop); }
+        }, { passive: false });
+
+        // keep target in sync if the user scrolls via keyboard, scrollbar drag, etc.
+        window.addEventListener('scroll', function () {
+          if (!ctrl.wheelRaf && !ctrl.anchorActive) { targetY = window.pageYOffset; }
+        }, { passive: true });
+      }
+    })();
+
+    // Summary popup: slide through overview, open/close, prev/next, dots, keyboard, and click outside to close
+    (function () {
+      var openBtn = document.getElementById('summaryOpen');
+      var overlay = document.getElementById('summaryOverlay');
+      var closeBtn = document.getElementById('summaryClose');
+      var doneBtn = document.getElementById('summaryDone');
+      var prevBtn = document.getElementById('summaryPrev');
+      var nextBtn = document.getElementById('summaryNext');
+      var dotsWrap = document.getElementById('summaryDots');
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.summary-slide'));
+      if (!openBtn || !overlay || !slides.length) return;
+
+      var current = 0;
+      var last = slides.length - 1;
+
+      slides.forEach(function (slide, i) {
+        var dot = document.createElement('span');
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+      });
+      var dots = Array.prototype.slice.call(dotsWrap.children);
+
+      function render() {
+        slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === current); });
+        dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === current); });
+        prevBtn.disabled = current === 0;
+        nextBtn.style.display = current === last ? 'none' : 'inline-flex';
+      }
+
+      function goTo(i) {
+        current = Math.max(0, Math.min(last, i));
+        render();
+      }
+
+      function open() {
+        current = 0;
+        render();
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function close() {
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      if (doneBtn) doneBtn.addEventListener('click', close);
+      prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (!overlay.classList.contains('is-open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight' && current < last) goTo(current + 1);
+        if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+      });
+    })();
+  </script>
+
+</body>
+</html>
