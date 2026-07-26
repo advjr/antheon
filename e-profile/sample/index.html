@@ -481,19 +481,19 @@ hr.rule{border:none;height:1px;background:var(--line);margin:0;}
 .channels a.cv:hover{color:var(--gold-soft);}
 .channels .cs{font-size:14px;color:var(--on-dark-soft);margin-top:4px;}
 
-/* footer — deep navy background */
-footer{background:var(--navy);color:var(--on-dark-soft);padding:60px 0 40px;}
+/* footer — white background, a distinct light layer under the dark contact section */
+footer{background:#fff;color:var(--ink-soft);padding:60px 0 40px;border-top:1px solid var(--line);}
 .foot-top{display:grid;grid-template-columns:1fr;gap:36px;}
 @media(min-width:768px){.foot-top{grid-template-columns:2fr 1fr 1fr;gap:48px;}}
-.foot-brand .bk{font-family:var(--font-display);font-size:26px;font-weight:600;color:#fff;}
+.foot-brand .bk{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--ink);}
 .lang-zh .foot-brand .bk{font-family:var(--font-cjk-serif);}
-.foot-brand p{font-size:15px;color:var(--on-dark-soft);margin-top:12px;max-width:380px;line-height:1.6;}
-.foot-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px;}
-.foot-col a,.foot-col span{display:block;font-size:15px;color:var(--on-dark-soft);margin-bottom:11px;transition:color .2s;}
-.foot-col a:hover{color:#fff;}
-.disclaimer{margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:var(--on-dark-soft);line-height:1.7;max-width:920px;}
-.disclaimer strong{color:#fff;}
-.foot-bottom{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--on-dark-soft);}
+.foot-brand p{font-size:15px;color:var(--ink-soft);margin-top:12px;max-width:380px;line-height:1.6;}
+.foot-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.foot-col a,.foot-col span{display:block;font-size:15px;color:var(--ink-soft);margin-bottom:11px;transition:color .2s;}
+.foot-col a:hover{color:var(--ink);}
+.disclaimer{margin-top:48px;padding-top:28px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft);line-height:1.7;max-width:920px;}
+.disclaimer strong{color:var(--ink);}
+.foot-bottom{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--ink-soft);}
 
 /* ----- Sticky WhatsApp bar ----- */
 .sticky-bar{
@@ -528,18 +528,18 @@ footer{background:var(--navy);color:var(--on-dark-soft);padding:60px 0 40px;}
 @media(min-width:768px){.preloader-logo-text{font-size:52px;}.preloader-dismiss{font-size:14px;}}
 
 /* ----- Footer resources + legal (drchangfugui-style) ----- */
-.foot-resources{margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-soft);}
-.foot-resources .fr-label{color:var(--gold-soft);}
-.foot-resources a{color:var(--on-dark-soft);transition:color .2s;}
-.foot-resources a:hover{color:#fff;}
-.foot-resources .dot{color:rgba(255,255,255,.3);}
+.foot-resources{margin-top:44px;padding-top:26px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+.foot-resources .fr-label{color:var(--gold);}
+.foot-resources a{color:var(--ink-soft);transition:color .2s;}
+.foot-resources a:hover{color:var(--ink);}
+.foot-resources .dot{color:var(--line-strong);}
 .foot-bottom .foot-legal{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;}
 .foot-bottom .foot-legal a,.foot-bottom .foot-legal button{
   font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--on-dark-soft);background:none;border:none;cursor:pointer;padding:0;transition:color .2s;
+  color:var(--ink-soft);background:none;border:none;cursor:pointer;padding:0;transition:color .2s;
 }
-.foot-bottom .foot-legal a:hover,.foot-bottom .foot-legal button:hover{color:var(--gold-soft);}
-.foot-bottom .foot-legal .sep{color:rgba(255,255,255,.3);}
+.foot-bottom .foot-legal a:hover,.foot-bottom .foot-legal button:hover{color:var(--gold);}
+.foot-bottom .foot-legal .sep{color:var(--line-strong);}
 
 /* ----- Cookie consent banner ----- */
 .cookie{position:fixed;left:0;right:0;bottom:0;z-index:200;padding:0 16px 16px;
