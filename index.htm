@@ -225,21 +225,88 @@
     @media (max-width: 767px){ .section-head h2 { font-size: 30px; } .section-head{ margin-bottom: 40px; } }
     @media (max-width: 1024px) { #faq .section-head { text-align: center; margin-left: auto; margin-right: auto; } }
 
-    /* --- Hero --- */
-    .hero { padding: 72px 0 84px; position: relative; overflow: hidden; }
-    @media (min-width: 768px) { .hero { padding: 110px 0 90px; } }
-    .hero::before {
-      content: "";
-      position: absolute; top: -20%; right: -10%;
-      width: 620px; height: 620px;
-      background: radial-gradient(circle at center, rgba(147,51,234,0.14), rgba(59,130,246,0.06) 45%, transparent 70%);
-      z-index: 0; pointer-events: none;
-      filter: blur(4px);
+    /* --- Hero: interactive violet aurora background --- */
+    .hero {
+      padding: 72px 0 0;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--brand-ink);
     }
-    .hero-centered {
-      background: linear-gradient(160deg, #FBFAFF 0%, var(--bg) 45%, #F8FAFF 100%);
-    }
+    @media (min-width: 768px) { .hero { padding: 110px 0 0; } }
+    .hero-centered { background: var(--brand-ink); }
     .hero .container { position: relative; z-index: 1; width: 100%; }
+
+    /* Background stack (mesh -> beams -> grain -> cursor glow), all non-interactive */
+    .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .hero-bg > span { position: absolute; display: block; }
+
+    /* 1. Mesh: overlapping violet and blue colour fields over a deep ink base */
+    .hb-mesh {
+      inset: -12%;
+      background:
+        radial-gradient(ellipse 68% 56% at 14% 10%, rgba(147,51,234,0.55), transparent 62%),
+        radial-gradient(ellipse 56% 54% at 86% 14%, rgba(59,130,246,0.45), transparent 60%),
+        radial-gradient(ellipse 62% 52% at 76% 90%, rgba(109,72,230,0.50), transparent 62%),
+        radial-gradient(ellipse 58% 46% at 20% 86%, rgba(88,28,135,0.48), transparent 62%),
+        radial-gradient(ellipse 40% 34% at 50% 46%, rgba(167,139,250,0.18), transparent 66%),
+        linear-gradient(168deg, #211544 0%, #2A1A52 45%, #170E2B 100%);
+      animation: heroDrift 26s ease-in-out infinite;
+    }
+    @keyframes heroDrift {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50%      { transform: translate3d(-1.6%, 1.2%, 0) scale(1.06); }
+    }
+
+    /* 2. Beams: soft diagonal light shafts sweeping across the panel */
+    .hb-beams {
+      inset: -30%;
+      transform: rotate(18deg);
+      background:
+        linear-gradient(90deg, transparent 0%,  rgba(196,181,253,0.11) 8%,  transparent 17%),
+        linear-gradient(90deg, transparent 26%, rgba(147,197,253,0.09) 34%, transparent 43%),
+        linear-gradient(90deg, transparent 55%, rgba(216,180,254,0.08) 62%, transparent 70%),
+        linear-gradient(90deg, transparent 78%, rgba(147,197,253,0.06) 85%, transparent 93%);
+      filter: blur(18px);
+    }
+
+    /* 3. Grain: breaks up gradient banding so the field reads as texture, not flat colour */
+    .hb-grain {
+      inset: 0;
+      opacity: 0.055;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* 4. WebGL aurora: domain-warped noise field that flows toward the cursor.
+          Sits over the CSS mesh above, which stays as the no-WebGL fallback. */
+    .hb-canvas {
+      position: absolute; inset: 0; display: block;
+      width: 100%; height: 100%;
+      opacity: 0; transition: opacity 0.8s ease;
+    }
+    .hb-canvas.ready { opacity: 1; }
+    /* Once the shader is live it fully covers the CSS mesh, so stop drifting it:
+       animating a layer nobody can see just costs compositing work. */
+    .hero-bg.gl .hb-mesh { animation: none; }
+
+    /* 5. Scrim: keeps headline and body copy legible over the brightest parts of the field.
+          Two soft plates sit behind the centred copy and the logo strip. */
+    .hb-scrim {
+      inset: 0;
+      background:
+        /* badge, headline, lead, tags, buttons (hero-center sits at 7-38% of the section) */
+        radial-gradient(ellipse 58% 28% at 50% 22%, rgba(8,4,18,0.62) 0%, rgba(8,4,18,0.30) 60%, transparent 82%),
+        /* trust label + logo marquee (41-49%) */
+        radial-gradient(ellipse 48% 11% at 50% 45%, rgba(8,4,18,0.62) 0%, rgba(8,4,18,0.28) 62%, transparent 84%),
+        /* The banner image fills the bottom half and is deliberately left
+           unscrimmed so the artwork keeps its own contrast. */
+        linear-gradient(180deg, rgba(8,4,18,0.40) 0%, rgba(8,4,18,0.06) 20%, rgba(8,4,18,0.06) 100%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hb-mesh { animation: none; }
+    }
 
     .hero-center { max-width: 780px; margin: 0 auto; text-align: center; }
     @media (max-width: 767px) {
@@ -281,6 +348,9 @@
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
     .hero-actions.centered { justify-content: center; margin-bottom: 48px; }
 
+    /* Stats band: its own light section below the hero, no aurora behind it */
+    .stats-band { padding: 56px 0 64px; background: var(--bg); }
+    @media (max-width: 767px) { .stats-band { padding: 36px 0 44px; } }
     .hero-stats {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 16px;
       padding-top: 40px; border-top: 1px solid var(--border);
@@ -295,7 +365,7 @@
     /* Hero visual: schematic system diagram */
     .hero-visual {
       width: 100vw;
-      margin: 48px calc(50% - 50vw) 56px;
+      margin: 48px calc(50% - 50vw) 0;
       aspect-ratio: 16 / 9;
       overflow: hidden;
     }
@@ -314,7 +384,7 @@
       .hero-actions.centered .btn { width: auto; white-space: nowrap; }
       .hero-actions.centered .btn-outline { padding: 13px 26px; font-size: 14px; }
       .hero-actions.centered .btn-primary { padding: 17px 42px; font-size: 16px; }
-      .hero-visual { margin: 24px calc(50% - 50vw) 28px; aspect-ratio: unset; }
+      .hero-visual { margin: 24px calc(50% - 50vw) 0; aspect-ratio: unset; }
       .hero-visual img { height: auto; object-fit: unset; }
       .hero-stats { padding-top: 24px; gap: 20px 12px; }
     }
@@ -341,6 +411,56 @@
       .trust-label { font-size: 15px; letter-spacing: 0.04em; line-height: 1.5; padding: 0 16px; margin-bottom: 22px; }
       .logo-track img { height: 26px; margin-right: 44px; }
     }
+
+    /* --- Hero on dark: light type + light chrome so everything stays legible --- */
+    .hero .hero-badge {
+      background: rgba(10,6,20,0.42); border-color: rgba(255,255,255,0.24);
+      color: rgba(255,255,255,0.82); text-shadow: 0 1px 8px rgba(8,4,18,0.5);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .hero .hero-badge:hover { background: rgba(10,6,20,0.55); border-color: rgba(255,255,255,0.4); }
+    .hero .hero-badge strong { color: #fff; }
+    /* Soft shadow keeps type readable wherever the animated field happens to be brightest */
+    .hero .hero-title { color: #fff; text-shadow: 0 2px 24px rgba(8,4,18,0.55); }
+    .hero .accent { color: #EFEAFF; }
+    .hero .hero-lead { color: rgba(255,255,255,0.95); text-shadow: 0 1px 14px rgba(8,4,18,0.55); }
+    .hero .hero-lead strong { color: #fff; }
+    .hero .hero-lead .hl-icon { color: #D6C9FF; }
+    .hero .hero-lead strong.ul { text-decoration-color: #C4B5FD; }
+    .hero .hero-tags { color: rgba(255,255,255,0.88); text-shadow: 0 1px 12px rgba(8,4,18,0.55); }
+    /* These sit over an animated field that can land bright or dark behind them,
+       so their own backing is a real dark plate (not a translucent tint riding on
+       whatever colour happens to be underneath) plus a text-shadow as backup. */
+    .hero .hero-tags .tag {
+      color: #fff; text-shadow: 0 1px 8px rgba(8,4,18,0.6);
+      border-color: rgba(255,255,255,0.4); background: rgba(10,6,20,0.42);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .hero .btn-outline {
+      color: #fff; text-shadow: 0 1px 8px rgba(8,4,18,0.5);
+      border-color: rgba(255,255,255,0.5); background: rgba(10,6,20,0.5);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .hero .btn-outline:hover { color: #fff; border-color: #fff; background: rgba(10,6,20,0.62); }
+    /* Primary CTA: solid white so it reads instantly against the aurora, with the
+       label filled in the brand gradient instead of plain text. The gradient fill
+       needs its own element (background-clip:text would otherwise clip the
+       button's own white background too), so the label is wrapped in a span. */
+    .hero .btn-primary {
+      background: #fff; box-shadow: 0 8px 24px -8px rgba(8,4,18,0.45);
+    }
+    .hero .btn-primary:hover {
+      background: #fff; color: inherit; box-shadow: 0 14px 32px -8px rgba(8,4,18,0.55);
+    }
+    .hero .btn-primary .btn-label {
+      background: var(--brand-gradient);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero .btn-primary svg { color: var(--brand-violet); }
+    .hero .trust-label { color: rgba(255,255,255,0.97); text-shadow: 0 1px 14px rgba(8,4,18,0.70); }
+    /* Client logos are dark artwork: flatten to white silhouettes, restore true colour on hover */
+    .hero .logo-track img { opacity: 0.65; filter: grayscale(100%) brightness(0) invert(1); }
+    .hero .logo-track img:hover { opacity: 1; filter: none; }
 
     .summary-block { padding: 56px 0; background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .summary-block p { font-size: 20px; line-height: 1.6; max-width: 900px; margin: 0 auto; text-align: center; color: var(--text); font-style: italic; }
@@ -669,6 +789,13 @@
 
     <!-- HERO -->
     <section class="hero hero-centered">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="hb-mesh"></span>
+        <span class="hb-beams"></span>
+        <canvas class="hb-canvas" id="heroCanvas"></canvas>
+        <span class="hb-grain"></span>
+        <span class="hb-scrim"></span>
+      </div>
       <div class="container">
         <div class="hero-center">
           <a href="#contact" class="hero-badge">
@@ -697,7 +824,7 @@
             </a>
             <a href="#contact" class="btn btn-primary" data-cta="hero-book">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><circle cx="9" cy="7" r="3"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M17 8l2 2 4-4"/></svg>
-              Book a Systems Audit
+              <span class="btn-label">Book a Systems Audit</span>
             </a>
           </div>
         </div>
@@ -725,6 +852,12 @@
           <img src="asset/antheon-banner-hd.png" alt="Before Antheon: scattered spreadsheets and disconnected tools. After Antheon: one engineered system with integrated CRM, automated workflows, and AI in the loop." width="1920" height="1080" loading="eager" fetchpriority="high">
         </div>
 
+      </div>
+    </section>
+
+    <!-- STATS BAND: sits on the normal page background, outside the hero aurora -->
+    <section class="stats-band">
+      <div class="container">
         <div class="hero-stats">
           <div class="hstat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/></svg>
@@ -1360,6 +1493,265 @@
         });
       }, { threshold: 0.12 });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Hero aurora: WebGL domain-warped noise field that flows and blooms toward the cursor.
+    // Falls back silently to the layered CSS mesh if WebGL is unavailable.
+    (function () {
+      var hero = document.querySelector('.hero');
+      var canvas = document.getElementById('heroCanvas');
+      if (!hero || !canvas) return;
+
+      var gl = canvas.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false })
+            || canvas.getContext('experimental-webgl', { alpha: false });
+      if (!gl) return; // CSS mesh stays visible
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var canHover = window.matchMedia('(hover: hover)').matches;
+
+      var VERT = [
+        'attribute vec2 p;',
+        'void main(){ gl_Position = vec4(p, 0.0, 1.0); }'
+      ].join('\n');
+
+      var FRAG = [
+        'precision highp float;',
+        'uniform vec2 u_res;',
+        'uniform float u_time;',
+        'uniform vec2 u_mouse;',
+        'uniform float u_amp;',
+        'uniform float u_radius;',
+        'uniform float u_wave;',
+        'uniform float u_waveK;',
+
+        'float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }',
+        'float noise(vec2 p){',
+        '  vec2 i = floor(p), f = fract(p);',
+        '  vec2 u = f*f*(3.0-2.0*f);',
+        '  return mix(mix(hash(i), hash(i+vec2(1.0,0.0)), u.x),',
+        '             mix(hash(i+vec2(0.0,1.0)), hash(i+vec2(1.0,1.0)), u.x), u.y);',
+        '}',
+        'float fbm(vec2 p){',
+        '  float v = 0.0, a = 0.5;',
+        '  for(int i = 0; i < 5; i++){ v += a*noise(p); p = p*2.02 + 17.3; a *= 0.5; }',
+        '  return v;',
+        '}',
+
+        'void main(){',
+        '  vec2 uv = gl_FragCoord.xy / u_res;',
+        '  float asp = u_res.x / max(u_res.y, 1.0);',
+        '  vec2 p = vec2(uv.x * asp, uv.y);',
+
+        // Pointer influence, confined to a real radius (u_radius is a pixel radius
+        // expressed in these units). smoothstep hits exactly zero at the edge, so
+        // the field is completely still outside the pool around the cursor.
+        '  vec2 m = vec2(u_mouse.x * asp, u_mouse.y);',
+        '  vec2 toM = p - m;',
+        '  float d = length(toM);',
+        '  float infl = 1.0 - smoothstep(0.0, u_radius, d);',
+        '  infl *= infl;',
+        '  infl *= u_amp;',
+
+        // Base field has no global time term, so it never churns on its own.
+        '  vec2 q = vec2(fbm(p*1.5), fbm(p*1.5 + vec2(5.2, 1.3)));',
+        '  vec2 r = vec2(fbm(p*1.5 + 2.6*q + vec2(1.7, 9.2)),',
+        '                fbm(p*1.5 + 2.6*q + vec2(8.3, 2.8)));',
+
+        // Ambient wave: a slow, shallow swell so the field is never frozen, which
+        // matters most on touch devices where nothing ever points at it. Two
+        // out-of-phase sines per axis keep it from looking like a single sweep.
+        // Amplitude is deliberately tiny (u_wave) so it reads as a gentle tide
+        // rather than the whole background moving.
+        // u_waveK is derived from hero height so the wavelength is a fixed number of
+        // screen pixels. p is already aspect-corrected, so one constant gives the
+        // same physical wavelength on both axes. Without this the wavelength scales
+        // with the element and a tall mobile hero just pulses uniformly.
+        '  float wt = u_time * 0.60;',
+        '  float k = u_waveK;',
+        '  vec2 wave = vec2(sin(wt + p.y * k) + 0.45 * sin(wt * 0.63 + p.y * k * 1.8),',
+        '                   cos(wt * 0.81 + p.x * k) + 0.45 * cos(wt * 0.57 + p.x * k * 1.7));',
+        '  r += wave * u_wave;',
+
+        // Local motion: a bounded swirl plus a drag toward the pointer, both
+        // scaled by infl so they vanish outside the radius. Using sin/cos keeps the
+        // phase bounded, so no shimmer creeps in as u_time grows.
+        '  float t = u_time * 0.55;',
+        '  vec2 churn = vec2(sin(t + d * 9.0), cos(t * 0.85 + d * 9.0));',
+        '  r += churn * infl * 0.15;',
+        '  r -= toM * infl * 0.95;',
+        '  float f = clamp(fbm(p*1.5 + 2.3*r), 0.0, 1.0);',
+
+        // Expand the noise into a wider tonal range: without this the field reads
+        // as one flat mid-violet and the headline loses contrast against it.
+        '  float fc = clamp((f - 0.30) / 0.44, 0.0, 1.0);',
+        '  fc = fc * fc * (3.0 - 2.0 * fc);',
+
+        // Antheon palette: deep ink -> violet -> brand violet -> brand blue -> pale lilac
+        '  vec3 ink    = vec3(0.043, 0.027, 0.094);',
+        '  vec3 deepV  = vec3(0.212, 0.071, 0.365);',
+        '  vec3 violet = vec3(0.576, 0.200, 0.918);',
+        '  vec3 blue   = vec3(0.231, 0.510, 0.965);',
+        '  vec3 pale   = vec3(0.886, 0.847, 1.000);',
+
+        '  vec3 col = ink;',
+        '  col = mix(col, deepV,  smoothstep(0.00, 0.40, fc));',
+        '  col = mix(col, violet, smoothstep(0.30, 0.72, fc) * 0.95);',
+        '  col = mix(col, blue,   smoothstep(0.56, 0.96, fc) * 0.70);',
+        '  col = mix(col, pale,   smoothstep(0.86, 1.00, fc) * 0.34);',
+
+        // directional bias so it always reads violet on the left, blue on the right
+        '  float g = clamp(uv.x*0.65 + (1.0-uv.y)*0.35, 0.0, 1.0);',
+        '  col = mix(col, mix(col, blue, 0.30), g*0.42);',
+
+        // pointer bloom, tinted violet rather than white so it adds glow without
+        // spiking luminance behind the copy
+        '  col += mix(violet, pale, 0.35) * infl * 0.10;',
+
+        // Luminance ceiling: rolls off the brightest areas so overlaid text and
+        // translucent chrome keep their contrast no matter where the field and
+        // the pointer happen to land. Starts earlier and caps lower than before,
+        // since small viewports can put the whole pointer pool behind copy.
+        '  float L = dot(col, vec3(0.2126, 0.7152, 0.0722));',
+        '  col *= mix(1.0, 0.46 / max(L, 0.001), smoothstep(0.30, 0.58, L));',
+
+        // Vignette: sinks the edges and the lower half so centred copy always has
+        // a darker bed to sit on, and gives the field real depth.
+        '  vec2 vc = uv - vec2(0.5, 0.56);',
+        '  float vig = 1.0 - smoothstep(0.26, 0.92, length(vec2(vc.x*1.02, vc.y*0.82)));',
+        '  col *= mix(0.46, 1.0, vig);',
+        '  col = mix(col, ink, smoothstep(0.50, 1.0, 1.0-uv.y) * 0.26);',
+
+        '  gl_FragColor = vec4(col, 1.0);',
+        '}'
+      ].join('\n');
+
+      function compile(type, src) {
+        var s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { gl.deleteShader(s); return null; }
+        return s;
+      }
+
+      var vs = compile(gl.VERTEX_SHADER, VERT);
+      var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+      if (!vs || !fs) return;
+
+      var prog = gl.createProgram();
+      gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+      gl.useProgram(prog);
+
+      var buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      var loc = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      var uRes = gl.getUniformLocation(prog, 'u_res');
+      var uTime = gl.getUniformLocation(prog, 'u_time');
+      var uMouse = gl.getUniformLocation(prog, 'u_mouse');
+      var uAmp = gl.getUniformLocation(prog, 'u_amp');
+      var uRadius = gl.getUniformLocation(prog, 'u_radius');
+      var uWave = gl.getUniformLocation(prog, 'u_wave');
+      var uWaveK = gl.getUniformLocation(prog, 'u_waveK');
+
+      // Ambient wave amplitude. Enough to be plainly visible within a second or
+      // two (at 0.032 the motion was real but too slow to register), still well
+      // short of the pointer pool so it reads as a tide rather than a churn.
+      // Touch gets roughly half: a tall phone hero renders to a much smaller
+      // buffer, so each shader pixel is upscaled over more screen area and the
+      // same amplitude lands about twice as strong. Reduced motion gets none.
+      gl.uniform1f(uWave, reduce ? 0.0 : (canHover ? 0.06 : 0.03));
+
+      // Target wavelength for the ambient wave, in CSS pixels. Converted against
+      // hero height on resize so it stays this size on any viewport.
+      var WAVE_WAVELENGTH_PX = 1100;
+
+      // How far the cursor's influence reaches, in CSS pixels, but capped as a
+      // fraction of the hero itself: on a small/narrow window a fixed 460px pool
+      // can engulf nearly the whole section, washing out everything at once
+      // instead of staying a local effect. Shader distances are normalised by
+      // hero height, so convert on every resize.
+      var RADIUS_PX = 460;
+      var RADIUS_MAX_FRACTION = 0.34;
+
+      // This shader is fill-rate bound (5-octave fbm, sampled 5x per pixel) and the
+      // output is a soft gradient field, so render small and let CSS upscale it.
+      // Fine texture comes from the full-resolution CSS grain layer above the canvas.
+      var MAX_EDGE = 720;
+      var w = 0, h = 0;
+      function resize() {
+        var cw = Math.max(1, hero.clientWidth), ch = Math.max(1, hero.clientHeight);
+        var scale = Math.min(1, MAX_EDGE / Math.max(cw, ch));
+        var bw = Math.max(1, Math.round(cw * scale));
+        var bh = Math.max(1, Math.round(ch * scale));
+        var radiusPx = Math.min(RADIUS_PX, Math.min(cw, ch) * RADIUS_MAX_FRACTION);
+        gl.uniform1f(uRadius, radiusPx / ch);
+        gl.uniform1f(uWaveK, (ch * 2.0 * Math.PI) / WAVE_WAVELENGTH_PX);
+        if (bw === w && bh === h) return;
+        w = bw; h = bh;
+        canvas.width = w; canvas.height = h;
+        gl.viewport(0, 0, w, h);
+        gl.uniform2f(uRes, w, h);
+      }
+
+      // target vs rendered mouse, lerped so the field trails the pointer
+      var mx = 0.5, my = 0.55, rx = 0.5, ry = 0.55, amp = 0, ampTarget = 0;
+      var start = performance.now(), visible = true, raf = null, lastDraw = -1e9;
+
+      // The ambient wave animates forever, so cap its redraw rate: a slow swell
+      // reads as smooth at 30fps and this halves GPU work, which matters on phones.
+      // Pointer interaction still gets full frame rate for responsiveness.
+      var AMBIENT_MS = 1000 / 30;
+
+      function frame(now) {
+        raf = null;
+        var interacting = amp > 0.002 || Math.abs(ampTarget - amp) > 0.001;
+        if (now - lastDraw >= (interacting ? 0 : AMBIENT_MS)) {
+          lastDraw = now;
+          resize();
+          rx += (mx - rx) * 0.055;
+          ry += (my - ry) * 0.055;
+          amp += (ampTarget - amp) * 0.05;
+          gl.uniform2f(uMouse, rx, ry);
+          gl.uniform1f(uAmp, amp);
+          gl.uniform1f(uTime, reduce ? 0 : (now - start) / 1000);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+        }
+        // Keep going while the hero is on screen: unlike before, the ambient wave
+        // needs to run with no pointer at all. Stops when scrolled away, when the
+        // tab is hidden (rAF pauses itself), and entirely under reduced motion.
+        if (visible && !reduce) raf = requestAnimationFrame(frame);
+      }
+      function kick() { if (raf === null) raf = requestAnimationFrame(frame); }
+
+      if (canHover && !reduce) {
+        hero.addEventListener('pointermove', function (e) {
+          var r = hero.getBoundingClientRect();
+          mx = (e.clientX - r.left) / r.width;
+          my = 1 - (e.clientY - r.top) / r.height; // GL origin is bottom-left
+          ampTarget = 1;
+          kick();
+        }, { passive: true });
+        hero.addEventListener('pointerleave', function () { ampTarget = 0; kick(); }, { passive: true });
+      }
+
+      // Don't burn frames while the hero is scrolled out of view
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          visible = entries[0].isIntersecting;
+          if (visible) kick();
+        }, { threshold: 0 }).observe(hero);
+      }
+
+      window.addEventListener('resize', function () { resize(); kick(); });
+
+      resize();
+      canvas.classList.add('ready');
+      canvas.parentNode.classList.add('gl');
+      kick();
     })();
 
     // Mobile burger menu
