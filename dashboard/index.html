@@ -128,20 +128,6 @@ a:hover{color:var(--gold)}
 .subtitle{font-family:var(--font-body);font-size:1.1rem;color:var(--t-muted);margin-bottom:18px;line-height:1.6}
 .note{font-family:var(--font-body);font-size:.85rem;color:var(--t-muted);font-style:italic;margin-bottom:48px;line-height:1.6;padding:14px 18px;border-left:2px solid var(--gold);background:var(--t-gold-bg);border-radius:0 6px 6px 0}
 
-/* Stats strip */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:60px;background:var(--t-card);border:1px solid var(--t-border);border-radius:10px;overflow:hidden}
-.stat{padding:20px 16px;text-align:center;border-right:1px solid var(--t-border)}
-.stat:last-child{border-right:none}
-.stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:400;color:var(--gold-dim);line-height:1;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:6px}
-.stat-num span.icon{font-size:1.2rem}
-.stat-label{font-family:var(--font-body);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--t-muted);font-weight:500}
-@media(max-width:640px){
-  .stats{grid-template-columns:1fr 1fr}
-  .stat{border-right:none;border-bottom:1px solid var(--t-border)}
-  .stat:nth-child(2n){border-right:none}
-  .stat:nth-child(odd){border-right:1px solid var(--t-border)}
-  .stat:nth-last-child(-n+2){border-bottom:none}
-}
 
 /* Build phases — vertical timeline */
 .phases{margin-bottom:60px}
@@ -425,13 +411,6 @@ a:hover{color:var(--gold)}
     </ol>
   </section>
 
-  <div class="stats">
-    <div class="stat"><div class="stat-num"><span class="icon">&#128193;</span>5</div><div class="stat-label">Public Pages</div></div>
-    <div class="stat"><div class="stat-num"><span class="icon">&#127909;</span>18</div><div class="stat-label">Videos Integrated</div></div>
-    <div class="stat"><div class="stat-num"><span class="icon">&#129489;&#8205;&#127979;</span>7</div><div class="stat-label">Coach Profiles</div></div>
-    <div class="stat"><div class="stat-num"><span class="icon">&#127942;</span>5</div><div class="stat-label">Champion Cards</div></div>
-  </div>
-
   <section class="previews" aria-label="Live preview of the website">
     <div class="previews-label">Live preview</div>
     <p class="previews-sub">The current build of <a href="sample.html" target="_blank" rel="noopener">client-xxx.com</a>, shown across three screen sizes.</p>
@@ -560,21 +539,21 @@ a:hover{color:var(--gold)}
     <h2 class="panel-heading">Documents</h2>
     <p class="panel-sub">Reference material and reports related to your website build.</p>
     <div class="docs-menu-grid">
-      <a href="/new-site/seo-report/" class="docs-card">
-        <div class="docs-card-icon">&#128214;</div>
+      <a href="/new-site/accessibility-audit/" class="docs-card">
+        <div class="docs-card-icon">&#9855;&#65039;</div>
         <div class="docs-card-body">
-          <div class="docs-card-eyebrow">Standing implementation report</div>
-          <div class="docs-card-title">SEO, AEO, GEO report</div>
-          <div class="docs-card-desc">What we did across search, answer, and generative engines on the rebuild, and why each choice was made. Updated when material work ships.</div>
+          <div class="docs-card-eyebrow">Compliance check</div>
+          <div class="docs-card-title">Accessibility audit, WCAG 2.2 AA</div>
+          <div class="docs-card-desc">Every page tested for screen reader support, colour contrast, and keyboard navigation, with fixes tracked against the WCAG 2.2 AA checklist.</div>
         </div>
         <span class="docs-card-cta">Open &rsaquo;</span>
       </a>
-      <a href="/new-site/redirect-plan/" class="docs-card">
-        <div class="docs-card-icon">&#128279;</div>
+      <a href="/new-site/analytics-setup/" class="docs-card">
+        <div class="docs-card-icon">&#128202;</div>
         <div class="docs-card-body">
-          <div class="docs-card-eyebrow">Transition plan</div>
-          <div class="docs-card-title">301 redirect plan, legacy to new site</div>
-          <div class="docs-card-desc">Every legacy WordPress URL on the primary domain mapped to its new destination, ahead of the production cutover.</div>
+          <div class="docs-card-eyebrow">Tracking &amp; reporting</div>
+          <div class="docs-card-title">Analytics and event tracking setup</div>
+          <div class="docs-card-desc">Every booking, enquiry, and video play wired into GA4 and the ad pixels, with a full reference of what each event means.</div>
         </div>
         <span class="docs-card-cta">Open &rsaquo;</span>
       </a>
