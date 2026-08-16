@@ -24,6 +24,20 @@ Optional integration: [BlackTwist](https://blacktwist.app/mcp) MCP server for ac
 and pulling live analytics. Without it, skills run in advisory mode (they draft content/instructions
 for manual posting).
 
+### Image/video generation — Higgsfield
+
+The [Higgsfield CLI](https://higgsfield.ai) (`@higgsfield/cli`, installed globally) generates the
+actual images/videos that go with posts — the social-media-skills only write copy, they don't
+produce visuals. Authenticated as `deverajranthony@gmail.com`, workspace `Private` (free plan).
+Companion skills installed via `npx skills add higgsfield-ai/skills` into `.agents/skills/`:
+`higgsfield-generate` (general image/video/3D/audio), `higgsfield-product-photoshoot` (brand/product
+visuals — the one to use for case-study and "real results" post images), `higgsfield-brandkit`,
+`higgsfield-marketplace-cards`, `higgsfield-soul-id`, `higgsfield-video-explainer`,
+`higgsfield-websites`, `higgsfield-youtube-thumbnail`, `higgsfield-game-generation`.
+
+Free-plan credits are limited (10 at signup) — check `higgsfield account status` before generating in
+bulk.
+
 ### Known repo state (as of 2026-08-05)
 
 The old `brando/` CRM/agent project (and its supporting files: `.mcp.json`, `.env.example`, old
@@ -32,11 +46,20 @@ not restored, deletion committed. `agents/` now only contains the social media s
 
 ## Room for improvement (living list — update as work progresses)
 
-- No `SKILL.md` yet filled out for `social-media-context-sms` — needed before other skills can produce
-  on-brand output.
 - No BlackTwist MCP connection configured yet — everything currently runs advisory-only (draft +
   manual post).
-- No content calendar or content pillars defined yet.
+- No content calendar defined yet.
+- Real LinkedIn/Instagram handles and current/target posting frequency still needed in
+  `social-media-context-sms.md` (marked TBD).
+- No LinkedIn example posts captured yet (only Instagram examples exist so far, pulled from
+  `marketing/antheon-ig-playbook.md`).
+- Higgsfield free-plan credits (10) will run out fast — revisit plan/paid tier once real production
+  starts.
+- Three Higgsfield companion skills (`higgsfield-marketplace-cards`, `higgsfield-product-photoshoot`,
+  `higgsfield-youtube-thumbnail`) were flagged "High Risk" by the `skills` CLI's built-in scanner at
+  install time. Spot-checked `higgsfield-product-photoshoot`'s SKILL.md — content looks like a normal
+  CLI-wrapper instruction file, no injection/exfiltration found, but the other flagged skills' full
+  `references/*.md` files haven't been read yet.
 
 ## Session Log
 
@@ -56,5 +79,19 @@ pick one and stay consistent within a day). Include: what was done, why, and wha
 - Committed removal of the `brando/` project entirely (CRM/agent app, `.mcp.json`, `.env.example`,
   old `CLAUDE.md`/`README.md`, `package.json`, `tsconfig.json`, `asset/brando-*.png`, `.claude/agents/brando.md`).
   `agents/` is now scoped solely to the social media skills build.
-- **Next**: fill out `social-media-context-sms` with Antheon's actual platform list, audience, and
-  tone/voice so downstream skills (content strategy, post writer, etc.) have something real to work from.
+- Filled out `.agents/social-media-context-sms.md` using Antheon's homepage copy/positioning
+  (d:\antheon\index.htm) plus the existing `marketing/antheon-ig-playbook.md` for ready-made
+  Instagram example posts. Voice set to professional/convincing; LinkedIn goal = visibility +
+  authenticity; Instagram goal = visibility via case studies, systems/automation education, website
+  advice, AI news, and light industry humor (calibrated against user-given references: web_pros for
+  format/confidence, catmemes.hub as a humor *ceiling*, not a target).
+- Installed and configured Higgsfield for image/video generation (see section above). Installer's
+  `npm i -g @higgsfield/cli` postinstall script is broken on this Windows/Git-Bash setup — Node's
+  `https` module fails to download the release tarball, and even when downloaded manually, `tar`
+  chokes on the absolute Windows path with a drive-letter colon. Workaround: `npm i -g @higgsfield/cli
+  --ignore-scripts`, then manually `curl`-download the tarball into the package's `vendor/` dir and
+  extract with a **relative** path (`cd vendor && tar -xzf file.tar.gz hf.exe`) to dodge the path bug.
+  Re-apply this workaround on any future reinstall/upgrade of `@higgsfield/cli` on this machine.
+- **Next**: get real LinkedIn/Instagram handles and posting frequency from the user; decide on
+  BlackTwist vs. continued manual posting; try a first Higgsfield-generated visual for one of the
+  playbook's carousel ideas.
