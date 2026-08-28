@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Website Building Progress | Indie Lane Photography</title>
+<meta name="description" content="Client portal for the Indie Lane Photography website build: live preview, build phases, proposal and reference material.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="../../asset/Ann.png">
+<link rel="apple-touch-icon" href="../../asset/Ann.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#FFFFFF;
+  --deep:#1A1230;
+  --gold:#9333EA;
+  --gold-light:#3B82F6;
+  --gold-dim:#6D28D9;
+  --cream:#F7F7F5;
+  --warm-white:#FFFFFF;
+  --text-light:#e8e4dc;
+  --text-mid:#c4b8a8;
+  --text-dim:#8a8078;
+  --t-bg:#FFFFFF;
+  --t-card:#FFFFFF;
+  --t-alt:#F7F7F5;
+  --t-heading:#111114;
+  --t-body:#3D3A37;
+  --t-muted:#5C5C66;
+  --t-border:#E6E6E9;
+  --t-gold-bg:rgba(147,51,234,0.08);
+  --t-gold-border:rgba(147,51,234,0.20);
+  --t-gold-on-light:#6D28D9;
+  --brand-gradient:linear-gradient(105deg,#9333EA 0%,#6D48E6 50%,#3B82F6 100%);
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Instrument Sans',-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:17px;overflow-x:hidden}
+body{background:var(--t-bg);color:var(--t-body);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;padding-top:53px}
+::selection{background:var(--gold);color:var(--black)}
+a{color:var(--gold-dim);text-decoration:none;transition:color .2s}
+a:hover{color:var(--gold)}
+
+/* Antheon brand bar */
+.antheon-bar{background:var(--deep);padding:12px 0;position:fixed;top:0;left:0;right:0;z-index:100}
+.antheon-bar-inner{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.antheon-bar-left{display:flex;align-items:center}
+.antheon-brand{display:flex;align-items:center;gap:9px}
+.antheon-brand img{display:block;width:22px;height:19px}
+.antheon-wordmark{font-family:var(--font-body);font-weight:700;font-size:.9rem;letter-spacing:.04em;color:#fff}
+.antheon-wordmark .heon{background:var(--brand-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.antheon-bar-right{display:flex;align-items:center;gap:16px}
+.live-indicator{display:flex;align-items:center;gap:7px;font-family:var(--font-body);font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.75)}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#ef4444;flex-shrink:0;box-shadow:0 0 0 0 rgba(239,68,68,0.55);animation:live-pulse 1.8s ease-in-out infinite}
+@keyframes live-pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.55)}70%{box-shadow:0 0 0 6px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.preview-btn{font-family:var(--font-body);font-size:.74rem;font-weight:700;letter-spacing:.3px;color:#fff;background:var(--brand-gradient);padding:7px 16px;border-radius:999px;transition:opacity .2s}
+.preview-btn:hover{opacity:.86;color:#fff}
+@media(prefers-reduced-motion:reduce){.live-dot{animation:none}}
+@media(max-width:640px){.antheon-bar-inner{padding:0 20px}.live-indicator span:last-child{display:none}}
+
+/* Mobile nav burger (opens the sidebar as a drawer) */
+.nav-burger{display:none;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:none;color:#fff;cursor:pointer;padding:0;margin-right:6px;flex-shrink:0}
+.nav-burger svg{width:22px;height:22px;display:block}
+@media(max-width:860px){.nav-burger{display:flex}}
+
+/* Backdrop behind the mobile sidebar drawer */
+.sidebar-backdrop{display:none;position:fixed;top:53px;left:0;right:0;bottom:0;background:rgba(10,10,20,0.4);z-index:80}
+@media(max-width:860px){.sidebar-backdrop.is-open{display:block}}
+
+/* Dashboard shell: sidebar + main content */
+.dash-shell{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;align-items:stretch;gap:44px}
+@media(max-width:860px){.dash-shell{flex-direction:column;padding:0;gap:0}}
+
+.sidebar{width:216px;flex-shrink:0;padding:0 24px 0 0;border-right:1px solid var(--t-border)}
+.sidebar-inner{position:sticky;top:0;padding:40px 0}
+@media(max-width:860px){
+  .sidebar{
+    position:fixed;top:53px;left:0;bottom:0;z-index:90;
+    width:78vw;max-width:300px;border-right:1px solid var(--t-border);
+    background:var(--t-bg);padding:0;overflow-y:auto;
+    transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 0 40px rgba(0,0,0,0.18);
+  }
+  .sidebar.is-open{transform:translateX(0)}
+  .sidebar-inner{position:static;padding:24px 20px}
+}
+
+.side-client{padding:0 14px 18px;margin-bottom:10px;border-bottom:1px solid var(--t-border)}
+.side-client-name{font-family:var(--font-display);font-size:1.35rem;color:var(--t-heading);line-height:1.2}
+.side-client-logo{display:block;width:100%;max-width:132px;height:auto;margin-bottom:10px}
+.side-client-tag{font-family:var(--font-body);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--t-muted);margin-top:4px}
+@media(max-width:860px){.side-client{padding:0 0 14px;margin-bottom:12px}}
+
+.side-nav{display:flex;flex-direction:column;gap:2px}
+.side-nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;font-family:var(--font-body);font-size:.88rem;font-weight:600;color:var(--t-muted);cursor:pointer;transition:background .2s,color .2s;border:none;background:none;text-align:left;width:100%}
+.side-nav-item .icon{font-size:1rem;width:20px;text-align:center;flex-shrink:0}
+.side-nav-item:hover{background:var(--t-alt);color:var(--t-heading)}
+.side-nav-item.is-active{background:var(--t-gold-bg);color:var(--gold-dim)}
+
+.dash-main{flex:1;min-width:0}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.is-active{display:block}
+
+/* Reused empty-state card (proposal / contract placeholders, changelog) */
+.changelog-empty,.empty-card{margin-bottom:64px;padding:56px 32px;text-align:center;background:var(--t-card);border:1px dashed var(--t-border);border-radius:12px}
+.changelog-empty-icon,.empty-card-icon{font-size:2rem;line-height:1;margin-bottom:14px}
+.changelog-empty-title,.empty-card-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:var(--t-heading);margin-bottom:8px}
+.changelog-empty-desc,.empty-card-desc{font-family:var(--font-body);font-size:.92rem;color:var(--t-muted);line-height:1.6;max-width:420px;margin:0 auto}
+
+/* Simple panel heading (Proposal / Contract / Documents) */
+.panel-heading{font-family:var(--font-display);font-size:1.9rem;font-weight:400;color:var(--t-heading);margin-bottom:10px}
+.panel-sub{font-family:var(--font-body);font-size:1rem;color:var(--t-muted);margin-bottom:32px;line-height:1.6}
+
+/* Layout */
+.wrap{max-width:780px;margin:0 auto;padding:56px 32px 120px}
+@media(max-width:640px){.wrap{padding:40px 20px 80px}}
+
+/* Header */
+.title{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,3.6rem);font-weight:400;line-height:1.1;color:var(--t-heading);margin-bottom:16px}
+.title em{font-style:italic;background:var(--brand-gradient);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{font-family:var(--font-body);font-size:1.1rem;color:var(--t-muted);margin-bottom:18px;line-height:1.6}
+.note{font-family:var(--font-body);font-size:.85rem;color:var(--t-muted);font-style:italic;margin-bottom:48px;line-height:1.6;padding:14px 18px;border-left:2px solid var(--gold);background:var(--t-gold-bg);border-radius:0 6px 6px 0}
+
+
+/* Build phases — vertical timeline */
+.phases{margin-bottom:60px}
+.phases-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.phases-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.timeline{list-style:none;margin:0;padding:4px 0 0;display:flex}
+.tl-item{flex:1 1 0;min-width:0;position:relative;text-align:center;padding:0 5px}
+@media(max-width:640px){
+  .timeline{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:4px 20px 10px}
+  .tl-item{flex:0 0 130px;min-width:130px;padding:0 10px}
+}
+/* horizontal connector behind the circles; gold once a phase is complete */
+.tl-item:not(:last-child)::before{content:'';position:absolute;top:40px;left:50%;width:100%;height:2px;background:var(--t-border);z-index:0}
+.is-done:not(:last-child)::before{background:var(--gold)}
+/* hourglass slot sits above the circle (only the current phase shows one) */
+.tl-top{height:30px;display:flex;align-items:flex-end;justify-content:center}
+.tl-hourglass{font-size:1.1rem;line-height:1;margin-bottom:9px;transform-origin:50% 50%;animation:tl-flip 4s ease-in-out infinite}
+@keyframes tl-flip{0%,38%{transform:rotate(0deg)}50%,88%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
+/* circle markers */
+.tl-marker{position:relative;z-index:1;width:22px;height:22px;border-radius:50%;margin:0 auto;background:var(--t-card);border:2px solid var(--t-border);display:flex;align-items:center;justify-content:center}
+.is-done .tl-marker{background:var(--gold);border-color:var(--gold)}
+.is-done .tl-marker::after{content:'\2713';color:var(--black);font-size:.66rem;font-weight:700;line-height:1}
+.is-current .tl-marker{border-color:var(--gold);box-shadow:0 0 0 4px var(--t-gold-bg)}
+.is-current .tl-marker::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--gold);animation:tl-pulse 1.8s ease-in-out infinite}
+@keyframes tl-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.55);opacity:.55}}
+/* labels below the circle */
+.tl-body{margin-top:12px}
+.tl-phase{font-family:var(--font-body);font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:4px}
+.tl-title{font-family:var(--font-display);font-size:.92rem;font-weight:400;color:var(--t-heading);line-height:1.22;margin-bottom:3px}
+.tl-status{font-family:var(--font-body);font-size:.7rem;color:var(--t-muted)}
+.is-upcoming .tl-title{color:var(--t-muted)}
+.is-done .tl-status{color:#2D7A4A}
+.is-current .tl-phase,.is-current .tl-status{color:var(--t-gold-on-light)}
+.is-current .tl-status{font-weight:600}
+@media(prefers-reduced-motion:reduce){.is-current .tl-marker::after,.tl-hourglass{animation:none}}
+
+/* Live preview — device frames */
+.previews{margin-bottom:60px}
+.previews-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.previews-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.changelog-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.changelog-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.previews-sub{font-family:var(--font-body);font-size:.9rem;color:var(--t-muted);margin-bottom:24px;line-height:1.6}
+.device-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.device{margin:0;display:flex;flex-direction:column;gap:12px}
+.device figcaption{font-family:var(--font-body);font-size:.66rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--t-heading);text-align:center}
+.device figcaption span{display:block;margin-top:3px;font-weight:500;letter-spacing:1px;color:var(--t-muted);font-size:.6rem}
+
+/* identical container: each screen is the same box; the iframe renders the static
+   sample site at its true breakpoint width, scaled to fill the box and cropped */
+.screen{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;background:#fff;
+  border:1px solid var(--t-border);border-radius:14px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.04),0 18px 40px -12px rgba(0,0,0,0.22);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease}
+.screen::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5)}
+/* .vp = the scrolling track (translateY animated); the iframe inside is scaled to width */
+.vp{position:absolute;top:0;left:0;will-change:transform;animation:vp-scroll 18s ease-in-out infinite alternate}
+.vp iframe{display:block;border:0;background:#fff;pointer-events:none;transform-origin:top left}
+/* each box is ~226px wide; scale = box-width / breakpoint-width. the live site sizes its
+   hero off 100vh, so each iframe is kept at a true device viewport height instead of the
+   full page height, otherwise the hero stretches to fill the frame. --d is the scaled
+   distance left over once the box is filled, so the track pans without exposing any gap */
+.vp-desktop iframe{width:1440px;height:1930px;transform:scale(.16)}
+.vp-tablet iframe{width:820px;height:1180px;transform:scale(.2805)}
+.vp-mobile iframe{width:390px;height:844px;transform:scale(.5897)}
+.vp-desktop{--d:6px;animation-duration:12s}
+.vp-tablet{--d:28px;animation-duration:14s}
+.vp-mobile{--d:195px;animation-duration:20s}
+@keyframes vp-scroll{from{transform:translateY(0)}to{transform:translateY(calc(var(--d) * -1))}}
+/* pause the pan on hover/focus so the framed view holds still under the View prompt */
+.device:hover .vp,.screen:focus-visible .vp{animation-play-state:paused}
+/* once the scroll controller has hold of a frame it scrolls the real page instead */
+.vp.is-driven{animation:none;transform:none}
+@media(prefers-reduced-motion:reduce){.vp{animation:none}}
+
+/* Hover -> reveal "View" */
+.screen-hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(to top,rgba(10,12,18,.55),rgba(10,12,18,.18));
+  opacity:0;transition:opacity .3s ease;border-radius:14px}
+.view-pill{font-family:var(--font-body);font-size:.74rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--black);background:var(--gold);padding:11px 22px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);transform:translateY(6px);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.device:hover .screen{transform:translateY(-4px);border-color:var(--t-gold-border);box-shadow:0 1px 2px rgba(0,0,0,0.04),0 26px 50px -12px rgba(0,0,0,0.30)}
+.device:hover .screen-hover{opacity:1}
+.device:hover .view-pill{transform:translateY(0)}
+.screen:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.screen:focus-visible .screen-hover{opacity:1}
+
+@media(max-width:640px){
+  .device-row{gap:10px}
+  .device figcaption{font-size:.58rem;letter-spacing:1px}
+  /* boxes shrink to ~110px wide on phones; rescale iframes + pan distance to match */
+  .vp-desktop iframe{transform:scale(.0764)}
+  .vp-tablet iframe{transform:scale(.1341)}
+  .vp-mobile iframe{transform:scale(.2821)}
+  .vp-desktop{--d:0px}
+  .vp-tablet{--d:11px}
+  .vp-mobile{--d:91px}
+}
+@media(hover:none){.screen-hover{opacity:1;background:linear-gradient(to top,rgba(10,12,18,.45),transparent 55%)}.view-pill{transform:none}}
+
+/* Entry blocks */
+.entry{margin-bottom:64px;position:relative}
+.entry::before{content:'';position:absolute;left:-32px;top:8px;bottom:0;width:1px;background:var(--t-border)}
+.entry::after{content:'';position:absolute;left:-37px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px var(--t-bg),0 0 0 4px var(--t-gold-border)}
+@media(max-width:640px){.entry::before,.entry::after{display:none}}
+
+.entry-meta{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.entry-date{font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light)}
+.entry-version{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:1px;color:var(--t-card);background:var(--gold);padding:3px 10px;border-radius:999px}
+.entry-title{font-family:var(--font-display);font-size:1.65rem;font-weight:400;color:var(--t-heading);line-height:1.25;margin-bottom:14px}
+.entry-title .icon{margin-right:8px}
+
+.entry-section{margin-top:24px}
+.entry-section-label{font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--t-heading);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.entry-section-label .icon{font-size:1rem}
+.entry-section-label .path{font-family:'SF Mono','Menlo',monospace;font-size:.75rem;font-weight:500;color:var(--gold-dim);background:var(--t-gold-bg);padding:2px 8px;border-radius:4px;letter-spacing:0;text-transform:none;margin-left:4px}
+
+/* Multi-file box: label + comma-separated paths, for sections touching several pages */
+.entry-section-files{display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--t-gold-bg);border-radius:8px;margin-bottom:14px;flex-wrap:wrap}
+.entry-section-files-label{font-family:var(--font-body);font-size:.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t-heading);flex-shrink:0}
+.entry-section-files-paths{font-family:'SF Mono','Menlo',monospace;font-size:.72rem;color:var(--gold-dim);line-height:1.5}
+
+.entry-list{list-style:none;padding:0}
+.entry-list li{display:flex;gap:10px;padding:7px 0;font-family:var(--font-body);font-size:.95rem;color:var(--t-body);line-height:1.6;border-bottom:1px solid var(--t-border)}
+.entry-list li:last-child{border-bottom:none}
+.entry-list .badge{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:4px;height:fit-content;margin-top:2px;white-space:nowrap}
+.entry-list .badge.new{background:rgba(45,122,74,0.1);color:#2D7A4A}
+.entry-list .badge.updated{background:rgba(74,144,196,0.1);color:#3a72a8}
+.entry-list .badge.fixed{background:var(--t-gold-bg);color:var(--t-gold-on-light)}
+.entry-list .badge.removed{background:rgba(201,58,58,0.08);color:#a82d2d}
+.entry-list code{font-family:'SF Mono','Menlo',monospace;font-size:.82rem;color:var(--gold-dim);background:var(--t-gold-bg);padding:1px 6px;border-radius:3px}
+.entry-list strong{color:var(--t-heading);font-weight:600}
+
+/* Footer */
+.foot{margin-top:96px;padding-top:32px;border-top:1px solid var(--t-border);font-family:var(--font-body);font-size:.8rem;color:var(--t-muted);text-align:center;line-height:1.7}
+.foot a{color:var(--gold-dim)}
+.foot-powered{margin-top:14px;font-size:.72rem;color:var(--t-muted);display:flex;align-items:center;justify-content:center;gap:7px}
+.foot-powered img{height:16px;width:auto;display:block}
+
+/* Team strip */
+.team-strip{background:var(--t-card);border:1px solid var(--t-border);border-radius:12px;padding:24px 28px 22px;margin-bottom:48px;box-shadow:var(--t-card-shadow)}
+.team-strip-label{font-family:var(--font-body);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--t-gold-on-light);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.team-strip-label::after{content:'';flex:1;height:1px;background:var(--t-gold-border);margin-left:4px}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 26px}
+.team-member{display:flex;align-items:center;gap:16px}
+/* Avatar sized to match the canonical 84px coach-thumb used across the new-site */
+.team-avatar{width:84px;height:84px;border-radius:50%;flex-shrink:0;overflow:hidden;background:linear-gradient(135deg,var(--gold),var(--gold-dim));box-shadow:0 2px 8px rgba(0,0,0,0.12);border:1px solid var(--t-gold-border)}
+.team-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:560px){.team-avatar{width:72px;height:72px}}
+.team-name{font-family:var(--font-display);font-size:1.02rem;font-weight:600;color:var(--t-heading);line-height:1.2}
+.team-role{font-family:var(--font-body);font-size:.76rem;color:var(--t-muted);margin-top:3px;line-height:1.45}
+.team-meta{margin-top:20px;padding-top:14px;border-top:1px solid var(--t-border);font-family:var(--font-body);font-size:.82rem;color:var(--t-muted);line-height:1.6}
+.team-meta strong{color:var(--t-heading);font-weight:600}
+
+/* Reference-doc menu (Documents tab) */
+.docs-menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.docs-menu-grid.is-single{grid-template-columns:1fr}
+@media(max-width:640px){.docs-menu-grid{grid-template-columns:1fr}}
+.docs-card{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--t-card);border:1px solid var(--t-border);border-radius:10px;text-decoration:none;color:var(--t-body);transition:border-color .2s,background .2s,transform .2s}
+.docs-card:hover{border-color:var(--t-gold-border);background:var(--t-gold-bg);transform:translateY(-1px)}
+.docs-card-icon{font-family:var(--font-display);font-size:1.6rem;color:var(--gold-dim);line-height:1;flex-shrink:0;margin-top:2px}
+.docs-card-body{flex:1;min-width:0}
+.docs-card-eyebrow{font-family:var(--font-body);font-size:.62rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--t-gold-on-light);margin-bottom:4px}
+.docs-card-title{font-family:var(--font-display);font-size:1.1rem;color:var(--t-heading);line-height:1.25;margin-bottom:4px}
+.docs-card-desc{font-family:var(--font-body);font-size:.85rem;color:var(--t-muted);line-height:1.55}
+.docs-card-cta{font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dim);flex-shrink:0;align-self:center;margin-left:4px}
+.docs-card.is-disabled{cursor:default;opacity:.6}
+.docs-card.is-disabled:hover{border-color:var(--t-border);background:var(--t-card);transform:none}
+.docs-card.is-disabled .docs-card-cta{color:var(--t-muted)}
+@media(max-width:680px){.team-grid{grid-template-columns:1fr;gap:14px}}
+</style>
+</head>
+<body>
+
+<header class="antheon-bar">
+  <div class="antheon-bar-inner">
+    <div class="antheon-bar-left">
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a href="#top" class="antheon-brand" aria-label="Back to the top of this page">
+        <img src="../../asset/Ann.png" alt="" width="22" height="19">
+        <span class="antheon-wordmark"><span class="ant">ANT</span><span class="heon">HEON</span></span>
+      </a>
+    </div>
+    <div class="antheon-bar-right">
+      <span class="live-indicator"><span class="live-dot" aria-hidden="true"></span><span>Live</span></span>
+      <a href="https://www.antheonph.com/projects/indielanephotography/index.html" target="_blank" rel="noopener" class="preview-btn">Preview</a>
+    </div>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="dash-shell">
+
+  <aside class="sidebar" id="sidebar">
+   <div class="sidebar-inner">
+    <div class="side-client">
+      <img class="side-client-logo" src="assets/indie-lane-logo.png" alt="Indie Lane Photography" width="750" height="579">
+      <div class="side-client-tag">Client Portal</div>
+    </div>
+    <nav class="side-nav" aria-label="Dashboard sections">
+      <button type="button" class="side-nav-item is-active" data-tab="updates" aria-selected="true"><span class="icon">&#128227;</span> Updates</button>
+      <button type="button" class="side-nav-item" data-tab="marketing" aria-selected="false"><span class="icon">&#128200;</span> Marketing</button>
+      <button type="button" class="side-nav-item" data-tab="proposal" aria-selected="false"><span class="icon">&#128196;</span> Proposal</button>
+      <button type="button" class="side-nav-item" data-tab="contract" aria-selected="false"><span class="icon">&#128221;</span> Contract</button>
+      <button type="button" class="side-nav-item" data-tab="documents" aria-selected="false"><span class="icon">&#128193;</span> Documents</button>
+    </nav>
+   </div>
+  </aside>
+
+  <main class="dash-main">
+  <div class="wrap">
+
+  <div id="panel-updates" class="tab-panel is-active">
+
+  <h1 class="title" id="top">Website Building <em>Progress</em></h1>
+  <p class="subtitle">Tracking the build of indielane.com.au, from discovery through launch</p>
+  <p class="note">This page is internal-only and is not indexed by search engines. It tracks where the build currently stands across each phase, alongside a live preview of the site, your proposal, and the reference material for the project.</p>
+
+  <section class="phases" aria-label="Website build phases">
+    <div class="phases-label">Build phases</div>
+    <ol class="timeline">
+      <li class="tl-item is-done">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 1</div>
+          <div class="tl-title">Discover and audit</div>
+          <div class="tl-status">Complete</div>
+        </div>
+      </li>
+      <li class="tl-item is-done">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 2</div>
+          <div class="tl-title">Strategy and plan</div>
+          <div class="tl-status">Complete</div>
+        </div>
+      </li>
+      <li class="tl-item is-current">
+        <div class="tl-top"><span class="tl-hourglass" aria-hidden="true">&#9203;</span></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 3</div>
+          <div class="tl-title">Build and configure</div>
+          <div class="tl-status">In progress</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 4</div>
+          <div class="tl-title">Review and QA</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 5</div>
+          <div class="tl-title">Launch and deploy</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 6</div>
+          <div class="tl-title">Optimise and monitor</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+      <li class="tl-item is-upcoming">
+        <div class="tl-top"></div>
+        <div class="tl-marker"></div>
+        <div class="tl-body">
+          <div class="tl-phase">Phase 7</div>
+          <div class="tl-title">Ongoing</div>
+          <div class="tl-status">Upcoming</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="previews" aria-label="Live preview of the website">
+    <div class="previews-label">Live preview</div>
+    <p class="previews-sub">The current build of <a href="https://www.antheonph.com/projects/indielanephotography/index.html" target="_blank" rel="noopener">indielane.com.au</a>, shown across three screen sizes.</p>
+    <div class="device-row">
+
+      <figure class="device">
+        <a class="screen" href="preview.html?device=desktop" target="_blank" rel="noopener" aria-label="View the desktop build">
+          <span class="vp vp-desktop"><iframe src="https://www.antheonph.com/projects/indielanephotography/index.html" title="Desktop preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
+          <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
+        </a>
+        <figcaption>Desktop <span>1440px</span></figcaption>
+      </figure>
+
+      <figure class="device">
+        <a class="screen" href="preview.html?device=tablet" target="_blank" rel="noopener" aria-label="View the tablet build">
+          <span class="vp vp-tablet"><iframe src="https://www.antheonph.com/projects/indielanephotography/index.html" title="Tablet preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
+          <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
+        </a>
+        <figcaption>Tablet <span>820px</span></figcaption>
+      </figure>
+
+      <figure class="device">
+        <a class="screen" href="preview.html?device=mobile" target="_blank" rel="noopener" aria-label="View the mobile build">
+          <span class="vp vp-mobile"><iframe src="https://www.antheonph.com/projects/indielanephotography/index.html" title="Mobile preview" loading="lazy" scrolling="no" tabindex="-1"></iframe></span>
+          <span class="screen-hover"><span class="view-pill">View &nearr;</span></span>
+        </a>
+        <figcaption>Mobile <span>390px</span></figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ==================== CHANGELOG ENTRIES ==================== -->
+  <!-- New <article class="entry"> ... </article> blocks go here, newest first. -->
+  <div class="changelog-label">Changelog</div>
+
+  <div class="changelog-empty">
+    <div class="changelog-empty-icon">&#128221;</div>
+    <div class="changelog-empty-title">No updates logged yet</div>
+    <p class="changelog-empty-desc">Structural, content, and design updates will be listed here as each one ships, newest first.</p>
+  </div>
+
+  </div><!-- /#panel-updates -->
+
+  <div id="panel-marketing" class="tab-panel">
+    <h2 class="panel-heading">Marketing</h2>
+    <p class="panel-sub">Campaigns, content, and performance reporting for your website.</p>
+    <div class="empty-card">
+      <div class="empty-card-icon">&#128200;</div>
+      <div class="empty-card-title">Coming soon</div>
+      <p class="empty-card-desc">Marketing reporting for your site is on the way. Check back here once it's live.</p>
+    </div>
+  </div>
+
+  <div id="panel-proposal" class="tab-panel">
+    <h2 class="panel-heading">Proposal</h2>
+    <p class="panel-sub">The scope, timeline, and investment for your website build.</p>
+    <div class="docs-menu-grid is-single">
+      <a href="proposal.html" target="_blank" rel="noopener" class="docs-card">
+        <div class="docs-card-icon">&#128196;</div>
+        <div class="docs-card-body">
+          <div class="docs-card-eyebrow">Scope and investment</div>
+          <div class="docs-card-title">Proposal</div>
+          <div class="docs-card-desc">Sections included, the hosting approach, what we need from you, timeline and pricing for the Indie Lane Photography build. Opens in a new tab.</div>
+        </div>
+        <span class="docs-card-cta">Open &rsaquo;</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="panel-contract" class="tab-panel">
+    <h2 class="panel-heading">Contract</h2>
+    <p class="panel-sub">Your service agreement with Antheon for this project.</p>
+    <div class="empty-card">
+      <div class="empty-card-icon">&#128221;</div>
+      <div class="empty-card-title">No contract on file yet</div>
+      <p class="empty-card-desc">Your signed agreement will appear here once contracting is complete.</p>
+    </div>
+  </div>
+
+  <div id="panel-documents" class="tab-panel">
+    <h2 class="panel-heading">Documents</h2>
+    <p class="panel-sub">Reference material related to your website build.</p>
+    <div class="docs-menu-grid is-single">
+      <div class="docs-card is-disabled" aria-disabled="true">
+        <div class="docs-card-icon">&#128247;</div>
+        <div class="docs-card-body">
+          <div class="docs-card-eyebrow">Photography library</div>
+          <div class="docs-card-title">Images</div>
+          <div class="docs-card-desc">Every photograph placed in the build, in the order it appears on the site, so crops, sequencing, and any swaps can be reviewed in one pass. Not uploaded yet.</div>
+        </div>
+        <span class="docs-card-cta">Coming soon</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <p>Indie Lane Photography &middot; Donna Nugent &middot; <a href="https://www.indielane.com.au/" target="_blank" rel="noopener">indielane.com.au</a></p>
+    <p style="margin-top:6px;font-size:.75rem;color:var(--t-muted);">Internal-only client portal, updated as the build progresses. Currently in Phase 3, build and configure.</p>
+    <p class="foot-powered">Powered by <a href="https://antheonph.com" target="_blank" rel="noopener"><img src="../../asset/Ann.png" alt="Antheon"></a></p>
+  </footer>
+
+  </div><!-- /.wrap -->
+  </main>
+
+</div><!-- /.dash-shell -->
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.side-nav-item');
+    var panels = document.querySelectorAll('.tab-panel');
+    function activate(tab) {
+      buttons.forEach(function (b) {
+        var on = b.getAttribute('data-tab') === tab;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('is-active', p.id === 'panel-' + tab);
+      });
+    }
+    var burger = document.getElementById('navBurger');
+    var sidebar = document.getElementById('sidebar');
+    var backdrop = document.getElementById('sidebarBackdrop');
+    function openSidebar() {
+      sidebar.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true');
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    burger.addEventListener('click', function () {
+      if (sidebar.classList.contains('is-open')) closeSidebar(); else openSidebar();
+    });
+    backdrop.addEventListener('click', closeSidebar);
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var tab = btn.getAttribute('data-tab');
+        activate(tab);
+        history.replaceState(null, '', '#' + tab);
+        closeSidebar();
+      });
+    });
+    var initial = (location.hash || '#updates').slice(1);
+    if (!document.querySelector('.side-nav-item[data-tab="' + initial + '"]')) initial = 'updates';
+    activate(initial);
+  })();
+</script>
+
+<script>
+  // Live preview: scroll the real page inside each device frame.
+  // The site sets its hero off 100vh, so the one-very-tall-iframe trick would stretch the
+  // hero over the whole frame. Each frame instead stays at a true device viewport and the
+  // page inside it is scrolled, which needs script access to the frame: direct when this
+  // portal is served from the same origin as the build, otherwise the page is re-fetched
+  // (the build sends Access-Control-Allow-Origin: *) and written into the frame so it
+  // becomes same-origin. If neither is possible, the CSS drift in the stylesheet stays.
+  (function () {
+    var LIVE = 'https://www.antheonph.com/projects/indielanephotography/index.html';
+    var BASE = 'https://www.antheonph.com/projects/indielanephotography/';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var PASS = { desktop: 45000, tablet: 60000, mobile: 75000 }; // ms for one pass down
+    var HOLD = 1600;                                            // pause at each end
+
+    // a frame starts life holding its own blank document, which is same-origin but empty,
+    // so only accept one that is actually carrying the build
+    function siteDoc(frame) {
+      try {
+        var d = frame.contentDocument;
+        if (!d || !d.body) return null;
+        if (!d.getElementById('site-content') && !d.querySelector('.hero')) return null;
+        return d;
+      } catch (e) { return null; }
+    }
+
+    function blankDoc(frame) {
+      try { var d = frame.contentDocument; return (d && d.body) ? d : null; }
+      catch (e) { return null; }
+    }
+
+    function drive(frame, track, figure, pass) {
+      var doc = siteDoc(frame);
+      if (!doc) return false;
+      var win = frame.contentWindow;
+
+      frame.setAttribute('scrolling', 'yes');
+      doc.documentElement.style.scrollBehavior = 'auto';
+      var tweak = doc.createElement('style');
+      // hide the frame's scrollbar, and settle the build's scroll reveals: a preview frame
+      // is a tall viewport, so anything still waiting on its reveal reads as a blank band
+      tweak.textContent = 'html{scroll-behavior:auto!important;overflow-y:auto!important;' +
+        'scrollbar-width:none!important}html::-webkit-scrollbar,body::-webkit-scrollbar' +
+        '{width:0!important;height:0!important;display:none!important}' +
+        '.reveal{opacity:1!important;transform:none!important}.line{width:72px!important}';
+      doc.head.appendChild(tweak);
+      track.classList.add('is-driven');
+
+      var pos = 0, dir = 1, holdUntil = 0, last = null;
+      function step(now) {
+        if (!doc.body) return;
+        if (last === null) last = now;
+        var dt = Math.min(64, now - last);
+        last = now;
+        var max = Math.max(0, doc.documentElement.scrollHeight - win.innerHeight);
+        // the build holds a branded preloader before it reveals, so wait for a real height
+        if (max > 40 && !figure.matches(':hover')) {
+          if (now >= holdUntil) {
+            pos += dir * (max / pass) * dt;
+            if (pos >= max) { pos = max; dir = -1; holdUntil = now + HOLD; }
+            else if (pos <= 0) { pos = 0; dir = 1; holdUntil = now + HOLD; }
+          }
+          win.scrollTo(0, pos);
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      return true;
+    }
+
+    // cross-origin frame: pull the page over CORS and write it in, so it is ours to scroll
+    function reinject(frame, track, figure, pass) {
+      fetch(LIVE, { credentials: 'omit' })
+        .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function (html) {
+          html = html.replace(/<head([^>]*)>/i, '<head$1><base href="' + BASE + '">');
+          frame.addEventListener('load', function onBlank() {
+            frame.removeEventListener('load', onBlank);
+            var d = blankDoc(frame);
+            // opened straight off disk, a blank frame is its own opaque origin and cannot
+            // be written to, so put the live page back and let the CSS drift carry it
+            if (!d) { frame.src = LIVE; return; }
+            d.open(); d.write(html); d.close();
+            setTimeout(function () { drive(frame, track, figure, pass); }, 80);
+          });
+          frame.src = 'about:blank';
+        })
+        .catch(function () { /* leave the CSS drift in place */ });
+    }
+
+    document.querySelectorAll('.previews .vp').forEach(function (track) {
+      var frame = track.querySelector('iframe');
+      var figure = track.closest('.device');
+      if (!frame || !figure) return;
+      var pass = track.classList.contains('vp-desktop') ? PASS.desktop
+               : track.classList.contains('vp-tablet') ? PASS.tablet : PASS.mobile;
+
+      var settled = false;
+      function begin() {
+        if (settled) return;
+        if (drive(frame, track, figure, pass)) { settled = true; return; }
+        settled = true;
+        frame.removeEventListener('load', begin);
+        reinject(frame, track, figure, pass);
+      }
+      frame.addEventListener('load', begin);
+      if (siteDoc(frame)) begin();
+    });
+  })();
+</script>
+
+<script>
+  // Shared scroll controller: eased anchor jumps + slow momentum wheel scroll
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var headerEl = document.querySelector('header');
+    var sidebarEl = document.getElementById('sidebar');
+    var ctrl = { anchorActive: false, wheelRaf: null };
+
+    // --- Anchor clicks: slow start, accelerates into the section ---
+    function easeInQuad(t) { return t * t; }
+
+    function animateScrollTo(targetY) {
+      var startY = window.pageYOffset;
+      var diff = targetY - startY;
+      if (Math.abs(diff) < 1) return;
+      var duration = Math.min(1400, Math.max(500, Math.abs(diff) * 0.7));
+      var startTime = null;
+      ctrl.anchorActive = true;
+      function step(timestamp) {
+        if (!ctrl.anchorActive) return; // interrupted by manual scroll
+        if (startTime === null) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        window.scrollTo({ top: startY + diff * easeInQuad(progress), left: 0, behavior: 'instant' });
+        if (progress < 1) { requestAnimationFrame(step); } else { ctrl.anchorActive = false; }
+      }
+      requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      var id = link.getAttribute('href').slice(1);
+      if (!id) return;
+      var target = document.getElementById(id);
+      if (!target) return;
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var offset = headerEl ? headerEl.offsetHeight : 0;
+        var targetY = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        if (reduce) {
+          window.scrollTo({ top: targetY, left: 0, behavior: 'instant' });
+        } else {
+          animateScrollTo(targetY);
+        }
+        if (history.pushState) { history.pushState(null, '', '#' + id); }
+      });
+    });
+
+    // --- Mouse wheel: slow, trailing momentum scroll instead of an instant jump ---
+    if (!reduce && 'ontouchstart' in window === false) {
+      var virtualY = window.pageYOffset;
+      var targetY = window.pageYOffset;
+
+      function wheelLoop() {
+        virtualY += (targetY - virtualY) * 0.11;
+        if (Math.abs(targetY - virtualY) < 0.4) {
+          virtualY = targetY;
+          window.scrollTo({ top: virtualY, left: 0, behavior: 'instant' });
+          ctrl.wheelRaf = null;
+          return;
+        }
+        window.scrollTo({ top: virtualY, left: 0, behavior: 'instant' });
+        ctrl.wheelRaf = requestAnimationFrame(wheelLoop);
+      }
+
+      window.addEventListener('wheel', function (e) {
+        // let the sidebar drawer scroll on its own while it is open
+        if (sidebarEl && sidebarEl.classList.contains('is-open') && sidebarEl.contains(e.target)) return;
+        ctrl.anchorActive = false; // manual scroll takes over from any anchor animation
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        virtualY = window.pageYOffset;
+        targetY = Math.min(maxScroll, Math.max(0, targetY + e.deltaY * 0.7));
+        e.preventDefault();
+        if (!ctrl.wheelRaf) { ctrl.wheelRaf = requestAnimationFrame(wheelLoop); }
+      }, { passive: false });
+
+      // keep target in sync if the user scrolls via keyboard, scrollbar drag, etc.
+      window.addEventListener('scroll', function () {
+        if (!ctrl.wheelRaf && !ctrl.anchorActive) { targetY = window.pageYOffset; }
+      }, { passive: true });
+    }
+  })();
+</script>
+
+</body>
+</html>
