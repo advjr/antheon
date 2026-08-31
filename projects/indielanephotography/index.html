@@ -346,7 +346,6 @@
     .contact-line .ci { width: 38px; height: 38px; border: 1px solid rgba(237,230,219,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #B5A89E; }
     .contact-line .ct-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9BBA9; margin-bottom: 3px; }
     .contact-line .ct-val { font-size: 17px; color: #F3ECE1; font-weight: 300; }
-    .form-success { display: none; padding: 24px; border: 1px solid var(--accent); background: var(--accent-soft); border-radius: 4px; color: #F3ECE1; font-size: 16px; }
 
     /* ===================== FOOTER ===================== */
     footer.site { background: var(--bg-alt); color: var(--text-muted); padding: 64px 0 40px; border-top: 1px solid var(--border); }
@@ -636,6 +635,7 @@
           <h2 class="section-headline reveal">Sessions made for your brand and your people</h2>
           <p class="section-body reveal">Every shoot is relaxed, unhurried and built around what you actually need the images for. Here is where I can help.</p>
         </div>
+        <!-- TODO: Editorial & Lifestyle and Weddings cards below reuse existing site photos as placeholders; swap in Donna's final selections once received -->
         <div class="services-grid reveal">
 
           <div class="service-card">
@@ -662,11 +662,11 @@
 
           <div class="service-card">
             <div class="card-img">
-              <img src="https://images.squarespace-cdn.com/content/v1/5de9b2b9fb7f953b5154014b/1579489757515-J2O2G1ISF3EPAXFE0O61/Shaun_Nature+HC_Indie+Lane_LR_25.JPG?format=900w" alt="Lifestyle and family photography by Indie Lane">
+              <img src="https://images.squarespace-cdn.com/content/v1/5de9b2b9fb7f953b5154014b/1579489757515-J2O2G1ISF3EPAXFE0O61/Shaun_Nature+HC_Indie+Lane_LR_25.JPG?format=900w" alt="Editorial and lifestyle photography by Indie Lane">
             </div>
             <div class="card-body">
-              <h3>Lifestyle &amp; Family</h3>
-              <p>Relaxed lifestyle sessions full of happy faces and real moments, shot outdoors in beautiful natural light.</p>
+              <h3>Editorial &amp; Lifestyle</h3>
+              <p>Storytelling image sets and relaxed lifestyle sessions full of happy faces and real moments, shot outdoors in beautiful natural light.</p>
               <a href="#book" class="card-link">Enquire <span>&rsaquo;</span></a>
             </div>
           </div>
@@ -684,11 +684,11 @@
 
           <div class="service-card">
             <div class="card-img">
-              <img src="https://images.squarespace-cdn.com/content/v1/5de9b2b9fb7f953b5154014b/1694588579515-80X65R9NYIHW3Y1UZOY2/Nikki_Soul+Potter_June+2023_by+Donna_Indie+Lane_LR-24-Edit.jpg?format=900w" alt="Editorial photography by Indie Lane">
+              <img src="https://images.squarespace-cdn.com/content/v1/5de9b2b9fb7f953b5154014b/1694588579515-80X65R9NYIHW3Y1UZOY2/Nikki_Soul+Potter_June+2023_by+Donna_Indie+Lane_LR-24-Edit.jpg?format=900w" alt="Wedding photography by Indie Lane">
             </div>
             <div class="card-body">
-              <h3>Editorial</h3>
-              <p>Storytelling image sets for magazines, features and campaigns, with a strong natural light feel.</p>
+              <h3>Weddings</h3>
+              <p>Relaxed, candid wedding day coverage from someone who has shot over 200 weddings, real moments over stiff posing, in beautiful natural light.</p>
               <a href="#book" class="card-link">Enquire <span>&rsaquo;</span></a>
             </div>
           </div>
@@ -963,30 +963,14 @@
             <h2 class="section-headline reveal">Let's create your visual story</h2>
             <p class="section-body reveal" style="margin-bottom:30px;">Tell me a little about what you need and I will get back to you within one business day with availability and pricing.</p>
 
-            <form id="bookForm" novalidate>
-              <div class="field-row">
-                <div class="field"><label>First name</label><input type="text" name="name" placeholder="Your name" required></div>
-                <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required></div>
-              </div>
-              <div class="field-row">
-                <div class="field"><label>Phone</label><input type="tel" name="phone" placeholder="0400 000 000"></div>
-                <div class="field"><label>What are you after?</label>
-                  <select name="type">
-                    <option>Branding Portraits</option>
-                    <option>Commercial</option>
-                    <option>Lifestyle &amp; Family</option>
-                    <option>Food &amp; Product</option>
-                    <option>Editorial</option>
-                    <option>Event</option>
-                    <option>Something else</option>
-                  </select>
-                </div>
-              </div>
-              <div class="field"><label>Tell me about your shoot</label><textarea name="message" rows="4" placeholder="Location, dates, what the images are for..."></textarea></div>
-              <button type="submit" class="btn btn-primary" style="width:100%;">Send enquiry</button>
-              <p class="form-note">Prefer to talk? Call Donna on 0400 815 182.</p>
-            </form>
-            <div class="form-success" id="formSuccess">Thank you. Your enquiry has been sent and Donna will be in touch within one business day.</div>
+            <!-- TODO: this is Studio Ninja's default (unstyled) embed look, kept as-is for now. Style tab in Studio Ninja allows theming to match the dark site design later. -->
+            <iframe height="886" style="min-width: 100%; max-width: 1440px; border: 0;" id="sn-form-sumju"
+              src="https://app.studioninja.co/contactform/parser/0a800fc8-6fc8-1b8c-816f-cafdf8a208a5/0a800fc8-6fc8-1b8c-816f-cafdf8cc08a7"
+              allowfullscreen title="Indie Lane Photography enquiry form">
+            </iframe>
+            <script type="text/javascript" data-iframe-id="sn-form-sumju"
+              src="https://app.studioninja.co/client-assets/form-render/assets/scripts/iframeResizer.js"></script>
+            <p class="form-note">Prefer to talk? Call Donna on 0400 815 182.</p>
           </div>
 
           <div>
@@ -1198,17 +1182,6 @@
         if(e.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
       });
     }
-
-    // ---------- booking form ----------
-    var form = document.getElementById('bookForm');
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var name = form.querySelector('[name="name"]').value.trim();
-      var email = form.querySelector('[name="email"]').value.trim();
-      if(!name || !email){ ilToast('Please add your name and email'); return; }
-      form.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    });
 
     // ---------- sticky bar ----------
     var bar = document.getElementById('stickyBar');

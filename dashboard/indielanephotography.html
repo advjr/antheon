@@ -456,11 +456,48 @@ a:hover{color:var(--gold)}
   <!-- New <article class="entry"> ... </article> blocks go here, newest first. -->
   <div class="changelog-label">Changelog</div>
 
-  <div class="changelog-empty">
-    <div class="changelog-empty-icon">&#128221;</div>
-    <div class="changelog-empty-title">No updates logged yet</div>
-    <p class="changelog-empty-desc">Structural, content, and design updates will be listed here as each one ships, newest first.</p>
-  </div>
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="entry-date">1 September 2026</span>
+      <span class="entry-version">v1.2</span>
+    </div>
+    <h3 class="entry-title"><span class="icon">&#127912;</span>Enquiry form styling is on hold until launch, by design</h3>
+    <p>You may notice the enquiry form on this proposal still looks like Studio Ninja's default style instead of matching the site's dark theme. This is intentional, not an oversight. The form connected to this proposal is the exact same form already live on your current website, so any color or font change made to it updates both places at once. We started a themed version to match the new site, then reverted it once we realized it was also changing how the form looks for visitors on your live site today, before you had approved the new design. We will properly theme the form as part of the final launch step, once the new site fully replaces the old one.</p>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#127912;</span>Enquiry form <span class="path">index.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge updated">Updated</span><span>Tried a dark, on-brand style for the enquiry form matching the rest of the site, then reverted it after confirming it also changed the form's look on your current live site.</span></li>
+        <li><span class="badge new">Planned</span><span>The enquiry form will be themed to match the new site's design as part of go-live, once the new site is the only version in use.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="entry-date">1 September 2026</span>
+      <span class="entry-version">v1.1</span>
+    </div>
+    <h3 class="entry-title"><span class="icon">&#128248;</span>Services updated and enquiries now connect straight to your Studio Ninja account</h3>
+    <p>The services section now reflects what you actually offer, and the enquiry form is no longer a demo. Every submission creates a real lead in your Studio Ninja account, the same way your current site already works.</p>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128248;</span>Services <span class="path">index.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge updated">Updated</span><span>Editorial and Lifestyle sessions combined into a single <strong>Editorial &amp; Lifestyle</strong> service, since they were being offered separately.</span></li>
+        <li><span class="badge removed">Removed</span><span>Family sessions removed from the services list, as requested.</span></li>
+        <li><span class="badge new">Added</span><span><strong>Weddings</strong> added as a new service.</span></li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128231;</span>Enquiry form <span class="path">index.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge new">Added</span><span>The enquiry form now connects directly to your Studio Ninja account. Every submission creates a new lead automatically, with the same notifications you already get today.</span></li>
+        <li><span class="badge updated">Updated</span><span>The "type of enquiry" options in the form now match the new services list, so leads are tagged correctly in Studio Ninja.</span></li>
+      </ul>
+    </div>
+  </article>
 
   </div><!-- /#panel-updates -->
 
