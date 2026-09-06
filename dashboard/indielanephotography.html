@@ -459,6 +459,37 @@ a:hover{color:var(--gold)}
   <article class="entry">
     <div class="entry-meta">
       <span class="entry-date">3 September 2026</span>
+      <span class="entry-version">v1.5</span>
+    </div>
+    <h3 class="entry-title"><span class="icon">&#128295;</span>Fixes to the previous build</h3>
+    <p>A closer pass over yesterday's homepage, gallery, and photo updates turned up three issues, all fixed and verified below.</p>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128247;</span>Service gallery lightbox <span class="path">index.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge fixed">Fixed</span><span>Service gallery lightbox not scrolling. The site's smooth-scroll library was intercepting mouse wheel and touch input over the lightbox instead of letting it scroll normally. Added an exception so the lightbox now scrolls natively. Verified on both desktop (mouse wheel) and mobile (touch swipe).</span></li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128444;</span>Full-bleed quote photo <span class="path">index.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge fixed">Fixed</span><span>Full-bleed quote photo cropping out the face on larger screens. The wide, short banner crop was cutting straight through the model's face on desktop and tablet widths. Adjusted the crop position on those screen sizes so the face stays in frame. Mobile was already correct and left untouched.</span></li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <div class="entry-section-label"><span class="icon">&#128220;</span>Photo separator placement <span class="path">index.html</span></div>
+      <ul class="entry-list">
+        <li><span class="badge fixed">Fixed</span><span>Photo separator was sitting mid-list inside the FAQ accordion instead of acting as a break between sections, as originally described. Moved it out of the FAQ list and placed it as a full-bleed image break between Testimonials and FAQ, matching the same pattern used elsewhere on the page.</span></li>
+        <li><span class="badge fixed">Fixed</span><span>Also caught and corrected an unrelated crop on this same photo at its new placement, which was zooming in too tight on desktop. Now shows a clean, well-framed crop.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="entry">
+    <div class="entry-meta">
+      <span class="entry-date">3 September 2026</span>
       <span class="entry-version">v1.4</span>
     </div>
     <h3 class="entry-title"><span class="icon">&#128203;</span>Homepage reordered, service galleries added, and several photos swapped</h3>
