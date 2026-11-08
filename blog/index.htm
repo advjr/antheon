@@ -13,14 +13,14 @@
   <!-- End Google Tag Manager -->
 
   <title>Blog: CRM, Automation and AI Guides | Antheon</title>
-  <meta name="description" content="Practical guides on CRMs, process automation, and AI for growing businesses that are tired of doing the same work twice.">
+  <meta name="description" content="Field notes on CRMs, automation, and AI from real builds. Practical lessons written for people who run businesses, not people who sell software.">
   <link rel="canonical" href="https://antheonph.com/blog/">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Antheon">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="The Antheon Blog | Build Systems That Run Themselves">
-  <meta property="og:description" content="Practical guides on CRMs, automation, and AI for teams tired of doing the same work twice.">
+  <meta property="og:title" content="Antheon Blog | Field Notes on Systems That Actually Work">
+  <meta property="og:description" content="Practical lessons from real CRM builds, automation projects, and AI rollouts, written for people who run businesses.">
   <meta property="og:image" content="https://antheonph.com/asset/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -28,8 +28,8 @@
   <meta property="og:site_name" content="Antheon">
   <meta property="og:locale" content="en_PH">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Antheon Blog | Build Systems That Run Themselves">
-  <meta name="twitter:description" content="Practical guides on CRMs, automation, and AI for teams tired of doing the same work twice.">
+  <meta name="twitter:title" content="Antheon Blog | Field Notes on Systems That Actually Work">
+  <meta name="twitter:description" content="Practical lessons from real CRM builds, automation projects, and AI rollouts, written for people who run businesses.">
   <meta name="twitter:image" content="https://antheonph.com/asset/og-image.jpg">
 
   <link rel="icon" type="image/png" href="../asset/Ann.png">
@@ -73,16 +73,9 @@
     <!-- HERO -->
     <section class="blog-hero">
       <div class="container hero-in">
-        <span class="eyebrow"><span class="dot"></span><strong>The Antheon Journal</strong></span>
-        <h1>Build systems that run without you chasing them</h1>
-        <p class="lead">Practical guides on CRMs, automation, and AI for teams tired of doing the same work twice.</p>
-        <div class="chips" role="group" aria-label="Filter articles by topic">
-          <button class="chip" type="button" data-filter="all" aria-pressed="true">All topics</button>
-          <button class="chip" type="button" data-filter="crm" aria-pressed="false">CRM</button>
-          <button class="chip" type="button" data-filter="automation" aria-pressed="false">Automation</button>
-          <button class="chip" type="button" data-filter="operations" aria-pressed="false">Operations</button>
-          <button class="chip" type="button" data-filter="ai" aria-pressed="false">AI</button>
-        </div>
+        <span class="kicker">Blog</span>
+        <h1>Field notes on systems that <span class="accent">actually work.</span></h1>
+        <p class="lead">Practical lessons from real CRM builds, automation projects, and AI rollouts. Written for people who run businesses, not people who sell software.</p>
       </div>
     </section>
 
@@ -90,46 +83,39 @@
     <section class="blog-list">
       <div class="container">
 
-        <!-- Featured article: the newest or most important post -->
-        <a class="featured reveal" href="your-crm-isnt-broken-your-process-is.htm" data-category="crm">
-          <div class="f-cover">
-            <img src="images/crm-process-workshop.jpg"
-                 srcset="images/crm-process-workshop-sm.jpg 640w, images/crm-process-workshop.jpg 1304w"
-                 sizes="(max-width: 899px) 100vw, 640px"
-                 alt="Team mapping a business process on whiteboards before setting up a CRM"
-                 width="1304" height="800" fetchpriority="high" decoding="async">
-            <span class="f-badge">Featured</span>
-          </div>
-          <div class="f-body">
-            <span class="cat">CRM</span>
-            <h2>Your CRM isn't broken. Your process is.</h2>
-            <p class="excerpt">Most CRM rollouts fail for the same reason: they copy a messy process into new software. Here is how to fix the process first, so the CRM finally sticks.</p>
-            <div class="meta"><time datetime="2026-11-04">4 Nov 2026</time><span class="sep"></span><span>6 min read</span></div>
-            <span class="read-link">Read the article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </div>
-        </a>
-
-        <div class="list-head">
-          <h2>Latest articles</h2>
-          <span class="count" aria-live="polite"></span>
-        </div>
-
         <!--
           ADDING A NEW ARTICLE
           1. Copy _post-template.htm to a new file named after the article, e.g. my-new-article.htm
           2. Fill in everything marked TODO in that file
-          3. Paste a new card below (newest first), pointing at the new file
-             data-category must match one of the filter chips: crm, automation, operations, ai
+          3. Copy one of the cards below, paste it at the top of the list (newest first),
+             and point it at the new file. Keep target="_blank" so it opens in a new tab.
         -->
-        <div class="post-grid">
+        <div class="post-list">
 
-          <a class="post-card" href="automate-the-client-handoff.htm" data-category="automation">
+          <a class="post-card" href="your-crm-isnt-broken-your-process-is.htm" target="_blank" rel="noopener">
+            <div class="pc-cover">
+              <img src="images/crm-process-workshop-sm.jpg"
+                   srcset="images/crm-process-workshop-sm.jpg 640w, images/crm-process-workshop.jpg 1304w"
+                   sizes="(max-width: 639px) 92px, (max-width: 899px) 220px, 300px"
+                   alt="Team mapping a business process on whiteboards before setting up a CRM"
+                   width="640" height="393" decoding="async">
+            </div>
+            <div class="pc-body">
+              <span class="cat">CRM</span>
+              <h3>Your CRM isn't broken. Your process is.</h3>
+              <p class="excerpt">Most CRM rollouts fail for the same reason: they copy a messy process into new software. Here is how to fix the process first, so the CRM finally sticks.</p>
+              <div class="meta"><time datetime="2026-11-04">4 Nov 2026</time><span class="sep"></span><span>6 min read</span></div>
+            </div>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+
+          <a class="post-card" href="automate-the-client-handoff.htm" target="_blank" rel="noopener">
             <div class="pc-cover">
               <img src="images/client-portal-status-updates-sm.jpg"
                    srcset="images/client-portal-status-updates-sm.jpg 640w, images/client-portal-status-updates.jpg 1600w"
-                   sizes="(max-width: 639px) 92px, (max-width: 979px) 50vw, 400px"
+                   sizes="(max-width: 639px) 92px, (max-width: 899px) 220px, 300px"
                    alt="Client portal showing live project phases and progress updates"
-                   width="640" height="344" loading="lazy" decoding="async">
+                   width="640" height="344" decoding="async">
             </div>
             <div class="pc-body">
               <span class="cat">Automation</span>
@@ -137,13 +123,14 @@
               <p class="excerpt">Every "just checking in" email points to a handoff nobody owns. Here is how to make updates move on their own, so clients stop asking.</p>
               <div class="meta"><time datetime="2026-10-21">21 Oct 2026</time><span class="sep"></span><span>5 min read</span></div>
             </div>
+            <span class="sr-only">(opens in a new tab)</span>
           </a>
 
-          <a class="post-card" href="signs-your-team-has-outgrown-spreadsheets.htm" data-category="operations">
+          <a class="post-card" href="signs-your-team-has-outgrown-spreadsheets.htm" target="_blank" rel="noopener">
             <div class="pc-cover">
               <img src="images/team-outgrown-spreadsheets-sm.jpg"
                    srcset="images/team-outgrown-spreadsheets-sm.jpg 640w, images/team-outgrown-spreadsheets.jpg 1600w"
-                   sizes="(max-width: 639px) 92px, (max-width: 979px) 50vw, 400px"
+                   sizes="(max-width: 639px) 92px, (max-width: 899px) 220px, 300px"
                    alt="Operations team gathered around a screen reviewing shared work"
                    width="640" height="360" loading="lazy" decoding="async">
             </div>
@@ -153,13 +140,14 @@
               <p class="excerpt">Spreadsheets are a great place to start and a costly place to stay. These five warning signs mean the workbook now costs more than it saves.</p>
               <div class="meta"><time datetime="2026-10-07">7 Oct 2026</time><span class="sep"></span><span>5 min read</span></div>
             </div>
+            <span class="sr-only">(opens in a new tab)</span>
           </a>
 
-          <a class="post-card" href="where-ai-actually-saves-time.htm" data-category="ai">
+          <a class="post-card" href="where-ai-actually-saves-time.htm" target="_blank" rel="noopener">
             <div class="pc-cover">
               <img src="images/ai-reporting-dashboard-sm.jpg"
                    srcset="images/ai-reporting-dashboard-sm.jpg 640w, images/ai-reporting-dashboard.jpg 1600w"
-                   sizes="(max-width: 639px) 92px, (max-width: 979px) 50vw, 400px"
+                   sizes="(max-width: 639px) 92px, (max-width: 899px) 220px, 300px"
                    alt="Laptop showing a reporting dashboard with charts and live metrics"
                    width="640" height="427" loading="lazy" decoding="async">
             </div>
@@ -169,23 +157,9 @@
               <p class="excerpt">Forget the demos. These are the four places AI earns its keep inside a real workflow, and the one place we tell clients to leave it out.</p>
               <div class="meta"><time datetime="2026-09-23">23 Sep 2026</time><span class="sep"></span><span>6 min read</span></div>
             </div>
+            <span class="sr-only">(opens in a new tab)</span>
           </a>
 
-        </div>
-
-        <div class="empty-state" hidden>
-          <strong>Nothing here yet</strong>
-          New articles on this topic are on the way. Try another topic for now.
-        </div>
-
-        <div class="show-more-wrap" hidden>
-          <button class="btn btn-outline" type="button" id="showMore">Show more articles</button>
-        </div>
-
-        <div class="cta-band reveal">
-          <h2>Not sure where your process leaks time?</h2>
-          <p>A Systems Audit maps how your business runs today and shows exactly what to simplify, connect, and automate first.</p>
-          <a href="../index.htm#contact" class="btn btn-primary" data-cta="blog-index-book">Book a Systems Audit</a>
         </div>
 
       </div>

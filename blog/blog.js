@@ -25,51 +25,6 @@
     });
   })();
 
-  // ---------- Listing: category filter + "show more" ----------
-  (function () {
-    var chips = document.querySelectorAll('.chip[data-filter]');
-    var cards = Array.prototype.slice.call(document.querySelectorAll('.post-grid .post-card'));
-    if (!chips.length && !cards.length) return;
-    var featured = document.querySelector('.featured');
-    var moreWrap = document.querySelector('.show-more-wrap');
-    var moreBtn = document.getElementById('showMore');
-    var empty = document.querySelector('.empty-state');
-    var countEl = document.querySelector('.list-head .count');
-    // Phones get a shorter first page so the list never turns into a long scroll
-    var limit = window.matchMedia('(max-width: 639px)').matches ? 6 : 9;
-    var current = 'all', expanded = false;
-
-    function apply() {
-      var shown = 0, matches = 0;
-      var featuredShown = !!featured && (current === 'all' || featured.dataset.category === current);
-      if (featured) featured.hidden = !featuredShown;
-      cards.forEach(function (card) {
-        var match = current === 'all' || card.dataset.category === current;
-        if (match) matches++;
-        var show = match && (expanded || current !== 'all' || shown < limit);
-        card.hidden = !show;
-        if (show) shown++;
-      });
-      if (moreWrap) moreWrap.hidden = !(current === 'all' && !expanded && matches > limit);
-      if (empty) empty.hidden = shown > 0 || featuredShown;
-      if (countEl) {
-        var total = matches + (featuredShown ? 1 : 0);
-        countEl.textContent = total + (total === 1 ? ' article' : ' articles');
-      }
-    }
-
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        current = chip.dataset.filter;
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
-        apply();
-        window.dataLayer && window.dataLayer.push({ event: 'blog_filter', category: current });
-      });
-    });
-    if (moreBtn) moreBtn.addEventListener('click', function () { expanded = true; apply(); });
-    apply();
-  })();
-
   // ---------- Article: contents list built from the h2s ----------
   (function () {
     var prose = document.querySelector('.prose');
@@ -166,7 +121,7 @@
 
   // ---------- Scroll reveal with stagger ----------
   (function () {
-    document.querySelectorAll('.post-grid, .rel-row').forEach(function (parent) {
+    document.querySelectorAll('.post-list, .rel-row').forEach(function (parent) {
       Array.prototype.forEach.call(parent.children, function (child, i) {
         child.classList.add('stagger-item');
         child.style.setProperty('--stagger', ((i % 3) * 110) + 'ms');
