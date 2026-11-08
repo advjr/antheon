@@ -1,3 +1,6 @@
 projects/assets/*.mov
 resume/asset/*.mov
 resume/asset/testimonial/originals/
+
+# Client source for the Travelz CRM demo: real data and API code, never commit
+projects/booking-progress-main/
