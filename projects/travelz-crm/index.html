@@ -1830,6 +1830,37 @@
   .announce-title { font-size: 14.5px !important; margin-bottom: 0 !important; }
   .announce-body { font-size: 14px !important; }
   .adv-cloud { display: none !important; }
+
+  
+  .tz-foldbar { display: flex; align-items: center; gap: 16px; width: 100%; margin: 0 0 14px; padding: 0; border: 0; background: transparent;
+    color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+  .tz-fold-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .tz-fold-text b { font-size: 16.5px; font-weight: 700; color: var(--text); }
+  .tz-fold-text small { font-size: 14px; color: var(--text-3); }
+  .tz-fold-cta { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; padding: 7px 13px; border-radius: 999px;
+    background: rgba(var(--acc-rgb), .08); color: var(--yellow); font-size: 13.5px; font-weight: 700; }
+  .tz-fold-cta svg { transition: transform .2s ease; }
+  .tz-foldbar[aria-expanded="true"] .tz-fold-cta svg, .tz-month-head[aria-expanded="true"] .tz-fold-cta svg { transform: rotate(180deg); }
+  .tz-foldbar:hover .tz-fold-cta, .tz-month-head:hover .tz-fold-cta { background: rgba(var(--acc-rgb), .15); }
+  .tz-foldbar:focus-visible, .tz-month-head:focus-visible { outline: 2px solid #f59e0b; outline-offset: 4px; border-radius: 8px; }
+  .panel.tz-fold.tz-closed > *:not(.tz-foldbar) { display: none !important; }
+  .panel.tz-fold.tz-closed { padding-top: 16px; padding-bottom: 16px; }
+  .panel.tz-fold.tz-closed .tz-foldbar { margin-bottom: 0; }
+  .panel.tz-fold.tz-closed:hover { border-color: rgba(var(--acc-rgb), .35); }
+  .tz-hide-title { display: none !important; }
+  
+  .tz-month-head { cursor: pointer; user-select: none; }
+  .tz-month-head .tz-month-cta { margin-left: auto; }
+  section.month.tz-closed > *:not(.mhead) { display: none !important; }
+  section.month.tz-closed { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 759px) { .tz-fold-text small { display: none; } .tz-fold-text b { font-size: 15.5px; } }
+  
+  .au-why { margin-top: 10px; }
+  .au-why summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 700; color: var(--yellow); }
+  .au-why summary::-webkit-details-marker { display: none; }
+  .au-why summary::after { content: "▾"; font-size: 11px; }
+  .au-why[open] summary::after { content: "▴"; }
+  .au-why .au-txt { margin-top: 6px; color: var(--text-2); }
 </style>
 </head>
 <body>
@@ -2255,6 +2286,7 @@ function render(p) {
     return;
   }
   $("msg").hidden = true;
+  $("msg").dataset.done = "1";
   $("board").hidden = view !== "board";
   $("legend").hidden = view !== "board";
   applyAnnouncement();
@@ -3366,7 +3398,7 @@ function auditPanel() {
     const cprCls = c.costPerResult != null && c.results >= (a.rules && a.rules.minResults || 5) && c.costPerResult > lim ? " au-badv" : "";
     const trend = p.results ? w.results > p.results ? "▲" : w.results < p.results ? "▼" : "=" : "";
     const why = (c.reasons || []).join(". ") + ".";
-    return `<div class="au-card ${AU_CLS[c.status]}">\n        <div class="au-top">\n          <div class="au-name">${esc(c.name)}</div>\n          <span class="lq-st ${AU_CLS[c.status]}" ${tip(c.status, why)}>${AU_GLYPH[c.status]} ${esc(c.status)}</span>\n        </div>\n        <div class="au-figs">\n          <div><span class="au-k">Cost / result</span><span class="au-v${cprCls}">${c.costPerResult == null ? "—" : `${cur} ${money(c.costPerResult)}`}</span><span class="au-s">limit ${int(lim)}</span></div>\n          <div><span class="au-k">Last 7 days</span><span class="au-v">${int(w.results)} results</span><span class="au-s">${p.results != null ? `${trend} ${int(p.results)} the week before` : ""}</span></div>\n          <div class="au-bud"><span class="au-k">Budget used (plan)</span><div class="au-barrow">${c.inPlan && c.budget ? barFor(c.budget - (c.budgetRemaining ?? c.budget), c.budget) : '<span class="au-s">Not in the Budget Plan</span>'}</div></div>\n        </div>\n        <div class="au-lab">What's happening</div>\n        <div class="au-txt">${esc(c.happening)}</div>\n        <div class="au-lab">Next step</div>\n        <div class="au-txt"><span class="au-act">${esc(c.action)}</span> ${esc(c.step)}</div>\n      </div>`;
+    return `<div class="au-card ${AU_CLS[c.status]}">\n        <div class="au-top">\n          <div class="au-name">${esc(c.name)}</div>\n          <span class="lq-st ${AU_CLS[c.status]}" ${tip(c.status, why)}>${AU_GLYPH[c.status]} ${esc(c.status)}</span>\n        </div>\n        <div class="au-figs">\n          <div><span class="au-k">Cost / result</span><span class="au-v${cprCls}">${c.costPerResult == null ? "—" : `${cur} ${money(c.costPerResult)}`}</span><span class="au-s">limit ${int(lim)}</span></div>\n          <div><span class="au-k">Last 7 days</span><span class="au-v">${int(w.results)} results</span><span class="au-s">${p.results != null ? `${trend} ${int(p.results)} the week before` : ""}</span></div>\n          <div class="au-bud"><span class="au-k">Budget used (plan)</span><div class="au-barrow">${c.inPlan && c.budget ? barFor(c.budget - (c.budgetRemaining ?? c.budget), c.budget) : '<span class="au-s">Not in the Budget Plan</span>'}</div></div>\n        </div>\n        <div class="au-lab">Next step</div>\n        <div class="au-txt"><span class="au-act">${esc(c.action)}</span> ${esc(c.step)}</div>\n        <details class="au-why"><summary>Why?</summary><div class="au-txt">${esc(c.happening)}</div></details>\n      </div>`;
   }).join("");
   return `<div class="panel au">${head(meta)}${sum}<div class="au-grid">${cards}</div></div>`;
 }
@@ -6332,7 +6364,7 @@ function setView(next) {
   $("board").hidden = view !== "board";
   $("legend").hidden = view !== "board";
   applyAnnouncement();
-  $("msg").hidden = view !== "board";
+  $("msg").hidden = view !== "board" || $("msg").dataset.done === "1";
   $("notes").hidden = view !== "board";
   $("reportWrap").hidden = view !== "report";
   $("previousWrap").hidden = view !== "previous";
@@ -6848,6 +6880,171 @@ setInterval(() => {
     update();
   };
   update();
+})();
+
+(() => {
+  const WRAPS = {
+    overview: "overviewWrap",
+    board: "board",
+    leads: "leadsWrap",
+    previous: "previousWrap",
+    campaigns: "campaignsWrap",
+    history: "historyWrap",
+    engagements: "engagementsWrap",
+    revenue: "revenueWrap",
+    trips: "tripsWrap",
+    feedback: "feedbackWrap",
+    kpis: "kpisWrap"
+  };
+  const OPEN = {
+    overview: [],
+    leads: [ "Daily leads", "Weekly conversion", "Weekly leads", "New vs repeat" ],
+    previous: [ "Same month", "Previous projects" ],
+    campaigns: [ "Campaign health" ],
+    history: [ "Ad spend" ],
+    engagements: [ "Instagram posts" ],
+    revenue: [ "Trip revenue", "Suggestions" ],
+    trips: [ "Trip decisions" ],
+    feedback: [ "Trip feedback", "By trip", "What people wrote" ]
+  };
+  const NO_FALLBACK = new Set([ "overview" ]);
+  const DESC = [ [ "KPIs", "Each goal checked by day, week and month." ], [ "Upcoming departures", "The next trips and how full they are." ], [ "Bookings by month", "Bookings taken each month, with past years to compare." ], [ "Leads by project", "Leads, high potential leads and bookings for each trip." ], [ "Bookings taken by month", "Every month’s bookings side by side." ], [ "Budget vs actual by campaign", "Spend against budget for every campaign this year." ], [ "Budget vs actual", "Ad spend so far against the agreed budget." ], [ "Running campaigns", "Whether each running ad brings serious enquiries." ], [ "Campaigns", "Every campaign from that year and what it achieved." ], [ "Top performing", "The posts that did best." ], [ "Posts", "Every post with its views, likes and shares." ], [ "By month", "How each month’s trips did." ], [ "By region", "How each region’s trips did." ], [ "Quality by region", "How many strong and weak trips each region has." ], [ "R&D pipeline", "New trips still being researched." ], [ "Lowest scores", "The questions travellers scored lowest." ] ];
+  const descFor = title => (DESC.find(([k]) => title.startsWith(k)) || [ null, "Tap to see the details." ])[1];
+  const opened = new Map;
+  const keyOf = title => title.split(" · ")[0].trim();
+  const wide = () => innerWidth >= 760;
+  const chevron = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+  function fold(panel, v, title, startOpen) {
+    if (panel.querySelector(":scope > .tz-foldbar")) return;
+    const id = `${v}|${keyOf(title)}`;
+    const isOpen = opened.has(id) ? opened.get(id) : startOpen;
+    const bar = document.createElement("button");
+    bar.type = "button";
+    bar.className = "tz-foldbar";
+    bar.innerHTML = `<span class="tz-fold-text"><b></b><small></small></span><span class="tz-fold-cta"><span class="tz-fold-word"></span>${chevron}</span>`;
+    bar.querySelector("b").textContent = title;
+    bar.querySelector("small").textContent = descFor(title);
+    panel.prepend(bar);
+    panel.classList.add("tz-fold");
+    const t = panel.querySelector(".ptitle");
+    if (t) t.classList.add("tz-hide-title");
+    const set = on => {
+      panel.classList.toggle("tz-closed", !on);
+      bar.setAttribute("aria-expanded", String(on));
+      bar.querySelector(".tz-fold-word").textContent = on ? "Hide" : "Show";
+    };
+    set(isOpen);
+    bar.addEventListener("click", () => {
+      const on = panel.classList.contains("tz-closed");
+      opened.set(id, on);
+      set(on);
+    });
+  }
+  function topPanels(wrap) {
+    return [ ...wrap.querySelectorAll(".panel") ].filter(p => !p.parentElement.closest(".panel") && !p.classList.contains("pv-off") && p.offsetParent !== null);
+  }
+  function applyPanels(v, wrap) {
+    const panels = topPanels(wrap).map(p => ({
+      p: p,
+      title: ((p.querySelector(".ptitle") || {}).textContent || "").replace(/\s+/g, " ").trim()
+    })).filter(x => x.title);
+    if (!panels.length) return;
+    const prefixes = OPEN[v] || [];
+    const matches = x => prefixes.some(k => x.title.startsWith(k));
+    const anyMatch = panels.some(matches);
+    panels.forEach((x, i) => {
+      const startOpen = matches(x) || !anyMatch && !NO_FALLBACK.has(v) && i === 0;
+      if (startOpen && !opened.has(`${v}|${keyOf(x.title)}`)) return;
+      fold(x.p, v, x.title, startOpen);
+    });
+  }
+  function applyOverview(wrap) {
+    if (!wide()) return;
+    const kpi = wrap.querySelector(":scope > .panel.ovk");
+    const sec = wrap.querySelector(":scope > .ov-sec");
+    const grid = wrap.querySelector(":scope > .ov-grid");
+    if (kpi && sec && grid && kpi.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      wrap.insertBefore(sec, kpi);
+      wrap.insertBefore(grid, kpi);
+    }
+    applyPanels("overview", wrap);
+  }
+  function applyBoard(wrap) {
+    [ ...wrap.querySelectorAll(":scope > section.month") ].forEach((m, i) => {
+      const head = m.querySelector(".mhead");
+      if (!head || head.querySelector(".tz-month-cta")) return;
+      const id = `board|${head.textContent.trim().split("\n")[0]}`;
+      const set = on => {
+        m.classList.toggle("tz-closed", !on);
+        head.setAttribute("aria-expanded", String(on));
+        cta.querySelector(".tz-fold-word").textContent = on ? "Hide" : "Show";
+      };
+      const cta = document.createElement("span");
+      cta.className = "tz-fold-cta tz-month-cta";
+      cta.innerHTML = `<span class="tz-fold-word"></span>${chevron}`;
+      head.appendChild(cta);
+      head.classList.add("tz-month-head");
+      head.setAttribute("role", "button");
+      head.tabIndex = 0;
+      const toggle = () => {
+        const on = m.classList.contains("tz-closed");
+        opened.set(id, on);
+        set(on);
+      };
+      head.addEventListener("click", toggle);
+      head.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggle();
+        }
+      });
+      set(opened.has(id) ? opened.get(id) : i < 2);
+    });
+  }
+  let kpiDefaulted = false;
+  function applyKpis(wrap) {
+    if (kpiDefaulted) return;
+    const failed = [ ...wrap.querySelectorAll(".kp-filter button") ].find(b => /^Failed/.test(b.textContent.trim()));
+    if (!failed) return;
+    kpiDefaulted = true;
+    if (/\b0\b/.test(failed.textContent)) return;
+    failed.click();
+  }
+  function apply(v) {
+    const wrap = document.getElementById(WRAPS[v]);
+    if (!wrap || wrap.hidden) return;
+    if (v === "overview") applyOverview(wrap); else if (v === "board") applyBoard(wrap); else if (v === "kpis") applyKpis(wrap); else applyPanels(v, wrap);
+  }
+  const relabel = wrap => wrap.querySelectorAll(".kp-filter button").forEach(b => {
+    const n = b.firstChild;
+    if (n && n.nodeType === 3 && /^Failed/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/^Failed/, "Needs attention");
+    if (n && n.nodeType === 3 && /^Passed/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/^Passed/, "On track");
+  });
+  let queued = false;
+  const run = () => {
+    queued = false;
+    for (const v of Object.keys(WRAPS)) apply(v);
+    const k = document.getElementById("kpisWrap");
+    if (k) relabel(k);
+  };
+  const soon = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(run);
+    }
+  };
+  const watch = new MutationObserver(soon);
+  for (const id of Object.values(WRAPS)) {
+    const el = document.getElementById(id);
+    if (el) watch.observe(el, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: [ "hidden" ]
+    });
+  }
+  addEventListener("resize", soon);
+  soon();
 })();
 </script>
 </body>
