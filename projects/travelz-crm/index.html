@@ -1733,6 +1733,66 @@
   .announce-title, .announce-body { color: #0f1b33; }
   html:not([data-theme="light"]) .adv-btn { color: #0f1b33; }
   #installApp, .sb-group:has(> #installApp) { display: none !important; }
+  
+  .tour { position: fixed; inset: 0; z-index: 2147483000; }
+  .tour[hidden] { display: none; }
+  .tour-shade { position: absolute; inset: 0; background: transparent; }
+  .tour.dim .tour-shade { background: rgba(8, 18, 40, .6); }
+  .tour-hole {
+    position: fixed; border-radius: 12px; pointer-events: none;
+    box-shadow: 0 0 0 200vmax rgba(8, 18, 40, .58), 0 0 0 3px #f59e0b, 0 0 24px 4px rgba(245, 158, 11, .35);
+    transition: top .35s ease, left .35s ease, width .35s ease, height .35s ease;
+  }
+  .tour-hole[hidden] { display: none; }
+  .tour-card {
+    position: fixed; width: min(380px, calc(100vw - 24px)); padding: 22px 22px 18px;
+    background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(8, 18, 40, .35); font-family: inherit;
+    transition: top .35s ease, left .35s ease;
+  }
+  .tour-card.center { top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(460px, calc(100vw - 24px)); }
+  .tour-card.dock { right: 24px; bottom: 24px; }
+  .tour-card.welcome { padding: 30px 28px 22px; text-align: left; }
+  .tour-card.welcome::before {
+    content: ""; display: block; width: 48px; height: 48px; border-radius: 14px; margin-bottom: 16px;
+    background: #1e40af url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f59e0b' d='M2.6 10.6 20.3 3.2c.9-.4 1.8.5 1.4 1.4l-7.4 17.7c-.4.9-1.7.9-2 0l-2.3-6.6-6.6-2.3c-.9-.3-.9-1.6 0-2z'/%3E%3C/svg%3E") center / 26px no-repeat;
+  }
+  .tour-x {
+    position: absolute; top: 10px; right: 12px; width: 32px; height: 32px; border: 0; border-radius: 8px;
+    background: transparent; color: var(--text-3); font-size: 22px; line-height: 1; cursor: pointer;
+  }
+  .tour-x:hover { background: rgba(var(--acc-rgb), .1); color: var(--text); }
+  .tour-step { font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #d97706; margin-bottom: 6px; }
+  .tour-title { margin: 0 0 8px; font-size: 20px; line-height: 1.25; font-weight: 800; color: var(--strong, var(--text)); padding-right: 24px; }
+  .tour-card.welcome .tour-title { font-size: 24px; }
+  .tour-body { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--text-2); }
+  .tour-src {
+    margin-top: 14px; padding: 10px 12px; border-radius: 10px; border-left: 3px solid #f59e0b;
+    background: rgba(245, 158, 11, .1); font-size: 13px; line-height: 1.45;
+  }
+  .tour-src[hidden], .tour-note[hidden], .tour-bar[hidden], .tour-acts button[hidden] { display: none; }
+  .tour-src span { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #b45309; margin-bottom: 2px; }
+  html:not([data-theme="light"]) .tour-src span { color: #fbbf24; }
+  .tour-src b { font-weight: 600; color: var(--text); }
+  .tour-note { margin: 12px 0 0; font-size: 12.5px; color: var(--text-3); }
+  .tour-bar { margin-top: 16px; height: 4px; border-radius: 4px; background: var(--track); overflow: hidden; }
+  .tour-bar i { display: block; height: 100%; background: linear-gradient(90deg, #2563eb, #f59e0b); border-radius: 4px; transition: width .35s ease; }
+  .tour-acts { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+  .tour-gap { flex: 1; }
+  .tour-acts button { font: inherit; font-size: 14px; font-weight: 700; border-radius: 10px; padding: 10px 16px; cursor: pointer; }
+  .tour-back, .tour-skip { background: transparent; border: 1px solid var(--line); color: var(--text-2); }
+  .tour-back:hover, .tour-skip:hover { border-color: var(--text-3); color: var(--text); }
+  .tour-next { background: #2563eb; border: 1px solid #2563eb; color: #fff; }
+  .tour-next:hover { background: #1d4ed8; }
+  .tour-acts button:focus-visible, .tour-x:focus-visible { outline: 2px solid #f59e0b; outline-offset: 2px; }
+  @media (max-width: 759px) {
+    .tour-card.dock { left: 12px; right: 12px; bottom: 84px; width: auto; }
+    .tour-title { font-size: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tour-hole, .tour-card, .tour-bar i { transition: none; } }
+  
+  #tourBtn { margin-top: 6px; }
+  #tourBtn svg { color: #f59e0b; }
 </style>
 </head>
 <body>
@@ -1761,6 +1821,7 @@ try {
         <button class="sb-item" data-section="marketing" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4a1 1 0 0 0 1 1h2.5L16 19.5V4.5L6.5 9H4a1 1 0 0 0-1 1z"/><path d="M19 8l2-1.5M19.5 12H22M19 16l2 1.5"/></svg><span class="sb-label">Marketing</span></button>
         <button class="sb-item" data-section="operations" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13L9 17l6 3 6-2.5v-13L15 7z"/><path d="M9 4v13M15 7v13"/></svg><span class="sb-label">Operations</span></button>
         <button class="sb-item" data-section="corporate" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg><span class="sb-label">Corporate</span></button>
+        <button class="sb-item" id="tourBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.7-2.5 2.3-2.5 3.8"/><path d="M12 17.2h.01"/></svg><span class="sb-label">Tutorial</span></button>
       </div>
       <div class="sb-group">
         <div class="sb-cat">Settings</div>
@@ -6480,6 +6541,246 @@ setInterval(() => {
 setInterval(() => {
   if (latest) render(latest);
 }, 2e4);
+</script>
+<script>
+(() => {
+  const SEEN = "travelzTourSeen";
+  const steps = [ {
+    kind: "welcome",
+    title: "Welcome to Travelz CRM",
+    body: "This is the control room for a group travel company: every booking, lead, ad campaign and traveller review in one place, kept up to date from the tools the team already uses. Take a two-minute tour to see how it works.",
+    note: "Everything you see is sample data."
+  }, {
+    view: "overview",
+    target: [ "#viewSeg", "#botNav" ],
+    title: "Five sections, one place",
+    body: "Dashboard for the big picture, then Sales, Marketing, Operations and Corporate. Each section has its own tabs along the top of the page."
+  }, {
+    view: "overview",
+    target: "#overviewWrap",
+    title: "Dashboard: the big picture",
+    body: "Every headline number against its target, by day, week and month, plus cards for campaigns, ad budget, satisfaction, margin and tasks. Tap any row or card to jump to the details.",
+    source: "All the sources below, pulled together."
+  }, {
+    view: "board",
+    target: "#board",
+    title: "Sales · Bookings",
+    body: "Every upcoming departure, week by week, filled against its capacity. The orange tick is the weekly target, green marks bookings from the last 24 hours, and sold out weeks turn orange.",
+    source: "TripDesk, the booking platform, read live."
+  }, {
+    view: "leads",
+    target: "#leadsWrap",
+    title: "Sales · Leads",
+    body: "New enquiries each day from WhatsApp and Instagram, how many are high potential, and how many turn into bookings, trip by trip.",
+    source: "ChatDesk counts every new chat automatically. The leads sheet covers the days before."
+  }, {
+    view: "report",
+    target: "#reportWrap",
+    title: "Sales · Reports",
+    body: "Bookings taken per day, week or month against the weekly target, and Previous Sales to compare each month with past years.",
+    source: "TripDesk booking history."
+  }, {
+    view: "campaigns",
+    target: "#campaignsWrap",
+    title: "Marketing · Campaigns",
+    body: "Every Meta ad campaign with its spend, cost per result and lead quality. A daily health check says what to do next, and the Budget Plan tracks spend against what was agreed.",
+    source: "Meta Ads, plus the Budget Plan set inside the CRM."
+  }, {
+    view: "engagements",
+    target: "#engagementsWrap",
+    title: "Marketing · Engagement",
+    body: "How each Instagram post performed: views, likes, shares, saves and engagement rate, with the best posts ranked.",
+    source: "The social media tracking sheet."
+  }, {
+    view: "revenue",
+    target: "#revenueWrap",
+    title: "Operations · Performance",
+    body: "The profit margin of every finished trip, by month and by region, with suggestions on what to fix and what to repeat.",
+    source: "The trip profit and loss sheet."
+  }, {
+    view: "trips",
+    target: "#tripsWrap",
+    title: "Operations · Products",
+    body: "The trip catalogue rated High, Medium or Low, so the team knows what to repeat, improve or drop when planning next year.",
+    source: "The trip master sheet."
+  }, {
+    view: "feedback",
+    target: "#feedbackWrap",
+    title: "Operations · Feedback",
+    body: "Satisfaction scores and comments from traveller surveys, with anything serious flagged for follow up.",
+    source: "The traveller feedback sheet."
+  }, {
+    view: "kpis",
+    target: "#kpisWrap",
+    title: "Corporate · KPIs",
+    body: "Every key target checked in one list: passed or failed, why, and what to do about it.",
+    source: "TripDesk, ChatDesk, Meta and TaskBoard together."
+  }, {
+    view: "pending",
+    target: "#pendingWrap",
+    title: "Corporate · Team Tasks",
+    body: "Open tasks for every team, who owns each one, and what is overdue.",
+    source: "TaskBoard, the team task manager."
+  }, {
+    view: "board",
+    target: ".headright",
+    title: "Always up to date",
+    body: "The CRM refreshes itself every 30 seconds. Refresh pulls new numbers straight away, and the moon button switches between light and dark mode."
+  }, {
+    view: "overview",
+    target: "#advBtn",
+    title: "Ask the AI Adviser",
+    body: 'Ask questions in plain English, like "What should we fix this week?", and get an answer based on everything in the CRM. It reads, it never changes anything.',
+    note: "In this demo it has ready answers for its suggested questions."
+  }, {
+    kind: "done",
+    view: "overview",
+    target: [ "#tourBtn" ],
+    title: "You're all set",
+    body: "Open any section from the sidebar to dig in. You can replay this tour any time from Tutorial, under Corporate."
+  } ];
+  const ui = document.createElement("div");
+  ui.className = "tour";
+  ui.hidden = true;
+  ui.innerHTML = `\n    <div class="tour-shade"></div>\n    <div class="tour-hole" aria-hidden="true"></div>\n    <div class="tour-card" role="dialog" aria-modal="true" aria-labelledby="tourTitle">\n      <button type="button" class="tour-x" aria-label="Close the tour">×</button>\n      <div class="tour-step"></div>\n      <h2 class="tour-title" id="tourTitle"></h2>\n      <p class="tour-body"></p>\n      <div class="tour-src"><span>Where the data comes from</span><b></b></div>\n      <p class="tour-note"></p>\n      <div class="tour-bar"><i></i></div>\n      <div class="tour-acts">\n        <button type="button" class="tour-back">Back</button>\n        <span class="tour-gap"></span>\n        <button type="button" class="tour-skip">Not now</button>\n        <button type="button" class="tour-next">Next</button>\n      </div>\n    </div>`;
+  document.body.appendChild(ui);
+  const q = s => ui.querySelector(s);
+  const card = q(".tour-card");
+  const hole = q(".tour-hole");
+  let i = 0;
+  let timers = [];
+  const visible = el => {
+    if (!el || el.hidden || el.closest("[hidden]")) return false;
+    const r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0 && r.right > 0 && r.left < innerWidth && r.bottom > 0 && r.top < innerHeight;
+  };
+  const pick = t => [].concat(t || []).map(s => document.querySelector(s)).find(visible) || null;
+  const narrowScreen = () => innerWidth < 760;
+  function place() {
+    if (ui.hidden) return;
+    const s = steps[i];
+    const el = pick(s.target);
+    card.style.left = card.style.top = card.style.right = card.style.bottom = "";
+    card.classList.remove("center", "dock");
+    if (!el) {
+      hole.hidden = true;
+      ui.classList.add("dim");
+      card.classList.add("center");
+      return;
+    }
+    ui.classList.remove("dim");
+    hole.hidden = false;
+    const r = el.getBoundingClientRect();
+    const pad = 6;
+    const box = {
+      top: Math.max(r.top - pad, 6),
+      left: Math.max(r.left - pad, 6),
+      right: Math.min(r.right + pad, innerWidth - 6),
+      bottom: Math.min(r.bottom + pad, innerHeight - 6)
+    };
+    Object.assign(hole.style, {
+      top: box.top + "px",
+      left: box.left + "px",
+      width: box.right - box.left + "px",
+      height: box.bottom - box.top + "px"
+    });
+    const cw = card.offsetWidth;
+    const ch = card.offsetHeight;
+    const gap = 16;
+    const big = box.bottom - box.top > innerHeight * .45 || box.right - box.left > innerWidth * .6;
+    if (narrowScreen() || big) {
+      card.classList.add("dock");
+      return;
+    }
+    const clampY = y => Math.min(Math.max(y, 12), innerHeight - ch - 12);
+    const clampX = x => Math.min(Math.max(x, 12), innerWidth - cw - 12);
+    let x;
+    let y;
+    if (box.right + gap + cw < innerWidth - 12) {
+      x = box.right + gap;
+      y = clampY(box.top);
+    } else if (box.left - gap - cw > 12) {
+      x = box.left - gap - cw;
+      y = clampY(box.top);
+    } else if (box.bottom + gap + ch < innerHeight - 12) {
+      y = box.bottom + gap;
+      x = clampX(box.left);
+    } else {
+      y = Math.max(12, box.top - gap - ch);
+      x = clampX(box.left);
+    }
+    card.style.left = x + "px";
+    card.style.top = y + "px";
+  }
+  function show(n) {
+    i = Math.max(0, Math.min(n, steps.length - 1));
+    const s = steps[i];
+    timers.forEach(clearTimeout);
+    timers = [];
+    if (s.view && typeof setView === "function" && view !== s.view) setView(s.view);
+    scrollTo(0, 0);
+    const welcome = s.kind === "welcome";
+    const last = i === steps.length - 1;
+    q(".tour-step").textContent = welcome ? "Quick tour" : last ? "Tour complete" : `Step ${i} of ${steps.length - 2}`;
+    q(".tour-title").textContent = s.title;
+    q(".tour-body").textContent = s.body;
+    q(".tour-src").hidden = !s.source;
+    q(".tour-src b").textContent = s.source || "";
+    q(".tour-note").hidden = !s.note;
+    q(".tour-note").textContent = s.note || "";
+    q(".tour-bar i").style.width = `${i / (steps.length - 1) * 100}%`;
+    q(".tour-bar").hidden = welcome;
+    q(".tour-back").hidden = i < 2;
+    q(".tour-skip").hidden = !welcome;
+    q(".tour-next").textContent = welcome ? "Take the tour" : last ? "Start exploring" : "Next";
+    card.classList.toggle("welcome", welcome);
+    place();
+    timers.push(setTimeout(place, 450), setTimeout(place, 1200));
+    q(".tour-next").focus({
+      preventScroll: true
+    });
+  }
+  function open(from = 0) {
+    if (typeof closeDrawer === "function" && typeof narrow !== "undefined" && narrow.matches) closeDrawer();
+    ui.hidden = false;
+    document.documentElement.classList.add("touring");
+    show(from);
+  }
+  function close() {
+    ui.hidden = true;
+    document.documentElement.classList.remove("touring");
+    timers.forEach(clearTimeout);
+    try {
+      localStorage.setItem(SEEN, "1");
+    } catch (e) {}
+  }
+  q(".tour-next").addEventListener("click", () => {
+    if (i === steps.length - 1) {
+      close();
+      if (typeof setView === "function") setView("overview");
+      scrollTo(0, 0);
+      return;
+    }
+    show(i + 1);
+  });
+  q(".tour-back").addEventListener("click", () => show(i - 1));
+  q(".tour-skip").addEventListener("click", close);
+  q(".tour-x").addEventListener("click", close);
+  q(".tour-shade").addEventListener("click", e => e.stopPropagation());
+  addEventListener("keydown", e => {
+    if (ui.hidden) return;
+    if (e.key === "Escape") close(); else if (e.key === "ArrowRight") q(".tour-next").click(); else if (e.key === "ArrowLeft" && i > 1) show(i - 1);
+  });
+  addEventListener("resize", place);
+  addEventListener("scroll", place, true);
+  const btn = document.getElementById("tourBtn");
+  if (btn) btn.addEventListener("click", () => open(0));
+  let seen = false;
+  try {
+    seen = localStorage.getItem(SEEN) === "1";
+  } catch (e) {}
+  if (!seen) setTimeout(() => open(0), 900);
+})();
 </script>
 </body>
 </html>
