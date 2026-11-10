@@ -813,27 +813,40 @@
   .au-of { font-size: 13.5px; color: var(--text-3); }
   .au-bar { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; background: var(--track); margin: 10px 0 14px; }
   .au-seg.good { background: var(--q-high); } .au-seg.watch { background: var(--q-med); } .au-seg.bad { background: var(--q-low); }
-  .au-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-  .au-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--q-none); border-radius: 10px; padding: 12px 14px; min-width: 0; }
-  .au-card.good { border-left-color: var(--q-high); } .au-card.watch { border-left-color: var(--q-med); } .au-card.bad { border-left-color: var(--q-low); }
-  .au-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-  .au-name { font-weight: 700; color: var(--strong); font-size: 15px; overflow-wrap: anywhere; }
-  .au-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin: 10px 0 4px; }
-  .au-figs > div { display: flex; flex-direction: column; min-width: 0; }
-  .au-figs .au-bud { grid-column: 1 / -1; }
-  .au-k { font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
-  .au-v { font-size: 16px; font-weight: 700; color: var(--strong); font-variant-numeric: tabular-nums; }
-  .au-v.au-badv { color: var(--bad-ink); }
-  .au-s { font-size: 12.5px; color: var(--text-3); }
-  .au-barrow { display: flex; align-items: center; margin-top: 4px; }
-  .au-bud .abar { width: 160px; }
-  .au-lab { font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); margin-top: 10px; }
-  .au-txt { font-size: 14.5px; color: var(--text); line-height: 1.45; margin-top: 2px; }
-  .au-act { display: inline-block; padding: 1px 8px; border-radius: 6px; background: rgba(var(--acc-rgb), .14); color: var(--yellow); font-weight: 700; font-size: 13.5px; margin-right: 4px; }
+  .au-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .au-card { position: relative; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 16px 14px; min-width: 0; overflow: hidden; }
+  .au-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--q-none); }
+  .au-card.good::before { background: var(--q-high); } .au-card.watch::before { background: var(--q-med); } .au-card.bad::before { background: var(--q-low); }
+  .au-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .au-name { font-weight: 700; color: var(--strong); font-size: 15.5px; overflow-wrap: anywhere; }
+  .au-k { display: block; font-size: 13px; font-weight: 600; color: var(--text-3); }
+  .au-s { font-size: 13px; color: var(--text-3); }
+  .au-hero { margin: 14px 0 0; }
+  .au-big { font-size: 28px; font-weight: 800; line-height: 1.15; color: var(--strong); font-variant-numeric: tabular-nums; margin: 2px 0 8px; }
+  .au-big small { font-size: 14px; font-weight: 700; color: var(--text-3); }
+  .au-big.bad { color: var(--bad-ink); }
+  .au-gauge { position: relative; height: 8px; border-radius: 999px; background: var(--track); margin-bottom: 6px; }
+  .au-gauge > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--q-none); }
+  .au-gauge > i.good { background: var(--q-high); } .au-gauge > i.watch { background: var(--q-med); } .au-gauge > i.bad { background: var(--q-low); }
+  .au-gauge > b { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; border-radius: 1px; background: var(--strong); opacity: .55; }
+  .au-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
+  .au-stats > div { min-width: 0; }
+  .au-num, .au-bnum { font-size: 20px; font-weight: 800; color: var(--strong); font-variant-numeric: tabular-nums; line-height: 1.25; margin: 2px 0 4px; }
+  .au-bnum small { font-size: 12.5px; font-weight: 600; color: var(--text-3); }
+  .au-chip { display: inline-block; white-space: nowrap; padding: 1px 8px; border-radius: 999px; font-size: 12.5px; font-weight: 700; background: var(--track); color: var(--text-3); }
+  .au-chip.up { background: rgba(12,163,12,.13); color: var(--good-ink); }
+  .au-chip.down { background: rgba(208,59,59,.13); color: var(--bad-ink); }
+  .au-btrack { height: 6px; border-radius: 999px; background: var(--track); overflow: hidden; margin-top: 6px; }
+  .au-btrack > i { display: block; height: 100%; border-radius: 999px; background: var(--yellow); }
+  .au-btrack > i.watch { background: var(--q-med); } .au-btrack > i.bad { background: var(--q-low); }
+  .au-next { margin: 16px -16px -14px; padding: 12px 16px 14px; background: rgba(var(--acc-rgb), .06); border-top: 1px solid var(--line); flex: 1; }
+  .au-nhead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .au-lab { font-size: 13px; font-weight: 600; color: var(--text-3); }
+  .au-txt { font-size: 14.5px; color: var(--text); line-height: 1.45; margin-top: 6px; }
+  .au-act { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--yellow); color: var(--card); font-weight: 700; font-size: 13px; }
   
   html[data-theme="light"] .au .lq-st.good { background: rgba(12,163,12,.09); }
   html[data-theme="light"] .au .lq-st.bad { background: rgba(208,59,59,.09); }
-  html[data-theme="light"] .au-act { background: rgba(var(--acc-rgb), .08); }
   html[data-theme="light"] .bp .lq-st.good { background: rgba(12,163,12,.09); }
   html[data-theme="light"] .bp .lq-st.bad { background: rgba(208,59,59,.09); }
   html[data-theme="light"] .bp-now { background: rgba(var(--acc-rgb), .08); }
@@ -3395,10 +3408,47 @@ function auditPanel() {
   const cards = list.map(c => {
     const w = c.last7 || {};
     const p = c.prev7 || {};
-    const cprCls = c.costPerResult != null && c.results >= (a.rules && a.rules.minResults || 5) && c.costPerResult > lim ? " au-badv" : "";
-    const trend = p.results ? w.results > p.results ? "▲" : w.results < p.results ? "▼" : "=" : "";
+    const minR = a.rules && a.rules.minResults || 5;
+    const cpr = c.costPerResult;
+    const judged = cpr != null && c.results >= minR;
+    const tone = cpr == null ? "none" : !judged ? "watch" : cpr > lim ? "bad" : cpr > lim * .8 ? "watch" : "good";
+    const scale = lim * 1.25;
+    const fill = cpr == null ? 0 : Math.max(2, Math.min(100, cpr / scale * 100));
+    const limPos = lim / scale * 100;
+    const cprNote = cpr == null ? "No results yet" : cpr > lim ? `${cur} ${money(cpr - lim)} over the ${cur} ${int(lim)} limit` : `${cur} ${money(lim - cpr)} under the ${cur} ${int(lim)} limit`;
+    let delta = "";
+    if (p.results != null) {
+      const d = (w.results || 0) - (p.results || 0);
+      delta = !p.results && w.results ? `<span class="au-chip up">New this week</span>` : d > 0 ? `<span class="au-chip up">+${int(d)} vs last week</span>` : d < 0 ? `<span class="au-chip down">−${int(-d)} vs last week</span>` : `<span class="au-chip">Same as last week</span>`;
+    }
+    let bud = `<span class="au-s">Not in the Budget Plan</span>`;
+    if (c.inPlan && c.budget) {
+      const spent = c.budget - (c.budgetRemaining ?? c.budget);
+      const pct = Math.max(0, spent / c.budget * 100);
+      bud = `<div class="au-bnum">${pct.toFixed(0)}%<small> of ${cur} ${int(c.budget)}</small></div><div class="au-btrack"><i class="${pct > 100 ? "bad" : pct > 85 ? "watch" : ""}" style="width:${Math.min(100, pct)}%"></i></div>`;
+    }
     const why = (c.reasons || []).join(". ") + ".";
-    return `<div class="au-card ${AU_CLS[c.status]}">\n        <div class="au-top">\n          <div class="au-name">${esc(c.name)}</div>\n          <span class="lq-st ${AU_CLS[c.status]}" ${tip(c.status, why)}>${AU_GLYPH[c.status]} ${esc(c.status)}</span>\n        </div>\n        <div class="au-figs">\n          <div><span class="au-k">Cost / result</span><span class="au-v${cprCls}">${c.costPerResult == null ? "—" : `${cur} ${money(c.costPerResult)}`}</span><span class="au-s">limit ${int(lim)}</span></div>\n          <div><span class="au-k">Last 7 days</span><span class="au-v">${int(w.results)} results</span><span class="au-s">${p.results != null ? `${trend} ${int(p.results)} the week before` : ""}</span></div>\n          <div class="au-bud"><span class="au-k">Budget used (plan)</span><div class="au-barrow">${c.inPlan && c.budget ? barFor(c.budget - (c.budgetRemaining ?? c.budget), c.budget) : '<span class="au-s">Not in the Budget Plan</span>'}</div></div>\n        </div>\n        <div class="au-lab">Next step</div>\n        <div class="au-txt"><span class="au-act">${esc(c.action)}</span> ${esc(c.step)}</div>\n        <details class="au-why"><summary>Why?</summary><div class="au-txt">${esc(c.happening)}</div></details>\n      </div>`;
+    return `<div class="au-card ${AU_CLS[c.status]}">
+        <div class="au-top">
+          <div class="au-name">${esc(c.name)}</div>
+          <span class="lq-st ${AU_CLS[c.status]}" ${tip(c.status, why)}>${AU_GLYPH[c.status]} ${esc(c.status)}</span>
+        </div>
+        <div class="au-hero">
+          <span class="au-k">Cost per result</span>
+          <div class="au-big ${tone}">${cpr == null ? "—" : `<small>${cur}</small> ${money(cpr)}`}</div>
+          <div class="au-gauge" aria-hidden="true"><i class="${tone}" style="width:${fill}%"></i><b style="left:${limPos}%"></b></div>
+          <div class="au-s">${cprNote}</div>
+        </div>
+        <div class="au-stats">
+          <div><span class="au-k">Results, last 7 days</span><div class="au-num">${int(w.results)}</div>${delta}</div>
+          <div><span class="au-k">Budget used</span>${bud}</div>
+        </div>
+        <div class="au-next">
+          <div class="au-nhead"><span class="au-lab">Next step</span><span class="au-act">${esc(c.action)}</span></div>
+          <div class="au-txt">${esc(c.step)}</div>
+          <details class="au-why"><summary>Why?</summary><div class="au-txt">${esc(c.happening)}</div></details>
+        </div>
+      </div>`;
   }).join("");
   return `<div class="panel au">${head(meta)}${sum}<div class="au-grid">${cards}</div></div>`;
 }
