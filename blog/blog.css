@@ -210,6 +210,8 @@ header nav { display: flex; align-items: center; justify-content: space-between;
 .feature-by .who, .feature-by .when { display: inline-flex; align-items: center; gap: 10px; }
 .feature-by .who img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.6); }
 .feature-by .when svg { width: 30px; height: 30px; padding: 6px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.35); }
+.feature-by .who img.logo, .pc-foot .who img.logo { object-fit: contain; background: #fff; padding: 5px; }
+.pc-foot .who img.logo { padding: 4px; border: 1px solid var(--border); }
 .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .feature-tags span { padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.45); font-size: 14px; font-weight: 500; }
 @media (max-width: 1023px) { .feature-body { padding: 26px 28px 26px; } }

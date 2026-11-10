@@ -1806,6 +1806,33 @@
   
   #tourBtn { margin-top: 6px; }
   #tourBtn svg { color: #f59e0b; }
+  @media (max-width: 759px) {
+    html.touring { overscroll-behavior-x: none; }
+    .tour-card.sheet { touch-action: pan-y; }
+    .tour-card.sheet {
+      left: 0; right: 0; bottom: 0; top: auto; width: auto; max-height: 48vh; overflow-y: auto;
+      padding: 10px 18px calc(14px + env(safe-area-inset-bottom)); border-radius: 20px 20px 0 0; border-width: 1px 0 0;
+      box-shadow: 0 -14px 40px rgba(8, 18, 40, .32); transition: none;
+    }
+    .tour-card.sheet::before { content: ""; display: block; width: 40px; height: 4px; border-radius: 4px; background: var(--line); margin: 0 auto 10px; }
+    .tour-card.sheet.sheet-top { top: 0; bottom: auto; padding: calc(14px + env(safe-area-inset-top)) 18px 14px; border-radius: 0 0 20px 20px; border-width: 0 0 1px; box-shadow: 0 14px 40px rgba(8, 18, 40, .32); }
+    .tour-card.sheet.sheet-top::before { display: none; }
+    .tour-card.sheet .tour-x { top: 8px; right: 8px; }
+    .tour-card.sheet.sheet-top .tour-x { top: calc(8px + env(safe-area-inset-top)); }
+    .tour-card.sheet .tour-step { font-size: 12px; margin-bottom: 2px; }
+    .tour-card.sheet .tour-title { font-size: 17px; margin-bottom: 4px; }
+    .tour-card.sheet .tour-body { font-size: 14.5px; line-height: 1.5; }
+    .tour-card.sheet .tour-src { margin-top: 8px; padding: 6px 10px; font-size: 13px; }
+    .tour-card.sheet .tour-src span { display: none; }
+    .tour-card.sheet .tour-src b::before { content: "Source: "; font-weight: 800; color: #b45309; }
+    html:not([data-theme="light"]) .tour-card.sheet .tour-src b::before { color: #fbbf24; }
+    .tour-card.sheet .tour-note { margin-top: 8px; }
+    .tour-card.sheet .tour-bar { margin-top: 10px; }
+    .tour-card.sheet .tour-acts { margin-top: 10px; }
+    .tour-card.sheet .tour-acts button { padding: 9px 18px; }
+    .tour-card.center { max-height: calc(100vh - 32px); overflow-y: auto; }
+    .tour-card.welcome { padding: 24px 20px 18px; }
+  }
   
   body { line-height: 1.5; }
   .shell { padding: 22px 30px 44px; }
@@ -6674,7 +6701,8 @@ setInterval(() => {
     view: "overview",
     target: [ "#viewSeg", "#botNav" ],
     title: "Five sections, one place",
-    body: "Dashboard for the big picture, then Sales, Marketing, Operations and Corporate. Each section has its own tabs along the top of the page."
+    body: "Dashboard for the big picture, then Sales, Marketing, Operations and Corporate. Each section has its own tabs along the top of the page.",
+    phoneBody: "Dashboard for the big picture, then Sales, Marketing, Operations and Corporate, in the bar at the bottom. Each section has its own tabs along the top of the page."
   }, {
     view: "overview",
     target: "#overviewWrap",
@@ -6757,7 +6785,8 @@ setInterval(() => {
     view: "overview",
     target: [ "#tourBtn" ],
     title: "You're all set",
-    body: "Open any section from the sidebar to dig in. You can replay this tour any time from Tutorial, under Corporate."
+    body: "Open any section from the sidebar to dig in. You can replay this tour any time from Tutorial, under Corporate.",
+    phoneBody: "Open any section from the bar at the bottom to dig in. You can replay this tour any time from Tutorial in the ☰ menu."
   } ];
   const ui = document.createElement("div");
   ui.className = "tour";
@@ -6775,13 +6804,30 @@ setInterval(() => {
     return r.width > 0 && r.height > 0 && r.right > 0 && r.left < innerWidth && r.bottom > 0 && r.top < innerHeight;
   };
   const pick = t => [].concat(t || []).map(s => document.querySelector(s)).find(visible) || null;
+  const shown = el => el && !el.hidden && !el.closest("[hidden]") && el.getBoundingClientRect().height > 0;
+  const find = t => [].concat(t || []).map(s => document.querySelector(s)).find(shown) || null;
   const narrowScreen = () => innerWidth < 760;
+  const setHole = box => Object.assign(hole.style, {
+    top: box.top + "px",
+    left: box.left + "px",
+    width: box.right - box.left + "px",
+    height: Math.max(0, box.bottom - box.top) + "px"
+  });
+  function frame() {
+    if (ui.hidden || !narrowScreen()) return;
+    const el = find(steps[i].target);
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.height < innerHeight * .4) return;
+    const y = Math.max(0, r.top + scrollY - 8);
+    if (Math.abs(y - scrollY) > 2) scrollTo(0, y);
+  }
   function place() {
     if (ui.hidden) return;
     const s = steps[i];
     const el = pick(s.target);
     card.style.left = card.style.top = card.style.right = card.style.bottom = "";
-    card.classList.remove("center", "dock");
+    card.classList.remove("center", "dock", "sheet", "sheet-top");
     if (!el) {
       hole.hidden = true;
       ui.classList.add("dim");
@@ -6798,12 +6844,16 @@ setInterval(() => {
       right: Math.min(r.right + pad, innerWidth - 6),
       bottom: Math.min(r.bottom + pad, innerHeight - 6)
     };
-    Object.assign(hole.style, {
-      top: box.top + "px",
-      left: box.left + "px",
-      width: box.right - box.left + "px",
-      height: box.bottom - box.top + "px"
-    });
+    if (narrowScreen()) {
+      const low = r.top > innerHeight * .5;
+      card.classList.add("sheet");
+      card.classList.toggle("sheet-top", low);
+      const ch = card.offsetHeight;
+      if (low) box.top = Math.max(box.top, ch + 10); else box.bottom = Math.min(box.bottom, innerHeight - ch - 10);
+      setHole(box);
+      return;
+    }
+    setHole(box);
     const cw = card.offsetWidth;
     const ch = card.offsetHeight;
     const gap = 16;
@@ -6843,7 +6893,7 @@ setInterval(() => {
     const last = i === steps.length - 1;
     q(".tour-step").textContent = welcome ? "Quick tour" : last ? "Tour complete" : `Step ${i} of ${steps.length - 2}`;
     q(".tour-title").textContent = s.title;
-    q(".tour-body").textContent = s.body;
+    q(".tour-body").textContent = narrowScreen() && s.phoneBody || s.body;
     q(".tour-src").hidden = !s.source;
     q(".tour-src b").textContent = s.source || "";
     q(".tour-note").hidden = !s.note;
@@ -6854,8 +6904,12 @@ setInterval(() => {
     q(".tour-skip").hidden = !welcome;
     q(".tour-next").textContent = welcome ? "Take the tour" : last ? "Start exploring" : "Next";
     card.classList.toggle("welcome", welcome);
-    place();
-    timers.push(setTimeout(place, 450), setTimeout(place, 1200));
+    const settle = () => {
+      frame();
+      place();
+    };
+    settle();
+    timers.push(setTimeout(settle, 450), setTimeout(settle, 1200));
     q(".tour-next").focus({
       preventScroll: true
     });
@@ -6890,6 +6944,24 @@ setInterval(() => {
   addEventListener("keydown", e => {
     if (ui.hidden) return;
     if (e.key === "Escape") close(); else if (e.key === "ArrowRight") q(".tour-next").click(); else if (e.key === "ArrowLeft" && i > 1) show(i - 1);
+  });
+  let sx = null;
+  let sy = null;
+  card.addEventListener("touchstart", e => {
+    sx = e.touches[0].clientX;
+    sy = e.touches[0].clientY;
+  }, {
+    passive: true
+  });
+  card.addEventListener("touchend", e => {
+    if (sx === null) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    const dy = e.changedTouches[0].clientY - sy;
+    sx = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (dx < 0) q(".tour-next").click(); else if (i > 1) show(i - 1);
+  }, {
+    passive: true
   });
   addEventListener("resize", place);
   addEventListener("scroll", place, true);
