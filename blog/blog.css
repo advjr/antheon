@@ -427,3 +427,27 @@ footer a:hover { color: #fff; }
   html { scroll-behavior: auto; }
   .read-progress { display: none; }
 }
+
+/* Wide cover: shows a 16:9 photo uncropped (for covers with text in the image) */
+.post-cover figure.cover-169 { aspect-ratio: 16 / 9; }
+
+/* Tables inside articles: rows stack as cards on phones */
+.prose .table-wrap { border: 1px solid var(--border); border-radius: 12px; margin-top: 1.4em; overflow: hidden; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.6; }
+.prose th, .prose td { padding: 14px 18px; text-align: left; vertical-align: top; border-top: 1px solid var(--border); }
+.prose thead th { border-top: 0; background: var(--bg-alt); font-size: 14px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); }
+.prose tbody th { width: 17%; font-weight: 600; color: var(--text); }
+.prose table.cols-2 tbody th { width: 32%; }
+.prose thead th { white-space: nowrap; }
+.prose td.who { width: 20%; color: var(--text-muted); font-size: 15px; }
+@media (max-width: 767px) {
+  .prose table, .prose tbody, .prose tr, .prose th, .prose td { display: block; width: auto !important; }
+  .prose thead { display: none; }
+  .prose table { font-size: 15px; }
+  .prose tbody tr { padding: 16px 18px; border-top: 1px solid var(--border); }
+  .prose tbody tr:first-child { border-top: 0; }
+  .prose tbody th, .prose tbody td { padding: 0; border: 0; }
+  .prose tbody th { font-size: 16px; margin-bottom: 4px; }
+  .prose td.who { margin-top: 8px; font-size: 14px; }
+  .prose td.who::before { content: "Who uses it: "; font-weight: 600; color: var(--text); }
+}
