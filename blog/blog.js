@@ -121,7 +121,7 @@
 
   // ---------- Scroll reveal with stagger ----------
   (function () {
-    document.querySelectorAll('.post-list, .rel-row').forEach(function (parent) {
+    document.querySelectorAll('.post-grid, .rel-row').forEach(function (parent) {
       Array.prototype.forEach.call(parent.children, function (child, i) {
         child.classList.add('stagger-item');
         child.style.setProperty('--stagger', ((i % 3) * 110) + 'ms');

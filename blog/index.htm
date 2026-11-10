@@ -73,8 +73,8 @@
     <!-- HERO -->
     <section class="blog-hero">
       <div class="container hero-in">
-        <span class="kicker">Blog</span>
-        <h1>Field notes on systems that <span class="accent">actually work.</span></h1>
+        <span class="pill">Read our blog</span>
+        <h1>Field notes on systems that actually work</h1>
         <p class="lead">Practical lessons from real CRM builds, automation projects, and AI rollouts. Written for people who run businesses, not people who sell software.</p>
       </div>
     </section>
@@ -87,28 +87,64 @@
           ADDING A NEW ARTICLE
           1. Copy _post-template.htm to a new file named after the article, e.g. my-new-article.htm
           2. Fill in everything marked TODO in that file
-          3. Copy one of the cards below, paste it at the top of the list (newest first),
-             and point it at the new file. Keep target="_blank" so it opens in a new tab.
+          3. The newest article goes in the big featured card below: swap its link, image, title,
+             excerpt, date and tags for the new article's.
+          4. Move the article that was featured into the "More articles" grid as a card (copy the
+             example card in the comment there), newest first. Keep target="_blank" on every link.
+          5. Add the new article to the "blogPost" list in the JSON-LD at the bottom of this page.
+          The "More articles" section stays hidden until it has at least one card.
         -->
-        <div class="post-list">
 
-          <a class="post-card" href="your-whole-company-on-one-screen.htm" target="_blank" rel="noopener">
-            <div class="pc-cover">
-              <img src="images/ceo-one-screen-crm-dashboard-sm.jpg"
-                   srcset="images/ceo-one-screen-crm-dashboard-sm.jpg 640w, images/ceo-one-screen-crm-dashboard.jpg 1536w"
-                   sizes="(max-width: 639px) 92px, (max-width: 899px) 220px, 300px"
-                   alt="A relaxed CEO on a beach checking a live company dashboard on his phone while staff run behind him with paperwork"
-                   width="640" height="360" decoding="async">
+        <!-- FEATURED: the newest article -->
+        <a class="feature reveal" href="your-whole-company-on-one-screen.htm" target="_blank" rel="noopener">
+          <div class="feature-media">
+            <img src="images/ceo-one-screen-crm-dashboard.jpg"
+                 srcset="images/ceo-one-screen-crm-dashboard-sm.jpg 640w, images/ceo-one-screen-crm-dashboard.jpg 1536w"
+                 sizes="(max-width: 1296px) 100vw, 1200px"
+                 alt="A relaxed CEO on a beach checking a live company dashboard on his phone while staff run behind him with paperwork"
+                 width="1536" height="864" fetchpriority="high" decoding="async">
+          </div>
+          <div class="feature-body">
+            <div class="feature-top">
+              <h2>Your whole company on one screen</h2>
+              <span class="feature-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
             </div>
-            <div class="pc-body">
-              <span class="cat">New service</span>
-              <h3>Your whole company on one screen</h3>
-              <p class="excerpt">How I built a live command centre for a UAE travel company, and how I can build one around the way your business runs.</p>
-              <div class="meta"><time datetime="2026-11-11">11 Nov 2026</time><span class="sep"></span><span>7 min read</span></div>
+            <p class="feature-excerpt">How I built a live command centre for a UAE travel company, and how I can build one around the way your business runs.</p>
+            <div class="feature-foot">
+              <div class="feature-by">
+                <span class="who"><img src="../resume/asset/profile-photo.jpg" alt="" width="34" height="34" decoding="async">Anthony De Vera Jr</span>
+                <span class="when"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><time datetime="2026-11-11">11 Nov 2026</time></span>
+              </div>
+              <div class="feature-tags"><span>Custom CRM</span><span>Dashboards</span><span>AI</span></div>
             </div>
-            <span class="sr-only">(opens in a new tab)</span>
-          </a>
+          </div>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
 
+        <!-- MORE ARTICLES: older posts as cards, newest first -->
+        <div class="more-posts">
+          <h2 class="list-label">More articles</h2>
+          <div class="post-grid">
+            <!-- Example card, copy it above this comment and fill it in:
+            <a class="post-card" href="article-file-name.htm" target="_blank" rel="noopener">
+              <div class="pc-cover">
+                <img src="images/cover-sm.jpg" srcset="images/cover-sm.jpg 640w, images/cover.jpg 1600w"
+                     sizes="(max-width: 639px) 92vw, (max-width: 979px) 46vw, 380px"
+                     alt="Describe the cover photo" width="640" height="480" loading="lazy" decoding="async">
+              </div>
+              <div class="pc-body">
+                <span class="cat">Category</span>
+                <h3>Article headline</h3>
+                <p class="excerpt">One or two sentences on why it is worth reading.</p>
+                <div class="pc-foot">
+                  <span class="who"><img src="../resume/asset/profile-photo.jpg" alt="" width="28" height="28" loading="lazy">Anthony De Vera Jr</span>
+                  <span>5 min read</span>
+                </div>
+              </div>
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+            -->
+          </div>
         </div>
 
       </div>
