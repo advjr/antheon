@@ -137,6 +137,78 @@
     els.forEach(function (el) { io.observe(el); });
   })();
 
+  // ---------- Demo preview: cover photo fades into a muted walkthrough ----------
+  // After 3 seconds the cover becomes a looping, muted video of the demo.
+  // Once the cover scrolls away, the same video moves into a small player in
+  // the corner so it keeps going while the article is read. The player hides
+  // near the end of the page, can be closed, and both open the demo.
+  (function () {
+    var fig = document.querySelector('[data-demo]');
+    if (!fig) return;
+    var video = fig.querySelector('.demo-video');
+    var link = fig.querySelector('.demo-link');
+    var mini = document.querySelector('.demo-mini');
+    var screen = mini && mini.querySelector('.demo-mini-screen');
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (!video || !link || reduce || saveData) { fig.classList.add('is-static'); return; }
+
+    var started = false, closed = false, inMini = false, coverVisible = true;
+    var ends = Array.prototype.slice.call(document.querySelectorAll('.post-cta, footer'));
+    var endShown = ends.map(function () { return false; });
+
+    function play() {
+      var pr = video.play();
+      if (pr && pr.catch) pr.catch(function () {
+        // Autoplay refused (e.g. battery saver): keep the photo and the demo link
+        started = false; fig.classList.remove('is-playing'); fig.classList.add('is-static'); move(false);
+      });
+    }
+    function move(toMini) {
+      if (!mini || toMini === inMini) return;
+      inMini = toMini;
+      if (toMini) {
+        screen.appendChild(video);
+        mini.hidden = false;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { mini.classList.add('is-open'); }); });
+      } else {
+        link.insertBefore(video, link.firstChild);
+        mini.classList.remove('is-open');
+        setTimeout(function () { if (!inMini) mini.hidden = true; }, 380);
+      }
+    }
+    function update() {
+      if (!started) return;
+      var below = fig.getBoundingClientRect().bottom < 0;
+      var nearEnd = endShown.some(Boolean);
+      move(!closed && !coverVisible && below && !nearEnd);
+      if (inMini || coverVisible) play(); else video.pause();
+    }
+
+    // Start buffering straight away so the switch at 3 seconds is smooth
+    video.preload = 'auto';
+    video.load();
+    var timeUp = false, ready = false;
+    function begin() {
+      if (!timeUp || !ready || started) return;
+      started = true;
+      fig.classList.add('is-playing');
+      update();
+    }
+    video.addEventListener('canplay', function () { ready = true; begin(); });
+    if (video.readyState >= 3) ready = true;
+    setTimeout(function () { timeUp = true; begin(); }, 3000);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { coverVisible = es[0].isIntersecting; update(); }, { threshold: 0 }).observe(fig);
+      var endIO = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { endShown[ends.indexOf(e.target)] = e.isIntersecting; });
+        update();
+      }, { threshold: 0 });
+      ends.forEach(function (el) { endIO.observe(el); });
+    }
+    if (mini) mini.querySelector('.demo-mini-x').addEventListener('click', function () { closed = true; update(); });
+  })();
+
   // ---------- Shared scroll controller (same pattern as index.htm) ----------
   // Eased anchor jumps + slow trailing momentum on desktop mouse wheels.
   (function () {

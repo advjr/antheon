@@ -94,12 +94,19 @@
       </div>
 
       <div class="post-cover reveal">
-        <figure class="cover-169">
+        <!-- After 3 seconds the photo fades into a muted walkthrough of the demo CRM (blog.js, "Demo preview") -->
+        <figure class="cover-169 cover-demo" data-demo>
           <img src="images/ceo-one-screen-crm-dashboard.jpg"
                srcset="images/ceo-one-screen-crm-dashboard-sm.jpg 640w, images/ceo-one-screen-crm-dashboard.jpg 1536w"
                sizes="(max-width: 1120px) 100vw, 1024px"
                alt="A relaxed CEO on a beach lounger checking a live company dashboard on his phone while staff run behind him carrying piles of paperwork"
                width="1536" height="864" fetchpriority="high" decoding="async">
+          <a class="demo-link" href="../projects/travelz-crm/index.html" target="_blank" rel="noopener" aria-label="Open the Travelz CRM demo in a new tab">
+            <video class="demo-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+              <source src="media/travelz-crm-walkthrough.mp4" type="video/mp4">
+            </video>
+            <span class="demo-badge"><span class="live" aria-hidden="true"></span><span class="bl">CRM walkthrough · </span>Open the live demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
         </figure>
       </div>
 
@@ -292,6 +299,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Small player that keeps the demo preview going while the reader scrolls -->
+  <div class="demo-mini" hidden>
+    <a class="demo-mini-link" href="../projects/travelz-crm/index.html" target="_blank" rel="noopener" aria-label="Open the Travelz CRM demo in a new tab">
+      <div class="demo-mini-screen"></div>
+      <div class="demo-mini-bar"><span class="label">Travelz CRM demo</span><span class="open">Open demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+    </a>
+    <button type="button" class="demo-mini-x" aria-label="Close the demo preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
 
   <script type="application/ld+json">
   {

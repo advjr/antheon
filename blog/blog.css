@@ -502,3 +502,58 @@ footer a:hover { color: #fff; }
   .prose td.who { margin-top: 8px; font-size: 14px; }
   .prose td.who::before { content: "Who uses it: "; font-weight: 600; color: var(--text); }
 }
+
+/* Closing call to action: room above the footer when nothing follows it */
+main > .container:last-child > .post-cta { margin-bottom: 112px; }
+@media (max-width: 767px) { main > .container:last-child > .post-cta { margin-bottom: 64px; } }
+
+/* Demo preview: the cover photo turns into a muted walkthrough video,
+   and a small player keeps it going while the reader scrolls. */
+.cover-demo { position: relative; }
+.cover-demo .demo-link { position: absolute; inset: 0; display: block; color: #fff; }
+.cover-demo .demo-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.9s ease; background: transparent; }
+.cover-demo.is-playing .demo-video { opacity: 1; }
+.demo-badge {
+  position: absolute; right: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-radius: 999px; background: rgba(26, 18, 48, 0.82); color: #fff;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 8px 24px -8px rgba(26, 18, 48, 0.6);
+  font-size: 15px; font-weight: 600; line-height: 1.2;
+  opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s, background 0.2s ease;
+}
+.demo-badge .live { width: 8px; height: 8px; border-radius: 50%; background: #f43f5e; box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.25); }
+.demo-badge svg { width: 16px; height: 16px; }
+.cover-demo.is-playing .demo-badge, .cover-demo.is-static .demo-badge { opacity: 1; transform: none; }
+.cover-demo .demo-link:hover .demo-badge { background: var(--brand-violet); }
+.cover-demo .demo-link:focus-visible { outline: 3px solid var(--brand-violet); outline-offset: -3px; border-radius: inherit; }
+
+.demo-mini {
+  position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 340px; border-radius: 14px; overflow: hidden;
+  background: var(--brand-ink); box-shadow: 0 24px 50px -12px rgba(26, 18, 48, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  opacity: 0; transform: translateY(16px) scale(0.98); pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.demo-mini.is-open { opacity: 1; transform: none; pointer-events: auto; }
+.demo-mini[hidden] { display: none; }
+.demo-mini-link { display: block; color: #fff; }
+.demo-mini-screen { position: relative; aspect-ratio: 16 / 9; background: #0f0b1f; }
+.demo-mini-screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.demo-mini-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; font-size: 14px; font-weight: 600; }
+.demo-mini-bar .open { display: inline-flex; align-items: center; gap: 6px; color: #c4b5fd; }
+.demo-mini-bar .open svg { width: 14px; height: 14px; }
+.demo-mini-link:hover .open { color: #fff; }
+.demo-mini-x {
+  position: absolute; top: 8px; right: 8px; z-index: 2; width: 32px; height: 32px; border: 0; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; background: rgba(15, 11, 31, 0.75); color: #fff;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: background 0.2s ease;
+}
+.demo-mini-x:hover { background: var(--brand-violet); }
+.demo-mini-x svg { width: 16px; height: 16px; }
+.demo-mini-x:focus-visible, .demo-mini-link:focus-visible { outline: 3px solid #c4b5fd; outline-offset: -3px; }
+@media (max-width: 767px) {
+  .demo-badge { right: 10px; bottom: 10px; padding: 7px 12px; font-size: 13px; gap: 8px; }
+  .demo-badge .bl { display: none; }
+  .demo-mini { right: 12px; bottom: 12px; width: min(210px, 52vw); border-radius: 12px; }
+  .demo-mini-bar { padding: 7px 10px; font-size: 13px; }
+  .demo-mini-bar .label { display: none; }
+  .demo-mini-x { width: 28px; height: 28px; top: 6px; right: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .demo-mini, .demo-badge, .cover-demo .demo-video { transition: none; } }
