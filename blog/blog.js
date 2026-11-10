@@ -159,9 +159,26 @@
     function play() {
       var pr = video.play();
       if (pr && pr.catch) pr.catch(function () {
-        // Autoplay refused (e.g. battery saver): keep the photo and the demo link
+        // Autoplay refused (iPhone Low Power Mode, some data savers): keep the
+        // photo and the demo link, and try again on the reader's first tap.
+        if (!started) return;
         started = false; fig.classList.remove('is-playing'); fig.classList.add('is-static'); move(false);
+        armRetry();
       });
+    }
+    var retryArmed = false;
+    function armRetry() {
+      if (retryArmed) return;
+      retryArmed = true;
+      var retry = function () {
+        document.removeEventListener('touchend', retry);
+        document.removeEventListener('click', retry);
+        retryArmed = false;
+        var pr = video.play();
+        if (pr && pr.then) pr.then(function () { fig.classList.remove('is-static'); start(); }).catch(function () {});
+      };
+      document.addEventListener('touchend', retry, { passive: true });
+      document.addEventListener('click', retry);
     }
     function move(toMini) {
       if (!mini || toMini === inMini) return;
@@ -184,19 +201,19 @@
       if (inMini || coverVisible) play(); else video.pause();
     }
 
-    // Start buffering straight away so the switch at 3 seconds is smooth
+    // Start buffering straight away where the browser allows it (iPhone Safari
+    // won't buffer ahead, so playback is simply started at 3 seconds rather than
+    // waiting for a "ready" signal that Safari never sends). Until the first
+    // frame arrives the video is transparent, so the photo stays in view.
     video.preload = 'auto';
     video.load();
-    var timeUp = false, ready = false;
-    function begin() {
-      if (!timeUp || !ready || started) return;
+    function start() {
+      if (started) return;
       started = true;
       fig.classList.add('is-playing');
       update();
     }
-    video.addEventListener('canplay', function () { ready = true; begin(); });
-    if (video.readyState >= 3) ready = true;
-    setTimeout(function () { timeUp = true; begin(); }, 3000);
+    setTimeout(start, 3000);
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { coverVisible = es[0].isIntersecting; update(); }, { threshold: 0 }).observe(fig);
