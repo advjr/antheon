@@ -73,8 +73,8 @@
     <!-- HERO -->
     <section class="blog-hero">
       <div class="container hero-in">
-        <span class="pill">Read our blog</span>
-        <h1>Field notes on systems that actually work</h1>
+        <span class="kicker">Blog</span>
+        <h1>Field notes on systems that <span class="accent">actually work.</span></h1>
         <p class="lead">Practical lessons from real CRM builds, automation projects, and AI rollouts. Written for people who run businesses, not people who sell software.</p>
       </div>
     </section>
@@ -88,7 +88,7 @@
           1. Copy _post-template.htm to a new file named after the article, e.g. my-new-article.htm
           2. Fill in everything marked TODO in that file
           3. The newest article goes in the big featured card below: swap its link, image, title,
-             excerpt, date and tags for the new article's.
+             excerpt, date and tags for the new article's, and point --cover at its small image.
           4. Move the article that was featured into the "More articles" grid as a card (copy the
              example card in the comment there), newest first. Keep target="_blank" on every link.
           5. Add the new article to the "blogPost" list in the JSON-LD at the bottom of this page.
@@ -96,7 +96,7 @@
         -->
 
         <!-- FEATURED: the newest article -->
-        <a class="feature reveal" href="your-whole-company-on-one-screen.htm" target="_blank" rel="noopener">
+        <a class="feature reveal" href="your-whole-company-on-one-screen.htm" target="_blank" rel="noopener" style="--cover: url('images/ceo-one-screen-crm-dashboard-sm.jpg')">
           <div class="feature-media">
             <img src="images/ceo-one-screen-crm-dashboard.jpg"
                  srcset="images/ceo-one-screen-crm-dashboard-sm.jpg 640w, images/ceo-one-screen-crm-dashboard.jpg 1536w"
